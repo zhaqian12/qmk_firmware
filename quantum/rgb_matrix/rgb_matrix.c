@@ -442,11 +442,17 @@ void rgb_matrix_task(void) {
 void rgb_matrix_indicators(void) {
     rgb_matrix_indicators_kb();
     rgb_matrix_indicators_user();
+    rgb_matrix_indicators_underglowrgbmatrix();
+    rgb_matrix_indicators_rgbmatrixcontrol();
 }
 
 __attribute__((weak)) void rgb_matrix_indicators_kb(void) {}
 
 __attribute__((weak)) void rgb_matrix_indicators_user(void) {}
+
+__attribute__((weak)) void rgb_matrix_indicators_rgbmatrixcontrol(void) {}
+
+__attribute__((weak)) void rgb_matrix_indicators_underglowrgbmatrix(void) {}
 
 void rgb_matrix_indicators_advanced(effect_params_t *params) {
     /* special handling is needed for "params->iter", since it's already been incremented.

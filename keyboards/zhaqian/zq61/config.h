@@ -1,0 +1,60 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#include "config_common.h"
+
+/* USB Device descriptor parameter */
+#define VENDOR_ID       0x00AA
+#define PRODUCT_ID      0xAA08
+#define DEVICE_VER      0x0001
+#define MANUFACTURER    ZhaQian
+#define PRODUCT         zq61
+#define DESCRIPTION     Keyboard
+
+/* key matrix size */
+#define MATRIX_ROWS 5
+#define MATRIX_COLS 14
+
+/* key matrix pins */
+#define MATRIX_ROW_PINS { A1, A3, B9, A8, B10 }
+#define MATRIX_COL_PINS { B12, B13, B14, B15, A10, A0, B4, B3, A15, A6, A7, B7, B0, B1 }
+#define UNUSED_PINS
+
+/* COL2ROW or ROW2COL */
+#define DIODE_DIRECTION COL2ROW
+
+#define FORCE_NKRO
+
+#define VIA_HAS_BROKEN_KEYCODES
+
+#define DEBOUNCE 1
+
+#define USB_POLLING_INTERVAL_MS 1
+
+#define QMK_KEYS_PER_SCAN 4
+
+#ifdef RGB_MATRIX_ENABLE
+#define RGB_DI_PIN B5
+#define RGBLED_NUM 79
+#define DRIVER_LED_TOTAL RGBLED_NUM
+#define WS2812_PWM_DRIVER PWMD3
+#define WS2812_PWM_CHANNEL 2
+#define WS2812_PWM_PAL_MODE 2
+#define WS2812_DMA_STREAM STM32_DMA1_STREAM2
+#define WS2812_DMA_CHANNEL 5
+#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 200
+#define RGB_DISABLE_WHEN_USB_SUSPENDED true
+#define RGB_MATRIX_KEYPRESSES
+#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
+#define RGB_MATRIX_CUSTOM_EFFECT_ANIMATION
+#define RGB_MATRIX_CENTER {111, 32}
+#endif
+
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+#define UG_RGB_MATRIX_ANIMATIONS
+#endif
+
+#define DYNAMIC_KEYMAP_LAYER_COUNT 5
+#define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 4095
+
+#endif
