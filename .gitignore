@@ -89,3 +89,4 @@ user_song_list.h
 lib/chibios-contrib
 lib/googletest
 lib/lufa
+lib/googletest
