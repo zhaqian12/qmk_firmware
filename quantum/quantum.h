@@ -200,6 +200,30 @@ extern layer_state_t layer_state;
 #    include "encoder.h"
 #endif
 
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+    #ifdef RGB_MATRIX_CONTROL_REV2_ENABLE
+    #    include "rgb_matrix_control_rev2.h"
+    #else
+    #    include "rgb_matrix_control.h"
+    #endif
+#endif
+
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+#    include "ugrgbmatrixeffect.h"
+#endif
+
+#ifdef ENCODER_TRIGGER_ENABLE
+#    include "encoder_trigger.h"
+#endif
+
+#ifdef ALT_TAB_MARCO_ENABLE
+#    include "alt_tab_marco.h"
+#endif
+
+#ifdef OPENRGB_ENABLE
+#    include "openrgb.h"
+#endif
+
 // For tri-layer
 void          update_tri_layer(uint8_t layer1, uint8_t layer2, uint8_t layer3);
 layer_state_t update_tri_layer_state(layer_state_t state, uint8_t layer1, uint8_t layer2, uint8_t layer3);

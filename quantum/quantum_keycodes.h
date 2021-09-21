@@ -525,6 +525,19 @@ enum quantum_keycodes {
     MAGIC_TOGGLE_GUI,
 
     // Start of custom keycode range for keyboards and keymaps - always leave at the end
+    ALT_TAB_FORWARD,
+    ALT_TAB_REVERSE,
+    UNDERGLOW_RGB_TOG,
+    KEY_RGB_TOG,
+    LOGO_RGB_TOG,
+    RGB_CONTROL_SW,
+    UNDERGLOW_RGB_MODE_FORWARD,
+    UNDERGLOW_RGB_MODE_REVERSE,
+    RADIAL_BUTTON,
+    RADIAL_LEFT,
+    RADIAL_RIGHT,
+    RADIAL_LEFT_CON,
+    RADIAL_RIGHT_CON,
     SAFE_RANGE
 };
 
@@ -854,3 +867,11 @@ enum quantum_keycodes {
 #define OS_TOGG ONESHOT_TOGGLE
 #define OS_ON ONESHOT_ENABLE
 #define OS_OFF ONESHOT_DISABLE
+
+// User rgb aliases
+#define UG_RGB_TOG UNDERGLOW_RGB_TOG
+#define K_RGB_TOG KEY_RGB_TOG
+#define L_RGB_TOG LOGO_RGB_TOG
+#define UG_RGB_MF UNDERGLOW_RGB_MODE_FORWARD
+#define UG_RGB_MR UNDERGLOW_RGB_MODE_REVERSE
+#define RGB_CT_SW RGB_CONTROL_SW

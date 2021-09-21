@@ -296,6 +296,12 @@ bool process_record_quantum(keyrecord_t *record) {
 #ifdef JOYSTICK_ENABLE
             process_joystick(keycode, record) &&
 #endif
+#if defined(RGB_MATRIX_CONTROL_ENABLE) && defined(RGB_MATRIX_ENABLE)
+            process_rgbcontrol(keycode, record) &&
+#endif
+#if defined(UNDERGLOW_RGB_MATRIX_ENABLE) && defined(RGB_MATRIX_ENABLE)
+            process_underglowrgb(keycode, record) &&
+#endif
             true)) {
         return false;
     }
@@ -393,7 +399,12 @@ void matrix_init_quantum() {
 #if defined(BLUETOOTH_ENABLE) && defined(OUTPUT_AUTO_ENABLE)
     set_output(OUTPUT_AUTO);
 #endif
-
+#if defined(RGB_MATRIX_CONTROL_ENABLE) && defined (RGB_MATRIX_ENABLE)
+    rgb_matrix_control_init();
+#endif
+#if defined(UNDERGLOW_RGB_MATRIX_ENABLE) && defined (RGB_MATRIX_ENABLE)
+    underglow_rgb_matrix_init();
+#endif
     matrix_init_kb();
 }
 

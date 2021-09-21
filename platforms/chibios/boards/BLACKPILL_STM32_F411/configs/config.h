@@ -15,7 +15,7 @@
  */
 #pragma once
 
-#define BOARD_OTG_NOVBUSSENS 1
+#define BOARD_OTG_NOVBUSSENS
 
 #ifndef STM32_LSECLK
 #    define STM32_LSECLK 32768U
