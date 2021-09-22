@@ -62,9 +62,7 @@ void matrix_init_kb(void) {
 
 void rgb_matrix_indicators_kb(void) {
 // COLOR RED RGB VALUE
-    HSV hsv = rgb_matrix_config.hsv;
-    hsv.h = 0;
-    hsv.s = 255;
+    HSV hsv = {0, 255, rgb_matrix_get_val()};
     RGB rgb = hsv_to_rgb(hsv);
 // caps_lock indicator
     if (host_keyboard_led_state().caps_lock) {
