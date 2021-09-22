@@ -18,6 +18,7 @@
 #include <lib/lib8tion/lib8tion.h>
 #include "eeprom.h"
 #include <math.h>
+
 // define the center of rgb matrix
 #ifndef RGB_MATRIX_CENTER
 static const led_point_t m_rgb_matrix_center = {112, 32};
@@ -159,22 +160,27 @@ void rgb_matrix_indicators_underglowrgbmatrix(void) {
 #if defined UG_RGB_MATRIX_WPMCYCLEINOUT && defined WPM_ENABLE
         case 17: WpmCycleInOut(); break;
 #endif
-        default: rgb_matrix_enable(); break;
+        default: break;
     }
 }
 
 // modes of underglow rgb matrix effects step function
 void underglow_rgb_mode_step(void) {
-    ++ underglow_rgblight_fixed_status;
-    underglow_rgblight_fixed_status = (underglow_rgblight_fixed_status < ug_rgb_matrix_effect_num) ? underglow_rgblight_fixed_status : 1;
-    eeprom_update_byte(EECONFIG_UNDERGLOWRGB, underglow_rgblight_fixed_status);
+    if (rgb_matrix_is_enabled()) {
+        ++ underglow_rgblight_fixed_status;
+        underglow_rgblight_fixed_status = (underglow_rgblight_fixed_status < ug_rgb_matrix_effect_num) ? underglow_rgblight_fixed_status : 1;
+        eeprom_update_byte(EECONFIG_UNDERGLOWRGB, underglow_rgblight_fixed_status);
+    }
 }
 
 // modes of underglow rgb matrix effects step reverse function
 void underglow_rgb_mode_step_reverse(void) {
-    -- underglow_rgblight_fixed_status;
-    underglow_rgblight_fixed_status = (underglow_rgblight_fixed_status < 1) ? ug_rgb_matrix_effect_num - 1 : underglow_rgblight_fixed_status;
-    eeprom_update_byte(EECONFIG_UNDERGLOWRGB, underglow_rgblight_fixed_status);
+    if (rgb_matrix_is_enabled()) {
+        -- underglow_rgblight_fixed_status;
+        underglow_rgblight_fixed_status = (underglow_rgblight_fixed_status < 1) ? ug_rgb_matrix_effect_num - 1 : underglow_rgblight_fixed_status;
+        eeprom_update_byte(EECONFIG_UNDERGLOWRGB, underglow_rgblight_fixed_status);
+    }
+
 }
 
 // process the keycodes of underglow rgb matrix effect
