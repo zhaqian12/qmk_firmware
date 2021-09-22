@@ -23,14 +23,12 @@
  * please enable RGB_MATRIX_CONTROL in rules.mk,
  */
 
-#ifndef ZQ_EEPROM_ADDR
-#define ZQ_EEPROM_ADDR VIA_EEPROM_CUSTOM_CONFIG_ADDR
+// define the address of rgb control variables to store in eeprom (use EECONFIG_KEYBOARD)
+#define EECONFIG_UGRGBTOG  (uint8_t *)15
+#define EECONFIG_KRGBTOG  (uint8_t *)16
+#ifdef LOGO_RGB_MATRIX_CONTROL_ENABLE
+#define EECONFIG_LGRGBTOG  (uint8_t *)17
 #endif
-
-#ifndef VIA_EEPROM_CUSTOM_CONFIG_SIZE
-#define VIA_EEPROM_CUSTOM_CONFIG_SIZE 6
-#endif
-
 void rgb_matrix_control_init(void);                                     // init rgb control information from eeprom
 void underglow_rgb_toggle(void);                                        // rgb toggle for underglow rgb light
 void key_backlight_rgb_toggle(void);                                    // rgb toggle for key rgb backlight
@@ -38,6 +36,6 @@ void key_backlight_rgb_toggle(void);                                    // rgb t
 void logo_rgb_toggle(void);
 #endif
 
-
+bool process_rgbcontrol(const uint16_t keycode, const keyrecord_t *record);
 
 
