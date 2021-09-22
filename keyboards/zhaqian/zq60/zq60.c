@@ -33,13 +33,12 @@ void suspend_wakeup_init_kb(void) {
 
 void rgb_matrix_indicators_kb(void) {
 // COLOR RED RGB VALUE
-    HSV hsv = {0, 255, rgb_matrix_get_val()};
-    RGB rgb = hsv_to_rgb(hsv);
+
 // caps_lock indicator
     if (host_keyboard_led_state().caps_lock) {
+        HSV hsv = {0, 255, rgb_matrix_get_val()};
+        RGB rgb = hsv_to_rgb(hsv);
         rgb_matrix_set_color(0, rgb.r, rgb.g, rgb.b);
-    } else {
-        rgb_matrix_set_color(0, 0x00, 0x00, 0x00);
     }
 }
 

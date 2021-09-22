@@ -36,11 +36,10 @@ led_config_t g_led_config = {  //
     }};
 
 void rgb_matrix_indicators_kb(void) {
-// COLOR RED RGB VALUE
-    HSV hsv = {0, 255, rgb_matrix_get_val()};
-    RGB rgb = hsv_to_rgb(hsv);
 // caps_lock indicator
     if (host_keyboard_led_state().caps_lock) {
+        HSV hsv = {0, 255, rgb_matrix_get_val()};
+        RGB rgb = hsv_to_rgb(hsv);
         rgb_matrix_set_color(5, rgb.r, rgb.g, rgb.b);
     }
 }
