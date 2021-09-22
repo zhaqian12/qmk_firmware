@@ -26,33 +26,36 @@ static uint8_t is_logo_rgblight_active = 1;
 
 // rgb matrix status initialized by reading from eeprom
 void rgb_matrix_control_init(void) {
-    if ((is_underglow_rgblight_active = eeprom_read_byte(EECONFIG_UGRGBTOG)) > 1)
-        is_underglow_rgblight_active = 1;
-    if ((is_key_backlight_active = eeprom_read_byte(EECONFIG_KRGBTOG)) > 1)
-        is_key_backlight_active = 1;
+    is_underglow_rgblight_active = eeprom_read_byte(EECONFIG_UGRGBTOG) % 2;
+    is_key_backlight_active = eeprom_read_byte(EECONFIG_KRGBTOG) % 2;
 #ifdef LOGO_RGB_MATRIX_CONTROL_ENABLE
-    if ((is_logo_rgblight_active = eeprom_read_byte(EECONFIG_LGRGBTOG)) > 1)
-        is_logo_rgblight_active = 1;
+    is_logo_rgblight_active = eeprom_read_byte(EECONFIG_LGRGBTOG) % 2;
 #endif
 }
 
 // underglow rgb matrix toggle
 void underglow_rgb_toggle(void) {
-    is_underglow_rgblight_active ^= 1;
-    eeprom_update_byte(EECONFIG_UGRGBTOG, is_underglow_rgblight_active);
+    if (rgb_matrix_is_enabled()) {
+        is_underglow_rgblight_active ^= 1;
+        eeprom_update_byte(EECONFIG_UGRGBTOG, is_underglow_rgblight_active);
+    }
 }
 
 // backlight rgb matrix toggle
 void key_backlight_rgb_toggle(void) {
-    is_key_backlight_active ^= 1;
-    eeprom_update_byte(EECONFIG_KRGBTOG, is_key_backlight_active);
+    if (rgb_matrix_is_enabled()) {
+        is_key_backlight_active ^= 1;
+        eeprom_update_byte(EECONFIG_KRGBTOG, is_key_backlight_active);
+    }
 }
 
 #ifdef LOGO_RGB_MATRIX_CONTROL_ENABLE
 // logo rgb matrix toggle
 void logo_rgb_toggle(void) {
-    is_logo_rgblight_active ^= 1;
-    eeprom_update_byte(EECONFIG_LGRGBTOG, is_logo_rgblight_active);
+    if (rgb_matrix_is_enabled()) {
+        is_logo_rgblight_active ^= 1;
+        eeprom_update_byte(EECONFIG_LGRGBTOG, is_logo_rgblight_active);
+    }
 }
 #endif
 
