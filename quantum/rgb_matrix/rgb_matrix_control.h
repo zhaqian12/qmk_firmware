@@ -29,6 +29,7 @@
 #ifdef LOGO_RGB_MATRIX_CONTROL_ENABLE
 #define EECONFIG_LGRGBTOG  (uint8_t *)17
 #endif
+
 void rgb_matrix_control_init(void);                                     // init rgb control information from eeprom
 void underglow_rgb_toggle(void);                                        // rgb toggle for underglow rgb light
 void key_backlight_rgb_toggle(void);                                    // rgb toggle for key rgb backlight

@@ -22,8 +22,7 @@ static uint8_t rgb_matrix_control_index = 0;
 
 // rgb matrix status initialized by reading from eeprom
 void rgb_matrix_control_init(void) {
-    rgb_matrix_control_index = eeprom_read_byte(EECONFIG_RGBCONTROL);
-    rgb_matrix_control_index %= 3;
+    rgb_matrix_control_index = eeprom_read_byte(EECONFIG_RGBCONTROL) % 3;
 }
 
 void rgb_matrix_control_sw(void) {
