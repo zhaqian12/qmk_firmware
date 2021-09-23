@@ -291,7 +291,7 @@ void CycleDxDyDistMath(uint8_t time, uint8_t mode) {
                 case 1: hsv.h = 3 * dist / 2 - time; break;
 #endif
 #if defined UG_RGB_MATRIX_CYCLESPIRAL || (defined UG_RGB_MATRIX_WPMCYCLESPIRAL && defined WPM_ENABLE)
-                case 2: hsv.h = dist - time - atan2(dy, dx); break;
+                case 2: hsv.h = dist - time - atan2_8(dy, dx); break;
 #endif
 #if defined UG_RGB_MATRIX_CYCLEBANDPINWHEELVAL
                 case 3: hsv.h = time; hsv.v = scale8(hsv.v - time - atan2_8(dy, dx) * 3, hsv.v); break;
@@ -325,20 +325,8 @@ void CycleCosSinMath(uint16_t time) {
     || defined UG_RGB_MATRIX_WPMCYCLESPIRAL \
     || defined UG_RGB_MATRIX_WPMCYCLEINOUT) \
     && defined WPM_ENABLE
-static uint8_t wpm = 1;
 uint8_t WpmMath(void) {
-    wpm = get_current_wpm() / 10;
-    if (wpm <= 3) {
-        return 1;
-    } else if (wpm <= 8){
-		return 2;
-	} else if (wpm <= 13) {
-		return 3;
-	} else if (wpm <= 18) {
-		return 4;
-	} else {
-		return 5;
-	}
+    return get_current_wpm() / 50 + 1;
 }
 #endif
 
