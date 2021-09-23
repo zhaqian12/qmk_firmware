@@ -1,7 +1,6 @@
 #ifdef RGB_MATRIX_EFFECT_KITT_RGB
 RGB_MATRIX_EFFECT(KITT_RGB)
 #ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
-
 static uint8_t k_led_count = DRIVER_LED_TOTAL - 1;
 static uint8_t k_led_first = 0;
 uint8_t time_to_led(uint8_t time, uint8_t led_behind) {
