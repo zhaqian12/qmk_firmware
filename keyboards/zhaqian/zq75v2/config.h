@@ -1,5 +1,20 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+/* Copyright 2021 ZhaQian
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#pragma once
 
 #include "config_common.h"
 
@@ -7,7 +22,7 @@
 #define VENDOR_ID       0x00AA
 #define PRODUCT_ID      0xAA01
 #define DEVICE_VER      0x0001
-#define MANUFACTURER    ZHAQIAN
+#define MANUFACTURER    ZhaQian
 #define PRODUCT         ZQ75V2pro
 #define DESCRIPTION     Keyboard
 
@@ -23,14 +38,8 @@
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION COL2ROW
 
-/* number of backlight levels */
-
-#ifdef BACKLIGHT_PIN
-#define BACKLIGHT_LEVELS 3
-#endif
-
 /* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 5
+#define DEBOUNCE 1
 
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
 #define LOCKING_SUPPORT_ENABLE
@@ -39,7 +48,7 @@
 #define LOCKING_RESYNC_ENABLE
 
 // #define FORCE_NKRO
-#define USB_POLLING_INTERVAL_MS 2
+#define USB_POLLING_INTERVAL_MS 1
 #define QMK_KEYS_PER_SCAN 4
 #define FORCE_NKRO
 
@@ -58,7 +67,7 @@
 #ifdef ENCODER_ENABLE
 #define ENCODERS_PAD_A { B0 }
 #define ENCODERS_PAD_B { B1 }
-#define ENCODER_RESOLUTION  2
+#define ENCODER_RESOLUTION 2
 #endif
 
 #ifdef VIA_ENABLE
@@ -70,6 +79,10 @@
 #define UG_RGB_MATRIX_WPM_ANIMATIONS
 #endif
 
+#ifdef RGB_MATRIX_CUSTOM_KB
+#define RGB_MATRIX_CUSTOM_EFFECT_ANIMATION
+#endif
+
 #ifdef TAP_DANCE_ENABLE
 #define TAPPING_TERM 175
 #endif
@@ -79,15 +92,7 @@
 #define OLED_TIMEOUT 100000
 #define OLED_FONT_HEIGHT 8
 #define OLED_FONT_WIDTH 6
-#define OLED_FONT_H "nfont.c"
-#endif
-
-#ifdef VIAL_ENABLE
-#define VIAL_KEYBOARD_UID {0xA7, 0xDA, 0x16, 0xD5, 0x43, 0xF0, 0x6A, 0xDC}
-#ifdef VIAL_ENCODERS_ENABLE
-#define VIAL_ENCODER_DEFAULT {KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU, KC_VOLD, KC_VOLU}
-#define VIAL_ENCODER_KEYCODE_DELAY 10
-#endif
+#define OLED_FONT_H "zfont.c"
 #endif
 
 #ifdef OPENRGB_ENABLE

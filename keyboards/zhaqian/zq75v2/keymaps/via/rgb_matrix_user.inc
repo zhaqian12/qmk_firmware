@@ -1,21 +1,35 @@
-RGB_MATRIX_EFFECT(FPS_CYCLE)
-RGB_MATRIX_EFFECT(FPS_BREATHING)
-RGB_MATRIX_EFFECT(MOBA_CYCLE)
-RGB_MATRIX_EFFECT(MOBA_BREATHING)
-RGB_MATRIX_EFFECT(CANDY_TAP)
-RGB_MATRIX_EFFECT(CANDY_NEXUS)
+RGB_MATRIX_EFFECT(CYCLE_BREATHING)
+RGB_MATRIX_EFFECT(CYCLE_BANDVAL)
+RGB_MATRIX_EFFECT(CYCLE_BAND_PINWHEEL_SAT)
+RGB_MATRIX_EFFECT(CYCLE_BAND_PINWHEEL_VAL)
+RGB_MATRIX_EFFECT(CYCLE_BAND_SPIRAL_SAT)
+RGB_MATRIX_EFFECT(CYCLE_BAND_SPIRAL_VAL)
+RGB_MATRIX_EFFECT(CYCLE_RIGHT_LEFT)
+// RGB_MATRIX_EFFECT(CYCLE_CROSS)
+RGB_MATRIX_EFFECT(CYCLE_DOWN_UP)
 RGB_MATRIX_EFFECT(FRACTAL)
 RGB_MATRIX_EFFECT(FRACTAL_RGB)
-RGB_MATRIX_EFFECT(kitt_effect)
-RGB_MATRIX_EFFECT(CYCLE_BREATHING)
-
+RGB_MATRIX_EFFECT(KITT_EFFECT)
+RGB_MATRIX_EFFECT(FPS_BREATHING)
+RGB_MATRIX_EFFECT(MOBA_BREATHING)
+RGB_MATRIX_EFFECT(CANDY_TAP)
+RGB_MATRIX_EFFECT(CYCLE_REACTIVE_WIDE)
+RGB_MATRIX_EFFECT(CYCLE_REACTIVE_MULTIWIDE)
+RGB_MATRIX_EFFECT(CYCLE_REACTIVE_MULTICROSS)
+RGB_MATRIX_EFFECT(CYCLE_REACTIVE_MULTINEXUS)
+RGB_MATRIX_EFFECT(CYCLE_MULTISPLASH)
+RGB_MATRIX_EFFECT(CYCLE_WPM_LEFT_RIGHT)
+RGB_MATRIX_EFFECT(CYCLE_IN_OUT)
+RGB_MATRIX_EFFECT(CYCLE_IN_OUT_DUAL)
 #ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
+
 
 typedef HSV (*fps_f)(HSV hsv, uint8_t i, uint8_t time);
 
+typedef HSV (*cb_f)(HSV hsv, uint8_t time);
+
 bool effect_runner_FPS(effect_params_t* params, fps_f effect_func) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
-
     uint8_t time = scale16by8(g_rgb_timer, qadd8(rgb_matrix_config.speed / 4, 1));
     for (uint8_t i = led_min; i <= led_max; i++) {
         if (i == 41 || (i >= 53 && i <= 55) || i == 69 || i == 80 || (i >= 75 && i <= 77) || (i >= 81 && i <= 98)){
@@ -24,7 +38,24 @@ bool effect_runner_FPS(effect_params_t* params, fps_f effect_func) {
             rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
         } else{
             rgb_matrix_set_color(i, 0, 0, 0);
-        }  
+        }
+    }
+    return led_max < DRIVER_LED_TOTAL;
+}
+
+bool effect_runner_FPScb(effect_params_t* params, cb_f effect_func) {
+    RGB_MATRIX_USE_LIMITS(led_min, led_max);
+	uint16_t time = scale16by8(g_rgb_timer, rgb_matrix_config.speed / 8);
+    HSV hsv  = effect_func(rgb_matrix_config.hsv, time);
+    hsv.v = scale8(abs8(sin8(time) - 128) * 2, hsv.v);
+    RGB rgb = rgb_matrix_hsv_to_rgb(hsv);
+    for (uint8_t i = led_min; i < led_max; i++) {
+        RGB_MATRIX_TEST_LED_FLAGS();
+		if (i == 41 || (i >= 53 && i <= 55) || i == 69 || i == 80 || (i >= 75 && i <= 77) || (i >= 81 && i <= 98)){
+            rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
+        } else{
+            rgb_matrix_set_color(i, 0, 0, 0);
+        }
     }
     return led_max < DRIVER_LED_TOTAL;
 }
@@ -36,12 +67,12 @@ static HSV FPS_CYCLE_math(HSV hsv, uint8_t i, uint8_t time) {
 
 bool FPS_CYCLE(effect_params_t* params) { return effect_runner_FPS(params, &FPS_CYCLE_math); }
 
-static HSV FPS_math(HSV hsv, uint8_t i, uint8_t time) {
+static HSV FPS_math(HSV hsv, uint8_t time) {
     hsv.h = time;
     return hsv;
 }
 
-bool FPS_BREATHING(effect_params_t* params) { return effect_runner_FPS(params, &FPS_math); }
+bool FPS_BREATHING(effect_params_t* params) { return effect_runner_FPScb(params, &FPS_math); }
 
 bool effect_runner_MOBA(effect_params_t* params, fps_f effect_func) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
@@ -54,14 +85,32 @@ bool effect_runner_MOBA(effect_params_t* params, fps_f effect_func) {
             rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
         } else{
             rgb_matrix_set_color(i, 0, 0, 0);
-        }  
+        }
+    }
+    return led_max < DRIVER_LED_TOTAL;
+}
+
+bool effect_runner_MOBAcb(effect_params_t* params, cb_f effect_func) {
+    RGB_MATRIX_USE_LIMITS(led_min, led_max);
+	uint16_t time = scale16by8(g_rgb_timer, rgb_matrix_config.speed / 8);
+    HSV hsv  = effect_func(rgb_matrix_config.hsv, time);
+    hsv.v = scale8(abs8(sin8(time) - 128) * 2, hsv.v);
+    RGB rgb = rgb_matrix_hsv_to_rgb(hsv);
+    for (uint8_t i = led_min; i < led_max; i++) {
+        RGB_MATRIX_TEST_LED_FLAGS();
+		if ((i >= 39 && i <= 42) || (i >= 52 && i <= 53) || (i >= 81 && i <= 98)){
+            RGB_MATRIX_TEST_LED_FLAGS();
+            rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
+        } else{
+            rgb_matrix_set_color(i, 0, 0, 0);
+        }
     }
     return led_max < DRIVER_LED_TOTAL;
 }
 
 bool MOBA_CYCLE(effect_params_t* params) { return effect_runner_MOBA(params, &FPS_CYCLE_math); }
 
-bool MOBA_BREATHING(effect_params_t* params) { return effect_runner_MOBA(params, &FPS_math); }
+bool MOBA_BREATHING(effect_params_t* params) { return effect_runner_MOBAcb(params, &FPS_math); }
 
 static bool CANDY_TAP(effect_params_t* params) {
 	HSV CANDY_TAP_math(HSV hsv, uint16_t offset) {
@@ -70,19 +119,6 @@ static bool CANDY_TAP(effect_params_t* params) {
 		return hsv;
 	}
 	return effect_runner_reactive(params, &CANDY_TAP_math);
-}
-
-static bool CANDY_NEXUS(effect_params_t* params) {
-	HSV CANDY_NEXUS_math(HSV hsv, int16_t dx, int16_t dy, uint8_t dist, uint16_t tick) {
-		uint16_t effect = tick - dist;
-		if (effect > 255) effect = 255;
-		if (dist > 72) effect = 255;
-		if ((dx > 8 || dx < -8) && (dy > 8 || dy < -8)) effect = 255;
-		hsv.v = qadd8(hsv.v, 255 - effect);
-		hsv.h = mod8(scale16by8(g_rgb_timer, add8(rgb_matrix_config.speed >> 5, 1)), 255) + dy / 4;
-		return hsv;
-	}
-	return effect_runner_reactive_splash(0, params, &CANDY_NEXUS_math);
 }
 
 uint8_t jsf8(void) { // Bob Jenkin's fast prng
@@ -270,7 +306,7 @@ bool effect_runner_s(effect_params_t* params, snake_f effect_func) {
     return led_max < DRIVER_LED_TOTAL;
 }
 
-bool kitt_effect(effect_params_t* params) {
+bool KITT_EFFECT(effect_params_t* params) {
 
 	static uint8_t k_led_count = 81;
 	static uint8_t k_led_first = 0;
@@ -312,7 +348,39 @@ bool kitt_effect(effect_params_t* params) {
 	return effect_runner_s(params, &kitt_effect_math);
 }
 
-typedef HSV (*cb_f)(HSV hsv, uint8_t time);
+uint8_t is_breathing_highest = 1;
+uint8_t is_breathing_lowest = 1;
+uint8_t hue_index = 0;
+uint8_t val_index = 0;
+uint8_t hue_stepper = 0;
+
+bool CYCLE_BREATHING(effect_params_t* params) {
+    RGB_MATRIX_USE_LIMITS(led_min, led_max);
+    HSV      hsv  = rgb_matrix_config.hsv;
+    uint16_t time = g_rgb_timer * (rgb_matrix_config.speed / 8) / 256;
+    hsv.v         = scale8(abs8(sin8(time) - 128) * 2, hsv.v);
+    if (is_breathing_lowest){
+        val_index = hsv.v;
+        hue_index = hue_stepper;
+        hue_stepper += 8;
+        is_breathing_lowest ^= 1;
+    } else {
+        if (hsv.v >= val_index && is_breathing_highest) {
+            is_breathing_highest ^= 1;
+        } else {
+            if (hsv.v <= 0 && !is_breathing_highest) {
+                is_breathing_highest ^= 1;
+                is_breathing_lowest  ^= 1;
+            }
+        }
+    }
+    hsv.h = hue_index;
+    RGB rgb       = hsv_to_rgb(hsv);
+    for (uint8_t i = 0; i < DRIVER_LED_TOTAL; i++) {
+        rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
+    }
+     return led_max < DRIVER_LED_TOTAL;
+}
 
 bool effect_runner_cb(effect_params_t* params, cb_f effect_func) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
@@ -322,17 +390,202 @@ bool effect_runner_cb(effect_params_t* params, cb_f effect_func) {
     RGB rgb = rgb_matrix_hsv_to_rgb(hsv);
     for (uint8_t i = led_min; i < led_max; i++) {
         RGB_MATRIX_TEST_LED_FLAGS();
-	
         rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
     }
     return led_max < DRIVER_LED_TOTAL;
 }
 
-static HSV CYCLE_BREATHING_math(HSV hsv, uint8_t time) {
-    hsv.h = time;
+static HSV CYCLE_BANDVAL_math(HSV hsv, uint8_t i, uint8_t time) {
+    int16_t v = hsv.v - abs(scale8(g_led_config.point[i].x, 228) + 28 - time) * 8;
+    hsv.v     = scale8(v < 0 ? 0 : v, hsv.v);
+	hsv.h = time;
     return hsv;
 }
 
-bool CYCLE_BREATHING(effect_params_t* params) { return effect_runner_cb(params, &CYCLE_BREATHING_math); }
+bool CYCLE_BANDVAL(effect_params_t* params) { return effect_runner_i(params, &CYCLE_BANDVAL_math); }
 
+static HSV CYCLE_BAND_PINWHEEL_SAT_math(HSV hsv, int16_t dx, int16_t dy, uint8_t time) {
+    hsv.s = scale8(hsv.s - time - atan2_8(dy, dx) * 3, hsv.s);
+	hsv.h = time;
+    return hsv;
+}
+
+bool CYCLE_BAND_PINWHEEL_SAT(effect_params_t* params) { return effect_runner_dx_dy(params, &CYCLE_BAND_PINWHEEL_SAT_math); }
+
+static HSV CYCLE_BAND_PINWHEEL_VAL_math(HSV hsv, int16_t dx, int16_t dy, uint8_t time) {
+    hsv.v = scale8(hsv.v - time - atan2_8(dy, dx) * 3, hsv.v);
+	hsv.h = time;
+    return hsv;
+}
+
+bool CYCLE_BAND_PINWHEEL_VAL(effect_params_t* params) { return effect_runner_dx_dy(params, &CYCLE_BAND_PINWHEEL_VAL_math); }
+
+static HSV CYCLE_BAND_SPIRAL_SAT_math(HSV hsv, int16_t dx, int16_t dy, uint8_t dist, uint8_t time) {
+    hsv.s = scale8(hsv.s + dist - time - atan2_8(dy, dx), hsv.s);
+	hsv.h = time;
+    return hsv;
+}
+
+bool CYCLE_BAND_SPIRAL_SAT(effect_params_t* params) { return effect_runner_dx_dy_dist(params, &CYCLE_BAND_SPIRAL_SAT_math); }
+
+static HSV CYCLE_BAND_SPIRAL_VAL_math(HSV hsv, int16_t dx, int16_t dy, uint8_t dist, uint8_t time) {
+    hsv.v = scale8(hsv.v + dist - time - atan2_8(dy, dx), hsv.v);
+	hsv.h = time;
+    return hsv;
+}
+
+bool CYCLE_BAND_SPIRAL_VAL(effect_params_t* params) { return effect_runner_dx_dy_dist(params, &CYCLE_BAND_SPIRAL_VAL_math); }
+
+static HSV CYCLE_RIGHT_LEFT_math(HSV hsv, uint8_t i, uint8_t time) {
+    hsv.h = 224 - g_led_config.point[i].x - time;
+    return hsv;
+}
+
+bool CYCLE_RIGHT_LEFT(effect_params_t* params) { return effect_runner_i(params, &CYCLE_RIGHT_LEFT_math); }
+
+static HSV CYCLE_DOWN_UP_math(HSV hsv, uint8_t i, uint8_t time) {
+    hsv.h = 64 - g_led_config.point[i].y - time;
+    return hsv;
+}
+
+bool CYCLE_DOWN_UP(effect_params_t* params) { return effect_runner_i(params, &CYCLE_DOWN_UP_math); }
+
+static HSV CYCLE_REACTIVE_WIDE_math(HSV hsv, int16_t dx, int16_t dy, uint8_t dist, uint16_t tick, uint8_t time) {
+    uint16_t effect = tick + dist * 5;
+    if (effect > 255) effect = 255;
+    hsv.v = qadd8(hsv.v, 255 - effect);
+	hsv.h = time;
+    return hsv;
+}
+
+typedef HSV (*rs_f)(HSV hsv, int16_t dx, int16_t dy, uint8_t dist, uint16_t tick, uint8_t time);
+
+bool effect_runner_reactive_s(uint8_t start, effect_params_t* params, rs_f effect_func) {
+    RGB_MATRIX_USE_LIMITS(led_min, led_max);
+	uint8_t time = scale16by8(g_rgb_timer, qadd8(rgb_matrix_config.speed / 4, 1));
+    uint8_t count = g_last_hit_tracker.count;
+    for (uint8_t i = led_min; i < led_max; i++) {
+        RGB_MATRIX_TEST_LED_FLAGS();
+        HSV hsv = rgb_matrix_config.hsv;
+        hsv.v   = 0;
+        for (uint8_t j = start; j < count; j++) {
+            int16_t  dx   = g_led_config.point[i].x - g_last_hit_tracker.x[j];
+            int16_t  dy   = g_led_config.point[i].y - g_last_hit_tracker.y[j];
+            uint8_t  dist = sqrt16(dx * dx + dy * dy);
+            uint16_t tick = scale16by8(g_last_hit_tracker.tick[j], qadd8(rgb_matrix_config.speed, 1));
+            hsv           = effect_func(hsv, dx, dy, dist, tick, time);
+        }
+        hsv.v   = scale8(hsv.v, rgb_matrix_config.hsv.v);
+        RGB rgb = rgb_matrix_hsv_to_rgb(hsv);
+        rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
+    }
+    return led_max < DRIVER_LED_TOTAL;
+}
+
+bool CYCLE_REACTIVE_WIDE(effect_params_t* params) { return effect_runner_reactive_s(qsub8(g_last_hit_tracker.count, 1), params, &CYCLE_REACTIVE_WIDE_math); }
+
+bool CYCLE_REACTIVE_MULTIWIDE(effect_params_t* params) { return effect_runner_reactive_s(0, params, &CYCLE_REACTIVE_WIDE_math); }
+
+static HSV CYCLE_REACTIVE_CROSS_math(HSV hsv, int16_t dx, int16_t dy, uint8_t dist, uint16_t tick, uint8_t time) {
+    uint16_t effect = tick + dist;
+    dx              = dx < 0 ? dx * -1 : dx;
+    dy              = dy < 0 ? dy * -1 : dy;
+    dx              = dx * 16 > 255 ? 255 : dx * 16;
+    dy              = dy * 16 > 255 ? 255 : dy * 16;
+    effect += dx > dy ? dy : dx;
+    if (effect > 255) effect = 255;
+    hsv.v = qadd8(hsv.v, 255 - effect);
+	hsv.h = time;
+    return hsv;
+}
+
+
+bool CYCLE_REACTIVE_MULTICROSS(effect_params_t* params) { return effect_runner_reactive_s(0, params, &CYCLE_REACTIVE_CROSS_math); }
+
+static HSV CYCLE_REACTIVE_NEXUS_math(HSV hsv, int16_t dx, int16_t dy, uint8_t dist, uint16_t tick, uint8_t time) {
+    uint16_t effect = tick - dist;
+    if (effect > 255) effect = 255;
+    if (dist > 72) effect = 255;
+    if ((dx > 8 || dx < -8) && (dy > 8 || dy < -8)) effect = 255;
+    hsv.v = qadd8(hsv.v, 255 - effect);
+    hsv.h = time + dy / 4;
+    return hsv;
+}
+
+bool CYCLE_REACTIVE_MULTINEXUS(effect_params_t* params) { return effect_runner_reactive_s(0, params, &CYCLE_REACTIVE_NEXUS_math); }
+
+HSV CYCLE_SPLASH_math(HSV hsv, int16_t dx, int16_t dy, uint8_t dist, uint16_t tick, uint8_t time) {
+    uint16_t effect = tick - dist;
+    if (effect > 255) effect = 255;
+    hsv.v = qadd8(hsv.v, 255 - effect);
+	hsv.h = time;
+    return hsv;
+}
+
+bool CYCLE_MULTISPLASH(effect_params_t* params) { return effect_runner_reactive_s(0, params, &CYCLE_SPLASH_math); }
+
+static HSV CYCLE_CROSS_math(HSV hsv, uint8_t i, uint8_t time) {
+	if (g_led_config.point[i].y == 9 || g_led_config.point[i].y == 27 || g_led_config.point[i].y == 48 || g_led_config.point[i].y == 64 || g_led_config.point[i].y == 45){
+		hsv.h = g_led_config.point[i].x - time;
+	} else {
+		hsv.h = 224 - g_led_config.point[i].x - time;
+	}
+    return hsv;
+}
+
+bool CYCLE_CROSS(effect_params_t* params) { return effect_runner_i(params, &CYCLE_CROSS_math); }
+
+typedef HSV (*iwpm_f)(HSV hsv, uint8_t i, uint8_t time);
+
+static uint8_t wpm = 1;
+
+bool effect_runner_iwpm(effect_params_t* params, iwpm_f effect_func) {
+    RGB_MATRIX_USE_LIMITS(led_min, led_max);
+    wpm = get_current_wpm() / 10;
+    if (wpm <= 1) {
+        wpm = 1;
+    } else if (wpm > 1 && wpm <= 5){
+		wpm = 2;
+	} else if (wpm > 5 && wpm <= 8) {
+		wpm = 3;
+	} else if (wpm > 8 && wpm <= 10) {
+		wpm = 4;
+	} else if (wpm > 10 && wpm <= 13) {
+		wpm = 5;
+	} else if (wpm > 13 && wpm <= 15) {
+		wpm = 6;
+	} else if (wpm > 15){
+        wpm = 6;
+    }
+    uint8_t time = scale16by8(g_rgb_timer, qadd8(rgb_matrix_config.speed* wpm / 4 , 1));
+    for (uint8_t i = led_min; i < led_max; i++) {
+        RGB_MATRIX_TEST_LED_FLAGS();
+        RGB rgb = rgb_matrix_hsv_to_rgb(effect_func(rgb_matrix_config.hsv, i, time));
+        rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
+    }
+    return led_max < DRIVER_LED_TOTAL;
+}
+
+static HSV CYCLE_WPM_LEFT_RIGHT_math(HSV hsv, uint8_t i, uint8_t time) {
+    hsv.h = g_led_config.point[i].x - time - 224;
+    return hsv;
+}
+
+bool CYCLE_WPM_LEFT_RIGHT(effect_params_t* params) { return effect_runner_iwpm(params, &CYCLE_WPM_LEFT_RIGHT_math); }
+
+static HSV CYCLE_IN_OUT_math(HSV hsv, int16_t dx, int16_t dy, uint8_t dist, uint8_t time) {
+    hsv.h = 3 * dist / 2 - time;
+    return hsv;
+}
+
+bool CYCLE_IN_OUT(effect_params_t* params) { return effect_runner_dx_dy_dist(params, &CYCLE_IN_OUT_math); }
+
+static HSV CYCLE_IN_OUT_DUAL_math(HSV hsv, int16_t dx, int16_t dy, uint8_t time) {
+    dx           = (k_rgb_matrix_center.x / 2) - abs8(dx);
+    uint8_t dist = sqrt16(dx * dx + dy * dy);
+    hsv.h        = 3 * dist - time;
+    return hsv;
+}
+
+bool CYCLE_IN_OUT_DUAL(effect_params_t* params) { return effect_runner_dx_dy(params, &CYCLE_IN_OUT_DUAL_math); }
 #endif // RGB_MATRIX_CUSTOM_EFFECT_IMPLS

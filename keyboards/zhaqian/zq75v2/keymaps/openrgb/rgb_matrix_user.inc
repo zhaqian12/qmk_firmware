@@ -5,6 +5,7 @@ RGB_MATRIX_EFFECT(CYCLE_BAND_PINWHEEL_VAL)
 RGB_MATRIX_EFFECT(CYCLE_BAND_SPIRAL_SAT)
 RGB_MATRIX_EFFECT(CYCLE_BAND_SPIRAL_VAL)
 RGB_MATRIX_EFFECT(CYCLE_RIGHT_LEFT)
+// RGB_MATRIX_EFFECT(CYCLE_CROSS)
 RGB_MATRIX_EFFECT(CYCLE_DOWN_UP)
 RGB_MATRIX_EFFECT(FRACTAL)
 RGB_MATRIX_EFFECT(FRACTAL_RGB)
@@ -17,8 +18,11 @@ RGB_MATRIX_EFFECT(CYCLE_REACTIVE_MULTIWIDE)
 RGB_MATRIX_EFFECT(CYCLE_REACTIVE_MULTICROSS)
 RGB_MATRIX_EFFECT(CYCLE_REACTIVE_MULTINEXUS)
 RGB_MATRIX_EFFECT(CYCLE_MULTISPLASH)
-
+RGB_MATRIX_EFFECT(CYCLE_WPM_LEFT_RIGHT)
+RGB_MATRIX_EFFECT(CYCLE_IN_OUT)
+RGB_MATRIX_EFFECT(CYCLE_IN_OUT_DUAL)
 #ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
+
 
 typedef HSV (*fps_f)(HSV hsv, uint8_t i, uint8_t time);
 
@@ -34,7 +38,7 @@ bool effect_runner_FPS(effect_params_t* params, fps_f effect_func) {
             rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
         } else{
             rgb_matrix_set_color(i, 0, 0, 0);
-        }  
+        }
     }
     return led_max < DRIVER_LED_TOTAL;
 }
@@ -51,7 +55,7 @@ bool effect_runner_FPScb(effect_params_t* params, cb_f effect_func) {
             rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
         } else{
             rgb_matrix_set_color(i, 0, 0, 0);
-        }  
+        }
     }
     return led_max < DRIVER_LED_TOTAL;
 }
@@ -81,7 +85,7 @@ bool effect_runner_MOBA(effect_params_t* params, fps_f effect_func) {
             rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
         } else{
             rgb_matrix_set_color(i, 0, 0, 0);
-        }  
+        }
     }
     return led_max < DRIVER_LED_TOTAL;
 }
@@ -99,7 +103,7 @@ bool effect_runner_MOBAcb(effect_params_t* params, cb_f effect_func) {
             rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
         } else{
             rgb_matrix_set_color(i, 0, 0, 0);
-        }  
+        }
     }
     return led_max < DRIVER_LED_TOTAL;
 }
@@ -344,6 +348,39 @@ bool KITT_EFFECT(effect_params_t* params) {
 	return effect_runner_s(params, &kitt_effect_math);
 }
 
+uint8_t is_breathing_highest = 1;
+uint8_t is_breathing_lowest = 1;
+uint8_t hue_index = 0;
+uint8_t val_index = 0;
+uint8_t hue_stepper = 0;
+
+bool CYCLE_BREATHING(effect_params_t* params) {
+    RGB_MATRIX_USE_LIMITS(led_min, led_max);
+    HSV      hsv  = rgb_matrix_config.hsv;
+    uint16_t time = g_rgb_timer * (rgb_matrix_config.speed / 8) / 256;
+    hsv.v         = scale8(abs8(sin8(time) - 128) * 2, hsv.v);
+    if (is_breathing_lowest){
+        val_index = hsv.v;
+        hue_index = hue_stepper;
+        hue_stepper += 8;
+        is_breathing_lowest ^= 1;
+    } else {
+        if (hsv.v >= val_index && is_breathing_highest) {
+            is_breathing_highest ^= 1;
+        } else {
+            if (hsv.v <= 0 && !is_breathing_highest) {
+                is_breathing_highest ^= 1;
+                is_breathing_lowest  ^= 1;
+            }
+        }
+    }
+    hsv.h = hue_index;
+    RGB rgb       = hsv_to_rgb(hsv);
+    for (uint8_t i = 0; i < DRIVER_LED_TOTAL; i++) {
+        rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
+    }
+     return led_max < DRIVER_LED_TOTAL;
+}
 
 bool effect_runner_cb(effect_params_t* params, cb_f effect_func) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
@@ -353,18 +390,10 @@ bool effect_runner_cb(effect_params_t* params, cb_f effect_func) {
     RGB rgb = rgb_matrix_hsv_to_rgb(hsv);
     for (uint8_t i = led_min; i < led_max; i++) {
         RGB_MATRIX_TEST_LED_FLAGS();
-	
         rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
     }
     return led_max < DRIVER_LED_TOTAL;
 }
-
-static HSV CYCLE_BREATHING_math(HSV hsv, uint8_t time) {
-    hsv.h = time;
-    return hsv;
-}
-
-bool CYCLE_BREATHING(effect_params_t* params) { return effect_runner_cb(params, &CYCLE_BREATHING_math); }
 
 static HSV CYCLE_BANDVAL_math(HSV hsv, uint8_t i, uint8_t time) {
     int16_t v = hsv.v - abs(scale8(g_led_config.point[i].x, 228) + 28 - time) * 8;
@@ -495,4 +524,68 @@ HSV CYCLE_SPLASH_math(HSV hsv, int16_t dx, int16_t dy, uint8_t dist, uint16_t ti
 
 bool CYCLE_MULTISPLASH(effect_params_t* params) { return effect_runner_reactive_s(0, params, &CYCLE_SPLASH_math); }
 
+static HSV CYCLE_CROSS_math(HSV hsv, uint8_t i, uint8_t time) {
+	if (g_led_config.point[i].y == 9 || g_led_config.point[i].y == 27 || g_led_config.point[i].y == 48 || g_led_config.point[i].y == 64 || g_led_config.point[i].y == 45){
+		hsv.h = g_led_config.point[i].x - time;
+	} else {
+		hsv.h = 224 - g_led_config.point[i].x - time;
+	}
+    return hsv;
+}
+
+bool CYCLE_CROSS(effect_params_t* params) { return effect_runner_i(params, &CYCLE_CROSS_math); }
+
+typedef HSV (*iwpm_f)(HSV hsv, uint8_t i, uint8_t time);
+
+static uint8_t wpm = 1;
+
+bool effect_runner_iwpm(effect_params_t* params, iwpm_f effect_func) {
+    RGB_MATRIX_USE_LIMITS(led_min, led_max);
+    wpm = get_current_wpm() / 10;
+    if (wpm <= 1) {
+        wpm = 1;
+    } else if (wpm > 1 && wpm <= 5){
+		wpm = 2;
+	} else if (wpm > 5 && wpm <= 8) {
+		wpm = 3;
+	} else if (wpm > 8 && wpm <= 10) {
+		wpm = 4;
+	} else if (wpm > 10 && wpm <= 13) {
+		wpm = 5;
+	} else if (wpm > 13 && wpm <= 15) {
+		wpm = 6;
+	} else if (wpm > 15){
+        wpm = 6;
+    }
+    uint8_t time = scale16by8(g_rgb_timer, qadd8(rgb_matrix_config.speed* wpm / 4 , 1));
+    for (uint8_t i = led_min; i < led_max; i++) {
+        RGB_MATRIX_TEST_LED_FLAGS();
+        RGB rgb = rgb_matrix_hsv_to_rgb(effect_func(rgb_matrix_config.hsv, i, time));
+        rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
+    }
+    return led_max < DRIVER_LED_TOTAL;
+}
+
+static HSV CYCLE_WPM_LEFT_RIGHT_math(HSV hsv, uint8_t i, uint8_t time) {
+    hsv.h = g_led_config.point[i].x - time - 224;
+    return hsv;
+}
+
+bool CYCLE_WPM_LEFT_RIGHT(effect_params_t* params) { return effect_runner_iwpm(params, &CYCLE_WPM_LEFT_RIGHT_math); }
+
+static HSV CYCLE_IN_OUT_math(HSV hsv, int16_t dx, int16_t dy, uint8_t dist, uint8_t time) {
+    hsv.h = 3 * dist / 2 - time;
+    return hsv;
+}
+
+bool CYCLE_IN_OUT(effect_params_t* params) { return effect_runner_dx_dy_dist(params, &CYCLE_IN_OUT_math); }
+
+static HSV CYCLE_IN_OUT_DUAL_math(HSV hsv, int16_t dx, int16_t dy, uint8_t time) {
+    dx           = (k_rgb_matrix_center.x / 2) - abs8(dx);
+    uint8_t dist = sqrt16(dx * dx + dy * dy);
+    hsv.h        = 3 * dist - time;
+    return hsv;
+}
+
+bool CYCLE_IN_OUT_DUAL(effect_params_t* params) { return effect_runner_dx_dy(params, &CYCLE_IN_OUT_DUAL_math); }
 #endif // RGB_MATRIX_CUSTOM_EFFECT_IMPLS
