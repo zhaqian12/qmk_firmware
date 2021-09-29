@@ -1,5 +1,20 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+/* Copyright 2021 ZhaQian
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#pragma once
 
 #include "config_common.h"
 
@@ -22,12 +37,6 @@
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION COL2ROW
-
-/* number of backlight levels */
-
-#ifdef BACKLIGHT_PIN
-#define BACKLIGHT_LEVELS 3
-#endif
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 1
@@ -66,10 +75,6 @@
 #define RGB_MATRIX_EFFECT_REACTIVE_MULTIWIDE_RGB
 #endif
 
-#ifdef VIAL_ENABLE
-#define VIAL_KEYBOARD_UID {0xDF, 0x3A, 0x05, 0x13, 0x08, 0xA4, 0x52, 0x65}
-#endif
 #define NO_ACTION_TAPPING
 #define NO_ACTION_ONESHOT
 #define NO_ACTION_FUNCTION
-#endif
