@@ -2,7 +2,7 @@
 
 ## Keyboard Firmwares and Lib
 
-### Keyboards Released by ZhaQIAN
+### Keyboards Released by ZhaQian
 | NAME          | VENDOR_ID | PRODUCT_ID | FEATURES                                     |
 | ------------  | --------- | ---------- | -------------------------------------------- |
 | zq75v2        | 0x00AA    | 0xAA01     | at90usb1286, RGB, UGRGB, ENCODER, OLED       |
