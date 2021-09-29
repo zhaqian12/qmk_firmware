@@ -1,15 +1,30 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+/* Copyright 2021 ZhaQian
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#pragma once
 
 #include "config_common.h"
 
 /* USB Device descriptor parameter */
-#define VENDOR_ID       0xFEEA
-#define PRODUCT_ID      0x6066
+#define VENDOR_ID       0x00AA
+#define PRODUCT_ID      0xAAAA
 #define DEVICE_VER      0x0001
-#define MANUFACTURER    zhaqian
+#define MANUFACTURER    ZhaQian
 #define PRODUCT         Mpad12
-#define DESCRIPTION     multifunction pad 12 designed by zhaqian
+#define DESCRIPTION     multifunction pad12
 
 /* key matrix size */
 #define MATRIX_ROWS 4
@@ -23,12 +38,6 @@
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION COL2ROW
 
-/* number of backlight levels */
-
-#ifdef BACKLIGHT_PIN
-#define BACKLIGHT_LEVELS 3
-#endif
-
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCING_DELAY 5
 
@@ -37,7 +46,6 @@
 
 /* Locking resynchronize hack */
 #define LOCKING_RESYNC_ENABLE
-
 
 #ifdef RGB_MATRIX_ENABLE
 #define RGB_DI_PIN F6
@@ -49,21 +57,16 @@
 #define DISABLE_RGB_MATRIX_ALPHAS_MODS
 #define DISABLE_RGB_MATRIX_GRADIENT_UP_DOWN
 #define DISABLE_RGB_MATRIX_GRADIENT_LEFT_RIGHT
-//#define DISABLE_RGB_MATRIX_BREATHING
 #define DISABLE_RGB_MATRIX_BAND_SAT
- #define DISABLE_RGB_MATRIX_BAND_VAL
+#define DISABLE_RGB_MATRIX_BAND_VAL
 #define DISABLE_RGB_MATRIX_BAND_PINWHEEL_SAT
- #define DISABLE_RGB_MATRIX_BAND_PINWHEEL_VAL
+#define DISABLE_RGB_MATRIX_BAND_PINWHEEL_VAL
 #define DISABLE_RGB_MATRIX_BAND_SPIRAL_SAT
- #define DISABLE_RGB_MATRIX_BAND_SPIRAL_VAL
-//#define DISABLE_RGB_MATRIX_CYCLE_ALL
-//#define DISABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
-//#define DISABLE_RGB_MATRIX_CYCLE_UP_DOWN
+#define DISABLE_RGB_MATRIX_BAND_SPIRAL_VAL
 #define DISABLE_RGB_MATRIX_RAINBOW_MOVING_CHEVRON
 #define DISABLE_RGB_MATRIX_CYCLE_OUT_IN
 #define DISABLE_RGB_MATRIX_CYCLE_OUT_IN_DUAL
- #define DISABLE_RGB_MATRIX_CYCLE_PINWHEEL
-//#define DISABLE_RGB_MATRIX_CYCLE_SPIRAL
+#define DISABLE_RGB_MATRIX_CYCLE_PINWHEEL
 #define DISABLE_RGB_MATRIX_DUAL_BEACON
 #define DISABLE_RGB_MATRIX_RAINBOW_BEACON
 #define DISABLE_RGB_MATRIX_RAINBOW_PINWHEELS
@@ -72,7 +75,7 @@
 #define DISABLE_RGB_MATRIX_HUE_BREATHING
 #define DISABLE_RGB_MATRIX_HUE_PENDULUM
 #define DISABLE_RGB_MATRIX_HUE_WAVE
- #define DISABLE_RGB_MATRIX_TYPING_HEATMAP
+#define DISABLE_RGB_MATRIX_TYPING_HEATMAP
 #define DISABLE_RGB_MATRIX_DIGITAL_RAIN
 #define DISABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
 #define DISABLE_RGB_MATRIX_SOLID_REACTIVE
@@ -107,20 +110,3 @@
 #define OLED_FONT_H "../../zfont.c"
 #endif
 
-// #ifdef MOUSEKEY_ENABLE
-// #define MOUSEKEY_DELAY 20
-// #define MOUSEKEY_INTERVAL 17
-// #define MK_3_SPEED
-// #define MK_MOMENTARY_ACCEL
-// #define MK_C_OFFSET_UNMOD 64   // MOUSEKEY移动鼠标指针一次64像素
-// #define MK_C_INTERVAL_UNMOD 17
-// #endif
-
-#ifdef VIAL_ENABLE
-#define VIAL_KEYBOARD_UID {0x6D, 0xDA, 0x44, 0xC6, 0x7E, 0xB8, 0xF2, 0x10}
-#ifdef VIAL_ENCODERS_ENABLE
-#define VIAL_ENCODER_KEYCODE_DELAY 10
-#endif
-#endif
-
-#endif
