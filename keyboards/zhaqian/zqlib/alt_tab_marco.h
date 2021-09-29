@@ -1,4 +1,4 @@
-/* Copyright 2020 QMK
+/* Copyright 2021 zhaiqian
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,24 +14,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #pragma once
-#include_next <halconf.h>
 
-#undef HAL_USE_PWM
-#define HAL_USE_PWM    TRUE
+#include "quantum.h"
 
-#define SERIAL_USB_BUFFERS_SIZE 256
+/*
+ * if you want to use these functions,
+ * please enable ALT_TAB_MARCO in rules.mk,
+ */
 
-// #undef  SERIAL_USB_BUFFERS_SIZE
-// #define SERIAL_USB_BUFFERS_SIZE 256
+void alt_tab_forward(void);					//alt_tab
+void alt_tab_reverse(void);					//alt_shift_tab
 
-// #undef  SERIAL_BUFFERS_SIZE
-// #define SERIAL_BUFFERS_SIZE     128
 
-// #undef  SPI_USE_WAIT
-// #define SPI_USE_WAIT TRUE
-
-// #undef  SPI_SELECT_MODE
-// #define SPI_SELECT_MODE SPI_SELECT_MODE_PAD
 

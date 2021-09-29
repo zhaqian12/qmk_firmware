@@ -20,7 +20,7 @@
 
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0x00AA
-#define PRODUCT_ID      0xAA03
+#define PRODUCT_ID      0xAA05
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    ZhaQian
 #define PRODUCT         zq80

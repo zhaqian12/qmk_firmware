@@ -1,4 +1,4 @@
-/* Copyright 2020 QMK
+/* Copyright 2021 zhaiqian
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,19 +16,12 @@
 
 #pragma once
 
-#define CH_CFG_ST_FREQUENCY 10000
+#include "quantum.h"
 
-#define CH_CFG_FACTORY_OBJECTS_REGISTRY TRUE
+/*
+ * if you want to use these functions,
+ * please enable ENCODER_TRIGGER in rules.mk,
+ */
 
-#define CH_CFG_FACTORY_GENERIC_BUFFERS TRUE
-
-#define CH_CFG_FACTORY_SEMAPHORES TRUE
-
-#define CH_CFG_FACTORY_MAILBOXES TRUE
-
-#define CH_CFG_FACTORY_OBJ_FIFOS TRUE
-
-#define CH_CFG_FACTORY_PIPES TRUE
-
-#include_next <chconf.h>
+void encoder_trigger_kb(uint16_t keycode,  keypos_t keylocation);		//encoder trigger
 

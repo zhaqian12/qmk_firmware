@@ -1,4 +1,4 @@
-/* Copyright 2020 QMK
+/* Copyright 2021 zhaiqian
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,19 +14,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
 
-#include_next <mcuconf.h>
+#include "encoder_trigger.h"
 
-#undef STM32_PWM_USE_TIM3
-#define STM32_PWM_USE_TIM3 TRUE
 
-#undef STM32_PLLM_VALUE
-#define STM32_PLLM_VALUE                    8
-#undef STM32_PLLN_VALUE
-#define STM32_PLLN_VALUE                    192
-#undef STM32_PLLP_VALUE
-#define STM32_PLLP_VALUE                    2
-#undef STM32_PLLQ_VALUE
-#define STM32_PLLQ_VALUE                    4
+__attribute__((weak)) void encoder_trigger_kb(uint16_t keycode, keypos_t keylocation) {
+#ifdef VIA_ENABLE
+    if (keycode <= QK_MODS_MAX) {
+        register_code16(keycode);
+        wait_ms(10);
+        unregister_code16(keycode);
+    } else {
+#else
+    if (keycode == 1) {
+#endif
+        action_exec((keyevent_t){.key = keylocation, .pressed = 1, .time = (timer_read() | 1)});
+        wait_ms(10);
+        action_exec((keyevent_t){.key = keylocation, .pressed = 0, .time = (timer_read() | 1)});
+    }
+}
+
+
 

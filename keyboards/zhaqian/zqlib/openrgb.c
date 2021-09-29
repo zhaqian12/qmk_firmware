@@ -34,7 +34,7 @@
 #endif
 
 #if !defined(OPENRGB_DIRECT_MODE_STARTUP_BLUE)
-#    define OPENRGB_DIRECT_MODE_STARTUP_BLUE 200
+#    define OPENRGB_DIRECT_MODE_STARTUP_BLUE 255
 #endif
 
 RGB                  g_openrgb_direct_mode_colors[DRIVER_LED_TOTAL] = {[0 ... DRIVER_LED_TOTAL - 1] = {OPENRGB_DIRECT_MODE_STARTUP_GREEN, OPENRGB_DIRECT_MODE_STARTUP_RED, OPENRGB_DIRECT_MODE_STARTUP_BLUE}};
@@ -164,7 +164,7 @@ static const uint8_t openrgb_rgb_matrix_effects_indexes[]           = {
 };
 static uint8_t raw_hid_buffer[RAW_EPSIZE];
 
-void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
+void raw_hid_receive(uint8_t *data, uint8_t length) {
     switch (*data) {
         case OPENRGB_GET_PROTOCOL_VERSION:
             openrgb_get_protocol_version();
@@ -312,6 +312,7 @@ void openrgb_set_mode(uint8_t *data) {
     const uint8_t v     = data[3];
     const uint8_t mode  = data[4];
     const uint8_t speed = data[5];
+    const uint8_t save = data[6];
 
     raw_hid_buffer[0] = OPENRGB_SET_MODE;
 
@@ -320,9 +321,16 @@ void openrgb_set_mode(uint8_t *data) {
         return;
     }
 
-    rgb_matrix_mode_noeeprom(mode);
-    rgb_matrix_set_speed_noeeprom(speed);
-    rgb_matrix_sethsv_noeeprom(h, s, v);
+    if (save == 1) {
+        rgb_matrix_mode(mode);
+        rgb_matrix_set_speed(speed);
+        rgb_matrix_sethsv(h, s, v);
+    }
+    else {
+        rgb_matrix_mode_noeeprom(mode);
+        rgb_matrix_set_speed_noeeprom(speed);
+        rgb_matrix_sethsv_noeeprom(h, s, v);
+    }
 
     raw_hid_buffer[RAW_EPSIZE - 2] = OPENRGB_SUCCESS;
 }
