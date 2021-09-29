@@ -1,33 +1,15 @@
-# Build Options
-#   change yes to no to disable
-#
-BOOTMAGIC_ENABLE = lite     # Virtual DIP switch configuration
-KEYBOARD_SHARED_EP = no    # Free up some extra endpoints - needed if console+mouse+extra
-MOUSEKEY_ENABLE = yes       # Mouse keys
-EXTRAKEY_ENABLE = yes       # Audio control and System control
-CONSOLE_ENABLE = no         # Console for debug
-COMMAND_ENABLE = no         # Commands for debug and configuration
-# if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
-NKRO_ENABLE = yes           # USB Nkey Rollover
-NO_USB_STARTUP_CHECK =  no	# Disable initialization only when usb is plugged in
-
+# Mcu
 MCU = STM32F401
 
 # Address of the bootloader in system memory
 STM32_BOOTLOADER_ADDRESS = 0x1FFF0000
 
-
 # Bootloader selection
 BOOTLOADER = tinyuf2
 
-# # project specific file
+# project specific file
 CUSTOM_MATRIX = lite    # for using the A9 pin as matrix io
 QUANTUM_SRC += matrix.c
-
-RGB_MATRIX_ENABLE = yes
-RGB_MATRIX_DRIVER = WS2812
-WS2812_DRIVER = pwm
-
 EEPROM_DRIVER = custom
 SRC += eep/eeprom_stm32.c
 SRC += eep/flash_stm32.c
@@ -37,10 +19,14 @@ COMMON_VPATH += patsubst$(%/, %, dir $(mkfile_patch))/eep
 # Enter lower-power sleep mode when on the ChibiOS idle thread
 OPT_DEFS += -DCORTEX_ENABLE_WFI_IDLE=TRUE
 
-RGB_MATRIX_CUSTOM_KB = yes
-RGB_MATRIX_CONTROL_ENABLE = yes
-UNDERGLOW_RGB_MATRIX_ENABLE = yes
-WPM_ENABLE = yes
-VELOCIKEY_ENABLE = yes
-TAP_DANCE_ENABLE = no
+# Build Options
+#   change yes to no to disable
+#
+BOOTMAGIC_ENABLE = lite
+MOUSEKEY_ENABLE = yes
+EXTRAKEY_ENABLE = yes
+CONSOLE_ENABLE = no
+COMMAND_ENABLE = no
+NKRO_ENABLE = yes
+
 
