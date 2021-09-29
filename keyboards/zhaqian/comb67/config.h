@@ -1,5 +1,20 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+/* Copyright 2021 ZhaQian
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#pragma once
 
 #include "config_common.h"
 
@@ -7,7 +22,7 @@
 #define VENDOR_ID       0x00AA
 #define PRODUCT_ID      0xAA02
 #define DEVICE_VER      0x0001
-#define MANUFACTURER    zhaqian
+#define MANUFACTURER    ZhaQian
 #define PRODUCT         Comb67
 #define DESCRIPTION     Keyboard
 
@@ -23,12 +38,6 @@
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION COL2ROW
 
-/* number of backlight levels */
-
-#ifdef BACKLIGHT_PIN
-#define BACKLIGHT_LEVELS 3
-#endif
-
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
 
@@ -38,20 +47,25 @@
 /* Locking resynchronize hack */
 #define LOCKING_RESYNC_ENABLE
 
-
+#ifdef RGB_MATRIX_ENABLE
 #define RGB_DI_PIN F6
-#ifdef RGB_DI_PIN
 #define RGBLED_NUM 83
 #define DRIVER_LED_TOTAL RGBLED_NUM
-#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 200 
+#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 200
 #define RGB_DISABLE_WHEN_USB_SUSPENDED true
 #define RGB_MATRIX_CENTER {112, 32}
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
 #endif
 
-#ifdef VIAL_ENABLE
-#define VIAL_KEYBOARD_UID {0xD3, 0x67, 0x1B, 0xEC, 0xD7, 0x5A, 0xDE, 0xEA}
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+#define UG_RGB_MATRIX_ANIMATIONS
 #endif
 
+#ifdef RGB_MATRIX_CUSTOM_KB
+#define RGB_MATRIX_EFFECT_FRACTAL_RGB
+#define RGB_MATRIX_EFFECT_CANDY_TAP
+#define RGB_MATRIX_EFFECT_REACTIVE_MULTICROSS_RGB
+#define RGB_MATRIX_EFFECT_REACTIVE_MULTINEXUS_RGB
+#define RGB_MATRIX_EFFECT_REACTIVE_MULTIWIDE_RGB
 #endif

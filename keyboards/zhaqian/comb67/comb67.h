@@ -1,5 +1,20 @@
-#ifndef COMB67_H
-#define COMB67_H
+/* Copyright 2021 ZhaQian
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#pragma once
 
 #include "quantum.h"
 
@@ -17,19 +32,19 @@
 	{ K400,  K401,  KC_NO, K403,  KC_NO, KC_NO, K406,  KC_NO, KC_NO, K409,  K410,  KC_NO, K412,  K413,  K414 }  \
 }
 
-#ifdef VIA_ENABLE
-#define VIA_CUSTOM_KEYCODES
-#endif
-
-#ifdef VIA_CUSTOM_KEYCODES
-
 enum custom_keycodes {
-    BLRGBTog = USER00,					
-	UGRGBTog,								
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+#ifdef VIA_ENABLE
+	UGLRGBTog = USER00,		//rgb toggle for underglow rgb light
+#else
+    UGLRGBTog = SAFE_RANGE,
+#endif
+	KBLRGBTog,				//rgb toggle for key rgb light
+#endif
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+    UGRGBMODF,              //underglow rgblight mode step
+    UGRGBMODR,              //underglow rgblight mode step forwards
+#endif
 };
 
-void BLRGBToggle(void);
-void UGRGBToggle(void);
-#endif
 
-#endif
