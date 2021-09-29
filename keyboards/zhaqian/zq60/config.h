@@ -1,5 +1,20 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+/* Copyright 2021 ZhaQian
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#pragma once
 
 #include "config_common.h"
 
@@ -7,7 +22,7 @@
 #define VENDOR_ID       0x00AA
 #define PRODUCT_ID      0xAA04
 #define DEVICE_VER      0x0001
-#define MANUFACTURER    zhaqian
+#define MANUFACTURER    ZhaQian
 #define PRODUCT         zq60
 #define DESCRIPTION     Keyboard
 
@@ -22,12 +37,6 @@
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION COL2ROW
-
-/* number of backlight levels */
-
-#ifdef BACKLIGHT_PIN
-#define BACKLIGHT_LEVELS 3
-#endif
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
@@ -49,19 +58,11 @@
 #define RGBLIGHT_LIMIT_VAL 200
 #endif
 
-
 #ifdef RGB_MATRIX_ENABLE
 #define RGB_DI_PIN F6
 #define RGBLED_NUM 5
 #define DRIVER_LED_TOTAL RGBLED_NUM
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 200
-#define RGB_DISABLE_WHEN_USB_SUSPENDED false
+#define RGB_DISABLE_WHEN_USB_SUSPENDED true
 #define RGB_MATRIX_TYPING_HEATMAP_DECREASE_DELAY_MS 50
-#endif
-
-#ifdef VIAL_ENABLE
-#define VIAL_KEYBOARD_UID {0x89, 0x5B, 0x48, 0x01, 0x00, 0x52, 0x88, 0xF1}
-#endif
-
-
 #endif
