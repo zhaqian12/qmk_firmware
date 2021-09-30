@@ -1,7 +1,7 @@
 # zq75v2
 
 A 75% keys keyboard with rgb.
-This keyboard use st90usb1286 as mcu.
+This keyboard uses st90usb1286 as mcu.
 
 * Keyboard Maintainer: [zhaqian](https://github.com/zhaqian12)
 * Hardware Supported: zq75v2
