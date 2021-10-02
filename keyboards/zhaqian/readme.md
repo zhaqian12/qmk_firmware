@@ -14,8 +14,10 @@
 | zq48          | 0x00AA    | 0xAA07     | 32U4, RGB, UGRGB                             |
 | zq61          | 0x00AA    | 0xAA08     | STM32F401, RGB, UGRGB                        |
 | zq67          | 0x00AA    | 0xAA09     | 32U4, RGB, UGRGB                             |
+| zq11800       | 0x00AA    | 0xAA0A     | 32U4, ENCODER, RGB                           |
 | Mpad12        | 0x00AA    | 0xAAAA     | 32u4, RGB, UGRGB, JOYSTICK, ENCODER, OLED    |
 | split69       | 0x00AA    | 0xAAAB     | 32U4, SPLIT, UGRGB, OLED, ENCODER            |
+
 
 ### ZhaQian library
 
