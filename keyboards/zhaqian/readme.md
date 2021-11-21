@@ -18,6 +18,7 @@
 | wave87        | 0x00AA    | 0xAA0B     | 32U4, LOGORGB                                |
 | zq980mini     | 0x00AA    | 0xAA0C     | 32U4, RGB, UGRGB                             |
 | zq67rev2      | 0x00AA    | 0xAA0D     | 32U4, RGB                                    |
+| zq64          | 0x00AA    | 0xAA0E     | 32U4, RGB, ENCODER                           |
 | Mpad12        | 0x00AA    | 0xAAAA     | 32u4, RGB, UGRGB, JOYSTICK, ENCODER, OLED    |
 | split69       | 0x00AA    | 0xAAAB     | 32U4, SPLIT, UGRGB, OLED, ENCODER            |
 
@@ -30,5 +31,9 @@
 - encoder trigger
 - rgb matrix control
 - underglow rgb matrix effect
+
+#### TODO LIST
+
+- Bluetooth
 
 
