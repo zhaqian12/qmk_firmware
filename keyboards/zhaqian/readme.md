@@ -20,7 +20,7 @@
 | zq67rev2      | 0x00AA    | 0xAA0D     | 32U4, RGB                                    |
 | zq64          | 0x00AA    | 0xAA0E     | 32U4, RGB, ENCODER                           |
 | zq68          | 0x00AA    | 0xAA0F     | 32U4, RGB, ENCODER                           |
-| toxic         | 0x00AA    | 0xAA10     | 32U4, RGB                                    |
+| toxic67       | 0x00AA    | 0xAA10     | 32U4, RGB                                    |
 | Mpad12        | 0x00AA    | 0xAAAA     | 32u4, RGB, UGRGB, JOYSTICK, ENCODER, OLED    |
 | split69       | 0x00AA    | 0xAAAB     | 32U4, SPLIT, UGRGB, OLED, ENCODER            |
 
