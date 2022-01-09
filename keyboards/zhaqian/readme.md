@@ -4,7 +4,7 @@
 
 ### Keyboards Released by ZhaQian
 | NAME          | VENDOR_ID | PRODUCT_ID | FEATURES                                     |
-| ------------  | --------- | ---------- | -------------------------------------------- |
+|:-------------:| :-------: | :--------: | :------------------------------------------: |
 | zq75v2        | 0x00AA    | 0xAA01     | at90usb1286, RGB, UGRGB, ENCODER, OLED       |
 | comb67        | 0x00AA    | 0xAA02     | 32U4, RGB, UGRGB                             |
 | zq75          | 0x00AA    | 0xAA03     | 32U4, RGB, SPLIT SPACE                       |
