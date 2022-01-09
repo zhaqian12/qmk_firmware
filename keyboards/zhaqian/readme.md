@@ -29,13 +29,14 @@
 
 - RGB matrix custom effect
 - Openrgb protcol
-- alt tab marco
-- encoder trigger
-- rgb matrix control
-- underglow rgb matrix effect
+- Alt tab marco
+- Encoder trigger
+- Rgb matrix control
+- Underglow rgb matrix effect
 
 #### TODO LIST
 
-- Bluetooth
-
-
+- Bluetooth which is communicated through uart
+- Ti TM4C129X fixed
+- Rgb matrix control software (usb hid)
+- Alice split keyboard with a slope like a mountain which use uart or spi to communicate
