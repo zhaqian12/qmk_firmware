@@ -93,6 +93,16 @@ typedef union {
     };
 } rgb_config_t;
 
+typedef union {
+    uint32_t raw;
+    struct PACKED {
+        uint8_t underglow_rgb_enable;
+        uint8_t keyboard_rgb_enable;
+        uint8_t logo_rgb_enable;
+        uint8_t underglow_rgb_mode;
+    };
+} rgb_control_config_t;
+
 #if defined(_MSC_VER)
 #    pragma pack(pop)
 #endif

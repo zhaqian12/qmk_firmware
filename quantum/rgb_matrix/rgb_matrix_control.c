@@ -26,17 +26,22 @@ static uint8_t is_logo_rgblight_active = 1;
 
 // rgb matrix status initialized by reading from eeprom
 void rgb_matrix_control_init(void) {
+    uint32_t current_state = 0;
     is_underglow_rgblight_active = eeprom_read_byte(EECONFIG_UGRGBTOG) % 2;
     is_key_backlight_active = eeprom_read_byte(EECONFIG_KRGBTOG) % 2;
+    current_state = is_underglow_rgblight_active | (is_key_backlight_active << 4);
 #ifdef LOGO_RGB_MATRIX_CONTROL_ENABLE
     is_logo_rgblight_active = eeprom_read_byte(EECONFIG_LGRGBTOG) % 2;
+    current_state |= (is_logo_rgblight_active << 8);
 #endif
+    rgb_matrix_control_config.raw = current_state;
 }
 
 // underglow rgb matrix toggle
 void underglow_rgb_toggle(void) {
     if (rgb_matrix_is_enabled()) {
         is_underglow_rgblight_active ^= 1;
+        rgb_matrix_control_config.underglow_rgb_enable = is_underglow_rgblight_active;
         eeprom_update_byte(EECONFIG_UGRGBTOG, is_underglow_rgblight_active);
     }
 }
@@ -45,6 +50,7 @@ void underglow_rgb_toggle(void) {
 void key_backlight_rgb_toggle(void) {
     if (rgb_matrix_is_enabled()) {
         is_key_backlight_active ^= 1;
+        rgb_matrix_control_config.keyboard_rgb_enable = is_key_backlight_active;
         eeprom_update_byte(EECONFIG_KRGBTOG, is_key_backlight_active);
     }
 }
@@ -54,6 +60,7 @@ void key_backlight_rgb_toggle(void) {
 void logo_rgb_toggle(void) {
     if (rgb_matrix_is_enabled()) {
         is_logo_rgblight_active ^= 1;
+        rgb_matrix_control_config.logo_rgb_enable = is_logo_rgblight_active;
         eeprom_update_byte(EECONFIG_LGRGBTOG, is_logo_rgblight_active);
     }
 }
@@ -99,3 +106,17 @@ bool process_rgbcontrol(const uint16_t keycode, const keyrecord_t *record) {
     }
     return true;
 }
+
+uint8_t is_underglow_rgb_enable(void) {
+    return rgb_matrix_control_config.underglow_rgb_enable;
+}
+
+uint8_t is_keyboard_rgb_enable(void) {
+    return rgb_matrix_control_config.keyboard_rgb_enable;
+}
+
+#ifdef LOGO_RGB_MATRIX_CONTROL_ENABLE
+uint8_t is_logo_rgb_enable(void) {
+    return rgb_matrix_control_config.logo_rgb_enable;
+}
+#endif

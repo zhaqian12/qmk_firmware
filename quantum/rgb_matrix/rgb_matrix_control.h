@@ -17,6 +17,7 @@
 #pragma once
 
 #include "quantum.h"
+#include "rgb_matrix_types.h"
 
 /*
  * if you want to use these functions,
@@ -39,4 +40,9 @@ void logo_rgb_toggle(void);
 
 bool process_rgbcontrol(const uint16_t keycode, const keyrecord_t *record);
 
-
+uint8_t is_underglow_rgb_enable(void);
+uint8_t is_keyboard_rgb_enable(void);
+#ifdef LOGO_RGB_MATRIX_CONTROL_ENABLE
+uint8_t is_logo_rgb_enable(void);
+#endif
+extern rgb_control_config_t rgb_matrix_control_config;

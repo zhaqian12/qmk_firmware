@@ -440,10 +440,17 @@ void rgb_matrix_task(void) {
 }
 
 void rgb_matrix_indicators(void) {
+#ifdef RGB_MATRIX_INDICATORS_NOT_OVERRIDE
+    rgb_matrix_indicators_underglowrgbmatrix();
+    rgb_matrix_indicators_rgbmatrixcontrol();
+    rgb_matrix_indicators_kb();
+    rgb_matrix_indicators_user();
+#else
     rgb_matrix_indicators_kb();
     rgb_matrix_indicators_user();
     rgb_matrix_indicators_underglowrgbmatrix();
     rgb_matrix_indicators_rgbmatrixcontrol();
+#endif
 }
 
 __attribute__((weak)) void rgb_matrix_indicators_kb(void) {}

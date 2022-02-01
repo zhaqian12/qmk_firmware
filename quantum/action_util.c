@@ -233,7 +233,7 @@ void send_keyboard_report(void) {
     keyboard_report->mods = real_mods;
     keyboard_report->mods |= weak_mods;
     keyboard_report->mods |= macro_mods;
-
+ 
 #ifndef NO_ACTION_ONESHOT
     if (oneshot_mods) {
 #    if (defined(ONESHOT_TIMEOUT) && (ONESHOT_TIMEOUT > 0))
