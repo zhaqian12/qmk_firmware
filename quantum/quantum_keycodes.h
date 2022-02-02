@@ -525,6 +525,8 @@ enum quantum_keycodes {
     MAGIC_TOGGLE_GUI,
 
     // Start of custom keycode range for keyboards and keymaps - always leave at the end
+    ALT_TAB_FORWARD,
+    ALT_TAB_REVERSE,
     UNDERGLOW_RGB_TOG,
     KEY_RGB_TOG,
     LOGO_RGB_TOG,
