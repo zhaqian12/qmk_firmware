@@ -38,6 +38,6 @@ void joystick_trigger(uint8_t index, joystick_axes_trigger_t axes_state, uint8_t
 bool joystick_update_user(uint8_t index, joystick_axes_state_t axes_state, uint8_t changed_axes);
 bool joystick_update_kb(uint8_t index, joystick_axes_state_t axes_state, uint8_t changed_axes);
 
-void joystick_init(void);
-bool joystick_task(void);
+void joystick_trigger_init(void);
+bool joystick_trigger_task(void);
 
