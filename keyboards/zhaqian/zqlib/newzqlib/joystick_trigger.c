@@ -81,7 +81,7 @@ __attribute__((weak)) bool joystick_update_kb(uint8_t index, joystick_axes_trigg
     return joystick_update_user(index, axes_state, changed_axes);
 }
 
-void joystick_init(void) {
+void joystick_trigger_task(void) {
     joystick_axes_state_t init_state;
     init_state.joystick_axes_trigger_state.raw = 0;
     for (uint8_t i = 0; i < NUMBER_OF_JOYSTICKS; i ++) {
@@ -108,7 +108,7 @@ static void joystick_update(uint8_t index) {
     return changed;
 }
 
-bool joystick_task(void) {
+bool joystick_trigger_task(void) {
     bool changed = false;
     for (uint8_t i = 0; i < NUMBER_OF_JOYSTICKS; i++) {
         joystick_axes_state[i].joystick_axes_x_value = analogReadPin(joystick_axes_x_pin[i]);
