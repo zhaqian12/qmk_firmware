@@ -20,7 +20,7 @@
 
 typedef union {
     uint8_t raw;
-    struct PACKED {
+    struct __attribute__((packed)) {
         uint8_t positive_x : 1;
         uint8_t negative_x : 1;
         uint8_t positive_y : 1;

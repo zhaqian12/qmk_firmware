@@ -18,9 +18,9 @@
 #include "analog.h"
 
 #ifndef JOYSTICK_ADC_RESOLUTION
-#    define JOYSTICK_ADC_RESOLUTION 10
+#define JOYSTICK_ADC_RESOLUTION 10
 #elif JOYSTICK_ADC_RESOLUTION < 8 || JOYSTICK_ADC_RESOLUTION > 16
-#    error JOYSTICK_ADC_RESOLUTION must be between 8 and 16
+#error "JOYSTICK_ADC_RESOLUTION must be between 8 and 16"
 #endif
 
 #define JOYSTICK_RESOLUTION ((1L << (JOYSTICK_ADC_RESOLUTION - 1)) - 1)
@@ -30,7 +30,7 @@
 #endif
 
 #if !defined(JOYSTICK_AXES_X_PIN) || !defined(JOYSTICK_AXES_Y_PIN)
-#    error "No encoder pads defined by ENCODERS_PAD_A and ENCODERS_PAD_B"
+#error "No joystick axes pins defined"
 #endif
 
 #ifndef JOYSTICK_AXES_PX_KEY_POS

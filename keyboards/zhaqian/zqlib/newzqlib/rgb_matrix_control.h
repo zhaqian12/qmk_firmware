@@ -22,7 +22,7 @@
 
 typedef union {
     uint8_t raw;
-    struct PACKED {
+    struct __attribute__((packed)) {
         uint8_t is_key_rgb_enable : 1;
         uint8_t is_underglow_rgb_enable : 1;
         uint8_t is_logo_rgb_enable : 1;
