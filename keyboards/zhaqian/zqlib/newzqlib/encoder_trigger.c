@@ -17,8 +17,9 @@
 #include "encoder_trigger.h"
 
 // define the key position for encoder pad a
+// ex: {col, row} or {col1, row1}, {col2, row2}
 #ifndef ENCODER_PAD_A_KEY_POS
-#define ENCODER_PAD_A_KEY_POS {0, 1}
+#define ENCODER_PAD_A_KEY_POS {1, 0}
 #endif
 
 // define the key position for encoder pad b

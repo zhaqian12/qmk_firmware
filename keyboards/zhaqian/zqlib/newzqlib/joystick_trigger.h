@@ -34,8 +34,9 @@ typedef struct {
     int16_t joystick_axes_y_value;
 } joystick_axes_state_t;
 
-bool joystick_update_user(uint8_t index, joystick_axes_state_t axes_state);
-bool joystick_update_kb(uint8_t index, joystick_axes_state_t axes_state);
+void joystick_trigger(uint8_t index, joystick_axes_trigger_t axes_state, uint8_t changed_axes);
+bool joystick_update_user(uint8_t index, joystick_axes_state_t axes_state, uint8_t changed_axes);
+bool joystick_update_kb(uint8_t index, joystick_axes_state_t axes_state, uint8_t changed_axes);
 
 void joystick_init(void);
 bool joystick_task(void);

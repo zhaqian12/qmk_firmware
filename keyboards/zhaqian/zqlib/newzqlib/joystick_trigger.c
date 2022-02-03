@@ -33,19 +33,52 @@
 #    error "No encoder pads defined by ENCODERS_PAD_A and ENCODERS_PAD_B"
 #endif
 
+#ifndef JOYSTICK_AXES_PX_KEY_POS
+#define JOYSTICK_AXES_PX_KEY_POS {0, 0}
+#endif
+
+#ifndef JOYSTICK_AXES_NX_KEY_POS
+#define JOYSTICK_AXES_NX_KEY_POS {0, 1}
+#endif
+
+#ifndef JOYSTICK_AXES_PY_KEY_POS
+#define JOYSTICK_AXES_PY_KEY_POS {1, 0}
+#endif
+
+#ifndef JOYSTICK_AXES_NY_KEY_POS
+#define JOYSTICK_AXES_NY_KEY_POS {1, 1}
+#endif
+
 static pin_t joystick_axes_x_pin[] = JOYSTICK_AXES_X_PIN;
 static pin_t joystick_axes_y_pin[] = JOYSTICK_AXES_Y_PIN;
+
+static keypos_t joystick_axes_key_pos[] = {JOYSTICK_AXES_PX_KEY_POS, JOYSTICK_AXES_NX_KEY_POS, \
+                                            JOYSTICK_AXES_PY_KEY_POS, JOYSTICK_AXES_NY_KEY_POS};
 
 #define NUMBER_OF_JOYSTICKS (sizeof(joystick_axes_x_pin) / sizeof(pin_t))
 
 static joystick_axes_state_t joystick_axes_state[NUMBER_OF_JOYSTICKS];
 
-__attribute__((weak)) bool joystick_update_user(uint8_t index, joystick_axes_state_t axes_state) {
+void joystick_trigger(uint8_t index, joystick_axes_trigger_t axes_state, uint8_t changed_axes) {
+    keyevent_t current_key_event;
+    uint8_t axes_mask = 1;
+    for (uint8_t i = 0; i < 4; i ++, axes_mask <<= 1) {
+        if (changed_axes & axes_mask == axes_mask) {
+            current_key_event.key_pos = joystick_axes_key_pos[index + i * NUMBER_OF_JOYSTICKS];
+            current_key_event.pressed = axes_state.raw & axes_mask == axes_mask ? 1 : 0;
+            current_key_event.time = (timer_read() | 1);
+            action_exec(current_key_event);
+        }
+    }
+}
+
+__attribute__((weak)) bool joystick_update_user(uint8_t index, joystick_axes_trigger_t axes_state, uint8_t changed_axes) {
     return true;
 }
 
-__attribute__((weak)) bool joystick_update_kb(uint8_t index, joystick_axes_state_t axes_state) {
-    return joystick_update_user(index, axes_state);
+__attribute__((weak)) bool joystick_update_kb(uint8_t index, joystick_axes_trigger_t axes_state, uint8_t changed_axes) {
+    joystick_trigger(index, axes_state, changed_axes);
+    return joystick_update_user(index, axes_state, changed_axes);
 }
 
 void joystick_init(void) {
@@ -68,8 +101,9 @@ static void joystick_update(uint8_t index) {
     current_state.positive_y = axes_y_buf > JOYSTICK_THRESHOLD ? 1 : 0;
     current_state.negative_y = axes_y_buf < -JOYSTICK_THRESHOLD ? 1 : 0;
     if (current_state.raw != joystick_axes_state[index].joystick_axes_trigger_state.raw) {
+        uint8_t changed_axes = current_state.raw ^ joystick_axes_state[index].joystick_axes_trigger_state.raw;
+        changed |= joystick_update_kb(index, current_state, changed_axes);
         joystick_axes_state[index].joystick_axes_trigger_state = current_state;
-        changed != joystick_update_kb(index, current_state);
     }
     return changed;
 }
@@ -83,4 +117,3 @@ bool joystick_task(void) {
     }
     return changed;
 }
-
