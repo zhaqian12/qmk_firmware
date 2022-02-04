@@ -32,6 +32,8 @@ void underglow_rgb_matrix_task(void);
 void underglow_rgb_mode_sync(void);
 void underglow_rgb_mode_step(void);
 void underglow_rgb_mode_step_reverse(void);
+
+#ifndef UNDERGLOW_RGB_MATRIX_API_DISABLE
 uint8_t underglow_rgb_matrix_get_mode(void);
 HSV undeglow_rgb_matrix_get_hsv(void);
 uint8_t underglow_rgb_matrix_get_speed(void);
@@ -49,6 +51,7 @@ void underglow_rgb_matrix_increase_val(void);
 void underglow_rgb_matrix_decrease_val(void);
 void underglow_rgb_matrix_increase_speed(void);
 void underglow_rgb_matrix_decrease_speed(void);
+#endif
 
 bool process_underglow_rgb_matrix(const uint16_t keycode, const keyrecord_t *record);
 
