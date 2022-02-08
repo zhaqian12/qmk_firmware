@@ -28,7 +28,6 @@ typedef union {
 
 void radial_controller_task(void);
 void host_radial_controller_send(uint16_t report);
-uint16_t host_last_radial_controller_report(void);
 void radial_controller_event_finished(void);
 void radial_controller_button_update(bool pressed);
 void radial_controller_dial_update(bool clockwise, bool continued);

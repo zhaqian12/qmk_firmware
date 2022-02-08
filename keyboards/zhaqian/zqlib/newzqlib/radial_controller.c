@@ -24,15 +24,19 @@
 #endif
 
 #ifndef RADIAL_CONTROLLER_ROTATION_STEP
+#define RADIAL_CONTROLLER_ROTATION_STEP 10
 #endif
 
 #ifndef RADIAL_CONTROLLER_TIMER_DELAY
-#define RADIAL_CONTROLLER_TIMER_DELAY 5
+#define RADIAL_CONTROLLER_TIMER_DELAY 15
+#endif
+
+#ifndef RADIAL_CONTROLLER_ROTATION_CONTINUE_STEP
+#define RADIAL_CONTROLLER_ROTATION_CONTINUE_STEP RADIAL_CONTROLLER_RESOLUTION
 #endif
 
 report_radial_controller_t radial_controller_report;
 
-static uint16_t last_radial_controller_report = 0;
 static int16_t radial_controller_rotation = 0;
 static bool is_radial_controller_rotate_finished = true;
 static bool is_clockwise = true;
@@ -49,19 +53,20 @@ void radial_controller_task(void) {
                                         -3600 : radial_controller_rotation - RADIAL_CONTROLLER_ROTATION_STEP;
             }
             radial_controller_timer = timer_read();
+#ifdef RADIAL_CONTROLLER_ROTATION_CONTINUE_BUTTON_ENABLE
+            if (radial_controller_rotation >= RADIAL_CONTROLLER_ROTATION_CONTINUE_STEP \
+                || radial_controller_rotation <= -RADIAL_CONTROLLER_ROTATION_CONTINUE_STEP) {
+                radial_controller_dial_finished();
+                is_radial_controller_rotate_finished = false;
+            }
+#endif
         }
     }
 }
 
 void host_radial_controller_send(uint16_t report) {
-    if (report == last_radial_controller_report) return;
-        last_radial_controller_report = report;
     if (!host_get_driver()) return;
     (host_get_driver()->send_radial_controller)(report);
-}
-
-uint16_t host_last_radial_controller_report(void) {
-    return last_radial_controller_report;
 }
 
 void radial_controller_event_finished(void) {
@@ -72,7 +77,7 @@ void radial_controller_event_finished(void) {
 void radial_controller_button_update(bool pressed) {
     if (pressed) {
         radial_controller_report.button = 1;
-    host_radial_controller_send(radial_controller_report.raw);
+        host_radial_controller_send(radial_controller_report.raw);
     } else {
         radial_controller_event_finished();
     }
