@@ -1,0 +1,141 @@
+/* Copyright 2022 zhaqian
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "radial_controller.h"
+#include "report.h"
+#include "host.h"
+
+// support encoder and switches
+#ifndef RADIAL_CONTROLLER_RESOLUTION
+#define RADIAL_CONTROLLER_RESOLUTION 120
+#endif
+
+#ifndef RADIAL_CONTROLLER_ROTATION_STEP
+#endif
+
+#ifndef RADIAL_CONTROLLER_TIMER_DELAY
+#define RADIAL_CONTROLLER_TIMER_DELAY 5
+#endif
+
+report_radial_controller_t radial_controller_report;
+
+static uint16_t last_radial_controller_report = 0;
+static int16_t radial_controller_rotation = 0;
+static bool is_radial_controller_rotate_finished = true;
+static bool is_clockwise = true;
+static uint16_t radial_controller_timer = 0;
+
+void radial_controller_task(void) {
+	if (!is_radial_controller_rotate_finished) {
+        if (timer_elapsed(radial_controller_timer) > RADIAL_CONTROLLER_TIMER_DELAY) {
+            if (is_clockwise) {
+                radial_controller_rotation = radial_controller_rotation > (3600 - RADIAL_CONTROLLER_ROTATION_STEP) ? \
+                                        3600 : radial_controller_rotation + RADIAL_CONTROLLER_ROTATION_STEP;
+            } else {
+                radial_controller_rotation = radial_controller_rotation < (-(3600 - RADIAL_CONTROLLER_ROTATION_STEP)) ? \
+                                        -3600 : radial_controller_rotation - RADIAL_CONTROLLER_ROTATION_STEP;
+            }
+            radial_controller_timer = timer_read();
+        }
+    }
+}
+
+void host_radial_controller_send(uint16_t report) {
+    if (report == last_radial_controller_report) return;
+        last_radial_controller_report = report;
+    if (!host_get_driver()) return;
+    (host_get_driver()->send_radial_controller)(report);
+}
+
+uint16_t host_last_radial_controller_report(void) {
+    return last_radial_controller_report;
+}
+
+void radial_controller_event_finished(void) {
+    radial_controller_report.raw = 0;
+    host_radial_controller_send(radial_controller_report.raw);
+}
+
+void radial_controller_button_update(bool pressed) {
+    if (pressed) {
+        radial_controller_report.button = 1;
+    host_radial_controller_send(radial_controller_report.raw);
+    } else {
+        radial_controller_event_finished();
+    }
+}
+
+void radial_controller_dial_update(bool clockwise, bool continued) {
+    if (!continued) {
+        if (clockwise) {
+            radial_controller_report.dial = RADIAL_CONTROLLER_RESOLUTION;
+        } else {
+            radial_controller_report.dial = -RADIAL_CONTROLLER_RESOLUTION;
+        }
+        host_radial_controller_send(radial_controller_report.raw);
+        radial_controller_report.dial = 0;
+    } else {
+        is_clockwise = clockwise;
+        is_radial_controller_rotate_finished = false;
+        radial_controller_timer = timer_read();
+    }
+}
+
+void radial_controller_dial_finished(void) {
+    is_radial_controller_rotate_finished = true;
+    radial_controller_report.dial = radial_controller_rotation;
+    host_radial_controller_send(radial_controller_report.raw);
+    radial_controller_report.dial = 0;
+    radial_controller_rotation = 0;
+    radial_controller_timer = 0;
+}
+
+bool process_radial_controller(const uint16_t keycode, const keyrecord_t *record) {
+    switch (keycode) {
+        case RADIAL_BUTTON:
+            if (record->event.pressed) {
+                radial_controller_button_update(true);
+            } else {
+                radial_controller_button_update(false);
+            }
+            return false;
+        case RADIAL_LEFT:
+            if (record->event.pressed) {
+                radial_controller_dial_update(false, false);
+            }
+            return false;
+        case RADIAL_RIGHT:
+            if (record->event.pressed) {
+                radial_controller_dial_update(true, false);
+            }
+            return false;
+        case RADIAL_LEFT_CON:
+            if (record->event.pressed) {
+                radial_controller_dial_update(false, true);
+            } else {
+                radial_controller_dial_finished();
+            }
+            return false;
+        case RADIAL_RIGHT_CON:
+            if (record->event.pressed) {
+                radial_controller_dial_update(true, true);
+            } else {
+                radial_controller_dial_finished();
+            }
+            return false;
+    }
+    return true;
+}
