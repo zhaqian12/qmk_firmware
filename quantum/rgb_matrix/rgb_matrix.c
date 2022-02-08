@@ -550,7 +550,7 @@ void rgb_matrix_disable(void) {
 
 void rgb_matrix_disable_noeeprom(void) {
     if (rgb_matrix_config.enable) rgb_task_state = STARTING;
-    rgb_matrix_config.enable = 0;
+    rgb_matrix_config.enable = 0  ;
 }
 
 uint8_t rgb_matrix_is_enabled(void) { return rgb_matrix_config.enable; }

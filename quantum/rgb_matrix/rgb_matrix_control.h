@@ -45,4 +45,4 @@ uint8_t is_keyboard_rgb_enable(void);
 #ifdef LOGO_RGB_MATRIX_CONTROL_ENABLE
 uint8_t is_logo_rgb_enable(void);
 #endif
-extern rgb_control_config_t rgb_matrix_control_config;
+
