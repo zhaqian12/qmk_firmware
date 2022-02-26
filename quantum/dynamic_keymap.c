@@ -202,9 +202,9 @@ void dynamic_keymap_macro_send(uint8_t id) {
     // of buffer writing, possibly an aborted buffer
     // write. So do nothing.
     void *p = (void *)(DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR + DYNAMIC_KEYMAP_MACRO_EEPROM_SIZE - 1);
-    // if (eeprom_read_byte(p) != 0) {
-    //     return;
-    // }
+    if (eeprom_read_byte(p) != 0) {
+        return;
+    }
 
     // Skip N null characters
     // p will then point to the Nth macro
