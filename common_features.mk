@@ -484,45 +484,6 @@ ifeq ($(strip $(DYNAMIC_KEYMAP_ENABLE)), yes)
     SRC += $(QUANTUM_DIR)/dynamic_keymap.c
 endif
 
-ifeq ($(strip $(RGB_MATRIX_CONTROL_ENABLE)), yes)
-	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
-        $(error RGB_MATRIX_CONTROL requires RGB_MATRIX_ENABLE, either disable RGB_MATRIX_CONTROL explicitly or enable RGB_MATRIX)
-    endif
-	ifeq ($(strip $(RGB_MATRIX_CONTROL_REV2_ENABLE)), yes)
-		SRC += $(QUANTUM_DIR)/rgb_matrix/rgb_matrix_control_rev2.c
-		OPT_DEFS += -DRGB_MATRIX_CONTROL_REV2_ENABLE
-	else
-    	SRC += $(QUANTUM_DIR)/rgb_matrix/rgb_matrix_control.c
-	endif
-	OPT_DEFS += -DRGB_MATRIX_CONTROL_ENABLE
-endif
-
-ifeq ($(strip $(UNDERGLOW_RGB_MATRIX_ENABLE)), yes)
-	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
-        $(error UNDERGLOW_RGB_MATRIX requires RGB_MATRIX_ENABLE, either disable UNDERGLOW_RGB_MATRIX_ENABLE explicitly or enable RGB_MATRIX)
-    endif
-    SRC += $(QUANTUM_DIR)/rgb_matrix/ugrgbmatrixeffect.c
-    OPT_DEFS += -DUNDERGLOW_RGB_MATRIX_ENABLE
-endif
-
-ifeq ($(strip $(ENCODER_TRIGGER_ENABLE)), yes)
-    ifeq ($(strip $(ENCODER_ENABLE)), no)
-        $(error ENCODER_TRIGGER_ENABLE requires ENCODER_ENABLE, either disable ENCODER_TRIGGER explicitly or enable ENCODER)
-    endif
-    SRC += $(QUANTUM_DIR)/encoder_trigger.c
-    OPT_DEFS += -DENCODER_TRIGGER_ENABLE
-endif
-
-ifeq ($(strip $(ALT_TAB_MARCO_ENABLE)), yes)
-    SRC += $(QUANTUM_DIR)/alt_tab_marco.c
-    OPT_DEFS += -DALT_TAB_MARCO_ENABLE
-endif
-
-ifeq ($(strip $(OPENRGB_ENABLE)), yes)
-    SRC += $(QUANTUM_DIR)/openrgb.c
-    OPT_DEFS += -DOPENRGB_ENABLE
-endif
-
 ifeq ($(strip $(DIP_SWITCH_ENABLE)), yes)
     OPT_DEFS += -DDIP_SWITCH_ENABLE
     SRC += $(QUANTUM_DIR)/dip_switch.c
