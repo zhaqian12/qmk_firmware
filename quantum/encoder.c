@@ -122,11 +122,17 @@ static bool encoder_update(uint8_t index, uint8_t state) {
         encoder_value[index]++;
         changed = true;
         encoder_update_kb(index, ENCODER_COUNTER_CLOCKWISE);
+#ifdef ENCODER_TRIGGER_ENABLE
+        encoder_trigger(index, ENCODER_COUNTER_CLOCKWISE);
+#endif
     }
     if (encoder_pulses[i] <= -resolution) { // direction is arbitrary here, but this clockwise
         encoder_value[index]--;
         changed = true;
         encoder_update_kb(index, ENCODER_CLOCKWISE);
+#ifdef ENCODER_TRIGGER_ENABLE
+        encoder_trigger(index, ENCODER_CLOCKWISE);
+#endif
     }
     encoder_pulses[i] %= resolution;
 #ifdef ENCODER_DEFAULT_POS
