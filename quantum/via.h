@@ -142,6 +142,10 @@ enum user_keycodes {
     USER13,
     USER14,
     USER15,
+    USER16,
+    USER17,
+    USER18,
+    USER19,
 };
 
 // Can be called in an overriding via_init_kb() to test if keyboard level code usage of
