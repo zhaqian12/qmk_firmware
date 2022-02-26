@@ -92,4 +92,4 @@ compile_commands.json
 .clangd/
 .cache/
 
-tmk_core/
+/tmk_core/*
