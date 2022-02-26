@@ -27,6 +27,7 @@ quantum/version.h
 *.uf2
 
 # Old-style QMK Makefiles
+/tmk_core/*
 /keyboards/*/Makefile
 /keyboards/*/*/Makefile
 /keyboards/*/*/*/Makefile
@@ -92,4 +93,5 @@ compile_commands.json
 .clangd/
 .cache/
 
-/tmk_core/*
+
+
