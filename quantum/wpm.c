@@ -20,7 +20,7 @@
 #include <math.h>
 
 // WPM Stuff
-static uint8_t  current_wpm = 0;
+static uint16_t current_wpm = 0;
 static uint16_t wpm_timer   = 0;
 
 // This smoothing is 40 keystrokes
@@ -28,7 +28,12 @@ static const float wpm_smoothing = WPM_SMOOTHING;
 
 void set_current_wpm(uint8_t new_wpm) { current_wpm = new_wpm; }
 
-uint8_t get_current_wpm(void) { return current_wpm; }
+uint8_t get_current_wpm(void) {
+    if (current_wpm >= 255)
+        return 255;
+    else
+        return current_wpm;
+}
 
 bool wpm_keycode(uint16_t keycode) { return wpm_keycode_kb(keycode); }
 
