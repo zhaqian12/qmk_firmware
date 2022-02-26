@@ -1,0 +1,102 @@
+"customKeycodes": [
+    {
+      "name": "Alt\nTab\nForward",
+      "title": "Alt Tab Marco in Windows",
+      "shortName": "Alt Tab\nForward"
+    },
+    {
+      "name": "Alt\nTab\neverse",
+      "title": "Alt Tab Shift Marco in Windows",
+      "shortName": "Alt Tab\nReverse"
+    },
+    {
+      "name": "Radial\nButton",
+      "title": "Radial Controller Button in Windows 10",
+      "shortName": "Radial\nButton"
+    },
+    {
+      "name": "Radial\nLeft",
+      "title": "Radial Controller Counter Clockwise in Windows 10",
+      "shortName": "Radial\nLeft"
+    },
+    {
+      "name": "Radial\nRight",
+      "title": "Radial Controller Clockwise in Windows 10",
+      "shortName": "Radial\nRight"
+    },
+    {
+      "name": "Radial\nLeft\nHold",
+      "title": "Radial Controller Continue Counter Clockwise in Windows 10",
+      "shortName": "Radial\nLeftC"
+    },
+    {
+      "name": "Radial\nRight\nHold",
+      "title": "Radial Controller Continue Clockwise in Windows 10",
+      "shortName": "Radial\nRightC"
+    },
+    {
+      "name": "Underglow\nRGB\nToggle",
+      "title": "Underglow RGB Toggle",
+      "shortName": "UGRGB Tog"
+    },
+    {
+      "name": "Key\nRGB\nToggle",
+      "title": "Key RGB Toggle",
+      "shortName": "KeyRGB Tog"
+    },
+    {
+      "name": "Underglow\nRGB\nMode\nSync",
+      "title": "Underglow RGB Mode Sync With Key RGB Mode",
+      "shortName": "UGRGB MODS"
+    },
+    {
+      "name": "Underglow\nRGB\nMode+",
+      "title": "Underglow RGB Mode Step",
+      "shortName": "UGRGB MOD+"
+    },
+    {
+      "name": "Underglow\nRGB\nMode-",
+      "title": "Underglow RGB Mode Step Reverse",
+      "shortName": "UGRGB MOD-"
+    },
+    {
+      "name": "Underglow\nRGB\nHue+",
+      "title": "Underglow RGB Hue Increase",
+      "shortName": "UGRGB Hue+"
+    },
+    {
+      "name": "Underglow\nRGB\nHue-",
+      "title": "Underglow RGB Hue Decrease",
+      "shortName": "UGRGB Hue-"
+    },
+    {
+      "name": "Underglow\nRGB\nSat+",
+      "title": "Underglow RGB Sat Increase",
+      "shortName": "UGRGB Sat+"
+    },
+    {
+      "name": "Underglow\nRGB\nSat-",
+      "title": "Underglow RGB Sat Decrease",
+      "shortName": "UGRGB Sat-"
+    },
+    {
+      "name": "Underglow\nRGB\nVal+",
+      "title": "Underglow RGB Val Increase",
+      "shortName": "UGRGB Val+"
+    },
+    {
+      "name": "Underglow\nRGB\nVal-",
+      "title": "Underglow RGB Val Decrease",
+      "shortName": "UGRGB Val-"
+    },
+    {
+      "name": "Underglow\nRGB\nSPD+",
+      "title": "Underglow RGB Speed Increase",
+      "shortName": "UGRGB SPD+"
+    },
+    {
+      "name": "Underglow\nRGB\nSPD-",
+      "title": "Underglow RGB Speed Decrease",
+      "shortName": "UGRGB SPD-"
+    }
+]
