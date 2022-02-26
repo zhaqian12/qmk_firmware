@@ -426,8 +426,17 @@ void rgb_matrix_task(void) {
         case RENDERING:
             rgb_task_render(effect);
             if (effect) {
+#ifdef RGB_MATRIX_INDICATORS_OVERRIDE
+                underglow_rgb_matrix_task();
+                rgb_matrix_control_task();
                 rgb_matrix_indicators();
                 rgb_matrix_indicators_advanced(&rgb_effect_params);
+#else
+                rgb_matrix_indicators();
+                rgb_matrix_indicators_advanced(&rgb_effect_params);
+                underglow_rgb_matrix_task();
+                rgb_matrix_control_task();
+#endif
             }
             break;
         case FLUSHING:
