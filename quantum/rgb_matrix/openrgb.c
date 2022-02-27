@@ -384,7 +384,7 @@ void openrgb_get_led_info(uint8_t *data) {
 void openrgb_get_enabled_modes(void) {
     raw_hid_buffer[0] = OPENRGB_GET_ENABLED_MODES;
     raw_hid_buffer[1] = size;
-    for (int i = 0; i < 63; i++) {
+    for (int i = 0; i < 61; i++) {
         raw_hid_buffer[i + 2] = openrgb_rgb_matrix_effects_indexes[mode_index];
         mode_index ++;
         if (mode_index >= size)
