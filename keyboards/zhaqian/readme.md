@@ -66,7 +66,7 @@ JOYSTICK_TRIGGER_ENABLE = yes
 and these to your `config.h`:
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `JOYSTICK_ADC_RESOLUTION` | The bits of  mcu adc sampling accuracy | 8 |
+| `JOYSTICK_ADC_RESOLUTION` | The bits of  mcu adc sampling accuracy | 10 |
 | `JOYSTICK_AXES_X_PIN` | The X axes pin of joystick |  |
 | `JOYSTICK_AXES_Y_PIN` | The Y axes pin of joystick |  |
 | `JOYSTICK_AXES_PX_KEY_POS` | The mapped key position of positive X trigger |  |

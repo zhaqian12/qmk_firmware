@@ -5,7 +5,7 @@
       "shortName": "Alt Tab\nForward"
     },
     {
-      "name": "Alt\nTab\neverse",
+      "name": "Alt\nTab\nReverse",
       "title": "Alt Tab Shift Marco in Windows",
       "shortName": "Alt Tab\nReverse"
     },
@@ -98,5 +98,10 @@
       "name": "Underglow\nRGB\nSPD-",
       "title": "Underglow RGB Speed Decrease",
       "shortName": "UGRGB SPD-"
+    },
+    {
+        "name": "RGB\nControl\nSwitch",
+        "title": "RGB Matrix Control Switch",
+        "shortName": "RGB\nCTSW"
     }
 ]

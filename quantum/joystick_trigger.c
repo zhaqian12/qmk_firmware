@@ -63,9 +63,9 @@ void joystick_trigger(uint8_t index, joystick_axes_trigger_t axes_state, uint8_t
     keyevent_t current_key_event;
     uint8_t axes_mask = 1;
     for (uint8_t i = 0; i < 4; i ++, axes_mask <<= 1) {
-        if (changed_axes & axes_mask == axes_mask) {
+        if ((changed_axes & axes_mask )== axes_mask) {
             current_key_event.key = joystick_axes_key_pos[index + i * NUMBER_OF_JOYSTICKS];
-            current_key_event.pressed = axes_state.raw & axes_mask == axes_mask ? 1 : 0;
+            current_key_event.pressed = (axes_state.raw & axes_mask) == axes_mask ? 1 : 0;
             current_key_event.time = (timer_read() | 1);
             action_exec(current_key_event);
         }
@@ -91,7 +91,7 @@ void joystick_trigger_init(void) {
     }
 }
 
-static void joystick_update(uint8_t index) {
+static bool joystick_update(uint8_t index) {
     bool changed = false;
     joystick_axes_trigger_t current_state;
     int16_t axes_x_buf = joystick_axes_state[index].joystick_axes_x_value - JOYSTICK_RESOLUTION;

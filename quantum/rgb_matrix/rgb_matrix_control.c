@@ -19,7 +19,7 @@
 
 rgb_matrix_control_config_t rgb_matrix_control_config = {1};
 #ifdef RGB_MATRIX_CONTROL_SWITCH_ENABLE
-const static uint8_t rgb_matrix_control_lut[4] = {3, 2, 0, 1};
+const static uint8_t rgb_matrix_control_lut[4] = {3, 0, 1, 2};
 #endif
 
 void eeconfig_read_rgb_matrix_control(void) {
@@ -86,7 +86,7 @@ void logo_rgb_toggle(void) {
 void rgb_matrix_control_switch(void) {
     if (rgb_matrix_is_enabled()) {
         uint8_t current_rgb_matrix_control_config = rgb_matrix_control_config.raw & 0x03;
-        rgb_matrix_control_config.raw |= rgb_matrix_control_lut[current_rgb_matrix_control_config];
+        rgb_matrix_control_config.raw = rgb_matrix_control_lut[current_rgb_matrix_control_config];
         eeconfig_update_rgb_matrix_control();
     }
 }
