@@ -37,7 +37,8 @@ families = {
     'LPC55': 0x2abc77ec,
     'GD32F350': 0x31D228C6,
     'ESP32S2': 0xbfdd4eee,
-    'RP2040': 0xe48bff56
+    'RP2040': 0xe48bff56,
+    'GD32VF103': 0x9af03e33
 }
 
 INFO_FILE = "/INFO_UF2.TXT"

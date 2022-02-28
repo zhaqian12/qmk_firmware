@@ -661,10 +661,17 @@ ifneq ($(findstring GD32VF103, $(MCU)),)
   MCU_FAMILY = GD32V
   MCU_SERIES = GD32VF103
 
+  ifeq ($(strip $(BOOTLOADER)), tinyuf2)
+    MCU_LDSCRIPT ?= GD32VF103xB_uf2
+    FIRMWARE_FORMAT ?= uf2
+	OPT_DEFS += -DGD32VF103UF2
+  else
+    MCU_LDSCRIPT ?= GD32VF103xB
+  endif
   # Linker script to use
   # - it should exist either in <chibios>/os/common/startup/RISCV-ECLIC/compilers/GCC/ld/
   #   or <keyboard_dir>/ld/
-  MCU_LDSCRIPT ?= GD32VF103xB
+
 
   # Startup code to use
   #  - it should exist in <chibios>/os/common/startup/RISCV-ECLIC/compilers/GCC/mk/
@@ -675,6 +682,7 @@ ifneq ($(findstring GD32VF103, $(MCU)),)
   BOARD ?= SIPEED_LONGAN_NANO
 
   USE_FPU ?= no
+  UF2_FAMILY ?= GD32VF103
 endif
 
 ifneq (,$(filter $(MCU),at90usb162 atmega16u2 atmega32u2 atmega16u4 atmega32u4 at90usb646 at90usb647 at90usb1286 at90usb1287))

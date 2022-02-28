@@ -31,6 +31,7 @@ quantum/version.h
 !uf2boot_f401_8MHz.bin 
 !uf2boot_f411_8MHz.bin 
 !uf2boot_f103_8MHz.bin
+!uf2boot_gd32vf103_8MHz.bin
 
 # Old-style QMK Makefiles
 /tmk_core/*
