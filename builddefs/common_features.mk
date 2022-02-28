@@ -883,3 +883,11 @@ ifeq ($(strip $(VIA_CUSTOM_KEYCODE_ENABLE)), yes)
     SRC += $(QUANTUM_DIR)/via_custom_keycode.c
 	OPT_DEFS += -DVIA_CUSTOM_KEYCODE_ENABLE
 endif
+
+ifeq ($(strip $(RGB_INDICATORS_ENABLE)), yes)
+	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
+        $(error RGB_INDICATORS_ENABLE requires RGB_MATRIX_ENABLE, either disable RGB_INDICATORS explicitly or enable RGB_MATRIX)
+    endif
+    SRC += $(QUANTUM_DIR)/rgb_matrix/rgb_indicators.c
+	OPT_DEFS += -DRGB_INDICATORS_ENABLE
+endif
