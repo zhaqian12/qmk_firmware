@@ -31,6 +31,8 @@
  - Underglow RGB Matrix
  - Via Custom Keycode
  - Custom RGB Matrix Effects
+ - UF2 Bootloader
+
 ## Alt Tab Marco
 This feature integrates the toggle window function in window system.It is supported by adding this to your `rules.mk`:
 ```make
@@ -73,6 +75,7 @@ and these to your `config.h`:
 | `JOYSTICK_AXES_NX_KEY_POS` | The mapped key position of negative X trigger |  |
 | `JOYSTICK_AXES_PY_KEY_POS` | The mapped key position of positive Y trigger |  |
 | `JOYSTICK_AXES_NY_KEY_POS` | The mapped key position of negative Y trigger |  |
+
 It can also use if you need multiple joysticks.
 
 ## Radial Controller
@@ -108,7 +111,7 @@ You can add this define in you `config.h`:
 #define UNDERGLOW_RGB_MATRIX_API_DISABLE // diasble underglow rgb matrix api
 ```
 All the rgb matrix effects of this feature are as follows.
-| Define|Underglow rgb matrix effects |
+| Define|Underglow rgb matrix effect |
 |----------|-----------|
 |UG_RGB_MATRIX_BREATHING|BREATHING|
 |UG_RGB_MATRIX_CYCLEBREATHING|CYCLE BREATHING|
@@ -140,6 +143,16 @@ You can also alternate these defines to control these feature:
 #define UNDERGLOW_RGB_MATRIX_STARTUP_VAL UNDERGLOW_RGB_MATRIX_MAXIMUM_BRIGHTNESS
 #define UNDERGLOW_RGB_MATRIX_STARTUP_SPD (UINT8_MAX / 2)
 ```
+
+## UF2 Bootloader
+| Support   |
+|---------- |
+|STM32F103x8|
+|STM32F103xB|
+|STM32F401xC|
+|STM32F411xE|
+|GD32VF103xB|
+
 # TODO LIST
 
 - Bluetooth (esp32s3,ch58x or nrf)
