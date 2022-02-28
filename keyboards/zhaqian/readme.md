@@ -145,7 +145,7 @@ You can also alternate these defines to control these feature:
 ```
 
 ## UF2 Bootloader
-| Support   |
+| Support Devices  |
 |---------- |
 |STM32F103x8|
 |STM32F103xB|
