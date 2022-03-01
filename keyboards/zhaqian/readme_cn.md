@@ -1,7 +1,6 @@
 # Readme Version
-* [Enlish version](./readme.md)
-* [Chinese version](./readme_cn.md)
-
+* [Enlish version](./README.md)
+* [Chinese version](./README_CN.md)
 # Keyboards Released by ZhaQian
 | NAME          | VENDOR_ID | PRODUCT_ID | PCB      | MCU      	        | FEATURES                                     |
 |:-------------:| :-------: | :--------: | :------: |:----------------: | :------------------------------------------: |
@@ -25,7 +24,7 @@
 | split69       | 0x00AA    | 0xAAAB     | Solder   | Atmel atmega32u4  | SPLIT, UGRGB, OLED, ENCODER                  |
 
 # ZhaQian library
- This is a simple library that integrates some common repetitive functions.
+这是一个集合了许多简单的但可能在不同键盘上重复用到功能的库.
  - Alt Tab Marco
  - Encoder Trigger
  - Joystick Trigger
@@ -38,56 +37,56 @@
  - UF2 Bootloader
 
 ## Alt Tab Marco
-This feature integrates the toggle window function in window system.It is supported by adding this to your `rules.mk`:
+Alt Tab Marco的功能本质上是一个预设好的按键宏,实现Windows系统的切换窗口功能.如果需要使用该功能,请在 `rules.mk`中添加:
 ```make
 ALT_TAB_MARCO_ENABLE = yes
 ```
-If you need more delay time to active this marco,you can define it in your `config.h`:
+如果需要更长或更短的宏触发时间,开以在 `config.h`中定义一下宏:
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `ALT_TAB_MARCO_DELAY` | Alt tab marco delay time | 1000 |
 
 ## Encoder Trigger
-This feature integrates the trigger of encoder, it can simply use when you use via, only through some define.It is supported by adding this to your `rules.mk`:
+Encoder Trigger实现了编码器的映射键盘矩阵按键触发功能,便于使用`via`和`dynamic_keymap`功能实现对编码器功能的自定义.如果需要使用该功能,请在 `rules.mk`中添加:
 ```make
 ENCODER_ENABLE = yes
 ENCODER_TRIGGER_ENABLE = yes
 ```
-and these to your `config.h`,they define the matrix positions of the clockwise and counterclockwise mappings of the encoder:
+并在`config.h`中定义编码器顺时针,逆时针触发按键的矩阵映射位置`{行,列}`:
 ```c
-#define ENCODER_PAD_A_KEY_POS {1, 0} // {col, row}
-#define ENCODER_PAD_B_KEY_POS {0, 0} // {col, row}
+#define ENCODER_PAD_A_KEY_POS {1, 0} // 顺时针
+#define ENCODER_PAD_B_KEY_POS {0, 0} // 逆时针
 ```
-Each PAD_A/B variable defines an array so multiple encoders can be defined, e.g.:
+同时该功能支持多个编码器,例如:
 ```c
 #define ENCODER_PAD_A_KEY_POS {1, 0}, {3, 0} // {col, row}
 #define ENCODER_PAD_B_KEY_POS {0, 0}, {2, 0} // {col, row}
 ```
 
 ## Joystick Trigger
-This feature integrates the trigger of joystick which has two axes,it maps the joystick to four buttons in the keyboard matrix.It is supported by adding this to your `rules.mk`:
+Joystick Trigger功能实现了具有X,Y轴的摇杆电位器四个方向的按键的矩阵映射触发功能.如果需要使用该功能,请在 `rules.mk`中添加:
 ```make
 JOYSTICK_TRIGGER_ENABLE = yes
 ```
-and these to your `config.h`:
+并在`config.h`中定义:
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `JOYSTICK_ADC_RESOLUTION` | The bits of  mcu adc sampling accuracy | 10 |
-| `JOYSTICK_AXES_X_PIN` | The X axes pin of joystick |  |
-| `JOYSTICK_AXES_Y_PIN` | The Y axes pin of joystick |  |
-| `JOYSTICK_AXES_PX_KEY_POS` | The mapped key position of positive X trigger |  |
-| `JOYSTICK_AXES_NX_KEY_POS` | The mapped key position of negative X trigger |  |
-| `JOYSTICK_AXES_PY_KEY_POS` | The mapped key position of positive Y trigger |  |
-| `JOYSTICK_AXES_NY_KEY_POS` | The mapped key position of negative Y trigger |  |
+| `JOYSTICK_ADC_RESOLUTION` | ADC采样精度 | 10 |
+| `JOYSTICK_AXES_X_PIN` | X轴引脚 |  |
+| `JOYSTICK_AXES_Y_PIN` | Y轴引脚 |  |
+| `JOYSTICK_AXES_PX_KEY_POS` | X轴正方向触发按键矩阵映射位置 |  |
+| `JOYSTICK_AXES_NX_KEY_POS` | X轴反方向触发按键矩阵映射位置|  |
+| `JOYSTICK_AXES_PY_KEY_POS` | Y轴正方向触发按键矩阵映射位置 |  |
+| `JOYSTICK_AXES_NY_KEY_POS` | Y轴反方向触发按键矩阵映射位置|  |
 
-It can also use if you need multiple joysticks.
+当然,该功能也支持多个摇杆的使用.
 
 ## Radial Controller
-This feature virtualize the function of radial controller in windows 10.It is supported by adding this to your `rules.mk`:
+Radial Controller功能实现了对WIN10的轮盘功能的模拟(仅适用支持轮盘功能的版本系统).如果需要使用该功能,请在 `rules.mk`中添加:
 ```make
 RADIAL_CONTROLLER_ENABLE = yes
 ```
-You can add these define to your `config.h`:
+以下参数可以在 `config.h`中定义:
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `RADIAL_CONTROLLER_RESOLUTION` | The rotation resolution of radial controller  | 100 |
@@ -96,25 +95,25 @@ You can add these define to your `config.h`:
 | `RADIAL_CONTROLLER_ROTATION_CONTINUE_STEP` | The rotation step of radial controller continue triggered | 100 |
 
 ## RGB Matrix Control
-This feature supports independent control of different areas in rgb matrix .It is supported by adding this to your `rules.mk`:
+RGB Matrix Control功能实现了对RGB矩阵系统的底灯和轴灯的开关的独立控制.如果需要使用该功能,请在 `rules.mk`中添加:
 ```make
 RGB_MATRIX_ENABLE = yes
 RGB_MATRIX_CONTROL_ENABLE = yes
 ```
 
 ## Underglow RGB Matrix
-This feature supports independent effect of underglow area in rgb matrix .It is supported by adding this to your `rules.mk`:
-```make
+Underglow RGB Matrix功能实现了RGB矩阵系统的独立的底灯灯效.如果需要使用该功能,请在 `rules.mk`中添加:
+```mak
 RGB_MATRIX_ENABLE = yes
 UNDERGLOW_RGB_MATRIX_ENABLE = yes
 ```
-You can add this define in you `config.h`:
+可以在`config.h`定义以下宏:
 ```c
-#define UG_RGB_MATRIX_ANIMATIONS // enable all effects of this feature except wpm effects
-#define UG_RGB_MATRIX_WPM_ANIMATIONS // enable all wpm effects of this feature
-#define UNDERGLOW_RGB_MATRIX_API_DISABLE // diasble underglow rgb matrix api
+#define UG_RGB_MATRIX_ANIMATIONS // 开启除了WPM以外的全部灯效
+#define UG_RGB_MATRIX_WPM_ANIMATIONS // 开启全部WPM灯效
+#define UNDERGLOW_RGB_MATRIX_API_DISABLE // 关闭该功能的独立颜色,亮度,速度设置 
 ```
-All the rgb matrix effects of this feature are as follows.
+所有灯效如下所示:
 | Define|Underglow rgb matrix effect |
 |----------|-----------|
 |UG_RGB_MATRIX_BREATHING|BREATHING|
@@ -134,7 +133,7 @@ All the rgb matrix effects of this feature are as follows.
 |UG_RGB_MATRIX_WPMCYCLESPIRAL|WPM CYCLE SPIRAL|
 |UG_RGB_MATRIX_WPMCYCLEINOUT|WPM CYCLE INOUT|
 
-You can also alternate these defines to control these feature:
+可以在`config.h`定义更改以下参数:
 ```c
 #define UNDERGLOW_RGB_MATRIX_MAXIMUM_BRIGHTNESS RGB_MATRIX_MAXIMUM_BRIGHTNESS
 #define UNDERGLOW_RGB_MATRIX_HUE_STEP 8
@@ -149,6 +148,7 @@ You can also alternate these defines to control these feature:
 ```
 
 ## UF2 Bootloader
+UF2 Bootloader储存了预编译好的MSC下载方式的引导程序,目前支持以下型号的主控.
 | Support Devices  |
 |---------- |
 |STM32F103x8|
