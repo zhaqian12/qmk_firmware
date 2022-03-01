@@ -1,3 +1,6 @@
+# Readme Version
+* [Enlish version](./README.md)
+* [Chinese version](./README_CN.md)
 # Keyboards Released by ZhaQian
 | NAME          | VENDOR_ID | PRODUCT_ID | PCB      | MCU      	        | FEATURES                                     |
 |:-------------:| :-------: | :--------: | :------: |:----------------: | :------------------------------------------: |
