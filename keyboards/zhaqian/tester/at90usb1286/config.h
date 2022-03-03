@@ -1,4 +1,4 @@
-/* Copyright 2022 zhaqian
+/* Copyright 2021 ZhaQian
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,54 +16,33 @@
 
 #pragma once
 
-enum via_custom_keycodes {
-    REV = 0x5F7F,
-#ifdef ALT_TAB_MARCO_ENABLE
-    ATF,
-    ATR,
+#include "config_common.h"
+
+#define MATRIX_ROW_PINS { B4, B3, B2 }
+#define MATRIX_COL_PINS { F2, F3, F4, F5, F6 }
+#define UNUSED_PINS
+
+#ifdef RGB_MATRIX_ENABLE
+#define RGB_DI_PIN F7
 #endif
 
-#ifdef RADIAL_CONTROLLER_ENABLE
-    RD_BUT,
-    RD_L,
-    RD_R,
-    RD_LC,
-    RD_RC,
-#endif
-
-#ifdef RGB_INDICATORS_ENABLE
-    RGB_IND_MF,
-    RGB_IND_MR,
-#endif
-
-#ifdef RGB_MATRIX_CONTROL_ENABLE
-#ifndef RGB_MATRIX_CONTROL_SWITCH_ENABLE
-	UG_R_T,
-	K_R_T,
-#ifdef  LOGO_RGB_CONTROL_ENABLE
-    L_R_T,
-#endif
-#else
-    R_C_SW,
+#ifdef ENCODER_ENABLE
+#define ENCODERS_PAD_A { B1 }
+#define ENCODERS_PAD_B { B5 }
+#define ENCODER_RESOLUTIONS { 4 }
+#ifdef ENCODER_TRIGGER_ENABLE
+#define ENCODER_PAD_A_KEY_POS {4, 1}
+#define ENCODER_PAD_B_KEY_POS {4, 2}
 #endif
 #endif
 
 #ifdef UNDERGLOW_RGB_MATRIX_ENABLE
-	UG_R_MS,
-    UG_R_MF,
-    UG_R_MR,
-#ifndef UNDERGLOW_RGB_MATRIX_API_DISABLE
-    UG_R_HI,
-    UG_R_HD,
-    UG_R_SI,
-    UG_R_SD,
-    UG_R_VI,
-    UG_R_VD,
-    UG_R_SPI,
-    UG_R_SPD,
+#define UG_RGB_MATRIX_ANIMATIONS
+#define UG_RGB_MATRIX_WPM_ANIMATIONS
+#define UNDERGLOW_RGB_MATRIX_API_DISABLE
 #endif
-#endif
-    NEW_USER,
-};
 
-bool process_via_custom_keycode(const uint16_t keycode, const keyrecord_t *record);
+#ifdef OPENRGB_ENABLE
+#define OPENRGB_DIRECT_MODE_USE_UNIVERSAL_BRIGHTNESS
+#endif
+
