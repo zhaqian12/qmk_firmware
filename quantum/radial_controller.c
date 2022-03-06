@@ -35,7 +35,7 @@
 #define RADIAL_CONTROLLER_ROTATION_CONTINUE_STEP RADIAL_CONTROLLER_RESOLUTION
 #endif
 
-report_radial_controller_t radial_controller_report;
+static report_radial_controller_t radial_controller_report;
 
 static int16_t radial_controller_rotation = 0;
 static bool is_radial_controller_rotate_finished = true;

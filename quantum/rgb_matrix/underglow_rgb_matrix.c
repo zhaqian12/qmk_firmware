@@ -140,7 +140,7 @@ static const uint8_t ug_rgb_matrix_effect_index[] = {
 
 static const uint8_t ug_rgb_matrix_effect_num = sizeof(ug_rgb_matrix_effect_index)/sizeof(uint8_t);
 
-underglow_rgb_matrix_config_t underglow_rgb_matrix_config;
+static underglow_rgb_matrix_config_t underglow_rgb_matrix_config;
 
 void eeconfig_read_underglow_rgb_matrix(void) {
     eeprom_read_block(&underglow_rgb_matrix_config, EECONFIG_UNDERGLOW_RGB_MATRIX, sizeof(underglow_rgb_matrix_config));
@@ -169,6 +169,11 @@ void underglow_rgb_matrix_init(void) {
 }
 
 void underglow_rgb_matrix_task(void) {
+#ifdef UNDERGLOW_RGB_MATRIX_API_DISABLE
+    underglow_rgb_matrix_config.hsv = rgb_matrix_config.hsv;
+    underglow_rgb_matrix_config.speed = rgb_matrix_config.speed;
+#endif
+
     switch (ug_rgb_matrix_effect_index[underglow_rgb_matrix_config.mode]) {
 #ifdef UG_RGB_MATRIX_BREATHING
         case 2: Breathing(); break;

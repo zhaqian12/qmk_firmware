@@ -20,6 +20,7 @@
 | zq64          | 0x00AA    | 0xAA0E     | Hotswap  | Atmel atmega32u4  | RGB, ENCODER                                 |
 | zq68          | 0x00AA    | 0xAA0F     | Hotswap  | Atmel atmega32u4  | RGB, ENCODER                                 |
 | toxic67       | 0x00AA    | 0xAA10     | Hotswap  | Atmel atmega32u4  | RGB                                          |
+| zq46	        | 0x00AA    | 0xAA11     | Hotswap  | ST stm32f401      | RGB, UGRGB, LOGORGB, ENCODER                 |
 | Mpad12        | 0x00AA    | 0xAAAA     | Hotswap  | Atmel atmega32u4  | RGB, UGRGB, JOYSTICK, ENCODER, OLED          |
 | split69       | 0x00AA    | 0xAAAB     | Solder   | Atmel atmega32u4  | SPLIT, UGRGB, OLED, ENCODER                  |
 

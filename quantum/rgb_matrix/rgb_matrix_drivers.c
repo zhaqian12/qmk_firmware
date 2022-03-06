@@ -336,7 +336,7 @@ const rgb_matrix_driver_t rgb_matrix_driver = {
 #    endif
 
 // LED color buffer
-LED_TYPE rgb_matrix_ws2812_array[DRIVER_LED_TOTAL];
+static LED_TYPE rgb_matrix_ws2812_array[DRIVER_LED_TOTAL];
 
 static void init(void) {}
 
