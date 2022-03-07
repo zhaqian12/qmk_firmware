@@ -853,14 +853,6 @@ ifeq ($(strip $(RADIAL_CONTROLLER_ENABLE)), yes)
     OPT_DEFS += -DRADIAL_CONTROLLER_ENABLE
 endif
 
-ifeq ($(strip $(RGB_INDICATORS_ENABLE)), yes)
-	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
-        $(error RGB_INDICATORS_ENABLE requires RGB_MATRIX_ENABLE, either disable RGB_INDICATORS explicitly or enable RGB_MATRIX)
-    endif
-    SRC += $(QUANTUM_DIR)/rgb_matrix/rgb_indicators.c
-    OPT_DEFS += -DRGB_INDICATORS_ENABLE
-endif
-
 ifeq ($(strip $(RGB_MATRIX_CONTROL_ENABLE)), yes)
 	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
         $(error RGB_MATRIX_CONTROL_ENABLE requires RGB_MATRIX_ENABLE, either disable RGB_MATRIX_CONTROL explicitly or enable RGB_MATRIX)

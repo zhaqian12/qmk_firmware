@@ -58,6 +58,11 @@ enum via_custom_keycodes {
     UG_R_SPD,
 #endif
 #endif
+#ifdef RGB_INDICATORS_ENABLE
+    RGB_IND_TOG,
+    RGB_IND_MF,
+    RGB_IND_MR,
+#endif
     NEW_USER,
 };
 

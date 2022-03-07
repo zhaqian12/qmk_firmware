@@ -153,6 +153,25 @@ bool process_via_custom_keycode(const uint16_t keycode, const keyrecord_t *recor
             return false;
 #endif
 #endif
+
+#ifdef RGB_INDICATORS_ENABLE
+        case RGB_IND_TOG:
+            if (record->event.pressed) {
+                rgb_indicators_toggle();
+            }
+            return false;
+        case RGB_IND_MF:
+            if (record->event.pressed) {
+                rgb_indicators_mode_step();
+            }
+            return false;
+        case RGB_IND_MR:
+            if (record->event.pressed) {
+                rgb_indicators_mode_step_reverse();
+            }
+            return false;
+#endif
+
     }
     return true;
 }

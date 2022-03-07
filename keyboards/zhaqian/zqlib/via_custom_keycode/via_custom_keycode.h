@@ -31,11 +31,6 @@ enum via_custom_keycodes {
     RD_RC,
 #endif
 
-#ifdef RGB_INDICATORS_ENABLE
-    RGB_IND_MF,
-    RGB_IND_MR,
-#endif
-
 #ifdef RGB_MATRIX_CONTROL_ENABLE
 #ifndef RGB_MATRIX_CONTROL_SWITCH_ENABLE
 	UG_R_T,
@@ -62,6 +57,11 @@ enum via_custom_keycodes {
     UG_R_SPI,
     UG_R_SPD,
 #endif
+#endif
+#ifdef RGB_INDICATORS_ENABLE
+    RGB_IND_TOG,
+    RGB_IND_MF,
+    RGB_IND_MR,
 #endif
     NEW_USER,
 };

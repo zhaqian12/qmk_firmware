@@ -160,6 +160,7 @@ void rgb_indicators_render(void) {
 #endif
         default: rgb_indicators_static(); break;
     }
+
 #endif
 }
 

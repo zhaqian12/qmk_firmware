@@ -427,6 +427,9 @@ void keyboard_init(void) {
 #ifdef UNDERGLOW_RGB_MATRIX_ENABLE
     underglow_rgb_matrix_init();
 #endif
+#ifdef RGB_INDICATORS_ENABLE
+    rgb_indicators_init();
+#endif
     keyboard_post_init_kb(); /* Always keep this last */
 }
 

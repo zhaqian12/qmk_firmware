@@ -74,9 +74,6 @@ void matrix_init_kb(void) {
 void rgb_matrix_indicators_kb(void) {
     HSV hsv = {0, 255, rgb_matrix_get_val()};
     RGB rgb = hsv_to_rgb(hsv);
-    if (host_keyboard_led_state().caps_lock) {
-        rgb_matrix_set_color(56, rgb.r, rgb.g, rgb.b);
-    }
     switch(biton32(layer_state)) {
         case 1: rgb_matrix_set_color(12, rgb.r, rgb.g, rgb.b); break;
         case 2: rgb_matrix_set_color(11, rgb.r, rgb.g, rgb.b); break;

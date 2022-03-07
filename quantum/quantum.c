@@ -319,6 +319,9 @@ bool process_record_quantum(keyrecord_t *record) {
 #ifdef RADIAL_CONTROLLER_ENABLE
             process_radial_controller(keycode, record) &&
 #endif
+#ifdef RGB_INDICATORS_ENABLE
+            process_rgb_indicators(keycode, record) &&
+#endif
 #ifdef VIA_CUSTOM_KEYCODE_ENABLE
             process_via_custom_keycode(keycode, record) &&
 #endif

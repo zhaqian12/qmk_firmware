@@ -620,6 +620,10 @@ enum quantum_keycodes {
     RADIAL_RIGHT,
     RADIAL_LEFT_CONTINUE,
     RADIAL_RIGHT_CONINUE,
+    
+    RGB_IND_TOGGLE,
+    RGB_IND_MODE_FORWARD,
+    RGB_IND_MODE_REVERSE,
     // Start of custom keycode range for keyboards and keymaps - always leave at the end
     SAFE_RANGE
 };
@@ -1009,3 +1013,7 @@ enum quantum_keycodes {
 #define DIAL_R RADIAL_RIGHT
 #define DIAL_LC RADIAL_LEFT_CONTINUE
 #define DIAL_RC RADIAL_RIGHT_CONINUE
+
+#define RGB_INDTOG RGB_IND_TOGGLE
+#define RGB_INDMF RGB_IND_MODE_FORWARD
+#define RGB_INDMR RGB_IND_MODE_REVERSE

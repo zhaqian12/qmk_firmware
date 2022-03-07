@@ -98,10 +98,25 @@
         "name": "Underglow\nRGB\nSPD-",
         "title": "Underglow RGB Speed Decrease",
         "shortName": "UGRGB\nSPD-"
-    }
+    },
     {
         "name": "RGB\nControl\nSwitch",
         "title": "RGB Matrix Control Switch",
         "shortName": "RGB\nCTSW"
+    },
+    {
+        "name": "RGB\nIndicator\nToggle",
+        "title": "RGB Indicator Toggle",
+        "shortName": "RGB\nINDTOG"
+    },
+    {
+        "name": "RGB\nIndicator\nMod+",
+        "title": "RGB Indicator Mode Step",
+        "shortName": "RGB\nINDMOD+"
+    },
+    {
+        "name": "RGB\nIndicator\nMod-",
+        "title": "RGB Indicator Mode Step Reverse",
+        "shortName": "RGB\nINDMOD-"
     }
 ]
