@@ -22,6 +22,7 @@
 | toxic67       | 0x00AA    | 0xAA10     | Hotswap  | Atmel atmega32u4  | RGB                                          |
 | zq46	        | 0x00AA    | 0xAA11     | Hotswap  | ST stm32f401      | RGB, UGRGB, LOGORGB, ENCODER                 |
 | osu	        | 0x00AA    | 0xAA12     | Hotswap  | ST stm32f401      | UGRGB                                        |
+| zq89	        | 0x00AA    | 0xAA13     | Hotswap  | ST stm32f411      | RGB, ENCODERS                                |
 | Mpad12        | 0x00AA    | 0xAAAA     | Hotswap  | Atmel atmega32u4  | RGB, UGRGB, JOYSTICK, ENCODER, OLED          |
 | split69       | 0x00AA    | 0xAAAB     | Solder   | Atmel atmega32u4  | SPLIT, UGRGB, OLED, ENCODER                  |
 
@@ -37,7 +38,8 @@
  - Via Custom Keycode
  - Custom RGB Matrix Effects
  - UF2 Bootloader
-
+ - ST7789 Driver
+ 
 ## Alt Tab Marco
 Alt Tab Marco的功能本质上是一个预设好的按键宏,实现Windows系统的切换窗口功能.如果需要使用该功能,请在 `rules.mk`中添加:
 ```make

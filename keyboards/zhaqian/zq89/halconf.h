@@ -1,4 +1,4 @@
-/* Copyright 2022 ZhaQian
+/* Copyright 2020 QMK
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,18 +16,6 @@
 
 #pragma once
 
-#include "quantum.h"
+#define HAL_USE_PWM    TRUE
 
-#define LAYOUT( \
-	K00, K01, K02, K03, K04, \
-	K10, K11, K12, K13, K14, \
-	K20, K21, K22, K23, K24  \
-) { \
-	{ K00,   K01,   K02,   K03,   K04 }, \
-	{ K10,   K11,   K12,   K13,   K14 }, \
-	{ K20,   K21,   K22,   K23,   K24 }  \
-}
-
-
-
-
+#include_next <halconf.h>
