@@ -313,11 +313,11 @@ void underglow_rgb_matrix_decrease_sat(void) {
 }
 
 void underglow_rgb_matrix_increase_val(void) {
-    underglow_rgb_matrix_set_sat(qadd8(underglow_rgb_matrix_config.hsv.v, UNDERGLOW_RGB_MATRIX_VAL_STEP));
+    underglow_rgb_matrix_set_val(qadd8(underglow_rgb_matrix_config.hsv.v, UNDERGLOW_RGB_MATRIX_VAL_STEP));
 }
 
 void underglow_rgb_matrix_decrease_val(void) {
-    underglow_rgb_matrix_set_sat(qsub8(underglow_rgb_matrix_config.hsv.v, UNDERGLOW_RGB_MATRIX_VAL_STEP));
+    underglow_rgb_matrix_set_val(qsub8(underglow_rgb_matrix_config.hsv.v, UNDERGLOW_RGB_MATRIX_VAL_STEP));
 }
 
 void underglow_rgb_matrix_increase_speed(void) {
