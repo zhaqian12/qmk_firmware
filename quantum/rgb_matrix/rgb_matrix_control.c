@@ -31,10 +31,10 @@ void eeconfig_update_rgb_matrix_control(void) {
 }
 
 void eeconfig_update_rgb_matrix_control_default(void) {
-    rgb_matrix_control_config.is_key_rgb_enable = 1;
-    rgb_matrix_control_config.is_underglow_rgb_enable = 1;
-    rgb_matrix_control_config.is_logo_rgb_enable = 1;
-    rgb_matrix_control_config.reverse = 1;
+    rgb_matrix_control_config.is_key_rgb_enable = 0;
+    rgb_matrix_control_config.is_underglow_rgb_enable = 0;
+    rgb_matrix_control_config.is_logo_rgb_enable = 0;
+    rgb_matrix_control_config.reverse = 0;
     eeconfig_update_rgb_matrix_control();
 }
 
