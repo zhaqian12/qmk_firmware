@@ -11,8 +11,13 @@
 #include "zqlib/rgb_matrix_effect/fractal.h"
 #include "zqlib/rgb_matrix_effect/fractal_rgb.h"
 #include "zqlib/rgb_matrix_effect/kitt_rgb.h"
+#include "zqlib/rgb_matrix_effect/cycle_sin_wave.h"
+#include "zqlib/rgb_matrix_effect/rainbow_sin_wave.h"
+#include "zqlib/rgb_matrix_effect/rainbow_sin_wave_reverse.h"
+#include "zqlib/rgb_matrix_effect/alter.h"
 
 #include "zqlib/rgb_matrix_effect/candy_tap.h"
+
 #include "zqlib/rgb_matrix_effect/cycle_reactive_multiwide.h"
 #include "zqlib/rgb_matrix_effect/cycle_reactive_multicross.h"
 #include "zqlib/rgb_matrix_effect/cycle_reactive_multinexus.h"
@@ -22,5 +27,3 @@
 #include "zqlib/rgb_matrix_effect/reactive_multiwide_rgb.h"
 #include "zqlib/rgb_matrix_effect/reactive_multicross_rgb.h"
 #include "zqlib/rgb_matrix_effect/reactive_multinexus_rgb.h"
-
-

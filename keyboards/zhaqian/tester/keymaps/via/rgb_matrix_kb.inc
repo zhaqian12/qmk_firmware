@@ -14,6 +14,7 @@
 #include "zqlib/rgb_matrix_effect/cycle_sin_wave.h"
 #include "zqlib/rgb_matrix_effect/rainbow_sin_wave.h"
 #include "zqlib/rgb_matrix_effect/rainbow_sin_wave_reverse.h"
+#include "zqlib/rgb_matrix_effect/alter.h"
 
 #include "zqlib/rgb_matrix_effect/candy_tap.h"
 

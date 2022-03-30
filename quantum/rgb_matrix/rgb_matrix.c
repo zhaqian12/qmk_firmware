@@ -508,6 +508,10 @@ void rgb_matrix_init(void) {
     }
 #endif // RGB_MATRIX_KEYREACTIVE_ENABLED
 
+#if defined(ENABLE_RGB_MATRIX_CYCLE_ALTER) || defined (ENABLE_RGB_MATRIX_RAINBOW_ALTER)
+    ALTER_init();
+#endif
+
     if (!eeconfig_is_enabled()) {
         dprintf("rgb_matrix_init_drivers eeconfig is not enabled.\n");
         eeconfig_init();
