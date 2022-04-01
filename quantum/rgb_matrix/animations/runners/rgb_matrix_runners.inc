@@ -5,3 +5,4 @@
 #include "effect_runner_reactive.h"
 #include "effect_runner_reactive_splash.h"
 #include "effect_runner_reactive_s.h"
+#include "effect_runner_col_row.h"

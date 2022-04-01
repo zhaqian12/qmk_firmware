@@ -33,7 +33,7 @@ bool CYCLE_BREATHING(effect_params_t* params) {
     for (uint8_t i = 0; i < DRIVER_LED_TOTAL; i++) {
         rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
     }
-    return led_max < DRIVER_LED_TOTAL;
+    return rgb_matrix_check_finished_leds(led_max);
 }
 
 #    endif  // RGB_MATRIX_CUSTOM_EFFECT_IMPLS

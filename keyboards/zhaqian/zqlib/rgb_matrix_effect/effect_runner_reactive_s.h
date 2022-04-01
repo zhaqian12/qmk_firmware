@@ -26,6 +26,6 @@ bool effect_runner_reactive_s(uint8_t start, effect_params_t* params, rs_f effec
         RGB rgb = rgb_matrix_hsv_to_rgb(hsv);
         rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
     }
-    return led_max < DRIVER_LED_TOTAL;
+    return rgb_matrix_check_finished_leds(led_max);
 }
 #endif

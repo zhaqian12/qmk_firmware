@@ -106,10 +106,11 @@ bool CYCLE_ALTER(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
     uint8_t time = scale16by8(g_rgb_timer, qadd8(rgb_matrix_config.speed / 6, 1));
     for (uint8_t i = led_min; i < led_max; i++) {
+        RGB_MATRIX_TEST_LED_FLAGS();
         RGB rgb = rgb_matrix_hsv_to_rgb(CYCLE_ALTER_math(rgb_matrix_config.hsv, i, time));
         rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
     }
-    return led_max < DRIVER_LED_TOTAL;
+    return rgb_matrix_check_finished_leds(led_max);
 }
 #endif
 
@@ -124,10 +125,11 @@ bool RAINBOW_ALTER(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
     uint8_t time = scale16by8(g_rgb_timer, qadd8(rgb_matrix_config.speed / 6, 1));
     for (uint8_t i = led_min; i < led_max; i++) {
+        RGB_MATRIX_TEST_LED_FLAGS();
         RGB rgb = rgb_matrix_hsv_to_rgb(RAINBOW_ALTER_math(rgb_matrix_config.hsv, i, time));
         rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
     }
-    return led_max < DRIVER_LED_TOTAL;
+    return rgb_matrix_check_finished_leds(led_max);
 }
 #endif
 

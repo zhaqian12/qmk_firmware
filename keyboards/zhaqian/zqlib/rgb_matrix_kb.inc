@@ -27,3 +27,5 @@
 #include "zqlib/rgb_matrix_effect/reactive_multiwide_rgb.h"
 #include "zqlib/rgb_matrix_effect/reactive_multicross_rgb.h"
 #include "zqlib/rgb_matrix_effect/reactive_multinexus_rgb.h"
+
+#include "zqlib/rgb_matrix_effect/breathing_circle.h"

@@ -85,7 +85,7 @@ static bool FRACTAL_RGB(effect_params_t* params) {
 		}
 	}
 
-	return led_max < DRIVER_LED_TOTAL;
+	return rgb_matrix_check_finished_leds(led_max);
 }
 
 
