@@ -29,3 +29,4 @@
 #include "zqlib/rgb_matrix_effect/reactive_multinexus_rgb.h"
 
 #include "zqlib/rgb_matrix_effect/breathing_circle.h"
+#include "zqlib/rgb_matrix_effect/bloom.h"
