@@ -1,20 +1,18 @@
 #ifdef ENABLE_RGB_MATRIX_LIGHTNING
 RGB_MATRIX_EFFECT(LIGHTNING)
 #ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
-uint8_t hue_stepper = 0;
+
+static HSV lightning = {0, 0, 0};
+
+HSV LIGHTNING_math(HSV hsv, uint8_t i, uint8_t time) {
+    lightning.v = ((rand() % 1000)) > (1000 - rgb_matrix_config.speed) ?  hsv.v : lightning.v > 0 ?  lightning.v / (1 + 20 / 60.0) : 0;
+    if(lightning.v == 0)
+        lightning.h = rand() % 255;
+    return lightning;
+}
+
 bool LIGHTNING(effect_params_t* params) {
-    HSV      hsv  = rgb_matrix_config.hsv;
-    uint8_t time = scale16by8(g_rgb_timer, qadd8(rgb_matrix_config.speed / 8, 1));
-    hue_stepper_l += 8;
-    hsv.h = hue_stepper_l;
-    for (uint8_t i = led_min; i < led_max; i++) {
-        RGB_MATRIX_TEST_LED_FLAGS();
-        int16_t v = hsv.v - abs(scale8(g_led_config.point[i].y, 64) - time) * 4;
-        hsv.v     = scale8(v < 0 ? 0 : v, hsv.v);
-        RGB rgb = rgb_matrix_hsv_to_rgb(hsv);
-        rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
-    }
-    return rgb_matrix_check_finished_leds(led_max);
+    return effect_runner_i(params, &LIGHTNING_math);
 }
 
 #    endif  // RGB_MATRIX_CUSTOM_EFFECT_IMPLS

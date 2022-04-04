@@ -22,7 +22,7 @@
 #define PRODUCT_ID      0xAA01
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    ZhaQian
-#define PRODUCT         ZQ75V2pro
+#define PRODUCT         剳牵的ZQ75V2pro
 #define DESCRIPTION     Keyboard
 
 #define MATRIX_ROWS 6
