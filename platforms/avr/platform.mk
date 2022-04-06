@@ -18,6 +18,7 @@ COMPILEFLAGS += -ffunction-sections
 COMPILEFLAGS += -fdata-sections
 COMPILEFLAGS += -fpack-struct
 COMPILEFLAGS += -fshort-enums
+COMPILEFLAGS += -mcall-prologues
 
 ASFLAGS += $(AVR_ASFLAGS)
 
