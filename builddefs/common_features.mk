@@ -149,6 +149,11 @@ ifeq ($(strip $(POINTING_DEVICE_ENABLE)), yes)
     endif
 endif
 
+QUANTUM_PAINTER_ENABLE ?= no
+ifeq ($(strip $(QUANTUM_PAINTER_ENABLE)), yes)
+    include $(QUANTUM_DIR)/painter/rules.mk
+endif
+
 VALID_EEPROM_DRIVER_TYPES := vendor custom transient i2c spi
 EEPROM_DRIVER ?= vendor
 ifeq ($(filter $(EEPROM_DRIVER),$(VALID_EEPROM_DRIVER_TYPES)),)
@@ -183,7 +188,7 @@ else
     ifeq ($(PLATFORM),AVR)
       # Automatically provided by avr-libc, nothing required
     else ifeq ($(PLATFORM),CHIBIOS)
-      ifneq ($(filter STM32F3xx_% STM32F1xx_% STM32F4xx_% GD32VF103_% %_STM32F401xC %_STM32F401xE %_STM32F405xG %_STM32F411xE %_STM32F072xB %_STM32F042x6 %_GD32VF103xB %_GD32VF103x8 ,$(MCU_SERIES)_$(MCU_LDSCRIPT)),)
+      ifneq ($(filter STM32F3xx_% STM32F1xx_% STM32F4xx_% GD32VF103_% CM32M101A_% %_STM32F401xC %_STM32F401xE %_STM32F405xG %_STM32F411xE %_STM32F072xB %_STM32F042x6 %_GD32VF103xB %_GD32VF103x8 ,$(MCU_SERIES)_$(MCU_LDSCRIPT)),)
         # Emulated EEPROM
         OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_STM32_FLASH_EMULATED
         COMMON_VPATH += $(DRIVER_PATH)/eeprom
