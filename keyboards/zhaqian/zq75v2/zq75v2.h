@@ -34,6 +34,17 @@
 	{ K500,  K501,  K502,  K503,  KC_NO, K505,  KC_NO, K507,  KC_NO, K509,  K510,  K511,  K512,  KC_NO, K514 }  \
 }
 
+enum custom_keycodes {
+#ifdef OLED_ENABLE
+	CATTOG = NEW_USER,
+#endif
+};
+
+#ifdef OLED_ENABLE
+extern bool is_cat_anime_active;
+extern bool anime_cleared;
+void CatToggle(void);
+#endif
 
 
 

@@ -426,8 +426,31 @@ void rgb_matrix_task(void) {
         case RENDERING:
             rgb_task_render(effect);
             if (effect) {
+#ifdef RGB_MATRIX_INDICATORS_OVERRIDE
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+                underglow_rgb_matrix_task();
+#endif
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+                rgb_matrix_control_task();
+#endif
+#ifdef RGB_INDICATORS_ENABLE
+                rgb_indicators_task();
+#endif
                 rgb_matrix_indicators();
                 rgb_matrix_indicators_advanced(&rgb_effect_params);
+#else
+#ifdef RGB_INDICATORS_ENABLE
+                rgb_indicators_task();
+#endif
+                rgb_matrix_indicators();
+                rgb_matrix_indicators_advanced(&rgb_effect_params);
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+                underglow_rgb_matrix_task();
+#endif
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+                rgb_matrix_control_task();
+#endif
+#endif
             }
             break;
         case FLUSHING:
@@ -484,6 +507,10 @@ void rgb_matrix_init(void) {
         last_hit_buffer.tick[i] = UINT16_MAX;
     }
 #endif // RGB_MATRIX_KEYREACTIVE_ENABLED
+
+#if defined(ENABLE_RGB_MATRIX_CYCLE_ALTER) || defined (ENABLE_RGB_MATRIX_RAINBOW_ALTER)
+    ALTER_init();
+#endif
 
     if (!eeconfig_is_enabled()) {
         dprintf("rgb_matrix_init_drivers eeconfig is not enabled.\n");

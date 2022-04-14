@@ -28,6 +28,10 @@
 #    include "gd32v_compatibility.h"
 #endif
 
+#if defined(MCU_CM32)
+#    include "cm32_compatibility.h"
+#endif
+
 #if defined(STM32F4XX)
 #    define FLASH_SR_PGERR (FLASH_SR_PGSERR | FLASH_SR_PGPERR | FLASH_SR_PGAERR)
 

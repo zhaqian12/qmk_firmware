@@ -46,14 +46,34 @@ led_config_t g_led_config = {
     }
 };
 
+#ifdef RGB_DISABLE_WHEN_USB_SUSPENDED
+void suspend_power_down_kb(void) {
+    rgb_matrix_set_suspend_state(true);
+    suspend_power_down_user();
+}
+
+void suspend_wakeup_init_kb(void) {
+    rgb_matrix_set_suspend_state(false);
+    suspend_wakeup_init_user();
+}
+#endif
+#endif
+
+#ifdef OLED_ENABLE
+bool is_cat_anime_active = false;
+bool anime_cleared = false;
+#endif
+
+void matrix_init_kb(void) {
+#ifdef OLED_ENABLE
+    is_cat_anime_active = eeprom_read_byte((uint8_t *)20);
+#endif
+    matrix_init_user();
+}
+
 void rgb_matrix_indicators_kb(void) {
     HSV hsv = {0, 255, rgb_matrix_get_val()};
     RGB rgb = hsv_to_rgb(hsv);
-// caps_lock indicator
-    if (host_keyboard_led_state().caps_lock) {
-        rgb_matrix_set_color(56, rgb.r, rgb.g, rgb.b);
-    }
-// layers indicators
     switch(biton32(layer_state)) {
         case 1: rgb_matrix_set_color(12, rgb.r, rgb.g, rgb.b); break;
         case 2: rgb_matrix_set_color(11, rgb.r, rgb.g, rgb.b); break;
@@ -70,18 +90,27 @@ void rgb_matrix_indicators_kb(void) {
         default: break;
     }
 }
-#endif
 
-#ifdef RGB_DISABLE_WHEN_USB_SUSPENDED
-void suspend_power_down_kb(void) {
-    rgb_matrix_set_suspend_state(true);
-    suspend_power_down_user();
-}
-
-void suspend_wakeup_init_kb(void) {
-    rgb_matrix_set_suspend_state(false);
-    suspend_wakeup_init_user();
+#ifdef OLED_ENABLE
+void CatToggle(void) {
+    anime_cleared = true;
+    is_cat_anime_active = !is_cat_anime_active;
+    eeprom_write_byte((uint8_t *)20, is_cat_anime_active);
 }
 #endif
+
+bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
+    switch(keycode) {
+#ifdef OLED_ENABLE
+        case CATTOG:
+			if (record->event.pressed) {
+                CatToggle();
+            }
+            return false;
+#endif
+    }
+    return process_record_user(keycode, record);
+};
+
 
 

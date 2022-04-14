@@ -414,11 +414,22 @@ void keyboard_init(void) {
 #ifdef SPLIT_KEYBOARD
     split_post_init();
 #endif
+#ifdef JOYSTICK_TRIGGER_ENABLE
+    joystick_trigger_init();
+#endif
 
 #if defined(DEBUG_MATRIX_SCAN_RATE) && defined(CONSOLE_ENABLE)
     debug_enable = true;
 #endif
-
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+    rgb_matrix_control_init();
+#endif
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+    underglow_rgb_matrix_init();
+#endif
+#ifdef RGB_INDICATORS_ENABLE
+    rgb_indicators_init();
+#endif
     keyboard_post_init_kb(); /* Always keep this last */
 }
 
@@ -562,6 +573,16 @@ void quantum_task(void) {
 #ifdef AUTO_SHIFT_ENABLE
     autoshift_matrix_scan();
 #endif
+
+#ifdef ALT_TAB_MARCO_ENABLE
+    alt_tab_marco_task();
+#endif
+
+#ifdef RADIAL_CONTROLLER_ENABLE
+    radial_controller_task();
+#endif
+
+
 }
 
 /** \brief Keyboard task: Do keyboard routine jobs
@@ -660,6 +681,10 @@ void keyboard_task(void) {
 
 #ifdef PROGRAMMABLE_BUTTON_ENABLE
     programmable_button_send();
+#endif
+
+#ifdef JOYSTICK_TRIGGER_ENABLE
+    joystick_trigger_task();
 #endif
 
     led_task();

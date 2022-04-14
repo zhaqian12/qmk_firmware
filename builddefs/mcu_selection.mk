@@ -196,18 +196,18 @@ ifneq ($(findstring STM32F103, $(MCU)),)
   MCU_FAMILY = STM32
   MCU_SERIES = STM32F1xx
 
-  # Linker script to use
-  # - it should exist either in <chibios>/os/common/startup/ARMCMx/compilers/GCC/ld/
-  #   or <keyboard_dir>/ld/
-  MCU_LDSCRIPT ?= STM32F103x8
+  ifeq ($(strip $(BOOTLOADER)), tinyuf2)
+    MCU_LDSCRIPT ?= STM32F103x8_uf2
+    FIRMWARE_FORMAT ?= uf2
+    BOARD ?= STM32_F103_STM32DUINO
+  else
+    MCU_LDSCRIPT ?= STM32F103x8
+    BOARD ?= GENERIC_STM32_F103
+  endif
 
   # Startup code to use
   #  - it should exist in <chibios>/os/common/startup/ARMCMx/compilers/GCC/mk/
   MCU_STARTUP ?= stm32f1xx
-
-  # Board: it should exist either in <chibios>/os/hal/boards/,
-  # <keyboard_dir>/boards/, or drivers/boards/
-  BOARD ?= GENERIC_STM32_F103
 
   USE_FPU ?= no
 
@@ -646,6 +646,42 @@ ifneq ($(findstring WB32F3G71, $(MCU)),)
   WB32_BOOTLOADER_ADDRESS ?= 0x1FFFE000
 endif
 
+ifneq ($(findstring CM32M101A, $(MCU)),)
+  # Cortex version
+  MCU = cortex-m4
+
+  # ARM version, CORTEX-M0/M1 are 6, CORTEX-M3/M4/M7 are 7
+  ARMV = 7
+
+  ## chip/board settings
+  # - the next two should match the directories in
+  #   <chibios>/os/hal/ports/$(MCU_FAMILY)/$(MCU_SERIES)
+  MCU_FAMILY = CM32
+  MCU_SERIES = CM32M101A
+
+  # Linker script to use
+  # - it should exist either in <chibios>/os/common/ports/ARMCMx/compilers/GCC/ld/
+  #   or <keyboard_dir>/ld/
+  MCU_LDSCRIPT ?= CM32M101A
+
+  # Startup code to use
+  #  - it should exist in <chibios>/os/common/startup/ARMCMx/compilers/GCC/mk/
+  MCU_STARTUP ?= cm32m101a
+
+  # Board: it should exist either in <chibios>/os/hal/boards/,
+  # <keyboard_dir>/boards/, or drivers/boards/
+  BOARD ?= GENERIC_CM32_M101A
+
+  USE_FPU ?= no
+
+  # UF2 settings
+  UF2_FAMILY ?= CM32M101A
+
+  # Bootloader address for CM32 DFU
+  STM32_BOOTLOADER_ADDRESS ?= 0x1FFF0000
+  CM32_BOOTLOADER_ADDRESS ?= 0x1FFF0000
+endif
+
 ifneq ($(findstring GD32VF103, $(MCU)),)
   # RISC-V
   MCU = risc-v
@@ -661,10 +697,17 @@ ifneq ($(findstring GD32VF103, $(MCU)),)
   MCU_FAMILY = GD32V
   MCU_SERIES = GD32VF103
 
+  ifeq ($(strip $(BOOTLOADER)), tinyuf2)
+    MCU_LDSCRIPT ?= GD32VF103xB_uf2
+    FIRMWARE_FORMAT ?= uf2
+	OPT_DEFS += -DGD32VF103UF2
+  else
+    MCU_LDSCRIPT ?= GD32VF103xB
+  endif
   # Linker script to use
   # - it should exist either in <chibios>/os/common/startup/RISCV-ECLIC/compilers/GCC/ld/
   #   or <keyboard_dir>/ld/
-  MCU_LDSCRIPT ?= GD32VF103xB
+
 
   # Startup code to use
   #  - it should exist in <chibios>/os/common/startup/RISCV-ECLIC/compilers/GCC/mk/
@@ -675,6 +718,7 @@ ifneq ($(findstring GD32VF103, $(MCU)),)
   BOARD ?= SIPEED_LONGAN_NANO
 
   USE_FPU ?= no
+  UF2_FAMILY ?= GD32VF103
 endif
 
 ifneq (,$(filter $(MCU),at90usb162 atmega16u2 atmega32u2 atmega16u4 atmega32u4 at90usb646 at90usb647 at90usb1286 at90usb1287))
