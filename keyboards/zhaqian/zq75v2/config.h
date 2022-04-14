@@ -22,6 +22,7 @@
 #define PRODUCT_ID      0xAA01
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    ZhaQian
+
 #define PRODUCT         剳牵的ZQ75V2pro
 #define DESCRIPTION     Keyboard
 
@@ -31,6 +32,7 @@
 #define MATRIX_ROW_PINS { B4, B3, B2, A0, B7, D2 }
 #define MATRIX_COL_PINS { F2, F3, F4, F5, F6, F7, A1, A2, D6, D5, D4, D3, F1, F0, B5 }
 #define UNUSED_PINS
+
 
 #define DIODE_DIRECTION COL2ROW
 
@@ -49,6 +51,7 @@
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 200
 #define RGB_DISABLE_WHEN_USB_SUSPENDED true
 #define RGB_MATRIX_CENTER {106, 32}
+
 #define RGB_MATRIX_ANIMATION
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
@@ -61,6 +64,7 @@
 #ifdef ENCODER_ENABLE
 #define ENCODERS_PAD_A { B0 }
 #define ENCODERS_PAD_B { B1 }
+
 #define ENCODER_RESOLUTION 4
 #ifdef ENCODER_TRIGGER_ENABLE
 #define ENCODER_PAD_A_KEY_POS {14, 3}
@@ -71,6 +75,7 @@
 #ifdef VIA_ENABLE
 #define DYNAMIC_KEYMAP_LAYER_COUNT 11
 #endif
+
 
 #ifdef OLED_ENABLE
 #define OLED_DISPLAY_128X64
