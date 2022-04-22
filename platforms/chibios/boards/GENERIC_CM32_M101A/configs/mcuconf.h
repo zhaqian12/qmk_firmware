@@ -31,13 +31,6 @@
  *
  */
 
-/**
- * @name    Internal clock sources
- * @{
- */
-#define CM32_HSECLK                        8000000
-#define CM32_LSECLK                        32768
-
 /*
  * HAL driver system settings.
  */

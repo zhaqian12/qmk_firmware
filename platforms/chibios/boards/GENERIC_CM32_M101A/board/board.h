@@ -34,11 +34,25 @@
 /*
  * Board identifier.
  */
+#define BOARD_CMIOT_CM32M101A
+#define BOARD_NAME                  "CMIOT CM32M101A"
+
 #define CM32M101A
 #if !defined(CM32M101A)
   #define CM32M101A
 #endif
 
+/*
+ * Board oscillators-related settings.
+ * NOTE: LSE not fitted.
+ */
+#if !defined(CM32_LSECLK)
+#define CM32_LSECLK                0U
+#endif
+
+#if !defined(CM32_HSECLK)
+#define CM32_HSECLK                8000000U
+#endif
 /*===========================================================================*/
 /* External declarations.                                                    */
 /*===========================================================================*/

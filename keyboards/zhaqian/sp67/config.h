@@ -40,7 +40,7 @@
 #define LOCKING_RESYNC_ENABLE
 
 #define QMK_KEYS_PER_SCAN 12
-#define FORCE_NKRO
+// #define FORCE_NKRO
 
 #ifdef ENCODER_ENABLE
 #define ENCODERS_PAD_A { B12 }

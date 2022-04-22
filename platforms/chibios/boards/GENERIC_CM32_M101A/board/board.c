@@ -20,7 +20,7 @@
  */
 
 #include "hal.h"
-
+#include "../../../../../lib/RTT/SEGGER_RTT.h"
 /*===========================================================================*/
 /* Driver local definitions.                                                 */
 /*===========================================================================*/
@@ -69,8 +69,9 @@ static void cm32_gpio_init(void) {
  * any other initialization.
  */
 void __early_init(void) {
-
+  SEGGER_RTT_printf(0, "printf Test: %s", "CM32_CLOCK_INIT");
   cm32_clock_init();
+  SEGGER_RTT_printf(0, "printf Test: %s", "CM32_GPIO_INIT");
   cm32_gpio_init();
 }
 /**

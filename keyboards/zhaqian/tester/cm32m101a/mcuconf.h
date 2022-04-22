@@ -18,8 +18,8 @@
 
 #include_next <mcuconf.h>
 
-#undef CM32_PWM_USE_TIM2
-#define CM32_PWM_USE_TIM2 TRUE
+// #undef CM32_PWM_USE_TIM2
+// #define CM32_PWM_USE_TIM2 TRUE
 
-#undef CM32_ST_USE_TIMER
-#define CM32_ST_USE_TIMER 3
+// #undef CM32_ST_USE_TIMER
+// #define CM32_ST_USE_TIMER 3

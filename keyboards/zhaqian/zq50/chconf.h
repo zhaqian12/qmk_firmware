@@ -16,6 +16,9 @@
 
 #pragma once
 
-// #define HAL_USE_PWM    TRUE
+#define CH_CFG_ST_FREQUENCY 10000
 
-#include_next <halconf.h>
+#define CH_CFG_ST_TIMEDELTA 0
+
+#include_next <chconf.h>
+
