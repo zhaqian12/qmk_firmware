@@ -9,7 +9,7 @@ This keyboard use different mcus.
 
 Make example for this keyboard (after setting up your build environment):
 
-* MCU: at90usb1286
+* MCU:at90usb1286
     make zhaqian/tester/at90usb1286:default
     make zhaqian/tester/at90usb1286:via
 
@@ -32,6 +32,14 @@ Make example for this keyboard (after setting up your build environment):
 * MCU:gd32vf103
     make zhaqian/tester/gd32vf103:default
     make zhaqian/tester/gd32vf103:via
+    
+* MCU:cm32m101a
+    make zhaqian/tester/cm32m101a:default
+    make zhaqian/tester/cm32m101a:via
+    
+* MCU:stm32l433
+    make zhaqian/tester/l433:default
+    make zhaqian/tester/l433:via
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
  
