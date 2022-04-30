@@ -56,10 +56,10 @@ static uint8_t ADDR2PAGE(uint32_t Page_Address) {
 #endif
 
 #if defined(STM32L4XX)
-#define FLASH_SR_PGERR (FLASH_SR_PGAERR  | FLASH_SR_PGSERR | FLASH_SR_PROGERR)
-#define FLASH_OBR_OPTERR FLASH_SR_OPERR
-#define FLASH_KEY1 0x45670123U
-#define FLASH_KEY2 0xCDEF89ABU
+#    define FLASH_SR_PGERR (FLASH_SR_PGAERR  | FLASH_SR_PGSERR | FLASH_SR_PROGERR)
+#    define FLASH_OBR_OPTERR FLASH_SR_OPERR
+#    define FLASH_KEY1 0x45670123U
+#    define FLASH_KEY2 0xCDEF89ABU
 static uint8_t ADDR2PAGE(uint32_t Page_Address) {
     uint8_t page = (uint8_t)((uint32_t)(Page_Address - FLASH_BASE) / 0x800);
     return page;
@@ -185,7 +185,7 @@ FLASH_Status FLASH_ProgramHalfWord(uint32_t Address, uint16_t Data) {
         status = FLASH_WaitForLastOperation(ProgramTimeout);
         if (status == FLASH_COMPLETE) {
             /* if the previous operation is completed, proceed to program the new data */
-            
+
 #if defined(FLASH_CR_PSIZE)
             FLASH->CR &= ~FLASH_CR_PSIZE;
             FLASH->CR |= FLASH_CR_PSIZE_0;
@@ -204,7 +204,13 @@ FLASH_Status FLASH_ProgramHalfWord(uint32_t Address, uint16_t Data) {
     return status;
 }
 
-
+/**
+ * @brief  Programs a double word at a specified address.
+ * @param  Address: specifies the address to be programmed.
+ * @param  Data: specifies the data to be programmed.
+ * @retval FLASH Status: The returned value can be: FLASH_ERROR_PG,
+ *   FLASH_ERROR_WRP, FLASH_COMPLETE or FLASH_TIMEOUT.
+ */
 FLASH_Status FLASH_ProgramDoubleWord(uint32_t Address, uint64_t Data) {
     FLASH_Status status = FLASH_BAD_ADDRESS;
 #if defined(STM32L4XX)
@@ -239,7 +245,6 @@ FLASH_Status FLASH_ProgramDoubleWord(uint32_t Address, uint64_t Data) {
 #endif
     return status;
 }
-
 
 /**
  * @brief  Unlocks the FLASH Program Erase Controller.
