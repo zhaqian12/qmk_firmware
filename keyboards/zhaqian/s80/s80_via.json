@@ -10,6 +10,73 @@
     "rows": 6,
     "cols": 17
   },
+  "customKeycodes": [
+    {
+      "name": "Underglow\nRGB\nToggle",
+      "title": "Underglow RGB Toggle",
+      "shortName": "UGRGB Tog"
+    },
+    {
+      "name": "Key\nRGB\nToggle",
+      "title": "Key RGB Toggle",
+      "shortName": "KeyRGB\nTog"
+    },
+    {
+      "name": "Underglow\nRGB\nMode\nSync",
+      "title": "Underglow RGB Mode Sync With Key RGB Mode",
+      "shortName": "UGRGB\nMODS"
+    },
+    {
+      "name": "Underglow\nRGB\nMode+",
+      "title": "Underglow RGB Mode Step",
+      "shortName": "UGRGB\nMOD+"
+    },
+    {
+      "name": "Underglow\nRGB\nMode-",
+      "title": "Underglow RGB Mode Step Reverse",
+      "shortName": "UGRGB\nMOD-"
+    },
+    {
+        "name": "Underglow\nRGB\nHue+",
+        "title": "Underglow RGB Hue Increase",
+        "shortName": "UGRGB\nHue+"
+    },
+    {
+        "name": "Underglow\nRGB\nHue-",
+        "title": "Underglow RGB Hue Decrease",
+        "shortName": "UGRGB\nHue-"
+    },
+    {
+        "name": "Underglow\nRGB\nSat+",
+        "title": "Underglow RGB Sat Increase",
+        "shortName": "UGRGB\nSat+"
+    },
+    {
+        "name": "Underglow\nRGB\nSat-",
+        "title": "Underglow RGB Sat Decrease",
+        "shortName": "UGRGB\nSat-"
+    },
+    {
+        "name": "Underglow\nRGB\nVal+",
+        "title": "Underglow RGB Val Increase",
+        "shortName": "UGRGB\nVal+"
+    },
+    {
+        "name": "Underglow\nRGB\nVal-",
+        "title": "Underglow RGB Val Decrease",
+        "shortName": "UGRGB\nVal-"
+    },
+    {
+        "name": "Underglow\nRGB\nSPD+",
+        "title": "Underglow RGB Speed Increase",
+        "shortName": "UGRGB\nSPD+"
+    },
+    {
+        "name": "Underglow\nRGB\nSPD-",
+        "title": "Underglow RGB Speed Decrease",
+        "shortName": "UGRGB\nSPD-"
+    }
+  ],
   "layouts": {
     "keymap": [
       [

@@ -33,6 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "sendchar.h"
 #include "eeconfig.h"
 #include "action_layer.h"
+// #include "../lib/RTT/SEGGER_RTT.h"
 #ifdef BACKLIGHT_ENABLE
 #    include "backlight.h"
 #endif
@@ -581,7 +582,7 @@ void quantum_task(void) {
 #ifdef RADIAL_CONTROLLER_ENABLE
     radial_controller_task();
 #endif
-
+    // SEGGER_RTT_printf(0, "printf Test: %s", "CM32_GPIO_TASK");
 
 }
 
