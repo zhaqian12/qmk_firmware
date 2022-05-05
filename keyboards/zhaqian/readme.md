@@ -29,6 +29,12 @@
 | Mpad12        | 0x00AA    | 0xAAAA     | Hotswap  | Atmel atmega32u4  | RGB, UGRGB, JOYSTICK, ENCODER, OLED          |
 | split69       | 0x00AA    | 0xAAAB     | Solder   | Atmel atmega32u4  | SPLIT, UGRGB, OLED, ENCODER                  |
 
+# TODO LIST
+- BLE 
+    - [ ] CH58X protocol of qmk 
+    - [x] new kb firmware(use cherry usb)
+- Rgb matrix control software (usb hid)
+
 # ZhaQian library
  This is a simple library that integrates some common repetitive functions.
  - Alt Tab Marco
@@ -163,7 +169,4 @@ You can also alternate these defines to control these feature:
 |STM32F411xE|
 |GD32VF103xB|
 
-# TODO LIST
 
-- Bluetooth (esp32s3,ch58x or nrf)
-- Rgb matrix control software (usb hid)
