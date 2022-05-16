@@ -1,5 +1,36 @@
 MCU_ORIG := $(MCU)
 
+ifneq ($(findstring CH582, $(MCU)),)
+  # RISC-V
+  MCU = risc-v
+
+  # RISC-V extensions and abi configuration
+  MCU_ARCH = rv32imac
+  MCU_ABI = ilp32
+  MCU_CMODEL = medlow
+
+  ## chip/board settings
+  # - the next two should match the directories in
+  #   <chibios>/os/hal/ports/$(MCU_FAMILY)/$(MCU_SERIES)
+  MCU_FAMILY = CH58x
+  MCU_SERIES = CH582
+
+  # Linker script to use
+  # - it should exist either in <chibios>/os/common/startup/RISCV-ECLIC/compilers/GCC/ld/
+  #   or <keyboard_dir>/ld/
+  MCU_LDSCRIPT ?= CH582M
+
+  # Startup code to use
+  #  - it should exist in <chibios>/os/common/startup/RISCV-ECLIC/compilers/GCC/mk/
+  MCU_STARTUP ?= ch582m
+
+  # Board: it should exist either in <chibios>/os/hal/boards/,
+  # <keyboard_dir>/boards/, or drivers/boards/
+  BOARD ?= CH582_DEMO
+
+  USE_FPU ?= no
+endif
+
 ifneq ($(findstring MKL26Z64, $(MCU)),)
   # Cortex version
   MCU = cortex-m0plus
