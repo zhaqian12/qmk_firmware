@@ -227,15 +227,9 @@ ifneq ($(findstring STM32F103, $(MCU)),)
   MCU_FAMILY = STM32
   MCU_SERIES = STM32F1xx
 
-  ifeq ($(strip $(BOOTLOADER)), tinyuf2)
-    MCU_LDSCRIPT ?= STM32F103x8_uf2
-    FIRMWARE_FORMAT ?= uf2
-    BOARD ?= STM32_F103_STM32DUINO
-  else
-    MCU_LDSCRIPT ?= STM32F103x8
-    BOARD ?= GENERIC_STM32_F103
-  endif
-
+  MCU_LDSCRIPT ?= STM32F103x8
+  BOARD ?= GENERIC_STM32_F103
+  
   # Startup code to use
   #  - it should exist in <chibios>/os/common/startup/ARMCMx/compilers/GCC/mk/
   MCU_STARTUP ?= stm32f1xx
