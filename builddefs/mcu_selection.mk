@@ -731,7 +731,6 @@ ifneq ($(findstring GD32VF103, $(MCU)),)
   ifeq ($(strip $(BOOTLOADER)), tinyuf2)
     MCU_LDSCRIPT ?= GD32VF103xB_uf2
     FIRMWARE_FORMAT ?= uf2
-	OPT_DEFS += -DGD32VF103UF2
   else
     MCU_LDSCRIPT ?= GD32VF103xB
   endif

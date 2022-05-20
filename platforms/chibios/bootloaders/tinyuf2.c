@@ -25,7 +25,7 @@
 extern uint32_t _board_dfu_dbl_tap[];
 #define DBL_TAP_REG _board_dfu_dbl_tap[0]
 
-#ifdef GD32VF103UF2
+#ifdef GD32VF103
 #define DBGMCU_KEY_UNLOCK 0x4B5A6978
 #define DBGMCU_CMD_RESET 0x1
 __IO uint32_t *DBGMCU_KEY = (uint32_t *)0xE0042000U + 0x0CU;
@@ -34,7 +34,7 @@ __IO uint32_t *DBGMCU_CMD = (uint32_t *)0xE0042000U + 0x08U;
 
 __attribute__((weak)) void bootloader_jump(void) {
     DBL_TAP_REG = DBL_TAP_MAGIC;
-#ifndef GD32VF103UF2
+#ifndef GD32VF103
     NVIC_SystemReset();
 #else
     *DBGMCU_KEY = DBGMCU_KEY_UNLOCK;
