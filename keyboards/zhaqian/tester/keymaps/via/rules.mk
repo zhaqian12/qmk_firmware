@@ -21,4 +21,7 @@ ifneq ($(findstring GD32VF103, $(MCU)),)
 else
   OPENRGB_ENABLE = yes
 endif
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes

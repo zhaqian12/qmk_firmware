@@ -21,5 +21,3 @@
 #undef STM32_HSECLK
 #define STM32_HSECLK 8000000
 
-#undef STM32F103xB
-#define STM32F103x8

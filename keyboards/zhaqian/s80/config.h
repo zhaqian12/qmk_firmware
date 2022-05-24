@@ -44,7 +44,11 @@
 
 #ifdef RGB_MATRIX_ENABLE
 #define RGB_DI_PIN A10
+<<<<<<< Updated upstream
 #define RGBLED_NUM 11
+=======
+#define RGBLED_NUM 32
+>>>>>>> Stashed changes
 #define DRIVER_LED_TOTAL RGBLED_NUM
 #define WS2812_PWM_DRIVER PWMD1
 #define WS2812_PWM_CHANNEL 3
@@ -75,3 +79,11 @@
 #endif
 #endif
 
+<<<<<<< Updated upstream
+=======
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+#define UG_RGB_MATRIX_ANIMATIONS
+#endif
+
+#define FEE_MCU_FLASH_SIZE 64
+>>>>>>> Stashed changes

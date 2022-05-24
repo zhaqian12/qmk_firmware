@@ -45,7 +45,7 @@
 #if !defined(FEE_MCU_FLASH_SIZE)
 #    if defined(STM32F042x6)
 #        define FEE_MCU_FLASH_SIZE 32 // Size in Kb
-#    elif defined(GD32VF103C8) || defined(STM32F103x8)
+#    elif defined(GD32VF103C8)
 #        define FEE_MCU_FLASH_SIZE 64 // Size in Kb
 #    elif defined(STM32F103xB) || defined(STM32F072xB) || defined(STM32F070xB) || defined(GD32VF103CB) || defined(CM32M101A)
 #        define FEE_MCU_FLASH_SIZE 128 // Size in Kb

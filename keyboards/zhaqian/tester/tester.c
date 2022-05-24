@@ -15,7 +15,7 @@
  */
 
 #include "tester.h"
-
+#include "uart.h"
 #ifdef RGB_MATRIX_ENABLE
 
 led_config_t g_led_config = {  //
@@ -60,3 +60,22 @@ void suspend_wakeup_init_kb(void) {
 #endif
 
 
+<<<<<<< Updated upstream
+=======
+void keyboard_post_init_user(void) {
+  // Customise these values to desired behaviour
+  debug_enable=true;
+  debug_matrix=true;
+  //debug_keyboard=true;
+  //debug_mouse=true;
+}
+
+
+void matrix_init_kb(void) {
+    uart_init(115200);
+}
+
+void matrix_scan_kb(void) {
+    uart_write(0x11);
+}
+>>>>>>> Stashed changes
