@@ -27,11 +27,6 @@ led_config_t g_led_config = {
     {NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED},
     {NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED, NO_LED},
 }, {
-<<<<<<< Updated upstream
-    {0, 54}, {0, 36}, {0, 18}, {0, 0}, {32, 0}, {64, 0}, {96, 0}, {128, 0}, {160, 0}, {192, 0}, {224, 0}
-}, {
-    8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8
-=======
     {0, 42}, {0, 18}, {64, 0}, {96, 0}, {128, 0}, {160, 0}, {192, 0}, {224, 0}, {224, 18},
     {224, 64}, {224, 48}, {224, 32}, {224, 16}, {224, 0}, 
     {208, 0}, {192, 0}, {176, 0}, {160, 0}, {144, 0}, {128, 0}, {112, 0}, {96, 0}, {80, 0}, {64, 0}, {48, 0}, {32, 0}, {16, 0},
@@ -41,7 +36,6 @@ led_config_t g_led_config = {
     2, 2, 2, 2, 2, 2, 2, 2,
     2, 2, 2, 2, 2, 2, 2, 2,
     2, 2, 2, 2, 2, 2, 2,
->>>>>>> Stashed changes
 }};
 
 #ifdef RGB_DISABLE_WHEN_USB_SUSPENDED

@@ -17,9 +17,5 @@
 #pragma once
 
 #define HAL_USE_PWM    TRUE
-<<<<<<< Updated upstream
-
-=======
 #define HAL_USE_SERIAL TRUE
->>>>>>> Stashed changes
 #include_next <halconf.h>

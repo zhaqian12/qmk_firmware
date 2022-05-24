@@ -59,9 +59,6 @@ void suspend_wakeup_init_kb(void) {
 
 #endif
 
-
-<<<<<<< Updated upstream
-=======
 void keyboard_post_init_user(void) {
   // Customise these values to desired behaviour
   debug_enable=true;
@@ -78,4 +75,4 @@ void matrix_init_kb(void) {
 void matrix_scan_kb(void) {
     uart_write(0x11);
 }
->>>>>>> Stashed changes
+
