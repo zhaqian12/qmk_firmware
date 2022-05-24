@@ -1,4 +1,4 @@
-/* Copyright 2020 QMK
+/* Copyright 2022 ZhaQian
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,15 +14,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include "bootloader.h"
 
-#include_next <mcuconf.h>
+#include <ch.h>
 
-#undef STM32_PWM_USE_TIM2
-#define STM32_PWM_USE_TIM2 TRUE
+#define MAGIC_BOOT 0x544F4F42UL
+#define MAGIC_REG *(volatile uint32_t*)0x20004000
 
-#undef STM32_ST_USE_TIMER
-#define STM32_ST_USE_TIMER 3
+void bootloader_jump(void) {
+    MAGIC_REG = MAGIC_BOOT;
+    NVIC_SystemReset();
+}
 
-#undef STM32_SERIAL_USE_USART2
-#define STM32_SERIAL_USE_USART2 TRUE
+void enter_bootloader_mode_if_requested(void) {}
+

@@ -52,3 +52,4 @@
 #endif
 #endif
 
+#define FEE_MCU_FLASH_SIZE 64
