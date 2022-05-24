@@ -1,6 +1,20 @@
 # Readme Version
 * [Enlish version](./readme.md)
 * [Chinese version](./readme_cn.md)
+  
+# Table of Contents
+- [Readme Version](#readme-version)
+- [Table of Contents](#table-of-contents)
+- [Keyboards Released by ZhaQian](#keyboards-released-by-zhaqian)
+- [ZhaQian library](#zhaqian-library)
+  - [Alt Tab Marco](#alt-tab-marco)
+  - [Encoder Trigger](#encoder-trigger)
+  - [Joystick Trigger](#joystick-trigger)
+  - [Radial Controller](#radial-controller)
+  - [RGB Matrix Control](#rgb-matrix-control)
+  - [Underglow RGB Matrix](#underglow-rgb-matrix)
+  - [UF2 Bootloader](#uf2-bootloader)
+- [TODO LIST](#todo-list)
 # Keyboards Released by ZhaQian
 | NAME          | VENDOR_ID | PRODUCT_ID | PCB      | MCU      	        | FEATURES                                     |
 |:-------------:| :-------: | :--------: | :------: |:----------------: | :------------------------------------------: |
@@ -28,7 +42,7 @@
 | zq50	        | 0x00AA    | 0xAA16     | Hotswap  | ST stm32f103/f103 | RGB, UGRGB, ENCODER                          |
 | Mpad12        | 0x00AA    | 0xAAAA     | Hotswap  | Atmel atmega32u4  | RGB, UGRGB, JOYSTICK, ENCODER, OLED          |
 | split69       | 0x00AA    | 0xAAAB     | Solder   | Atmel atmega32u4  | SPLIT, UGRGB, OLED, ENCODER                  |
-
+| GH60        | 0xFEED    | 0x6060    | Hotswap  | ST stm32f103/f103 | RGB          |
 # ZhaQian library
 这是一个集合了许多简单的但可能在不同键盘上重复用到功能的库.
  - Alt Tab Marco

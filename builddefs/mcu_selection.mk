@@ -1,5 +1,36 @@
 MCU_ORIG := $(MCU)
 
+ifneq ($(findstring CH582, $(MCU)),)
+  # RISC-V
+  MCU = risc-v
+
+  # RISC-V extensions and abi configuration
+  MCU_ARCH = rv32imac
+  MCU_ABI = ilp32
+  MCU_CMODEL = medlow
+
+  ## chip/board settings
+  # - the next two should match the directories in
+  #   <chibios>/os/hal/ports/$(MCU_FAMILY)/$(MCU_SERIES)
+  MCU_FAMILY = CH58x
+  MCU_SERIES = CH582
+
+  # Linker script to use
+  # - it should exist either in <chibios>/os/common/startup/RISCV-ECLIC/compilers/GCC/ld/
+  #   or <keyboard_dir>/ld/
+  MCU_LDSCRIPT ?= CH582M
+
+  # Startup code to use
+  #  - it should exist in <chibios>/os/common/startup/RISCV-ECLIC/compilers/GCC/mk/
+  MCU_STARTUP ?= ch582m
+
+  # Board: it should exist either in <chibios>/os/hal/boards/,
+  # <keyboard_dir>/boards/, or drivers/boards/
+  BOARD ?= CH582_DEMO
+
+  USE_FPU ?= no
+endif
+
 ifneq ($(findstring MKL26Z64, $(MCU)),)
   # Cortex version
   MCU = cortex-m0plus
@@ -196,15 +227,9 @@ ifneq ($(findstring STM32F103, $(MCU)),)
   MCU_FAMILY = STM32
   MCU_SERIES = STM32F1xx
 
-  ifeq ($(strip $(BOOTLOADER)), tinyuf2)
-    MCU_LDSCRIPT ?= STM32F103x8_uf2
-    FIRMWARE_FORMAT ?= uf2
-    BOARD ?= STM32_F103_STM32DUINO
-  else
-    MCU_LDSCRIPT ?= STM32F103x8
-    BOARD ?= GENERIC_STM32_F103
-  endif
-
+  MCU_LDSCRIPT ?= STM32F103x8
+  BOARD ?= GENERIC_STM32_F103
+  
   # Startup code to use
   #  - it should exist in <chibios>/os/common/startup/ARMCMx/compilers/GCC/mk/
   MCU_STARTUP ?= stm32f1xx
@@ -700,7 +725,6 @@ ifneq ($(findstring GD32VF103, $(MCU)),)
   ifeq ($(strip $(BOOTLOADER)), tinyuf2)
     MCU_LDSCRIPT ?= GD32VF103xB_uf2
     FIRMWARE_FORMAT ?= uf2
-	OPT_DEFS += -DGD32VF103UF2
   else
     MCU_LDSCRIPT ?= GD32VF103xB
   endif

@@ -1,6 +1,21 @@
 # Readme Version
 * [Enlish version](./readme.md)
 * [Chinese version](./readme_cn.md)
+
+# Table of Contents
+- [Readme Version](#readme-version)
+- [Table of Contents](#table-of-contents)
+- [Keyboards Released by ZhaQian](#keyboards-released-by-zhaqian)
+- [TODO LIST](#todo-list)
+- [ZhaQian library](#zhaqian-library)
+  - [Alt Tab Marco](#alt-tab-marco)
+  - [Encoder Trigger](#encoder-trigger)
+  - [Joystick Trigger](#joystick-trigger)
+  - [Radial Controller](#radial-controller)
+  - [RGB Matrix Control](#rgb-matrix-control)
+  - [Underglow RGB Matrix](#underglow-rgb-matrix)
+  - [UF2 Bootloader](#uf2-bootloader)
+
 # Keyboards Released by ZhaQian
 | NAME          | VENDOR_ID | PRODUCT_ID | PCB      | MCU      	        | FEATURES                                     |
 |:-------------:| :-------: | :--------: | :------: |:----------------: | :------------------------------------------: |
@@ -28,6 +43,12 @@
 | zq50	        | 0x00AA    | 0xAA16     | Hotswap  | ST stm32f103/f103 | RGB, UGRGB, ENCODER                          |
 | Mpad12        | 0x00AA    | 0xAAAA     | Hotswap  | Atmel atmega32u4  | RGB, UGRGB, JOYSTICK, ENCODER, OLED          |
 | split69       | 0x00AA    | 0xAAAB     | Solder   | Atmel atmega32u4  | SPLIT, UGRGB, OLED, ENCODER                  |
+| GH60        | 0xFEED    | 0x6060    | Hotswap  | ST stm32f103/f103 | RGB          |
+# TODO LIST
+- BLE 
+    - [ ] CH58X protocol of qmk 
+    - [x] new kb firmware(use cherry usb)
+- Rgb matrix control software (usb hid)
 
 # ZhaQian library
  This is a simple library that integrates some common repetitive functions.
@@ -163,7 +184,4 @@ You can also alternate these defines to control these feature:
 |STM32F411xE|
 |GD32VF103xB|
 
-# TODO LIST
 
-- Bluetooth (esp32s3,ch58x or nrf)
-- Rgb matrix control software (usb hid)

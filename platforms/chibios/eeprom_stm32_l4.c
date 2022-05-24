@@ -535,7 +535,7 @@ void eeprom_write_block(const void *buf, void *addr, size_t len) {
             write_len = 2;
         } else {
             /* Write the unaligned or single byte */
-            EEPROM_WriteDataByte((uintptr_t)dest++, *src++);
+            EEPROM_WriteDataByte((uintptr_t)dest, *src);
             write_len = 1;
         }
 
