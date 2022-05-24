@@ -75,11 +75,8 @@
 #endif
 #endif
 
-<<<<<<< Updated upstream
-=======
 #ifdef UNDERGLOW_RGB_MATRIX_ENABLE
 #define UG_RGB_MATRIX_ANIMATIONS
 #endif
 
 #define FEE_MCU_FLASH_SIZE 64
->>>>>>> Stashed changes
