@@ -31,9 +31,9 @@
 | zq11800       | 0x00AA    | 0xAA0A     | Solder   | Atmel atmega32u4  | ENCODER, RGB                                 |
 | wave87        | 0x00AA    | 0xAA0B     | Hotswap  | Atmel atmega32u4  | LOGORGB                                      |
 | zq980mini     | 0x00AA    | 0xAA0C     | Hotswap  | Atmel atmega32u4  | RGB, UGRGB                                   |
-| zq67rev2      | 0x00AA    | 0xAA0D     | Hotswap  | ST stm32f103/f103  | RGB                                          |
-| zq64          | 0x00AA    | 0xAA0E     | Hotswap  | Atmel atmega32u4  | RGB, ENCODER                                 |
-| zq68          | 0x00AA    | 0xAA0F     | Hotswap  | Atmel atmega32u4  | RGB, ENCODER                                 |
+| zq67rev2      | 0x00AA    | 0xAA0D     | Hotswap  | Atmel atmega32u4  | RGB                                          |
+| zq64          | 0x00AA    | 0xAA0E     | Hotswap  | ST stm32f103/f103  | RGB, ENCODER                                 |
+| zq68          | 0x00AA    | 0xAA0F     | Hotswap  | ST stm32f103/f103  | RGB, ENCODER                                 |
 | toxic67       | 0x00AA    | 0xAA10     | Hotswap  | Atmel atmega32u4  | RGB                                          |
 | zq46	        | 0x00AA    | 0xAA11     | Hotswap  | ST stm32f401      | RGB, UGRGB, LOGORGB, ENCODER                 |
 | osu	        | 0x00AA    | 0xAA12     | Hotswap  | ST stm32f401      | UGRGB                                        |

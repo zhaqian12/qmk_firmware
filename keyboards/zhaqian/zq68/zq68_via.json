@@ -33,7 +33,7 @@
           "title": "Radial Controller Continue Clockwise in Windows 10",
           "shortName": "Radial\nRightC"
         }
-      ],
+    ],
     "layouts": {
         "labels": [
             ["Encoder", "CLOSE", "OPEN"]
