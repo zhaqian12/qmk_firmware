@@ -28,6 +28,10 @@
 #    include "gd32v_compatibility.h"
 #endif
 
+#if defined(MCU_CM32)
+#    include "cm32_compatibility.h"
+#endif
+
 #if defined(STM32F4XX)
 #    define FLASH_SR_PGERR (FLASH_SR_PGSERR | FLASH_SR_PGPERR | FLASH_SR_PGAERR)
 
@@ -48,6 +52,17 @@ static uint8_t ADDR2PAGE(uint32_t Page_Address) {
 
     // TODO: bad times...
     return 7;
+}
+#endif
+
+#if defined(STM32L4XX)
+#    define FLASH_SR_PGERR (FLASH_SR_PGAERR  | FLASH_SR_PGSERR | FLASH_SR_PROGERR)
+#    define FLASH_OBR_OPTERR FLASH_SR_OPERR
+#    define FLASH_KEY1 0x45670123U
+#    define FLASH_KEY2 0xCDEF89ABU
+static uint8_t ADDR2PAGE(uint32_t Page_Address) {
+    uint8_t page = (uint8_t)((uint32_t)(Page_Address - FLASH_BASE) / 0x800);
+    return page;
 }
 #endif
 
@@ -125,7 +140,10 @@ FLASH_Status FLASH_ErasePage(uint32_t Page_Address) {
 
     if (status == FLASH_COMPLETE) {
         /* if the previous operation is completed, proceed to erase the page */
-#if defined(FLASH_CR_SNB)
+#if defined(FLASH_CR_PNB)
+        FLASH->CR &= ~FLASH_CR_PNB;
+        FLASH->CR |= FLASH_CR_PER | (ADDR2PAGE(Page_Address) << FLASH_CR_PNB_Pos);
+#elif defined(FLASH_CR_SNB)
         FLASH->CR &= ~FLASH_CR_SNB;
         FLASH->CR |= FLASH_CR_SER | (ADDR2PAGE(Page_Address) << FLASH_CR_SNB_Pos);
 #else
@@ -138,7 +156,9 @@ FLASH_Status FLASH_ErasePage(uint32_t Page_Address) {
         status = FLASH_WaitForLastOperation(EraseTimeout);
         if (status != FLASH_TIMEOUT) {
             /* if the erase operation is completed, disable the configured Bits */
-#if defined(FLASH_CR_SNB)
+#if defined(FLASH_CR_PNB)
+            FLASH->CR &= ~(FLASH_CR_PER | FLASH_CR_PNB);
+#elif defined(FLASH_CR_SNB)
             FLASH->CR &= ~(FLASH_CR_SER | FLASH_CR_SNB);
 #else
             FLASH->CR &= ~FLASH_CR_PER;
@@ -181,6 +201,48 @@ FLASH_Status FLASH_ProgramHalfWord(uint32_t Address, uint16_t Data) {
             FLASH->SR = (FLASH_SR_EOP | FLASH_SR_PGERR | FLASH_SR_WRPERR);
         }
     }
+    return status;
+}
+
+/**
+ * @brief  Programs a double word at a specified address.
+ * @param  Address: specifies the address to be programmed.
+ * @param  Data: specifies the data to be programmed.
+ * @retval FLASH Status: The returned value can be: FLASH_ERROR_PG,
+ *   FLASH_ERROR_WRP, FLASH_COMPLETE or FLASH_TIMEOUT.
+ */
+FLASH_Status FLASH_ProgramDoubleWord(uint32_t Address, uint64_t Data) {
+    FLASH_Status status = FLASH_BAD_ADDRESS;
+#if defined(STM32L4XX)
+    if (IS_FLASH_ADDRESS(Address)) {
+        /* Wait for last operation to be completed */
+        status = FLASH_WaitForLastOperation(ProgramTimeout);
+        if (status == FLASH_COMPLETE) {
+            /* if the previous operation is completed, proceed to program the new data */
+            /* disable data cache first */
+            FLASH->ACR &= ~FLASH_ACR_DCEN;
+            FLASH->CR |= FLASH_CR_PG;
+            *(__IO uint32_t*)Address = (uint32_t)Data;
+            __ISB();
+            *(__IO uint32_t*)(Address + 4U) = (uint32_t)(Data >> 32);
+            /* Wait for last operation to be completed */
+            status = FLASH_WaitForLastOperation(ProgramTimeout);
+            if (status != FLASH_TIMEOUT) {
+                /* if the program operation is completed, disable the PG Bit */
+                FLASH->CR &= ~FLASH_CR_PG;
+            }
+            FLASH->SR = (FLASH_SR_EOP | FLASH_SR_PGERR | FLASH_SR_WRPERR);
+            /* reset data cache */
+            FLASH->ACR |= FLASH_ACR_DCRST;
+            FLASH->ACR &= ~FLASH_ACR_DCRST;
+            /* enable data cache */
+            FLASH->ACR |= FLASH_ACR_DCEN;
+        }
+    }
+#else
+    (void)Address;
+    (void)Data;
+#endif
     return status;
 }
 
