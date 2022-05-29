@@ -25,7 +25,7 @@
 #        ifndef FEE_PAGE_COUNT
 #            define FEE_PAGE_COUNT 2 // How many pages are used
 #        endif
-#    elif defined(STM32F103xE) || defined(STM32F303xC) || defined(STM32F072xB) || defined(STM32F070xB) || defined(CM32M101A) || defined(STM32L433xC)
+#    elif defined(STM32F103xE) || defined(STM32F303xC) || defined(STM32F303xE) || defined(STM32F072xB) || defined(STM32F070xB) || defined(CM32M101A) || defined(STM32L433xC)
 #        ifndef FEE_PAGE_SIZE
 #            define FEE_PAGE_SIZE 0x800 // Page size = 2KByte
 #        endif
@@ -45,13 +45,13 @@
 #if !defined(FEE_MCU_FLASH_SIZE)
 #    if defined(STM32F042x6)
 #        define FEE_MCU_FLASH_SIZE 32 // Size in Kb
-#    elif defined(GD32VF103C8) || defined(STM32F103x8)
+#    elif defined(GD32VF103C8)
 #        define FEE_MCU_FLASH_SIZE 64 // Size in Kb
 #    elif defined(STM32F103xB) || defined(STM32F072xB) || defined(STM32F070xB) || defined(GD32VF103CB) || defined(CM32M101A)
 #        define FEE_MCU_FLASH_SIZE 128 // Size in Kb
 #    elif defined(STM32F303xC) || defined(STM32F401xC) || defined(STM32L433xC)
 #        define FEE_MCU_FLASH_SIZE 256 // Size in Kb
-#    elif defined(STM32F103xE) || defined(STM32F401xE) || defined(STM32F411xE)
+#    elif defined(STM32F103xE) || defined(STM32F303xE) || defined(STM32F401xE) || defined(STM32F411xE)
 #        define FEE_MCU_FLASH_SIZE 512 // Size in Kb
 #    elif defined(STM32F405xG)
 #        define FEE_MCU_FLASH_SIZE 1024 // Size in Kb
