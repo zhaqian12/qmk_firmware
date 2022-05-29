@@ -656,8 +656,9 @@ ifeq ($(strip $(HAPTIC_ENABLE)),yes)
 endif
 
 ifeq ($(strip $(HD44780_ENABLE)), yes)
-    SRC += platforms/avr/drivers/hd44780.c
     OPT_DEFS += -DHD44780_ENABLE
+    COMMON_VPATH += $(DRIVER_PATH)/lcd
+    SRC += hd44780.c
 endif
 
 VALID_OLED_DRIVER_TYPES := SSD1306 custom
@@ -705,7 +706,8 @@ endif
 
 ifeq ($(strip $(UNICODE_COMMON)), yes)
     OPT_DEFS += -DUNICODE_COMMON_ENABLE
-    SRC += $(QUANTUM_DIR)/process_keycode/process_unicode_common.c
+    SRC += $(QUANTUM_DIR)/process_keycode/process_unicode_common.c \
+           $(QUANTUM_DIR)/utf8.c
 endif
 
 MAGIC_ENABLE ?= yes

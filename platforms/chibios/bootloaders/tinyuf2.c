@@ -32,7 +32,7 @@ __IO uint32_t *DBGMCU_KEY = (uint32_t *)0xE0042000U + 0x0CU;
 __IO uint32_t *DBGMCU_CMD = (uint32_t *)0xE0042000U + 0x08U;
 #endif
 
-__attribute__((weak)) void bootloader_jump(void) {
+__attribute__((weak)) void mcu_reset(void) {
     DBL_TAP_REG = DBL_TAP_MAGIC;
 #ifndef GD32VF103
     NVIC_SystemReset();
