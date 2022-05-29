@@ -33,8 +33,8 @@
 #    define FLASH_CR_STRT FLASH_CTRL_START
 #    define FLASH_CR_LOCK FLASH_CTRL_LOCK
 #    define FLASH_CR_PG FLASH_CTRL_PG
-#    define FLASH_KEY1 0x45670123U
-#    define FLASH_KEY2 0xCDEF89ABU
+// #    define FLASH_KEY1 0x45670123U
+// #    define FLASH_KEY2 0xCDEF89ABU
 #endif
 
 
