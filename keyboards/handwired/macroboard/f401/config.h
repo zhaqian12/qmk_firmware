@@ -1,5 +1,5 @@
 /*
-Copyright 2022 Tommy Alatalo <@altosys>
+Copyright 2021 Michał Szczepaniak
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,11 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-/* Use I2C or Serial, not both */
-#define USE_I2C
-/* #define USE_SERIAL */
+#include "config_common.h"
 
-/* Select hand configuration */
-#define EE_HANDS
-/* #define MASTER_LEFT */
-/* #define MASTER_RIGHT */
+#define MATRIX_ROW_PINS { A4, A3, A2, A1, A0  }
+#define MATRIX_COL_PINS { A5, A6, A7, B0, B1, B10 }
