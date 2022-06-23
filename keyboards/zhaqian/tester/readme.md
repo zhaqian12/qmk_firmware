@@ -56,6 +56,12 @@ Make example for this keyboard (after setting up your build environment):
     make zhaqian/tester/l433:default
     make zhaqian/tester/l433:via
     ```
+    
+ * MCU:air32f103xB/xC
+    ```
+    make zhaqian/tester/air32f103:default
+    make zhaqian/tester/air32f103:via
+    ```
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
  
