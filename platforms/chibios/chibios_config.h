@@ -75,6 +75,16 @@
 #    endif
 #endif
 
+// AIR32 compatibility
+#if defined(MCU_AIR32)
+#    define CPU_CLOCK AIR32_SYSCLK
+
+#    if defined(AIR32F10x)
+#        define PAL_MODE_ALTERNATE_OPENDRAIN PAL_MODE_AIR32_ALTERNATE_OPENDRAIN
+#        define PAL_MODE_ALTERNATE_PUSHPULL PAL_MODE_AIR32_ALTERNATE_PUSHPULL
+#    endif
+#endif
+
 #if defined(GD32VF103)
 /* This chip has the same API as STM32F103, but uses different names for literally the same thing.
  * As of 4.7.2021 QMK is tailored to use STM32 defines/names, for compatibility sake
