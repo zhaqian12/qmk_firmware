@@ -34,25 +34,6 @@
 /*
  * HAL driver system settings.
  */
-// #define AIR32_NO_INIT                       FALSE
-// #define AIR32_HSI_ENABLED                   TRUE
-// #define AIR32_LSI_ENABLED                   FALSE
-// #define AIR32_HSE_ENABLED                   TRUE
-// #define AIR32_LSE_ENABLED                   FALSE
-// #define AIR32_SW                            AIR32_SW_PLL
-// #define AIR32_PLLSRC                        AIR32_PLLSRC_HSE
-// #define AIR32_PLLXTPRE                      AIR32_PLLXTPRE_DIV1
-// #define AIR32_PLLMUL_VALUE                  9
-// #define AIR32_HPRE                          AIR32_HPRE_DIV1
-// #define AIR32_PPRE1                         AIR32_PPRE1_DIV2
-// #define AIR32_PPRE2                         AIR32_PPRE2_DIV2
-// #define AIR32_ADCPRE                        AIR32_ADCPRE_DIV4
-// #define AIR32_USB_CLOCK_REQUIRED            TRUE
-// #define AIR32_USBPRE                        AIR32_USBPRE_DIV1P5
-// #define AIR32_MCOSEL                        AIR32_MCOSEL_NOCLOCK
-// #define AIR32_RTCSEL                        AIR32_RTCSEL_HSEDIV
-// #define AIR32_PVD_ENABLE                    FALSE
-// #define AIR32_PLS                           AIR32_PLS_LEV0
 #define AIR32_NO_INIT                       FALSE
 #define AIR32_HSI_ENABLED                   TRUE
 #define AIR32_LSI_ENABLED                   FALSE
