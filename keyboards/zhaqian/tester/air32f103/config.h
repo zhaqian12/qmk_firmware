@@ -49,6 +49,6 @@
 // #define DEBUG_EEPROM_OUTPUT
 #define DEBUG_MATRIX_SCAN_RATE
 
-#define SERIAL_DRIVER SD2
-#define SD1_TX_PIN A2
-#define SD1_RX_PIN A3
+// #define SERIAL_DRIVER SD2
+// #define SD1_TX_PIN A2
+// #define SD1_RX_PIN A3
