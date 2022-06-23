@@ -176,12 +176,12 @@ You can also alternate these defines to control these feature:
 ```
 
 ## UF2 Bootloader
-| Support Devices  |
-|---------- |
-|STM32F103x8|
-|STM32F103xB|
-|STM32F401xC|
-|STM32F411xE|
-|GD32VF103xB|
-
-
+| Support Devices  |  Description |
+|---------- | ---------- |
+|STM32F103x8||
+|STM32F103xB||
+|STM32F401xC||
+|STM32F411xE||
+|GD32VF103xB||
+|AIR32F103xB| No hardware DP pull-up required|
+|AIR32F103xC| No hardware DP pull-up required|

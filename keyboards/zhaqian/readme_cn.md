@@ -170,13 +170,15 @@ UNDERGLOW_RGB_MATRIX_ENABLE = yes
 
 ## UF2 Bootloader
 UF2 Bootloader储存了预编译好的MSC下载方式的引导程序,目前支持以下型号的主控.
-| Support Devices  |
-|---------- |
-|STM32F103x8|
-|STM32F103xB|
-|STM32F401xC|
-|STM32F411xE|
-|GD32VF103xB|
+| 支持的MCU  |  描述 |
+|---------- | ---------- |
+|STM32F103x8||
+|STM32F103xB||
+|STM32F401xC||
+|STM32F411xE||
+|GD32VF103xB||
+|AIR32F103xB| 无需硬件DP上拉|
+|AIR32F103xC| 无需硬件DP上拉|
 
 # TODO LIST
 
