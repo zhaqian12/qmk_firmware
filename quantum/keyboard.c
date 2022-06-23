@@ -33,6 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "sendchar.h"
 #include "eeconfig.h"
 #include "action_layer.h"
+// #include "../lib/RTT/SEGGER_RTT.h"
 #ifdef BACKLIGHT_ENABLE
 #    include "backlight.h"
 #endif
