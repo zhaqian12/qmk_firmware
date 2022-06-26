@@ -24,7 +24,7 @@
 #define MANUFACTURER    ZhaQian
 
 #define PRODUCT         剳牵的ZQ75V2pro
-#define DESCRIPTION     Keyboard
+
 
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 15

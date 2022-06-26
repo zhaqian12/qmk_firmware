@@ -22,7 +22,7 @@
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    zhaqian
 #define PRODUCT         gh60_example
-#define DESCRIPTION     Keyboard
+
 
 /* key matrix size */
 #define MATRIX_ROWS 5

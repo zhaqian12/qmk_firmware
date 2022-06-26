@@ -27,7 +27,7 @@
  * driver is enabled in halconf.h.
  *
  * IRQ priorities:
- * 7...0       Lowest...Highest.
+ * 3...0       Lowest...Highest.
  *
  */
 
@@ -59,11 +59,11 @@
  */
 #define AIR32_ADC_USE_ADC1                  FALSE
 #define AIR32_ADC_ADC1_DMA_PRIORITY         2
-#define AIR32_ADC_ADC1_IRQ_PRIORITY         6
+#define AIR32_ADC_ADC1_IRQ_PRIORITY         2
 
 #define AIR32_ADC_USE_ADC2                  FALSE
 #define AIR32_ADC_ADC2_DMA_PRIORITY         2
-#define AIR32_ADC_ADC2_IRQ_PRIORITY         6
+#define AIR32_ADC_ADC2_IRQ_PRIORITY         2
 
 /*
  * DAC driver system settings.
@@ -71,10 +71,10 @@
 #define AIR32_DAC_DUAL_MODE                 FALSE
 #define AIR32_DAC_USE_DAC1_CH1              FALSE
 #define AIR32_DAC_USE_DAC1_CH2              FALSE
-#define AIR32_DAC_DAC1_CH1_IRQ_PRIORITY     7
-#define AIR32_DAC_DAC1_CH2_IRQ_PRIORITY     7
-#define AIR32_DAC_DAC1_CH1_DMA_PRIORITY     7
-#define AIR32_DAC_DAC1_CH2_DMA_PRIORITY     7
+#define AIR32_DAC_DAC1_CH1_IRQ_PRIORITY     3
+#define AIR32_DAC_DAC1_CH2_IRQ_PRIORITY     3
+#define AIR32_DAC_DAC1_CH1_DMA_PRIORITY     3
+#define AIR32_DAC_DAC1_CH2_DMA_PRIORITY     3
 
 /*
  * CAN driver system settings.
@@ -85,13 +85,13 @@
 /*
  * EXT driver system settings.
  */
-#define AIR32_EXT_EXTI0_IRQ_PRIORITY        6
-#define AIR32_EXT_EXTI1_IRQ_PRIORITY        6
-#define AIR32_EXT_EXTI2_IRQ_PRIORITY        6
-#define AIR32_EXT_EXTI3_IRQ_PRIORITY        6
-#define AIR32_EXT_EXTI4_IRQ_PRIORITY        6
-#define AIR32_EXT_EXTI5_9_IRQ_PRIORITY      6
-#define AIR32_EXT_EXTI10_15_IRQ_PRIORITY    6
+#define AIR32_EXT_EXTI0_IRQ_PRIORITY        2
+#define AIR32_EXT_EXTI1_IRQ_PRIORITY        2
+#define AIR32_EXT_EXTI2_IRQ_PRIORITY        2
+#define AIR32_EXT_EXTI3_IRQ_PRIORITY        2
+#define AIR32_EXT_EXTI4_IRQ_PRIORITY        2
+#define AIR32_EXT_EXTI5_9_IRQ_PRIORITY      2
+#define AIR32_EXT_EXTI10_15_IRQ_PRIORITY    2
 
 /*
  * GPT driver system settings.
@@ -101,11 +101,11 @@
 #define AIR32_GPT_USE_TIM3                  FALSE
 #define AIR32_GPT_USE_TIM4                  FALSE
 #define AIR32_GPT_USE_TIM5                  FALSE
-#define AIR32_GPT_TIM1_IRQ_PRIORITY         7
-#define AIR32_GPT_TIM2_IRQ_PRIORITY         7
-#define AIR32_GPT_TIM3_IRQ_PRIORITY         7
-#define AIR32_GPT_TIM4_IRQ_PRIORITY         7
-#define AIR32_GPT_TIM5_IRQ_PRIORITY         7
+#define AIR32_GPT_TIM1_IRQ_PRIORITY         3
+#define AIR32_GPT_TIM2_IRQ_PRIORITY         3
+#define AIR32_GPT_TIM3_IRQ_PRIORITY         3
+#define AIR32_GPT_TIM4_IRQ_PRIORITY         3
+#define AIR32_GPT_TIM5_IRQ_PRIORITY         3
 
 /*
  * I2C driver system settings.
@@ -127,11 +127,11 @@
 #define AIR32_ICU_USE_TIM3                  FALSE
 #define AIR32_ICU_USE_TIM4                  FALSE
 #define AIR32_ICU_USE_TIM5                  FALSE
-#define AIR32_ICU_TIM1_IRQ_PRIORITY         7
-#define AIR32_ICU_TIM2_IRQ_PRIORITY         7
-#define AIR32_ICU_TIM3_IRQ_PRIORITY         7
-#define AIR32_ICU_TIM4_IRQ_PRIORITY         7
-#define AIR32_ICU_TIM5_IRQ_PRIORITY         7
+#define AIR32_ICU_TIM1_IRQ_PRIORITY         3
+#define AIR32_ICU_TIM2_IRQ_PRIORITY         3
+#define AIR32_ICU_TIM3_IRQ_PRIORITY         3
+#define AIR32_ICU_TIM4_IRQ_PRIORITY         3
+#define AIR32_ICU_TIM5_IRQ_PRIORITY         3
 
 /*
  * PWM driver system settings.
@@ -142,16 +142,16 @@
 #define AIR32_PWM_USE_TIM3                  FALSE
 #define AIR32_PWM_USE_TIM4                  FALSE
 #define AIR32_PWM_USE_TIM5                  FALSE
-#define AIR32_PWM_TIM1_IRQ_PRIORITY         7
-#define AIR32_PWM_TIM2_IRQ_PRIORITY         7
-#define AIR32_PWM_TIM3_IRQ_PRIORITY         7
-#define AIR32_PWM_TIM4_IRQ_PRIORITY         7
-#define AIR32_PWM_TIM5_IRQ_PRIORITY         7
+#define AIR32_PWM_TIM1_IRQ_PRIORITY         3
+#define AIR32_PWM_TIM2_IRQ_PRIORITY         3
+#define AIR32_PWM_TIM3_IRQ_PRIORITY         3
+#define AIR32_PWM_TIM4_IRQ_PRIORITY         3
+#define AIR32_PWM_TIM5_IRQ_PRIORITY         3
 
 /*
  * RTC driver system settings.
  */
-#define AIR32_RTC_IRQ_PRIORITY              7
+#define AIR32_RTC_IRQ_PRIORITY              3
 
 /*
  * SERIAL driver system settings.
@@ -159,9 +159,9 @@
 #define AIR32_SERIAL_USE_USART1             FALSE
 #define AIR32_SERIAL_USE_USART2             FALSE
 #define AIR32_SERIAL_USE_USART3             FALSE
-#define AIR32_SERIAL_USART1_PRIORITY        12
-#define AIR32_SERIAL_USART2_PRIORITY        12
-#define AIR32_SERIAL_USART3_PRIORITY        12
+#define AIR32_SERIAL_USART1_PRIORITY        6
+#define AIR32_SERIAL_USART2_PRIORITY        6
+#define AIR32_SERIAL_USART3_PRIORITY        6
 
 /*
  * SPI driver system settings.
@@ -172,15 +172,15 @@
 #define AIR32_SPI_SPI1_DMA_PRIORITY         1
 #define AIR32_SPI_SPI2_DMA_PRIORITY         1
 #define AIR32_SPI_SPI3_DMA_PRIORITY         1
-#define AIR32_SPI_SPI1_IRQ_PRIORITY         10
-#define AIR32_SPI_SPI2_IRQ_PRIORITY         10
-#define AIR32_SPI_SPI3_IRQ_PRIORITY         10
+#define AIR32_SPI_SPI1_IRQ_PRIORITY         6
+#define AIR32_SPI_SPI2_IRQ_PRIORITY         6
+#define AIR32_SPI_SPI3_IRQ_PRIORITY         6
 #define AIR32_SPI_DMA_ERROR_HOOK(spip)      osalSysHalt("DMA failure")
 
 /*
  * ST driver system settings.
  */
-#define AIR32_ST_IRQ_PRIORITY               8
+#define AIR32_ST_IRQ_PRIORITY               4
 #define AIR32_ST_USE_TIMER                  2
 
 /*
@@ -189,9 +189,9 @@
 #define AIR32_UART_USE_USART1               FALSE
 #define AIR32_UART_USE_USART2               FALSE
 #define AIR32_UART_USE_USART3               FALSE
-#define AIR32_UART_USART1_IRQ_PRIORITY      12
-#define AIR32_UART_USART2_IRQ_PRIORITY      12
-#define AIR32_UART_USART3_IRQ_PRIORITY      12
+#define AIR32_UART_USART1_IRQ_PRIORITY      6
+#define AIR32_UART_USART2_IRQ_PRIORITY      6
+#define AIR32_UART_USART3_IRQ_PRIORITY      6
 #define AIR32_UART_USART1_DMA_PRIORITY      0
 #define AIR32_UART_USART2_DMA_PRIORITY      0
 #define AIR32_UART_USART3_DMA_PRIORITY      0
@@ -202,8 +202,8 @@
  */
 #define AIR32_USB_USE_USB1                  TRUE
 #define AIR32_USB_LOW_POWER_ON_SUSPEND      FALSE
-#define AIR32_USB_USB1_HP_IRQ_PRIORITY      13
-#define AIR32_USB_USB1_LP_IRQ_PRIORITY      14
+#define AIR32_USB_USB1_HP_IRQ_PRIORITY      5
+#define AIR32_USB_USB1_LP_IRQ_PRIORITY      6
 
 
 #endif /* MCUCONF_H */

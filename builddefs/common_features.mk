@@ -188,7 +188,7 @@ else
     ifeq ($(PLATFORM),AVR)
       # Automatically provided by avr-libc, nothing required
     else ifeq ($(PLATFORM),CHIBIOS)
-      ifneq ($(filter STM32F3xx_% STM32F1xx_% STM32F4xx_% STM32L4xx_% GD32VF103_% CM32M101A_% AIR32F103_% %_STM32F401xC %_STM32F401xE %_STM32F405xG %_STM32F411xE %_STM32F072xB %_STM32F042x6 %_GD32VF103xB %_GD32VF103x8 ,$(MCU_SERIES)_$(MCU_LDSCRIPT)),)
+      ifneq ($(filter STM32F3xx_% STM32F1xx_% STM32F4xx_% STM32L4xx_% GD32VF103_% CM32M101A_% AIR32F10x_% %_STM32F401xC %_STM32F401xE %_STM32F405xG %_STM32F411xE %_STM32F072xB %_STM32F042x6 %_GD32VF103xB %_GD32VF103x8 ,$(MCU_SERIES)_$(MCU_LDSCRIPT)),)
         # Emulated EEPROM
         OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_STM32_FLASH_EMULATED
         COMMON_VPATH += $(DRIVER_PATH)/eeprom
@@ -517,12 +517,13 @@ ifeq ($(strip $(WS2812_DRIVER_REQUIRED)), yes)
     ifeq ($(strip $(WS2812_DRIVER)), bitbang)
         SRC += ws2812.c
     else
-        SRC += ws2812_$(strip $(WS2812_DRIVER)).c
+        SRC += ws2812_$(strip $(WS2812_DRIVER)).c  
 
         ifeq ($(strip $(PLATFORM)), CHIBIOS)
             ifeq ($(strip $(WS2812_DRIVER)), pwm)
                 OPT_DEFS += -DSTM32_DMA_REQUIRED=TRUE
 				OPT_DEFS += -DGD32_DMA_REQUIRED=TRUE
+                OPT_DEFS += -DAIR32_DMA_REQUIRED=TRUE
             endif
         endif
     endif

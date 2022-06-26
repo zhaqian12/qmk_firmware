@@ -21,7 +21,7 @@
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    ZhaQian
 #define PRODUCT         zq50
-#define DESCRIPTION     Keyboard
+
 
 #define MATRIX_ROWS 4
 #define MATRIX_COLS 14

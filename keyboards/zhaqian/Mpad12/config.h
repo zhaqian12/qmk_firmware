@@ -24,7 +24,6 @@
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    ZhaQian
 #define PRODUCT         Mpad12
-#define DESCRIPTION     multifunction pad12
 
 /* key matrix size */
 #define MATRIX_ROWS 4

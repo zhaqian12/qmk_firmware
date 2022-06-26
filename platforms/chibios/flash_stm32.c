@@ -19,7 +19,7 @@
 #include <hal.h>
 #include "flash_stm32.h"
 
-#if defined(STM32F1XX) || defined(AIR32F10x)
+#if defined(STM32F1XX) 
 #    define FLASH_SR_WRPERR FLASH_SR_WRPRTERR
 #endif
 
@@ -64,6 +64,12 @@ static uint8_t ADDR2PAGE(uint32_t Page_Address) {
     uint8_t page = (uint8_t)((uint32_t)(Page_Address - FLASH_BASE) / 0x800);
     return page;
 }
+#endif
+
+#if defined(AIR32F10x)
+#    define FLASH_SR_WRPERR FLASH_SR_WRPRTERR
+#    define FLASH_KEY1 0x45670123U
+#    define FLASH_KEY2 0xCDEF89ABU
 #endif
 
 /* Delay definition */
