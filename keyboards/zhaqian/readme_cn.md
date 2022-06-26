@@ -40,6 +40,7 @@
 | s80	        | 0x00AA    | 0xAA14     | Hotswap  | ST stm32f103/f103 | RGB                                          |
 | sp67	        | 0x00AA    | 0xAA15     | Hotswap  | ST stm32f103/f103 | ENCODER                                      |
 | zq50	        | 0x00AA    | 0xAA16     | Hotswap  | ST stm32f103/f103 | RGB, UGRGB, ENCODER                          |
+| Jane_v2_ce_slot	| 0x00AA  | 0xAA17     | Hotswap  | Atmel atmega32u4  |                          |
 | Mpad12        | 0x00AA    | 0xAAAA     | Hotswap  | Atmel atmega32u4  | RGB, UGRGB, JOYSTICK, ENCODER, OLED          |
 | split69       | 0x00AA    | 0xAAAB     | Solder   | Atmel atmega32u4  | SPLIT, UGRGB, OLED, ENCODER                  |
 | GH60        | 0xFEED    | 0x6060    | Hotswap  | ST stm32f103/f103 | RGB          |
@@ -170,13 +171,15 @@ UNDERGLOW_RGB_MATRIX_ENABLE = yes
 
 ## UF2 Bootloader
 UF2 Bootloader储存了预编译好的MSC下载方式的引导程序,目前支持以下型号的主控.
-| Support Devices  |
-|---------- |
-|STM32F103x8|
-|STM32F103xB|
-|STM32F401xC|
-|STM32F411xE|
-|GD32VF103xB|
+| 支持的MCU  |  描述 |
+|---------- | ---------- |
+|STM32F103x8||
+|STM32F103xB||
+|STM32F401xC||
+|STM32F411xE||
+|GD32VF103xB||
+|AIR32F103xB| 无需硬件DP上拉|
+|AIR32F103xC| 无需硬件DP上拉|
 
 # TODO LIST
 

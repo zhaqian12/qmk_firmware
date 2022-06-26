@@ -23,7 +23,7 @@
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    ZhaQian
 #define PRODUCT         Tester
-#define DESCRIPTION     Keyboard
+
 
 #define MATRIX_ROWS 3
 #define MATRIX_COLS 5

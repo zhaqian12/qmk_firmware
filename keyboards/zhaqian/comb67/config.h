@@ -23,7 +23,6 @@
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    ZhaQian
 #define PRODUCT         Comb67
-#define DESCRIPTION     Keyboard
 
 #define MATRIX_ROWS 5
 #define MATRIX_COLS 15

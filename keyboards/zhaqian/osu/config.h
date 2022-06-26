@@ -23,7 +23,7 @@
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    ZhaQian
 #define PRODUCT         osu
-#define DESCRIPTION     Keyboard
+
 
 #define DIRECT_PINS { \
     {B12, B13, B14, A15, B3, B4, B5}, \

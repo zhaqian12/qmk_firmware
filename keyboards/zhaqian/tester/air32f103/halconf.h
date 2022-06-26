@@ -16,6 +16,6 @@
 
 #pragma once
 
-#define CH_CFG_ST_TIMEDELTA 0
-
-#include_next <chconf.h>
+#define HAL_USE_PWM    TRUE
+// #define HAL_USE_SERIAL TRUE
+#include_next <halconf.h>

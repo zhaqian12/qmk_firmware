@@ -1,4 +1,4 @@
-/* Copyright 2020 QMK
+/* Copyright 2022 ZhaQian
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,8 +14,5 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include "Jane_v2_ce_slot.h"
 
-#define CH_CFG_ST_TIMEDELTA 0
-
-#include_next <chconf.h>

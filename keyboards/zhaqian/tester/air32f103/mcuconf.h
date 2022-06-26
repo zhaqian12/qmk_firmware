@@ -16,6 +16,10 @@
 
 #pragma once
 
-#define CH_CFG_ST_TIMEDELTA 0
+#include_next <mcuconf.h>
 
-#include_next <chconf.h>
+#undef AIR32_PWM_USE_TIM1
+#define AIR32_PWM_USE_TIM1 TRUE
+
+// #undef AIR32_SERIAL_USE_USART2
+// #define AIR32_SERIAL_USE_USART2 TRUE
