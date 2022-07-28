@@ -1,8 +1,0 @@
-# MCU name
-MCU   = GD32VF103
-
-# BOOTLOADER = gd32v-dfu
-BOOTLOADER = tinyuf2
-
-KEYBOARD_SHARED_EP = yes
-LTO_ENABLE = yes
