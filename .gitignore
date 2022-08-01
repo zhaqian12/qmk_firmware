@@ -5,6 +5,10 @@
 .DS_Store
 ._*
 
+# Merge files
+*.orig
+*.rej
+
 # Build artifacts
 .clang_complete
 .build/
@@ -36,17 +40,11 @@ quantum/version.h
 !uf2boot_air32f103xC_8MHz.bin
 
 # Old-style QMK Makefiles
-/tmk_core/*
-/keyboards/*/Makefile
-/keyboards/*/*/Makefile
-/keyboards/*/*/*/Makefile
-/keyboards/*/*/*/*/Makefile
-/keyboards/*/*/*/*/*/Makefile
-/keyboards/*/keymaps/Makefile
-/keyboards/*/*/keymaps/Makefile
-/keyboards/*/*/*/keymaps/Makefile
-/keyboards/*/*/*/*/keymaps/Makefile
-/keyboards/*/*/*/*/*/keymaps/Makefile
+/keyboards/**/Makefile
+
+# kbfirmware....
+/keyboards/**/kb.h
+/keyboards/**/kb.c
 
 # Eclipse/PyCharm/Other IDE Settings
 *.iml
