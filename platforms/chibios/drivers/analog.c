@@ -37,7 +37,7 @@
 // Otherwise assume V3
 #if defined(STM32F0XX) || defined(STM32L0XX)
 #    define USE_ADCV1
-#elif defined(STM32F1XX) || defined(STM32F2XX) || defined(STM32F4XX) || defined(GD32VF103)
+#elif defined(STM32F1XX) || defined(STM32F2XX) || defined(STM32F4XX) || defined(GD32VF103) || defined(AIR32F10x)
 #    define USE_ADCV2
 #endif
 
@@ -74,7 +74,7 @@
 
 /* User configurable ADC options */
 #ifndef ADC_COUNT
-#    if defined(STM32F0XX) || defined(STM32F1XX) || defined(STM32F4XX) || defined(GD32VF103)
+#    if defined(STM32F0XX) || defined(STM32F1XX) || defined(STM32F4XX) || defined(GD32VF103) || defined(AIR32F10x)
 #        define ADC_COUNT 1
 #    elif defined(STM32F3XX)
 #        define ADC_COUNT 4
@@ -219,7 +219,7 @@ __attribute__((weak)) adc_mux pinToMux(pin_t pin) {
         case F9:  return TO_MUX( ADC_CHANNEL_IN7,  2 );
         case F10: return TO_MUX( ADC_CHANNEL_IN8,  2 );
 #    endif
-#elif defined(STM32F1XX) || defined(GD32VF103)
+#elif defined(STM32F1XX) || defined(GD32VF103) || defined(CM32M101A)
         case A0:  return TO_MUX( ADC_CHANNEL_IN0,  0 );
         case A1:  return TO_MUX( ADC_CHANNEL_IN1,  0 );
         case A2:  return TO_MUX( ADC_CHANNEL_IN2,  0 );

@@ -188,12 +188,16 @@ else
     ifeq ($(PLATFORM),AVR)
       # Automatically provided by avr-libc, nothing required
     else ifeq ($(PLATFORM),CHIBIOS)
-      ifneq ($(filter STM32F3xx_% STM32F1xx_% %_STM32F401xC %_STM32F401xE %_STM32F405xG %_STM32F411xE %_STM32F072xB %_STM32F042x6 %_GD32VF103xB %_GD32VF103x8, $(MCU_SERIES)_$(MCU_LDSCRIPT)),)
+      ifneq ($(filter STM32F3xx_% STM32F1xx_% STM32F4xx_% STM32L4xx_% GD32VF103_% CM32M101A_% AIR32F10x_% %_STM32F401xC %_STM32F401xE %_STM32F405xG %_STM32F411xE %_STM32F072xB %_STM32F042x6 %_GD32VF103xB %_GD32VF103x8 ,$(MCU_SERIES)_$(MCU_LDSCRIPT)),)
         # Emulated EEPROM
         OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_STM32_FLASH_EMULATED
         COMMON_VPATH += $(DRIVER_PATH)/eeprom
         SRC += eeprom_driver.c
-        SRC += $(PLATFORM_COMMON_DIR)/eeprom_stm32.c
+		ifneq ($(filter $(MCU_SERIES),STM32L4xx),)
+		  SRC += $(PLATFORM_COMMON_DIR)/eeprom_stm32_l4.c
+		else
+          SRC += $(PLATFORM_COMMON_DIR)/eeprom_stm32.c
+		endif
         SRC += $(PLATFORM_COMMON_DIR)/flash_stm32.c
       else ifneq ($(filter $(MCU_SERIES),STM32L0xx STM32L1xx),)
         # True EEPROM on STM32L0xx, L1xx
@@ -513,11 +517,13 @@ ifeq ($(strip $(WS2812_DRIVER_REQUIRED)), yes)
     ifeq ($(strip $(WS2812_DRIVER)), bitbang)
         SRC += ws2812.c
     else
-        SRC += ws2812_$(strip $(WS2812_DRIVER)).c
+        SRC += ws2812_$(strip $(WS2812_DRIVER)).c  
 
         ifeq ($(strip $(PLATFORM)), CHIBIOS)
             ifeq ($(strip $(WS2812_DRIVER)), pwm)
                 OPT_DEFS += -DSTM32_DMA_REQUIRED=TRUE
+				OPT_DEFS += -DGD32_DMA_REQUIRED=TRUE
+                OPT_DEFS += -DAIR32_DMA_REQUIRED=TRUE
             endif
         endif
     endif
@@ -820,4 +826,73 @@ ifeq ($(strip $(BLUETOOTH_ENABLE)), yes)
         SRC += $(DRIVER_PATH)/bluetooth/rn42.c
         QUANTUM_LIB_SRC += uart.c
     endif
+endif
+
+ifeq ($(strip $(ALT_TAB_MARCO_ENABLE)), yes)
+    SRC += $(QUANTUM_DIR)/alt_tab_marco.c
+    OPT_DEFS += -DALT_TAB_MARCO_ENABLE
+endif
+
+ifeq ($(strip $(ENCODER_TRIGGER_ENABLE)), yes)
+    ifeq ($(strip $(ENCODER_ENABLE)), no)
+        $(error ENCODER_TRIGGER_ENABLE requires ENCODER_ENABLE, either disable ENCODER_TRIGGER explicitly or enable ENCODER)
+    endif
+    SRC += $(QUANTUM_DIR)/encoder_trigger.c
+    OPT_DEFS += -DENCODER_TRIGGER_ENABLE
+endif
+
+ifeq ($(strip $(JOYSTICK_TRIGGER_ENABLE)), yes)
+    SRC += $(QUANTUM_DIR)/joystick_trigger.c
+	SRC += analog.c
+    OPT_DEFS += -DJOYSTICK_TRIGGER_ENABLE
+endif
+
+ifeq ($(strip $(OPENRGB_ENABLE)), yes)
+	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
+        $(error OPENRGB_ENABLE requires RGB_MATRIX_ENABLE, either disable OPENRGB_ENABLE explicitly or enable RGB_MATRIX)
+    endif
+    RAW_ENABLE := yes
+    SRC += $(QUANTUM_DIR)/rgb_matrix/openrgb.c
+    OPT_DEFS += -DOPENRGB_ENABLE
+	OPT_DEFS += -DOPENRGB_PROTOCOL_ENABLE
+endif
+
+ifeq ($(strip $(RADIAL_CONTROLLER_ENABLE)), yes)
+    ifeq ($(strip $(EXTRAKEY_ENABLE)), no)
+        $(error RADIAL_CONTROLLER_ENABLE requires EXTRAKEY_ENABLE, either disable RADIAL_CONTROLLER explicitly or enable EXTRAKEY)
+    endif
+    SRC += $(QUANTUM_DIR)/radial_controller.c
+    OPT_DEFS += -DRADIAL_CONTROLLER_ENABLE
+endif
+
+ifeq ($(strip $(RGB_MATRIX_CONTROL_ENABLE)), yes)
+	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
+        $(error RGB_MATRIX_CONTROL_ENABLE requires RGB_MATRIX_ENABLE, either disable RGB_MATRIX_CONTROL explicitly or enable RGB_MATRIX)
+    endif
+    SRC += $(QUANTUM_DIR)/rgb_matrix/rgb_matrix_control.c
+	OPT_DEFS += -DRGB_MATRIX_CONTROL_ENABLE
+endif
+
+ifeq ($(strip $(UNDERGLOW_RGB_MATRIX_ENABLE)), yes)
+	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
+        $(error UNDERGLOW_RGB_MATRIX_ENABLE requires RGB_MATRIX_ENABLE, either disable UNDERGLOW_RGB_MATRIX explicitly or enable RGB_MATRIX)
+    endif
+    SRC += $(QUANTUM_DIR)/rgb_matrix/underglow_rgb_matrix.c
+    OPT_DEFS += -DUNDERGLOW_RGB_MATRIX_ENABLE
+endif
+
+ifeq ($(strip $(VIA_CUSTOM_KEYCODE_ENABLE)), yes)
+	ifeq ($(strip $(VIA_ENABLE)), no)
+        $(error VIA_CUSTOM_KEYCODE_ENABLE requires VIA_ENABLE, either disable VIA_CUSTOM_KEYCODE explicitly or enable VIA)
+    endif
+    SRC += $(QUANTUM_DIR)/via_custom_keycode.c
+	OPT_DEFS += -DVIA_CUSTOM_KEYCODE_ENABLE
+endif
+
+ifeq ($(strip $(RGB_INDICATORS_ENABLE)), yes)
+	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
+        $(error RGB_INDICATORS_ENABLE requires RGB_MATRIX_ENABLE, either disable RGB_INDICATORS explicitly or enable RGB_MATRIX)
+    endif
+    SRC += $(QUANTUM_DIR)/rgb_matrix/rgb_indicators.c
+	OPT_DEFS += -DRGB_INDICATORS_ENABLE
 endif
