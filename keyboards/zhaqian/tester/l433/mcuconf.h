@@ -1,4 +1,4 @@
-/* Copyright 2022 ZhaQian
+/* Copyright 2020 QMK
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,25 +16,10 @@
 
 #pragma once
 
-#define MCU_STM32
+#include_next <mcuconf.h>
 
-/* FLASH redefines */
-#if defined(EEPROM_ENABLE)
-#    define SR STS
-#    define FLASH_SR_BSY FLASH_STS_BUSY
-#    define FLASH_SR_PGERR FLASH_STS_PGERR
-#    define FLASH_SR_EOP FLASH_STS_EOP
-#    define FLASH_SR_WRPRTERR FLASH_STS_WRPERR
-#    define FLASH_SR_WRPERR FLASH_STS_WRPERR
-#    define FLASH_OBR_OPTERR FLASH_OB_OBERR
-#    define AR ADD
-#    define CR CTRL
-#    define FLASH_CR_PER FLASH_CTRL_PER
-#    define FLASH_CR_STRT FLASH_CTRL_START
-#    define FLASH_CR_LOCK FLASH_CTRL_LOCK
-#    define FLASH_CR_PG FLASH_CTRL_PG
-// #    define FLASH_KEY1 0x45670123U
-// #    define FLASH_KEY2 0xCDEF89ABU
-#endif
+// #undef STM32_PWM_USE_TIM2
+// #define STM32_PWM_USE_TIM2 TRUE
 
-
+// #undef STM32_ST_USE_TIMER
+// #define STM32_ST_USE_TIMER 3
