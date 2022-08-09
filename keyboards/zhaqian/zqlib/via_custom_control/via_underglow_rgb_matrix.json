@@ -5,6 +5,7 @@
         "label": "Underglow",
         "content": [
           {
+            "showIf": "{id_underglow_rgb_matrix_effect} != 1",
             "label": "Brightness",
             "type": "range",
             "options": [0, 255],
@@ -18,8 +19,8 @@
               ["Sync", 1],
               ["Breathing", 2],
               ["Cycle Breathing", 3],
-              ["Cycle Band Val", 4], 
-              ["Cycle Pinwheel Val", 5],
+              ["Cycle Band Val.", 4], 
+              ["Cycle Pinwheel Val.", 5],
               ["Cycle All", 6],
               ["Cycle Left/Right", 7],
               ["Cycle Up/Down", 8],
