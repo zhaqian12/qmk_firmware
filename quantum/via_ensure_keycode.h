@@ -338,8 +338,4 @@ _Static_assert(USER12                 == 0x5F8C, "");
 _Static_assert(USER13                 == 0x5F8D, "");
 _Static_assert(USER14                 == 0x5F8E, "");
 _Static_assert(USER15                 == 0x5F8F, "");
-_Static_assert(USER16                 == 0x5F90, "");
-_Static_assert(USER17                 == 0x5F91, "");
-_Static_assert(USER18                 == 0x5F92, "");
-_Static_assert(USER19                 == 0x5F93, "");
 #endif
