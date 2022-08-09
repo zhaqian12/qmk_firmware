@@ -270,8 +270,16 @@ extern layer_state_t layer_state;
 #   include "via_custom_keycode.h"
 #endif
 
+#ifdef VIA_CUSTOM_CONTROL_ENABLE
+#   include "via_custom_control.h"
+#endif
+
 #ifdef RGB_INDICATORS_ENABLE
 #   include "rgb_indicators.h"
+#endif
+
+#ifdef SIGNALRGB_ENABLE
+#    include "signalrgb.h"
 #endif
 
 // For tri-layer

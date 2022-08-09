@@ -26,11 +26,6 @@ static const led_point_t ug_rgb_matrix_center = {112, 32};
 static const led_point_t ug_rgb_matrix_center = RGB_MATRIX_CENTER;
 #endif
 
-#if !defined(UNDERGLOW_RGB_MATRIX_MAXIMUM_BRIGHTNESS) || UNDERGLOW_RGB_MATRIX_MAXIMUM_BRIGHTNESS > UINT8_MAX
-#undef UNDERGLOW_RGB_MATRIX_MAXIMUM_BRIGHTNESS
-#define UNDERGLOW_RGB_MATRIX_MAXIMUM_BRIGHTNESS RGB_MATRIX_MAXIMUM_BRIGHTNESS
-#endif
-
 #if !defined(UNDERGLOW_RGB_MATRIX_HUE_STEP)
 #define UNDERGLOW_RGB_MATRIX_HUE_STEP 8
 #endif
@@ -175,6 +170,8 @@ void underglow_rgb_matrix_task(void) {
 #endif
 
     switch (ug_rgb_matrix_effect_index[underglow_rgb_matrix_config.mode]) {
+        case 0:
+        case 1: break;
 #ifdef UG_RGB_MATRIX_BREATHING
         case 2: Breathing(); break;
 #endif
@@ -252,80 +249,102 @@ void underglow_rgb_mode_step_reverse(void) {
 
 #ifndef UNDERGLOW_RGB_MATRIX_API_DISABLE
 
+uint8_t underglow_rgb_matrix_get_mode_num(void) {
+    return ug_rgb_matrix_effect_num;
+}
+
 uint8_t underglow_rgb_matrix_get_mode(void) {
     return underglow_rgb_matrix_config.mode;
 }
 
-HSV undeglow_rgb_matrix_get_hsv(void) {
+HSV underglow_rgb_matrix_get_hsv(void) {
     return underglow_rgb_matrix_config.hsv;
+}
+
+uint8_t underglow_rgb_matrix_get_hue(void) {
+    return underglow_rgb_matrix_config.hsv.h;
+}
+
+uint8_t underglow_rgb_matrix_get_sat(void) {
+    return underglow_rgb_matrix_config.hsv.s;
+}
+
+uint8_t underglow_rgb_matrix_get_val(void) {
+    return underglow_rgb_matrix_config.hsv.v;
 }
 
 uint8_t underglow_rgb_matrix_get_speed(void) {
     return underglow_rgb_matrix_config.speed;
 }
 
-void underglow_rgb_matrix_set_mode(uint8_t mode) {
+void underglow_rgb_matrix_set_mode(uint8_t mode, bool update) {
     underglow_rgb_matrix_config.mode = mode;
-    eeconfig_update_underglow_rgb_matrix();
+    if (update)
+        eeconfig_update_underglow_rgb_matrix();
 }
 
-void underglow_rgb_matrix_set_hsv(uint8_t hue, uint8_t sat, uint8_t val) {
+void underglow_rgb_matrix_set_hsv(uint8_t hue, uint8_t sat, uint8_t val, bool update) {
     underglow_rgb_matrix_config.hsv.h = hue;
     underglow_rgb_matrix_config.hsv.s = sat;
     underglow_rgb_matrix_config.hsv.v = val;
-    eeconfig_update_underglow_rgb_matrix();
+    if (update)
+        eeconfig_update_underglow_rgb_matrix();
 }
 
-void underglow_rgb_matrix_set_hue(uint8_t hue) {
+void underglow_rgb_matrix_set_hue(uint8_t hue, bool update) {
     underglow_rgb_matrix_config.hsv.h = hue;
-    eeconfig_update_underglow_rgb_matrix();
+    if (update)
+        eeconfig_update_underglow_rgb_matrix();
 }
 
-void underglow_rgb_matrix_set_sat(uint8_t sat) {
+void underglow_rgb_matrix_set_sat(uint8_t sat, bool update) {
     underglow_rgb_matrix_config.hsv.s = sat;
-    eeconfig_update_underglow_rgb_matrix();
+    if (update)
+        eeconfig_update_underglow_rgb_matrix();
 }
 
-void underglow_rgb_matrix_set_val(uint8_t val) {
+void underglow_rgb_matrix_set_val(uint8_t val, bool update) {
     underglow_rgb_matrix_config.hsv.v = val;
-    eeconfig_update_underglow_rgb_matrix();
+    if (update)
+        eeconfig_update_underglow_rgb_matrix();
 }
 
-void underglow_rgb_matrix_set_speed(uint8_t speed) {
+void underglow_rgb_matrix_set_speed(uint8_t speed, bool update) {
     underglow_rgb_matrix_config.speed = speed;
-    eeconfig_update_underglow_rgb_matrix();
+    if (update)
+        eeconfig_update_underglow_rgb_matrix();
 }
 
 void underglow_rgb_matrix_increase_hue(void) {
-    underglow_rgb_matrix_set_hue(underglow_rgb_matrix_config.hsv.h + UNDERGLOW_RGB_MATRIX_HUE_STEP);
+    underglow_rgb_matrix_set_hue(underglow_rgb_matrix_config.hsv.h + UNDERGLOW_RGB_MATRIX_HUE_STEP, true);
 }
 
 void underglow_rgb_matrix_decrease_hue(void) {
-    underglow_rgb_matrix_set_hue(underglow_rgb_matrix_config.hsv.h - UNDERGLOW_RGB_MATRIX_HUE_STEP);
+    underglow_rgb_matrix_set_hue(underglow_rgb_matrix_config.hsv.h - UNDERGLOW_RGB_MATRIX_HUE_STEP, true);
 }
 
 void underglow_rgb_matrix_increase_sat(void) {
-    underglow_rgb_matrix_set_sat(qadd8(underglow_rgb_matrix_config.hsv.s, UNDERGLOW_RGB_MATRIX_SAT_STEP));
+    underglow_rgb_matrix_set_sat(qadd8(underglow_rgb_matrix_config.hsv.s, UNDERGLOW_RGB_MATRIX_SAT_STEP), true);
 }
 
 void underglow_rgb_matrix_decrease_sat(void) {
-    underglow_rgb_matrix_set_sat(qsub8(underglow_rgb_matrix_config.hsv.s, UNDERGLOW_RGB_MATRIX_SAT_STEP));
+    underglow_rgb_matrix_set_sat(qsub8(underglow_rgb_matrix_config.hsv.s, UNDERGLOW_RGB_MATRIX_SAT_STEP), true);
 }
 
 void underglow_rgb_matrix_increase_val(void) {
-    underglow_rgb_matrix_set_val(qadd8(underglow_rgb_matrix_config.hsv.v, UNDERGLOW_RGB_MATRIX_VAL_STEP));
+    underglow_rgb_matrix_set_val(qadd8(underglow_rgb_matrix_config.hsv.v, UNDERGLOW_RGB_MATRIX_VAL_STEP), true);
 }
 
 void underglow_rgb_matrix_decrease_val(void) {
-    underglow_rgb_matrix_set_val(qsub8(underglow_rgb_matrix_config.hsv.v, UNDERGLOW_RGB_MATRIX_VAL_STEP));
+    underglow_rgb_matrix_set_val(qsub8(underglow_rgb_matrix_config.hsv.v, UNDERGLOW_RGB_MATRIX_VAL_STEP), true);
 }
 
 void underglow_rgb_matrix_increase_speed(void) {
-    underglow_rgb_matrix_set_speed(qadd8(underglow_rgb_matrix_config.speed, UNDERGLOW_RGB_MATRIX_SPD_STEP));
+    underglow_rgb_matrix_set_speed(qadd8(underglow_rgb_matrix_config.speed, UNDERGLOW_RGB_MATRIX_SPD_STEP), true);
 }
 
 void underglow_rgb_matrix_decrease_speed(void) {
-    underglow_rgb_matrix_set_speed(qsub8(underglow_rgb_matrix_config.speed, UNDERGLOW_RGB_MATRIX_SPD_STEP));
+    underglow_rgb_matrix_set_speed(qsub8(underglow_rgb_matrix_config.speed, UNDERGLOW_RGB_MATRIX_SPD_STEP), true);
 }
 
 #endif

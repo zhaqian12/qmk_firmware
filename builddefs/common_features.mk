@@ -851,10 +851,8 @@ ifeq ($(strip $(OPENRGB_ENABLE)), yes)
 	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
         $(error OPENRGB_ENABLE requires RGB_MATRIX_ENABLE, either disable OPENRGB_ENABLE explicitly or enable RGB_MATRIX)
     endif
-    RAW_ENABLE := yes
     SRC += $(QUANTUM_DIR)/rgb_matrix/openrgb.c
-    OPT_DEFS += -DOPENRGB_ENABLE
-	OPT_DEFS += -DOPENRGB_PROTOCOL_ENABLE
+    OPT_DEFS += -DOPENRGB_ENABLE -DOPENRGB_PROTOCOL_ENABLE
 endif
 
 ifeq ($(strip $(RADIAL_CONTROLLER_ENABLE)), yes)
@@ -889,10 +887,26 @@ ifeq ($(strip $(VIA_CUSTOM_KEYCODE_ENABLE)), yes)
 	OPT_DEFS += -DVIA_CUSTOM_KEYCODE_ENABLE
 endif
 
+ifeq ($(strip $(VIA_CUSTOM_CONTROL_ENABLE)), yes)
+	ifeq ($(strip $(VIA_ENABLE)), no)
+        $(error VIA_CUSTOM_CONTROL_ENABLE requires VIA_ENABLE, either disable VIA_CUSTOM_CONTROL explicitly or enable VIA)
+    endif
+    SRC += $(QUANTUM_DIR)/via_custom_control.c
+	OPT_DEFS += -DVIA_CUSTOM_CONTROL_ENABLE
+endif
+
 ifeq ($(strip $(RGB_INDICATORS_ENABLE)), yes)
 	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
         $(error RGB_INDICATORS_ENABLE requires RGB_MATRIX_ENABLE, either disable RGB_INDICATORS explicitly or enable RGB_MATRIX)
     endif
     SRC += $(QUANTUM_DIR)/rgb_matrix/rgb_indicators.c
 	OPT_DEFS += -DRGB_INDICATORS_ENABLE
+endif
+
+ifeq ($(strip $(SIGNALRGB_ENABLE)), yes)
+	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
+        $(error SIGNALRGB_ENABLE requires RGB_MATRIX_ENABLE, either disable SIGNALRGB_ENABLE explicitly or enable RGB_MATRIX)
+    endif
+    SRC += $(QUANTUM_DIR)/rgb_matrix/signalrgb.c
+    OPT_DEFS += -DSIGNALRGB_ENABLE -DOPENRGB_PROTOCOL_ENABLE
 endif

@@ -86,6 +86,10 @@ extern keymap_config_t keymap_config;
 #    include "raw_hid.h"
 #endif
 
+#if (defined(OPENRGB_PROTOCOL_ENABLE) && !defined(RAW_ENABLE))
+#    include "raw_hid.h"
+#endif
+
 #ifdef JOYSTICK_ENABLE
 #    include "joystick.h"
 #endif
