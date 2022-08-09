@@ -104,4 +104,7 @@ compile_commands.json
 
 # VIA(L) json files that don't belong in QMK repo
 via*.json
-
+!via_rgb_control_setting.json
+!via_rgb_matrix_no_openrgb.json
+!via_rgb_matrix_with_openrgb.json
+!via_underglow_rgb_matrix.json
