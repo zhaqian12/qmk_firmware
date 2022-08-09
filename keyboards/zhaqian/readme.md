@@ -62,9 +62,9 @@
  - RGB Matrix Control
  - Underglow RGB Matrix
  - Via Custom Keycode
+ - Via Custom Control
  - Custom RGB Matrix Effects
  - UF2 Bootloader
- - ST7789 Driver
 
 ## Alt Tab Marco
 This feature integrates the toggle window function in window system.It is supported by adding this to your `rules.mk`:
