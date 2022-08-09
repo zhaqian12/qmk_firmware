@@ -1,4 +1,4 @@
-/* Copyright 2022 ZhaQian
+/* Copyright 2022 zhaqian
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,25 +16,20 @@
 
 #pragma once
 
-#define MCU_STM32
+#include "quantum.h"
 
-/* FLASH redefines */
-#if defined(EEPROM_ENABLE)
-#    define SR STS
-#    define FLASH_SR_BSY FLASH_STS_BUSY
-#    define FLASH_SR_PGERR FLASH_STS_PGERR
-#    define FLASH_SR_EOP FLASH_STS_EOP
-#    define FLASH_SR_WRPRTERR FLASH_STS_WRPERR
-#    define FLASH_SR_WRPERR FLASH_STS_WRPERR
-#    define FLASH_OBR_OPTERR FLASH_OB_OBERR
-#    define AR ADD
-#    define CR CTRL
-#    define FLASH_CR_PER FLASH_CTRL_PER
-#    define FLASH_CR_STRT FLASH_CTRL_START
-#    define FLASH_CR_LOCK FLASH_CTRL_LOCK
-#    define FLASH_CR_PG FLASH_CTRL_PG
-// #    define FLASH_KEY1 0x45670123U
-// #    define FLASH_KEY2 0xCDEF89ABU
-#endif
+typedef union {
+    uint16_t raw;
+    struct __attribute__ ((packed)) {
+        uint16_t button : 1;
+        int16_t dial : 15;
+    };
+} report_radial_controller_t;
 
-
+void radial_controller_task(void);
+void host_radial_controller_send(uint16_t report);
+void radial_controller_event_finished(void);
+void radial_controller_button_update(bool pressed);
+void radial_controller_dial_update(bool clockwise, bool continued);
+void radial_controller_dial_finished(void);
+bool process_radial_controller(const uint16_t keycode, const keyrecord_t *record);

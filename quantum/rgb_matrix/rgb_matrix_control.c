@@ -82,6 +82,55 @@ void logo_rgb_toggle(void) {
     }
 }
 
+void key_rgb_enable(bool update) {
+    if (rgb_matrix_is_enabled()) {
+        rgb_matrix_control_config.is_key_rgb_enable = 0;
+        if (update)
+            eeconfig_update_rgb_matrix_control();
+    }
+}
+
+void key_rgb_disable(bool update) {
+    if (rgb_matrix_is_enabled()) {
+        rgb_matrix_control_config.is_key_rgb_enable = 1;
+        if (update)
+            eeconfig_update_rgb_matrix_control();
+    }
+}
+
+void underglow_rgb_enable(bool update) {
+    if (rgb_matrix_is_enabled()) {
+        rgb_matrix_control_config.is_underglow_rgb_enable = 0;
+        if (update)
+            eeconfig_update_rgb_matrix_control();
+    }
+}
+
+void underglow_rgb_disable(bool update) {
+    if (rgb_matrix_is_enabled()) {
+        rgb_matrix_control_config.is_underglow_rgb_enable = 1;
+        if (update)
+            eeconfig_update_rgb_matrix_control();
+    }
+}
+
+void logo_rgb_enable(bool update) {
+    if (rgb_matrix_is_enabled()) {
+        rgb_matrix_control_config.is_logo_rgb_enable = 0;
+        if (update)
+            eeconfig_update_rgb_matrix_control();
+    }
+}
+
+void logo_rgb_disable(bool update) {
+    if (rgb_matrix_is_enabled()) {
+        rgb_matrix_control_config.is_logo_rgb_enable = 1;
+        if (update)
+            eeconfig_update_rgb_matrix_control();
+    }
+}
+
+
 #ifdef RGB_MATRIX_CONTROL_SWITCH_ENABLE
 void rgb_matrix_control_switch(void) {
     if (rgb_matrix_is_enabled()) {
@@ -93,15 +142,15 @@ void rgb_matrix_control_switch(void) {
 #endif
 
 bool key_rgb_is_enabled(void) {
-    return rgb_matrix_control_config.is_key_rgb_enable;
+    return !(rgb_matrix_control_config.is_key_rgb_enable);
 }
 
 bool underglow_rgb_is_enabled(void) {
-    return rgb_matrix_control_config.is_underglow_rgb_enable;
+    return !(rgb_matrix_control_config.is_underglow_rgb_enable);
 }
 
 bool logo_rgb_is_enabled(void) {
-    return rgb_matrix_control_config.is_logo_rgb_enable;
+    return !(rgb_matrix_control_config.is_logo_rgb_enable);
 }
 
 bool process_rgb_matrix_control(const uint16_t keycode, const keyrecord_t *record) {

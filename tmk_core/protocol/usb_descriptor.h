@@ -75,6 +75,13 @@ typedef struct {
     USB_Descriptor_Endpoint_t  Raw_OUTEndpoint;
 #endif
 
+#ifdef OPENRGB_PROTOCOL_ENABLE
+    USB_Descriptor_Interface_t OPENRGB_Interface;
+    USB_HID_Descriptor_HID_t   OPENRGB_HID;
+    USB_Descriptor_Endpoint_t  OPENRGB_INEndpoint;
+    USB_Descriptor_Endpoint_t  OPENRGB_OUTEndpoint;
+#endif
+
 #if defined(MOUSE_ENABLE) && !defined(MOUSE_SHARED_EP)
     // Mouse HID Interface
     USB_Descriptor_Interface_t Mouse_Interface;
@@ -162,6 +169,10 @@ enum usb_interfaces {
     RAW_INTERFACE,
 #endif
 
+#ifdef OPENRGB_PROTOCOL_ENABLE
+    OPENRGB_INTERFACE,
+#endif
+
 #if defined(MOUSE_ENABLE) && !defined(MOUSE_SHARED_EP)
     MOUSE_INTERFACE,
 #endif
@@ -220,6 +231,15 @@ enum usb_endpoints {
 #        define RAW_OUT_EPNUM RAW_IN_EPNUM
 #    else
     RAW_OUT_EPNUM         = NEXT_EPNUM,
+#    endif
+#endif
+
+#ifdef OPENRGB_PROTOCOL_ENABLE
+    OPENRGB_IN_EPNUM = NEXT_EPNUM,
+#    if STM32_USB_USE_OTG1
+#        define OPENRGB_OUT_EPNUM OPENRGB_IN_EPNUM
+#    else
+    OPENRGB_OUT_EPNUM         = NEXT_EPNUM,
 #    endif
 #endif
 
@@ -303,6 +323,7 @@ enum usb_endpoints {
 #define SHARED_EPSIZE 32
 #define MOUSE_EPSIZE 8
 #define RAW_EPSIZE 32
+#define OPENRGB_EPSIZE 64
 #define CONSOLE_EPSIZE 32
 #define MIDI_STREAM_EPSIZE 64
 #define CDC_NOTIFICATION_EPSIZE 8

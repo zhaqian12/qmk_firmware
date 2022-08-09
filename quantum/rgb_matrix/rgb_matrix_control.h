@@ -30,6 +30,8 @@ typedef union {
     };
 } rgb_matrix_control_config_t;
 
+void eeconfig_read_rgb_matrix_control(void);
+void eeconfig_update_rgb_matrix_control(void);
 
 void rgb_matrix_control_init(void);
 void rgb_matrix_control_task(void);
@@ -37,6 +39,13 @@ void rgb_matrix_control_task(void);
 void key_rgb_toggle(void);
 void underglow_rgb_toggle(void);
 void logo_rgb_toggle(void);
+void underglow_rgb_enable(bool update);
+void underglow_rgb_disable(bool update);
+void key_rgb_enable(bool update);
+void key_rgb_disable(bool update);
+void logo_rgb_enable(bool update);
+void logo_rgb_disable(bool update);
+
 #ifdef RGB_MATRIX_CONTROL_SWITCH_ENABLE
 void rgb_matrix_control_switch(void);
 #endif
