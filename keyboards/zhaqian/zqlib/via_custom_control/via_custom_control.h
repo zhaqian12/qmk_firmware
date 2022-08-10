@@ -18,13 +18,17 @@
 
 #include "quantum.h"
 
-#if defined(RGB_MATRIX_CONTROL_ENABLE) || defined(UNDERGLOW_RGB_MATRIX_ENABLE) || \
-    defined(RGB_INDICATORS_ENABLE)
+#if defined(RGB_MATRIX_CONTROL_ENABLE) || defined(UNDERGLOW_RGB_MATRIX_ENABLE)
 #define VIA_CUSTOM_RGB_MATRIX_ENABLE
+#endif
+
+#if defined(DYNAMIC_RGB_INDICATORS_ENABLE)
+#define VIA_CUSTOM_RGB_INDICATORS_ENABLE
 #endif
 
 enum via_custom_channel_id {
     id_custom_rgb_matrix_channel = 5,
+    id_custom_rgb_indicators_channel = 6,
 };
 
 enum via_custom_rgb_matrix_value {
@@ -35,9 +39,25 @@ enum via_custom_rgb_matrix_value {
     id_underglow_rgb_matrix_color           = 5,       // underglow rgb matrix color
 };
 
+enum via_custom_rgb_indicators_value {
+    id_rgb_indicators_override              = 1,       // rgb indicator override
+    // rgb indicator {num lock, caps lock, scroll lock}
+    id_rgb_indicators_brightness            = 2,       // rgb indicator brightness
+    id_rgb_indicators_effect                = 3,       // rgb indicator effect
+    id_rgb_indicators_color                 = 4,       // rgb indicator color 
+    id_rgb_indicators_led                   = 5,       // rgb indicator led
+};
+
 #if defined(VIA_CUSTOM_RGB_MATRIX_ENABLE)
 void via_custom_rgb_matrix_command(uint8_t *data, uint8_t length);
 void via_custom_rgb_matrix_set_value(uint8_t *data);
 void via_custom_rgb_matrix_get_value(uint8_t *data);
 void via_custom_rgb_matrix_save(void);
+#endif
+
+#if defined(VIA_CUSTOM_RGB_INDICATORS_ENABLE)
+void via_custom_rgb_indicators_command(uint8_t *data, uint8_t length);
+void via_custom_rgb_indicators_set_value(uint8_t *data);
+void via_custom_rgb_indicators_get_value(uint8_t *data);
+void via_custom_rgb_indicators_save(void);
 #endif

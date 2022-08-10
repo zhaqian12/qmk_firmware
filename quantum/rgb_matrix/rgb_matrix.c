@@ -426,30 +426,22 @@ void rgb_matrix_task(void) {
         case RENDERING:
             rgb_task_render(effect);
             if (effect) {
-#ifdef RGB_MATRIX_INDICATORS_OVERRIDE
 #ifdef UNDERGLOW_RGB_MATRIX_ENABLE
                 underglow_rgb_matrix_task();
 #endif
 #ifdef RGB_MATRIX_CONTROL_ENABLE
-                rgb_matrix_control_task();
-#endif
-#ifdef RGB_INDICATORS_ENABLE
-                rgb_indicators_task();
-#endif
-                rgb_matrix_indicators();
-                rgb_matrix_indicators_advanced(&rgb_effect_params);
+                if (indicator_rgb_is_override() == 1) 
+                {
+                    rgb_matrix_control_task();
+                    RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
+                }
+                else
+                {
+                    RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
+                    rgb_matrix_control_task();
+                }
 #else
-#ifdef RGB_INDICATORS_ENABLE
-                rgb_indicators_task();
-#endif
-                rgb_matrix_indicators();
-                rgb_matrix_indicators_advanced(&rgb_effect_params);
-#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
-                underglow_rgb_matrix_task();
-#endif
-#ifdef RGB_MATRIX_CONTROL_ENABLE
-                rgb_matrix_control_task();
-#endif
+                RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
 #endif
             }
             break;

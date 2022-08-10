@@ -119,6 +119,10 @@ static void update_dynamic_rgb_indicators_default(void) {
     update_dynamic_rgb_indicators();
 }
 
+void via_init_kb(void) {
+    rgb_indicators_init();
+}
+
 void rgb_indicators_init(void) {
     if (!eeconfig_is_enabled()) {
         eeconfig_init();
@@ -138,7 +142,7 @@ uint8_t is_rgb_indicators_enabled(void) {
     return (rgb_indicators_config.num_lock_config.enable || rgb_indicators_config.caps_lock_config.enable || rgb_indicators_config.scroll_lock_config.enable);
 }
 
-uint8_t is_rgb_indicators_enabled(uint8_t indicator) {
+uint8_t is_rgb_indicator_enabled(uint8_t indicator) {
     switch (indicator) {
         case 0: return (rgb_indicators_config.num_lock_config.enable);
         case 1: return (rgb_indicators_config.caps_lock_config.enable);

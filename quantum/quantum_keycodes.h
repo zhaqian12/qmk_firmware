@@ -634,7 +634,16 @@ enum quantum_keycodes {
     RGB_IND_TOGGLE,
     RGB_IND_MODE_FORWARD,
     RGB_IND_MODE_REVERSE,
-
+    
+    RGB_IND_NUM_LOCK_TOG,
+    RGB_IND_NUM_LOCK_MF,
+    RGB_IND_NUM_LOCK_MR,
+    RGB_IND_CAPS_LOCK_TOG,
+    RGB_IND_CAPS_LOCK_MF,
+    RGB_IND_CAPS_LOCK_MR,
+    RGB_IND_SCROLL_LOCK_TOG,
+    RGB_IND_SCROLL_LOCK_MF,
+    RGB_IND_SCROLL_LOCK_MR,
     // Start of custom keycode range for keyboards and keymaps - always leave at the end
     SAFE_RANGE
 };

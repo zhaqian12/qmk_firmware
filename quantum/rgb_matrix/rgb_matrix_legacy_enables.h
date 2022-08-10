@@ -109,3 +109,17 @@
 #define ENABLE_RGB_MATRIX_RAINBOW_ZIGZAG
 #endif
 
+#ifdef RGB_INDICATORS_ENABLE                                  
+#define RGB_MATRIX_INDICATORS_TASK(rgb_effect_params)         \
+do {                                                          \
+    rgb_indicators_task();                                    \
+    rgb_matrix_indicators();                                  \
+    rgb_matrix_indicators_advanced(&rgb_effect_params);       \
+} while (0)
+#else
+#define RGB_MATRIX_INDICATORS_TASK(rgb_effect_params)         \
+do {                                                          \
+    rgb_matrix_indicators();                                  \
+    rgb_matrix_indicators_advanced(&rgb_effect_params);       \
+} while (0)
+#endif  
