@@ -19,7 +19,6 @@
 #include "color.h"
 #include <stdlib.h>
 #include "eeprom.h"
-#include "via.h"
 
 #ifndef DEFAULT_NUM_LOCK_LED
 #define DEFAULT_NUM_LOCK_LED 0
@@ -125,7 +124,8 @@ void via_init_kb(void) {
 }
 
 void rgb_indicators_init(void) {
-    if (!via_eeprom_is_valid()) {
+    if (!eeconfig_is_enabled()) {
+        eeconfig_init();
         update_dynamic_rgb_indicators_default();
     }
     read_dynamic_rgb_indicators();
