@@ -271,7 +271,11 @@ extern layer_state_t layer_state;
 #endif
 
 #ifdef RGB_INDICATORS_ENABLE
+#ifdef DYNAMIC_RGB_INDICATORS_ENABLE
+#   include "dynamic_rgb_indicators.h"
+#else
 #   include "rgb_indicators.h"
+#endif
 #endif
 
 // For tri-layer

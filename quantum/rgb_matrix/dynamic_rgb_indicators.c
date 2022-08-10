@@ -19,6 +19,7 @@
 #include "color.h"
 #include <stdlib.h>
 #include "eeprom.h"
+#include "via.h"
 
 #ifndef DEFAULT_NUM_LOCK_LED
 #define DEFAULT_NUM_LOCK_LED 0
@@ -119,9 +120,12 @@ static void update_dynamic_rgb_indicators_default(void) {
     update_dynamic_rgb_indicators();
 }
 
+void via_init_kb(void) {
+    rgb_indicators_init();
+}
+
 void rgb_indicators_init(void) {
-    if (!eeconfig_is_enabled()) {
-        eeconfig_init();
+    if (!via_eeprom_is_valid()) {
         update_dynamic_rgb_indicators_default();
     }
     read_dynamic_rgb_indicators();
@@ -138,7 +142,7 @@ uint8_t is_rgb_indicators_enabled(void) {
     return (rgb_indicators_config.num_lock_config.enable || rgb_indicators_config.caps_lock_config.enable || rgb_indicators_config.scroll_lock_config.enable);
 }
 
-uint8_t is_rgb_indicators_enabled(uint8_t indicator) {
+uint8_t is_rgb_indicator_enabled(uint8_t indicator) {
     switch (indicator) {
         case 0: return (rgb_indicators_config.num_lock_config.enable);
         case 1: return (rgb_indicators_config.caps_lock_config.enable);

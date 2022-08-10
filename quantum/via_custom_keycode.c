@@ -154,7 +154,7 @@ bool process_via_custom_keycode(const uint16_t keycode, const keyrecord_t *recor
 #endif
 #endif
 
-#ifdef RGB_INDICATORS_ENABLE
+#if defined(RGB_INDICATORS_ENABLE) && !defined(DYNAMIC_RGB_INDICATORS_ENABLE)
         case RGB_IND_TOG:
             if (record->event.pressed) {
                 rgb_indicators_toggle();

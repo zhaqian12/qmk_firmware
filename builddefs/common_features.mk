@@ -895,11 +895,25 @@ ifeq ($(strip $(VIA_CUSTOM_CONTROL_ENABLE)), yes)
 	OPT_DEFS += -DVIA_CUSTOM_CONTROL_ENABLE
 endif
 
+VALID_RGB_INDICATORS_TYPES := solid dynamic
+
+RGB_INDICATORS ?= solid
 ifeq ($(strip $(RGB_INDICATORS_ENABLE)), yes)
 	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
         $(error RGB_INDICATORS_ENABLE requires RGB_MATRIX_ENABLE, either disable RGB_INDICATORS explicitly or enable RGB_MATRIX)
     endif
-    SRC += $(QUANTUM_DIR)/rgb_matrix/rgb_indicators.c
+	ifeq ($(filter $(RGB_INDICATORS),$(VALID_RGB_INDICATORS_TYPES)),)
+        $(error RGB_INDICATORS="$(RGB_INDICATORS)" is not a valid driver)
+    endif
+	ifeq ($(strip $(RGB_INDICATORS)), solid)
+    	SRC += $(QUANTUM_DIR)/rgb_matrix/rgb_indicators.c
+    else ifeq ($(strip $(RGB_INDICATORS)), dynamic)
+		ifeq ($(strip $(VIAL_ENABLE)), no)
+        	$(error DYNAMIC_RGB_INDICATORS requires VIAL_ENABLE, either disable DYNAMIC_RGB_INDICATORS explicitly or enable VIAL)
+    	endif
+		SRC += $(QUANTUM_DIR)/rgb_matrix/dynamic_rgb_indicators.c
+		OPT_DEFS += -DDYNAMIC_RGB_INDICATORS_ENABLE
+    endif
 	OPT_DEFS += -DRGB_INDICATORS_ENABLE
 endif
 

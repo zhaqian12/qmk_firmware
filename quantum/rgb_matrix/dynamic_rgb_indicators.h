@@ -67,7 +67,7 @@ void rgb_indicators_init(void);
 void rgb_indicators_task(void);
 void rgb_indicators_state_update(void);
 uint8_t is_rgb_indicators_enabled(void);
-uint8_t is_rgb_indicators_enabled(uint8_t indicator);
+uint8_t is_rgb_indicator_enabled(uint8_t indicator);
 uint8_t is_num_lock_enabled(void);
 uint8_t is_caps_lock_enabled(void);
 uint8_t is_scroll_lock_enabled(void);

@@ -1,0 +1,120 @@
+{
+    "label": "Lighting",
+    "content": [
+      {
+        "label": "Indicators",
+        "content": [
+          {
+            "label": "Normally On",
+            "type": "toggle",
+            "content": ["id_rgb_indicators_override", 6, 1]
+          },
+          {
+            "showIf": "{id_rgb_indicators_effect1} != 0",
+            "label": "Caps Lock Brightness",
+            "type": "range",
+            "options": [0, 255],
+            "content": ["id_rgb_indicators_brightness[1]", 6, 2, 1]
+          },
+          {
+            "label": "Caps Lock Effect",
+            "type": "dropdown",
+            "content": ["id_rgb_indicators_effect1", 6, 3, 1],
+            "options": [
+              ["All Off", 0],
+              ["Solid Color", 1],
+              ["Breathing", 2],
+              ["Cycle Breathing", 3],
+              ["Cycle All", 4],
+              ["Twinkle", 5],
+              ["Random Color", 6]
+            ]
+          },
+          {
+            "showIf": "{id_rgb_indicators_effect1} != 0",
+            "label": "Caps Lock Led",
+            "type": "dropdown",
+            "content": ["id_rgb_indicators_led[1]", 6, 5, 1],
+            "options": [
+              ["All Led", 0],
+              ["Backlight", 1],
+              ["Underglow", 2],
+              ["Logo", 3],
+              ["Led 0", 4],
+              ["Led 1", 5],
+              ["Led 2", 6],
+              ["Led 3", 7],
+              ["Led 4", 8],
+              ["Led 5", 9],
+              ["Led 6", 10],
+              ["Led 7", 11],
+              ["Led 8", 12],
+              ["Led 9", 13],
+              ["Led 10", 14],
+              ["Led 11", 15],
+              ["Led 12", 16],
+              ["Led 13", 17],
+              ["Led 14", 18],
+              ["Led 15", 19],
+              ["Led 16", 20],
+              ["Led 17", 21],
+              ["Led 18", 22],
+              ["Led 19", 23],
+              ["Led 20", 24],
+              ["Led 21", 25],
+              ["Led 22", 26],
+              ["Led 23", 27],
+              ["Led 24", 28],
+              ["Led 25", 29],
+              ["Led 26", 30],
+              ["Led 27", 31],
+              ["Led 28", 32],
+              ["Led 29", 33],
+              ["Led 30", 34],
+              ["Led 31", 35],
+              ["Led 32", 36],
+              ["Led 33", 37],
+              ["Led 34", 38],
+              ["Led 35", 39],
+              ["Led 36", 40],
+              ["Led 37", 41],
+              ["Led 38", 42],
+              ["Led 39", 43],
+              ["Led 40", 44],
+              ["Led 41", 45],
+              ["Led 42", 46],
+              ["Led 43", 47],
+              ["Led 44", 48],
+              ["Led 45", 49],
+              ["Led 46", 50],
+              ["Led 47", 51],
+              ["Led 48", 52],
+              ["Led 49", 53],
+              ["Led 50", 54],
+              ["Led 51", 55],
+              ["Led 52", 56],
+              ["Led 53", 57],
+              ["Led 54", 58],
+              ["Led 55", 59],
+              ["Led 56", 60],
+              ["Led 57", 61],
+              ["Led 58", 62],
+              ["Led 59", 63],
+              ["Led 60", 64],
+              ["Led 61", 65],
+              ["Led 62", 66],
+              ["Led 63", 67],
+              ["Led 64", 68],
+              ["Led 65", 69]
+            ]
+          },
+          {
+            "showIf": "{id_rgb_indicators_effect1} != 0",
+            "label": "Caps Lock Color",
+            "type": "color",
+            "content": ["id_rgb_indicators_color[1]", 6, 4, 1]
+          }
+        ]
+      }
+    ]
+  }   

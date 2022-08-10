@@ -58,7 +58,7 @@ enum via_custom_keycodes {
     UG_R_SPD,
 #endif
 #endif
-#ifdef RGB_INDICATORS_ENABLE
+#if defined(RGB_INDICATORS_ENABLE) && !defined(DYNAMIC_RGB_INDICATORS_ENABLE)
     RGB_IND_TOG,
     RGB_IND_MF,
     RGB_IND_MR,

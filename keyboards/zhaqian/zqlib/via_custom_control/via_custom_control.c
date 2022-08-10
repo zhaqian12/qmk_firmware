@@ -27,6 +27,13 @@ void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
         return;
     }
 #endif
+
+#if defined(VIA_CUSTOM_RGB_INDICATORS_ENABLE)
+    if (*channel_id == id_custom_rgb_matrix_channel) {
+        via_custom_rgb_indicators_command(data, length);
+        return;
+    }
+#endif
     *command_id = id_unhandled;
     *channel_id = *channel_id;  // force use of variable
 }
@@ -177,6 +184,142 @@ void via_custom_rgb_matrix_save(void) {
 #if defined(UNDERGLOW_RGB_MATRIX_ENABLE)
     eeconfig_update_underglow_rgb_matrix();
 #endif
+}
+
+#endif
+
+#if defined(VIA_CUSTOM_RGB_INDICATORS_ENABLE)
+void via_custom_rgb_indicators_command(uint8_t *data, uint8_t length) {
+    // data = [ command_id, channel_id, value_id, value_data ]
+    uint8_t *command_id        = &(data[0]);
+    uint8_t *value_id_and_data = &(data[2]);
+
+    switch (*command_id) {
+        case id_custom_set_value: {
+            via_custom_rgb_indicators_set_value(value_id_and_data);
+            break;
+        }
+        case id_custom_get_value: {
+            via_custom_rgb_indicators_get_value(value_id_and_data);
+            break;
+        }
+        case id_custom_save: {
+            via_custom_rgb_indicators_save();
+            break;
+        }
+        default: {
+            *command_id = id_unhandled;
+            break;
+        }
+    }
+}
+
+void via_custom_rgb_indicators_set_value(uint8_t *data) {
+    // data = [ value_id, value_data ]
+    uint8_t *value_id   = &(data[0]);
+    uint8_t *value_data = &(data[1]);
+    switch (*value_id) {
+#if defined(RGB_MATRIX_CONTROL_ENABLE)
+        case id_rgb_indicators_override: {
+            set_indicator_rgb_override(value_data[0], true);
+            break;
+        }
+#endif
+        case id_rgb_indicators_brightness: {
+            rgb_indicators_set_val(value_data[0], value_data[1], false);
+            break;
+        }
+        case id_rgb_indicators_effect: {
+            if (value_data[1] == 0) {
+                rgb_indicators_disable(value_data[0], false);
+            } else {
+                rgb_indicators_enable(value_data[0], false);
+                rgb_indicators_set_mode(value_data[0], value_data[1], false);
+            }
+            break;
+        }
+        case id_rgb_indicators_color: {
+            rgb_indicators_set_hsv(value_data[0], value_data[1], value_data[2], rgb_indicators_get_val(value_data[0]), false);
+            break;
+        }
+        case id_rgb_indicators_led: {
+            rgb_indicators_enable_all_led(value_data[0], 0, false);
+            rgb_indicators_enable_key_led(value_data[0], 0, false);
+            rgb_indicators_enable_underglow_led(value_data[0], 0, false);
+            rgb_indicators_enable_logo_led(value_data[0], 0, false);
+            switch (value_data[1]) {
+                case 0: {
+                    rgb_indicators_enable_all_led(value_data[0], 1, false); 
+                    break;
+                }
+                case 1: {
+                    rgb_indicators_enable_key_led(value_data[0], 1, false); 
+                    break;
+                }
+                case 2: {
+                    rgb_indicators_enable_underglow_led(value_data[0], 1, false); 
+                    break;
+                }
+                case 3: {
+                    rgb_indicators_enable_logo_led(value_data[0], 1, false);
+                    break;
+                }
+                default: {
+                    rgb_indicators_set_led(value_data[0], value_data[1] - 4, false);
+                    break;
+                }
+            }
+            break;
+        }
+    }
+}
+void via_custom_rgb_indicators_get_value(uint8_t *data) {
+        // data = [ value_id, value_data ]
+    uint8_t *value_id   = &(data[0]);
+    uint8_t *value_data = &(data[1]);
+    switch (*value_id) {
+#if defined(RGB_MATRIX_CONTROL_ENABLE)
+        case id_rgb_indicators_override: {
+            value_data[0] = indicator_rgb_is_override() ? 1 : 0;
+            break;
+        }
+#endif
+        case id_rgb_indicators_brightness: {
+            value_data[1] = rgb_indicators_get_val(value_data[0]);
+            break;
+        }
+        case id_rgb_indicators_effect: {
+            if (!is_rgb_indicator_enabled(value_data[0])) {
+                value_data[1] = 0;
+            } else {
+                value_data[1] = rgb_indicators_get_mode(value_data[0]);
+            }
+            break;
+        }
+        case id_rgb_indicators_color: {
+            value_data[1] = rgb_indicators_get_hue(value_data[0]);
+            value_data[2] = rgb_indicators_get_sat(value_data[0]);
+            break;
+        }
+        case id_rgb_indicators_led: {
+            if (rgb_indicators_get_all_led(value_data[0])) {
+                value_data[1] = 0;
+            } else if (rgb_indicators_get_key_led(value_data[0])) {
+                value_data[1] = 1;
+            } else if (rgb_indicators_get_underglow_led(value_data[0])) {
+                value_data[1] = 2;
+            } else if (rgb_indicators_get_logo_led(value_data[0])) {
+                value_data[1] = 3;
+            } else {
+                value_data[1] = rgb_indicators_get_led(value_data[0]) + 4;
+            }
+            break;
+        }
+    }
+}
+
+void via_custom_rgb_indicators_save(void) {
+    update_dynamic_rgb_indicators();
 }
 
 #endif

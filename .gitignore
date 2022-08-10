@@ -109,3 +109,4 @@ via*.json
 !via_rgb_matrix_no_openrgb.json
 !via_rgb_matrix_with_openrgb.json
 !via_underglow_rgb_matrix.json
+!via_rgb_indicators.json
