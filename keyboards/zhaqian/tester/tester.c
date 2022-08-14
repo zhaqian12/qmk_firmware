@@ -15,7 +15,7 @@
  */
 
 #include "tester.h"
-#include "uart.h"
+// #include "uart.h"
 #ifdef RGB_MATRIX_ENABLE
 
 led_config_t g_led_config = {  //
@@ -44,19 +44,6 @@ led_config_t g_led_config = {  //
     }
 };
 
-#ifdef RGB_DISABLE_WHEN_USB_SUSPENDED
-
-void suspend_power_down_kb(void) {
-    rgb_matrix_set_suspend_state(true);
-    suspend_power_down_user();
-}
-
-void suspend_wakeup_init_kb(void) {
-    rgb_matrix_set_suspend_state(false);
-    suspend_wakeup_init_user();
-}
-#endif
-
 #endif
 
 void keyboard_post_init_user(void) {
@@ -68,11 +55,11 @@ void keyboard_post_init_user(void) {
 }
 
 
-void matrix_init_kb(void) {
-    uart_init(115200);
-}
+// void matrix_init_kb(void) {
+//     uart_init(115200);
+// }
 
-void matrix_scan_kb(void) {
-    uart_write(0x11);
-}
+// void matrix_scan_kb(void) {
+//     uart_write(0x11);
+// }
 
