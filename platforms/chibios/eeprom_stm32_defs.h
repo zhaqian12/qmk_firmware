@@ -32,7 +32,7 @@
 #        ifndef FEE_PAGE_COUNT
 #            define FEE_PAGE_COUNT 4 // How many pages are used
 #        endif
-#    elif defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F405xG) || defined(STM32F411xE)
+#    elif defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F405xG) || defined(STM32F411xE) || defined(STM32F407xE) || defined(STM32F407xG)
 #        ifndef FEE_PAGE_SIZE
 #            define FEE_PAGE_SIZE 0x4000 // Page size = 16KByte
 #        endif
@@ -51,16 +51,16 @@
 #        define FEE_MCU_FLASH_SIZE 128 // Size in Kb
 #    elif defined(STM32F303xC) || defined(STM32F401xC) || defined(STM32L433xC) || defined(AIR32F103xC)
 #        define FEE_MCU_FLASH_SIZE 256 // Size in Kb
-#    elif defined(STM32F103xE) || defined(STM32F303xE) || defined(STM32F401xE) || defined(STM32F411xE)
+#    elif defined(STM32F103xE) || defined(STM32F303xE) || defined(STM32F401xE) || defined(STM32F411xE) || defined(STM32F407xE)
 #        define FEE_MCU_FLASH_SIZE 512 // Size in Kb
-#    elif defined(STM32F405xG)
+#    elif defined(STM32F405xG) || defined(STM32F407xG)
 #        define FEE_MCU_FLASH_SIZE 1024 // Size in Kb
 #    endif
 #endif
 
 /* Start of the emulated eeprom */
 #if !defined(FEE_PAGE_BASE_ADDRESS)
-#    if defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F405xG) || defined(STM32F411xE)
+#    if defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F405xG) || defined(STM32F411xE) || defined(STM32F407xE) || defined(STM32F407xG)
 #        ifndef FEE_PAGE_BASE_ADDRESS
 #            ifdef BOOTLOADER_TINYUF2
 #                define FEE_PAGE_BASE_ADDRESS 0x08008000 // bodge to force 3nd 16k page

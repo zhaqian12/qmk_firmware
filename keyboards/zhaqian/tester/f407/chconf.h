@@ -16,10 +16,7 @@
 
 #pragma once
 
-#include_next <mcuconf.h>
+#define CH_CFG_ST_FREQUENCY 10000
 
-#undef AIR32_PWM_USE_TIM3
-#define AIR32_PWM_USE_TIM3 TRUE
+#include_next <chconf.h>
 
-// #undef AIR32_SERIAL_USE_USART2
-// #define AIR32_SERIAL_USE_USART2 TRUE
