@@ -52,21 +52,8 @@
 #include "version.h" // for QMK_BUILDDATE used in EEPROM magic
 #include "via_ensure_keycode.h"
 
-// Forward declare some helpers.
-#if defined(VIA_QMK_BACKLIGHT_ENABLE)
-void via_qmk_backlight_set_value(uint8_t *data);
-void via_qmk_backlight_get_value(uint8_t *data);
-#endif
-
-#if defined(VIA_QMK_RGBLIGHT_ENABLE)
-void via_qmk_rgblight_set_value(uint8_t *data);
-void via_qmk_rgblight_get_value(uint8_t *data);
-#endif
-
-#if defined(VIA_QMK_RGB_MATRIX_ENABLE)
-void via_qmk_rgb_matrix_set_value(uint8_t *data);
-void via_qmk_rgb_matrix_get_value(uint8_t *data);
-void eeconfig_update_rgb_matrix(void);
+#ifdef SIGNALRGB_ENABLE
+#include "signalrgb.h"
 #endif
 
 // Can be called in an overriding via_init_kb() to test if keyboard level code usage of
@@ -396,6 +383,24 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
             dynamic_keymap_set_buffer(offset, size, &command_data[3]);
             break;
         }
+#ifdef ENCODER_MAP_ENABLE
+        case id_dynamic_keymap_get_encoder: {
+            uint16_t keycode = dynamic_keymap_get_encoder(command_data[0], command_data[1], command_data[2] != 0);
+            command_data[3]  = keycode >> 8;
+            command_data[4]  = keycode & 0xFF;
+            break;
+        }
+        case id_dynamic_keymap_set_encoder: {
+            dynamic_keymap_set_encoder(command_data[0], command_data[1], command_data[2] != 0, (command_data[3] << 8) | command_data[4]);
+            break;
+        }
+#endif
+#ifdef SIGNALRGB_ENABLE
+        case id_signalrgb_prefix: {
+            signal_rgb_command_handler(data, length);
+            break;
+        }
+#endif
         default: {
             // The command ID is not known
             // Return the unhandled state
