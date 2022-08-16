@@ -276,7 +276,11 @@ void ws2812_init(void) {
                 [WS2812_PWM_CHANNEL - 1] = {.mode = WS2812_PWM_OUTPUT_MODE, .callback = NULL},  // Turn on the channel we care about
             },
         .cr2  = 0,
+#if defined(AIR32F10x)
+        .dier = ((0x100 << WS2812_PWM_CHANNEL) | TIM_DIER_TDE),
+#else
         .dier = TIM_DIER_UDE,  // DMA on update event for next period
+#endif
     };
     //#pragma GCC diagnostic pop  // Restore command-line warning options
 

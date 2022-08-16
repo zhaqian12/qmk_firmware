@@ -17,9 +17,8 @@
 #pragma once
 
 #include_next <mcuconf.h>
+         
+#undef STM32_PLLM_VALUE               
+#define STM32_PLLM_VALUE                    25
 
-#undef AIR32_PWM_USE_TIM3
-#define AIR32_PWM_USE_TIM3 TRUE
 
-// #undef AIR32_SERIAL_USE_USART2
-// #define AIR32_SERIAL_USE_USART2 TRUE
