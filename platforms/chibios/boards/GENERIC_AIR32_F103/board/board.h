@@ -34,10 +34,11 @@
  * PA3  - Normal input      (USART2 RX).
  * PA9  - Alternate output  (USART1 TX).
  * PA10 - Normal input      (USART1 RX).
+ * PA11 - Alternate output  (DP PUUP).
  */
 #define VAL_GPIOACRL            0x88884B88      /*  PA7...PA0 */
-#define VAL_GPIOACRH            0x888884B8      /* PA15...PA8 */
-#define VAL_GPIOAODR            0xFFFFFFFF
+#define VAL_GPIOACRH            0x8888F4B8      /* PA15...PA8 */
+#define VAL_GPIOAODR            0xFFFFF7FF
 
 /*
  * Port B setup.
