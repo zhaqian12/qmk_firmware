@@ -31,7 +31,7 @@ enum set_device_id {
 
 extern RGB signalrgb_colors[DRIVER_LED_TOTAL];
 
-void signal_rgb_command_handler(uint8_t *data, uint8_t length);
+bool signal_rgb_command_handler(uint8_t *data, uint8_t length);
 void signalrgb_get_protocol_version(uint8_t *data);
 void signalrgb_get_qmk_version(uint8_t *data);
 void signalrgb_get_device_info(uint8_t *data);

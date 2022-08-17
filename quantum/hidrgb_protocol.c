@@ -2,16 +2,17 @@
 #include "raw_hid.h"
 
 void hidrgb_hid_receive(uint8_t *data, uint8_t length) {
+    bool send = false;
     switch (*data) {
 #ifdef OPENRGB_ENABLE
         case 1 ... 9: {
-            openrgb_command_handler(data, length); 
+            send = openrgb_command_handler(data, length); 
             break;
         }
 #endif
 #ifdef SIGNALRGB_ENABLE
         case id_signalrgb_prefix: {
-            signal_rgb_command_handler(data, length);
+            send = signal_rgb_command_handler(data, length);
             break;
         }
 #endif
@@ -20,5 +21,7 @@ void hidrgb_hid_receive(uint8_t *data, uint8_t length) {
             break;
         }
     }
-    hidrgb_hid_send(data, length);
+    if (send) {
+        hidrgb_hid_send(data, length);
+    }
 }

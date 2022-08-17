@@ -9,7 +9,7 @@
 
 RGB signalrgb_colors[DRIVER_LED_TOTAL] = {[0 ... DRIVER_LED_TOTAL - 1] = SIGNALRGB_STARTUP_HSV};
 
-void signal_rgb_command_handler(uint8_t *data, uint8_t length) {
+bool signal_rgb_command_handler(uint8_t *data, uint8_t length) {
     uint8_t *command_id   = &(data[1]);
     uint8_t *command_data = &(data[2]);
 
@@ -43,6 +43,10 @@ void signal_rgb_command_handler(uint8_t *data, uint8_t length) {
             break;
         }
     }
+    if (*command_id < 4 && *command_id > 0) {
+        return true;
+    } 
+    return false;
 }
 
 void signalrgb_get_protocol_version(uint8_t *data) {
