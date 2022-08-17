@@ -270,6 +270,10 @@ extern layer_state_t layer_state;
 #   include "via_custom_keycode.h"
 #endif
 
+#ifdef VIA_CUSTOM_CONTROL_ENABLE
+#   include "via_custom_control.h"
+#endif
+
 #ifdef RGB_INDICATORS_ENABLE
 #ifdef DYNAMIC_RGB_INDICATORS_ENABLE
 #   include "dynamic_rgb_indicators.h"
