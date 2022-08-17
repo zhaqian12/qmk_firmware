@@ -50,7 +50,10 @@ __attribute__((weak)) RGB rgb_matrix_hsv_to_rgb(HSV hsv) {
 #ifdef RGB_MATRIX_CUSTOM_USER
 #    include "rgb_matrix_user.inc"
 #endif
-
+#ifdef SIGNALRGB_ENABLE
+#    include "signalrgb_anim.h"
+#endif
+,
 #undef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 #undef RGB_MATRIX_EFFECT
 // -----End rgb effect includes macros-------
@@ -352,9 +355,9 @@ static void rgb_task_render(uint8_t effect) {
 // ---------------------------------------------
 // -----Begin rgb effect switch case macros-----
 #define RGB_MATRIX_EFFECT(name, ...)          \
-    case RGB_MATRIX_##name:                   \
-        rendering = name(&rgb_effect_params); \
-        break;
+        case RGB_MATRIX_##name:                   \
+            rendering = name(&rgb_effect_params); \
+            break;
 #include "rgb_matrix_effects.inc"
 #undef RGB_MATRIX_EFFECT
 
@@ -369,6 +372,15 @@ static void rgb_task_render(uint8_t effect) {
 #    ifdef RGB_MATRIX_CUSTOM_USER
 #        include "rgb_matrix_user.inc"
 #    endif
+#    undef RGB_MATRIX_EFFECT
+#endif
+
+#ifdef SIGNALRGB_ENABLE
+#define RGB_MATRIX_EFFECT(name, ...)              \
+        case RGB_MATRIX_##name:                   \
+            rendering = name(&rgb_effect_params); \
+            break;
+#    include "signalrgb_anim.h"
 #    undef RGB_MATRIX_EFFECT
 #endif
             // -----End rgb effect switch case macros-------
