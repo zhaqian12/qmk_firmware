@@ -433,6 +433,12 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
             break;
         }
 #endif
+#ifdef SIGNALRGB_ENABLE
+        case id_signalrgb_prefix: {
+            signal_rgb_command_handler(data, length);
+            break;
+        }
+#endif
         default: {
             // The command ID is not known
             // Return the unhandled state

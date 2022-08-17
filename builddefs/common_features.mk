@@ -921,6 +921,7 @@ ifeq ($(strip $(SIGNALRGB_ENABLE)), yes)
 	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
         $(error SIGNALRGB_ENABLE requires RGB_MATRIX_ENABLE, either disable SIGNALRGB_ENABLE explicitly or enable RGB_MATRIX)
     endif
+    RAW_ENABLE := yes
     SRC += $(QUANTUM_DIR)/rgb_matrix/signalrgb.c
-    OPT_DEFS += -DSIGNALRGB_ENABLE -DOPENRGB_PROTOCOL_ENABLE
+    OPT_DEFS += -DSIGNALRGB_ENABLE
 endif
