@@ -58,6 +58,7 @@
  - Via Custom Control
  - Custom RGB Matrix Effects
  - UF2 Bootloader
+ - Signalrgb Protocol
 
 ## Alt Tab Marco
 Alt Tab Marco的功能本质上是一个预设好的按键宏,实现Windows系统的切换窗口功能.如果需要使用该功能,请在 `rules.mk`中添加:

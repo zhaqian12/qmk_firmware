@@ -13,7 +13,6 @@ enum signalrgb_command_id
     id_signalrgb_get_protocol_version       = 0x01,
     id_signalrgb_get_qmk_version            = 0x02,
     id_signalrgb_get_device_info            = 0x03,
-    
     id_signalrgb_set_leds                   = 0x04,
     id_signalrgb_set_effect                 = 0x05,
     id_signalrgb_set_device                 = 0x06,

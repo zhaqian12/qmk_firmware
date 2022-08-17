@@ -1,4 +1,5 @@
 /* Copyright 2020 Kasper
+ *           2022 ZhaQian
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -217,36 +218,83 @@ static const uint8_t openrgb_rgb_matrix_effects_indexes[]           = {
 #ifdef ENABLE_RGB_MATRIX_RAINBOW_SIN_WAVE_REVERSE
     61,
 #endif
-#ifdef ENABLE_RGB_MATRIX_CANDY_TAP
+#ifdef ENABLE_RGB_MATRIX_CYCLE_ALTER
     62,
 #endif
-#ifdef ENABLE_RGB_MATRIX_CYCLE_REACTIVE_MULTIWIDE
+#ifdef ENABLE_RGB_MATRIX_RAINBOW_ALTER
     63,
 #endif
-#ifdef ENABLE_RGB_MATRIX_CYCLE_REACTIVE_MULTICROSS
+#ifdef ENABLE_RGB_MATRIX_STATIC_BREATHING_CIRCLE
     64,
 #endif
-#ifdef ENABLE_RGB_MATRIX_CYCLE_REACTIVE_MULTINEXUS
+#ifdef ENABLE_RGB_MATRIX_CYCLE_BREATHING_CIRCLE
     65,
 #endif
-#ifdef ENABLE_RGB_MATRIX_CYCLE_MULTISPLASH
+#ifdef ENABLE_RGB_MATRIX_BLOOM
     66,
 #endif
-#ifdef ENABLE_RGB_MATRIX_REACTIVE_MULTIWIDE_RGB
+#ifdef ENABLE_RGB_MATRIX_COMMET
     67,
 #endif
-#ifdef ENABLE_RGB_MATRIX_REACTIVE_MULTICROSS_RGB
+#ifdef ENABLE_RGB_MATRIX_ROTATE_RAINBOW
     68,
 #endif
-#ifdef ENABLE_RGB_MATRIX_REACTIVE_MULTINEXUS_RGB
+#ifdef ENABLE_RGB_MATRIX_MOTION_POINT
     69,
+#endif
+#ifdef ENABLE_RGB_MATRIX_ROTATE_BEAM_PENDULUM
+    70,
+#endif
+#ifdef ENABLE_RGB_MATRIX_ROTATE_BEAM_WIPERS
+    71,
+#endif
+#ifdef ENABLE_RGB_MATRIX_H_STACK
+    72,
+#endif
+#ifdef ENABLE_RGB_MATRIX_V_STACK
+    73,
+#endif
+#ifdef ENABLE_RGB_MATRIX_SWAP
+    74,
+#endif
+#ifdef ENABLE_RGB_MATRIX_STATIC_ZIGZAG
+    75,
+#endif
+#ifdef ENABLE_RGB_MATRIX_RAINBOW_ZIGZAG
+    76,
+#endif
+#ifdef ENABLE_RGB_MATRIX_CANDY_TAP
+    77,
+#endif
+#ifdef ENABLE_RGB_MATRIX_CYCLE_REACTIVE_MULTIWIDE
+    78,
+#endif
+#ifdef ENABLE_RGB_MATRIX_CYCLE_REACTIVE_MULTICROSS
+    79,
+#endif
+#ifdef ENABLE_RGB_MATRIX_CYCLE_REACTIVE_MULTINEXUS
+    80,
+#endif
+#ifdef ENABLE_RGB_MATRIX_CYCLE_MULTISPLASH
+    81,
+#endif
+#ifdef ENABLE_RGB_MATRIX_REACTIVE_MULTIWIDE_RGB
+    82,
+#endif
+#ifdef ENABLE_RGB_MATRIX_REACTIVE_MULTICROSS_RGB
+    83,
+#endif
+#ifdef ENABLE_RGB_MATRIX_REACTIVE_MULTINEXUS_RGB
+    84,
 #endif
 
 };
+
 static uint8_t raw_hid_buffer[OPENRGB_EPSIZE];
 const uint8_t size = sizeof openrgb_rgb_matrix_effects_indexes / sizeof openrgb_rgb_matrix_effects_indexes[0];
 static uint8_t mode_index = 0;
-void openrgb_hid_receive(uint8_t *data, uint8_t length) {
+
+void openrgb_command_handler(uint8_t *data, uint8_t length) {
     switch (*data) {
         case OPENRGB_GET_PROTOCOL_VERSION:
             openrgb_get_protocol_version();
@@ -280,7 +328,8 @@ void openrgb_hid_receive(uint8_t *data, uint8_t length) {
 
     if (*data != OPENRGB_DIRECT_MODE_SET_LEDS) {
         raw_hid_buffer[OPENRGB_EPSIZE - 1] = OPENRGB_END_OF_MESSAGE;
-        openrgb_hid_send(raw_hid_buffer, OPENRGB_EPSIZE);
+        // openrgb_hid_send(raw_hid_buffer, OPENRGB_EPSIZE);
+        memcpy(data, raw_hid_buffer, OPENRGB_EPSIZE);
         memset(raw_hid_buffer, 0x00, OPENRGB_EPSIZE);
     }
 }

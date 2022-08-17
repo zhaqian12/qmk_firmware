@@ -82,8 +82,8 @@ void virtser_task(void);
 void raw_hid_task(void);
 #endif
 
-#ifdef OPENRGB_PROTOCOL_ENABLE
-void openrgb_hid_task(void);
+#ifdef HIDRGB_PROTOCOL_ENABLE
+void hidrgb_hid_task(void);
 #endif
 
 #ifdef CONSOLE_ENABLE
@@ -230,7 +230,7 @@ void protocol_post_task(void) {
 #ifdef RAW_ENABLE
     raw_hid_task();
 #endif
-#ifdef OPENRGB_PROTOCOL_ENABLE
-    openrgb_hid_task();
+#ifdef HIDRGB_PROTOCOL_ENABLE
+    hidrgb_hid_task();
 #endif
 }

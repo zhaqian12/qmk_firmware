@@ -352,16 +352,16 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM RawReport[] = {
 };
 #endif
 
-#ifdef OPENRGB_PROTOCOL_ENABLE
-const USB_Descriptor_HIDReport_Datatype_t PROGMEM OPENRGBReport[] = {
-    HID_RI_USAGE_PAGE(16, OPENRGB_USAGE_PAGE), // Vendor Defined
-    HID_RI_USAGE(8, OPENRGB_USAGE_ID),         // Vendor Defined
+#ifdef HIDRGB_PROTOCOL_ENABLE
+const USB_Descriptor_HIDReport_Datatype_t PROGMEM HIDRGBReport[] = {
+    HID_RI_USAGE_PAGE(16, HIDRGB_USAGE_PAGE), // Vendor Defined
+    HID_RI_USAGE(8, HIDRGB_USAGE_ID),         // Vendor Defined
     HID_RI_COLLECTION(8, 0x01),    // Application
         // Data to host
         HID_RI_USAGE(8, 0x62),     // Vendor Defined
         HID_RI_LOGICAL_MINIMUM(8, 0x00),
         HID_RI_LOGICAL_MAXIMUM(16, 0x00FF),
-        HID_RI_REPORT_COUNT(8, OPENRGB_EPSIZE),
+        HID_RI_REPORT_COUNT(8, HIDRGB_EPSIZE),
         HID_RI_REPORT_SIZE(8, 0x08),
         HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
 
@@ -369,7 +369,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM OPENRGBReport[] = {
         HID_RI_USAGE(8, 0x63),     // Vendor Defined
         HID_RI_LOGICAL_MINIMUM(8, 0x00),
         HID_RI_LOGICAL_MAXIMUM(16, 0x00FF),
-        HID_RI_REPORT_COUNT(8, OPENRGB_EPSIZE),
+        HID_RI_REPORT_COUNT(8, HIDRGB_EPSIZE),
         HID_RI_REPORT_SIZE(8, 0x08),
         HID_RI_OUTPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE | HID_IOF_NON_VOLATILE),
     HID_RI_END_COLLECTION(0),
@@ -608,13 +608,13 @@ const USB_Descriptor_Configuration_t PROGMEM ConfigurationDescriptor = {
     },
 #endif
 
-#ifdef OPENRGB_PROTOCOL_ENABLE
-    .OPENRGB_Interface = {
+#ifdef HIDRGB_PROTOCOL_ENABLE
+    .HIDRGB_Interface = {
         .Header = {
             .Size               = sizeof(USB_Descriptor_Interface_t),
             .Type               = DTYPE_Interface
         },
-        .InterfaceNumber        = OPENRGB_INTERFACE,
+        .InterfaceNumber        = HIDRGB_INTERFACE,
         .AlternateSetting       = 0x00,
         .TotalEndpoints         = 2,
         .Class                  = HID_CSCP_HIDClass,
@@ -622,7 +622,7 @@ const USB_Descriptor_Configuration_t PROGMEM ConfigurationDescriptor = {
         .Protocol               = HID_CSCP_NonBootProtocol,
         .InterfaceStrIndex      = NO_DESCRIPTOR
     },
-    .OPENRGB_HID = {
+    .HIDRGB_HID = {
         .Header = {
             .Size               = sizeof(USB_HID_Descriptor_HID_t),
             .Type               = HID_DTYPE_HID
@@ -631,26 +631,26 @@ const USB_Descriptor_Configuration_t PROGMEM ConfigurationDescriptor = {
         .CountryCode            = 0x00,
         .TotalReportDescriptors = 1,
         .HIDReportType          = HID_DTYPE_Report,
-        .HIDReportLength        = sizeof(OPENRGBReport)
+        .HIDReportLength        = sizeof(HIDRGBReport)
     },
-    .OPENRGB_INEndpoint = {
+    .HIDRGB_INEndpoint = {
         .Header = {
             .Size               = sizeof(USB_Descriptor_Endpoint_t),
             .Type               = DTYPE_Endpoint
         },
-        .EndpointAddress        = (ENDPOINT_DIR_IN | OPENRGB_IN_EPNUM),
+        .EndpointAddress        = (ENDPOINT_DIR_IN | HIDRGB_IN_EPNUM),
         .Attributes             = (EP_TYPE_INTERRUPT | ENDPOINT_ATTR_NO_SYNC | ENDPOINT_USAGE_DATA),
-        .EndpointSize           = OPENRGB_EPSIZE,
+        .EndpointSize           = HIDRGB_EPSIZE,
         .PollingIntervalMS      = 0x01
     },
-    .OPENRGB_OUTEndpoint = {
+    .HIDRGB_OUTEndpoint = {
         .Header = {
             .Size               = sizeof(USB_Descriptor_Endpoint_t),
             .Type               = DTYPE_Endpoint
         },
-        .EndpointAddress        = (ENDPOINT_DIR_OUT | OPENRGB_OUT_EPNUM),
+        .EndpointAddress        = (ENDPOINT_DIR_OUT | HIDRGB_OUT_EPNUM),
         .Attributes             = (EP_TYPE_INTERRUPT | ENDPOINT_ATTR_NO_SYNC | ENDPOINT_USAGE_DATA),
-        .EndpointSize           = OPENRGB_EPSIZE,
+        .EndpointSize           = HIDRGB_EPSIZE,
         .PollingIntervalMS      = 0x01
     },
 #endif
@@ -1249,9 +1249,9 @@ uint16_t get_usb_descriptor(const uint16_t wValue, const uint16_t wIndex, const 
                     break;
 #endif
 
-#ifdef OPENRGB_PROTOCOL_ENABLE
-                case OPENRGB_INTERFACE:
-                    Address = &ConfigurationDescriptor.OPENRGB_HID;
+#ifdef HIDRGB_PROTOCOL_ENABLE
+                case HIDRGB_INTERFACE:
+                    Address = &ConfigurationDescriptor.HIDRGB_HID;
                     Size    = sizeof(USB_HID_Descriptor_HID_t);
 
                     break;
@@ -1314,10 +1314,10 @@ uint16_t get_usb_descriptor(const uint16_t wValue, const uint16_t wIndex, const 
                     break;
 #endif
 
-#ifdef OPENRGB_PROTOCOL_ENABLE
-                case OPENRGB_INTERFACE:
-                    Address = &OPENRGBReport;
-                    Size    = sizeof(OPENRGBReport);
+#ifdef HIDRGB_PROTOCOL_ENABLE
+                case HIDRGB_INTERFACE:
+                    Address = &HIDRGBReport;
+                    Size    = sizeof(HIDRGBReport);
 
                     break;
 #endif

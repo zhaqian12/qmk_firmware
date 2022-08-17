@@ -313,8 +313,8 @@ typedef struct {
 #ifdef RAW_ENABLE
             usb_driver_config_t raw_driver;
 #endif
-#ifdef OPENRGB_PROTOCOL_ENABLE
-            usb_driver_config_t openrgb_driver;
+#ifdef HIDRGB_PROTOCOL_ENABLE
+            usb_driver_config_t hidrgb_driver;
 #endif
 #ifdef MIDI_ENABLE
             usb_driver_config_t midi_driver;
@@ -352,12 +352,12 @@ static usb_driver_configs_t drivers = {
 #    define RAW_OUT_MODE USB_EP_MODE_TYPE_INTR
     .raw_driver = QMK_USB_DRIVER_CONFIG(RAW, 0, false),
 #endif
-#ifdef OPENRGB_PROTOCOL_ENABLE
-#    define OPENRGB_IN_CAPACITY 4
-#    define OPENRGB_OUT_CAPACITY 4
-#    define OPENRGB_IN_MODE USB_EP_MODE_TYPE_INTR
-#    define OPENRGB_OUT_MODE USB_EP_MODE_TYPE_INTR
-    .openrgb_driver = QMK_USB_DRIVER_CONFIG(OPENRGB, 0, false),
+#ifdef HIDRGB_PROTOCOL_ENABLE
+#    define HIDRGB_IN_CAPACITY 4
+#    define HIDRGB_OUT_CAPACITY 4
+#    define HIDRGB_IN_MODE USB_EP_MODE_TYPE_INTR
+#    define HIDRGB_OUT_MODE USB_EP_MODE_TYPE_INTR
+    .hidrgb_driver = QMK_USB_DRIVER_CONFIG(HIDRGB, 0, false),
 #endif
 #ifdef MIDI_ENABLE
 #    define MIDI_STREAM_IN_CAPACITY 4
@@ -1136,28 +1136,28 @@ void raw_hid_task(void) {
 
 #endif
 
-#ifdef OPENRGB_PROTOCOL_ENABLE
-void openrgb_hid_send(uint8_t *data, uint8_t length) {
+#ifdef HIDRGB_PROTOCOL_ENABLE
+void hidrgb_hid_send(uint8_t *data, uint8_t length) {
     // TODO: implement variable size packet
-    if (length != OPENRGB_EPSIZE) {
+    if (length != HIDRGB_EPSIZE) {
         return;
     }
-    chnWrite(&drivers.openrgb_driver.driver, data, length);
+    chnWrite(&drivers.hidrgb_driver.driver, data, length);
 }
 
-__attribute__((weak)) void openrgb_hid_receive(uint8_t *data, uint8_t length) {
+__attribute__((weak)) void hidrgb_hid_receive(uint8_t *data, uint8_t length) {
     // Users should #include "raw_hid.h" in their own code
     // and implement this function there. Leave this as weak linkage
     // so users can opt to not handle data coming in.
 }
 
-void openrgb_hid_task(void) {
-    uint8_t buffer[OPENRGB_EPSIZE];
+void hidrgb_hid_task(void) {
+    uint8_t buffer[HIDRGB_EPSIZE];
     size_t  size = 0;
     do {
-        size_t size = chnReadTimeout(&drivers.openrgb_driver.driver, buffer, sizeof(buffer), TIME_IMMEDIATE);
+        size_t size = chnReadTimeout(&drivers.hidrgb_driver.driver, buffer, sizeof(buffer), TIME_IMMEDIATE);
         if (size > 0) {
-            openrgb_hid_receive(buffer, size);
+            hidrgb_hid_receive(buffer, size);
         }
     } while (size > 0);
 }

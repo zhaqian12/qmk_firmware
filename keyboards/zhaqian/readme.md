@@ -65,7 +65,7 @@
  - Via Custom Control
  - Custom RGB Matrix Effects
  - UF2 Bootloader
-
+ - Signalrgb Protocol
 ## Alt Tab Marco
 This feature integrates the toggle window function in window system.It is supported by adding this to your `rules.mk`:
 ```make

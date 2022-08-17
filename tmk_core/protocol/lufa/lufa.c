@@ -86,7 +86,7 @@ extern keymap_config_t keymap_config;
 #    include "raw_hid.h"
 #endif
 
-#if (defined(OPENRGB_PROTOCOL_ENABLE) && !defined(RAW_ENABLE))
+#if (defined(HIDRGB_PROTOCOL_ENABLE) && !defined(RAW_ENABLE))
 #    include "raw_hid.h"
 #endif
 
@@ -221,11 +221,11 @@ static void raw_hid_task(void) {
 }
 #endif
 
-#ifdef OPENRGB_PROTOCOL_ENABLE
+#ifdef HIDRGB_PROTOCOL_ENABLE
 
-void openrgb_hid_send(uint8_t *data, uint8_t length) {
+void hidrgb_hid_send(uint8_t *data, uint8_t length) {
     // TODO: implement variable size packet
-    if (length != OPENRGB_EPSIZE) {
+    if (length != HIDRGB_EPSIZE) {
         return;
     }
 
@@ -237,12 +237,12 @@ void openrgb_hid_send(uint8_t *data, uint8_t length) {
     // of other endpoint usage.
     uint8_t ep = Endpoint_GetCurrentEndpoint();
 
-    Endpoint_SelectEndpoint(OPENRGB_IN_EPNUM);
+    Endpoint_SelectEndpoint(HIDRGB_IN_EPNUM);
 
     // Check to see if the host is ready to accept another packet
     if (Endpoint_IsINReady()) {
         // Write data
-        Endpoint_Write_Stream_LE(data, OPENRGB_EPSIZE, NULL);
+        Endpoint_Write_Stream_LE(data, HIDRGB_EPSIZE, NULL);
         // Finalize the stream transfer to send the last packet
         Endpoint_ClearIN();
     }
@@ -254,7 +254,7 @@ void openrgb_hid_send(uint8_t *data, uint8_t length) {
  *
  * FIXME: Needs doc
  */
-__attribute__((weak)) void openrgb_hid_receive(uint8_t *data, uint8_t length) {
+__attribute__((weak)) void hidrgb_hid_receive(uint8_t *data, uint8_t length) {
     // Users should #include "raw_hid.h" in their own code
     // and implement this function there. Leave this as weak linkage
     // so users can opt to not handle data coming in.
@@ -264,15 +264,15 @@ __attribute__((weak)) void openrgb_hid_receive(uint8_t *data, uint8_t length) {
  *
  * FIXME: Needs doc
  */
-static void openrgb_hid_task(void) {
+static void hidrgb_hid_task(void) {
     // Create a temporary buffer to hold the read in data from the host
-    uint8_t data[OPENRGB_EPSIZE];
+    uint8_t data[HIDRGB_EPSIZE];
     bool    data_read = false;
 
     // Device must be connected and configured for the task to run
     if (USB_DeviceState != DEVICE_STATE_Configured) return;
 
-    Endpoint_SelectEndpoint(OPENRGB_OUT_EPNUM);
+    Endpoint_SelectEndpoint(HIDRGB_OUT_EPNUM);
 
     // Check to see if a packet has been sent from the host
     if (Endpoint_IsOUTReceived()) {
@@ -287,7 +287,7 @@ static void openrgb_hid_task(void) {
         Endpoint_ClearOUT();
 
         if (data_read) {
-            openrgb_hid_receive(data, sizeof(data));
+            hidrgb_hid_receive(data, sizeof(data));
         }
     }
 }
@@ -555,9 +555,9 @@ void EVENT_USB_Device_ConfigurationChanged(void) {
     ConfigSuccess &= Endpoint_ConfigureEndpoint((RAW_OUT_EPNUM | ENDPOINT_DIR_OUT), EP_TYPE_INTERRUPT, RAW_EPSIZE, 1);
 #endif
 
-#ifdef OPENRGB_PROTOCOL_ENABLE
-    ConfigSuccess &= Endpoint_ConfigureEndpoint((OPENRGB_IN_EPNUM | ENDPOINT_DIR_IN), EP_TYPE_INTERRUPT, OPENRGB_EPSIZE, 1);
-    ConfigSuccess &= Endpoint_ConfigureEndpoint((OPENRGB_OUT_EPNUM | ENDPOINT_DIR_OUT), EP_TYPE_INTERRUPT, OPENRGB_EPSIZE, 1);
+#ifdef HIDRGB_PROTOCOL_ENABLE
+    ConfigSuccess &= Endpoint_ConfigureEndpoint((HIDRGB_IN_EPNUM | ENDPOINT_DIR_IN), EP_TYPE_INTERRUPT, HIDRGB_EPSIZE, 1);
+    ConfigSuccess &= Endpoint_ConfigureEndpoint((HIDRGB_OUT_EPNUM | ENDPOINT_DIR_OUT), EP_TYPE_INTERRUPT, HIDRGB_EPSIZE, 1);
 #endif
 
 #ifdef CONSOLE_ENABLE
@@ -1192,8 +1192,8 @@ void protocol_post_task(void) {
     raw_hid_task();
 #endif
 
-#ifdef OPENRGB_PROTOCOL_ENABLE
-    openrgb_hid_task();
+#ifdef HIDRGB_PROTOCOL_ENABLE
+    hidrgb_hid_task();
 #endif
 
 #if !defined(INTERRUPT_CONTROL_ENDPOINT)

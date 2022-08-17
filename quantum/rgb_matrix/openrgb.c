@@ -294,7 +294,7 @@ static uint8_t raw_hid_buffer[OPENRGB_EPSIZE];
 const uint8_t size = sizeof openrgb_rgb_matrix_effects_indexes / sizeof openrgb_rgb_matrix_effects_indexes[0];
 static uint8_t mode_index = 0;
 
-void openrgb_hid_receive(uint8_t *data, uint8_t length) {
+void openrgb_command_handler(uint8_t *data, uint8_t length) {
     switch (*data) {
         case OPENRGB_GET_PROTOCOL_VERSION:
             openrgb_get_protocol_version();
@@ -328,7 +328,8 @@ void openrgb_hid_receive(uint8_t *data, uint8_t length) {
 
     if (*data != OPENRGB_DIRECT_MODE_SET_LEDS) {
         raw_hid_buffer[OPENRGB_EPSIZE - 1] = OPENRGB_END_OF_MESSAGE;
-        openrgb_hid_send(raw_hid_buffer, OPENRGB_EPSIZE);
+        // openrgb_hid_send(raw_hid_buffer, OPENRGB_EPSIZE);
+        memcpy(data, raw_hid_buffer, OPENRGB_EPSIZE);
         memset(raw_hid_buffer, 0x00, OPENRGB_EPSIZE);
     }
 }

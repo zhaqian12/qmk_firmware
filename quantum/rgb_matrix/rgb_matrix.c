@@ -53,7 +53,7 @@ __attribute__((weak)) RGB rgb_matrix_hsv_to_rgb(HSV hsv) {
 #ifdef SIGNALRGB_ENABLE
 #    include "signalrgb_anim.h"
 #endif
-,
+
 #undef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 #undef RGB_MATRIX_EFFECT
 // -----End rgb effect includes macros-------

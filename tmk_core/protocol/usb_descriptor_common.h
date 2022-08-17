@@ -31,16 +31,16 @@
 #    define RAW_USAGE_ID 0x61
 #endif
 
-#ifndef OPENRGB_USAGE_PAGE
-#    define OPENRGB_USAGE_PAGE 0xFF59
+#ifndef HIDRGB_USAGE_PAGE
+#    define HIDRGB_USAGE_PAGE 0xFF59
 #endif
 
-#ifndef OPENRGB_USAGE_ID
-#    define OPENRGB_USAGE_ID 0x60
+#ifndef HIDRGB_USAGE_ID
+#    define HIDRGB_USAGE_ID 0x60
 #endif
 
 #define RAW_USAGE_PAGE_HI ((uint8_t)(RAW_USAGE_PAGE >> 8))
 #define RAW_USAGE_PAGE_LO ((uint8_t)(RAW_USAGE_PAGE & 0xFF))
 
-#define OPENRGB_USAGE_PAGE_HI ((uint8_t)(OPENRGB_USAGE_PAGE >> 8))
-#define OPENRGB_USAGE_PAGE_LO ((uint8_t)(OPENRGB_USAGE_PAGE & 0xFF))
+#define HIDRGB_USAGE_PAGE_HI ((uint8_t)(HIDRGB_USAGE_PAGE >> 8))
+#define HIDRGB_USAGE_PAGE_LO ((uint8_t)(HIDRGB_USAGE_PAGE & 0xFF))
