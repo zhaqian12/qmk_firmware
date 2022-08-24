@@ -18,7 +18,7 @@
 
 // This is changed only when the command IDs change,
 // so OpenRGB can detect compatible firmware.
-#define OPENRGB_PROTOCOL_VERSION 0x0E
+#define OPENRGB_PROTOCOL_VERSION 0xAA
 
 
 enum openrgb_command_id {

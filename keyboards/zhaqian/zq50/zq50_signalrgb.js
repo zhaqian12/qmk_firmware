@@ -144,11 +144,11 @@ function effectDisable() {
 }
 
 export function onbksetChanged(){
-	setrgbctrl(0, bkset)
+    setrgbctrl(0, bkset)
 }
 
 export function onugsetChanged(){
-	setrgbctrl(1, ugset)
+    setrgbctrl(1, ugset)
 }
 
 function setrgbctrl(val, set){
@@ -160,8 +160,6 @@ function setrgbctrl(val, set){
     packet[4] = set;
     device.write(packet, 64);
     device.log(`setrgbctrl to ${val} ${set}`)
-  
-
 }
 
 function grabColors(shutdown = false) {
@@ -203,7 +201,7 @@ function sendColors() {
         packet[3] = offset;
         packet[4] = 0x14;
         packet = packet.concat(rgbdata.splice(0, 60));
-        device.write(packet, 64);
+        device.write(packet, 65);
     }
 }
 

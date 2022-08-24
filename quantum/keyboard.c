@@ -33,7 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "sendchar.h"
 #include "eeconfig.h"
 #include "action_layer.h"
-// #include "../lib/RTT/SEGGER_RTT.h"
+
 #ifdef BACKLIGHT_ENABLE
 #    include "backlight.h"
 #endif
@@ -413,7 +413,7 @@ void keyboard_init(void) {
 #ifdef UNDERGLOW_RGB_MATRIX_ENABLE
     underglow_rgb_matrix_init();
 #endif
-#if (defined(RGB_INDICATORS_ENABLE) && !defined(DYNAMIC_RGB_INDICATORS_ENABLE))
+#ifdef RGB_INDICATORS_ENABLE
     rgb_indicators_init();
 #endif
 
