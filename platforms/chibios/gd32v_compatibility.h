@@ -120,3 +120,7 @@
 #    define SPI_CR1_BR_1 SPI_CTL0_PSC_1
 #    define SPI_CR1_BR_2 SPI_CTL0_PSC_2
 #endif
+
+#if defined HAL_USE_PWM && !defined HAL_USE_SERIAL
+#    define CCR CHCV
+#endif

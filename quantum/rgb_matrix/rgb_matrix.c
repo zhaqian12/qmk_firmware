@@ -50,6 +50,9 @@ __attribute__((weak)) RGB rgb_matrix_hsv_to_rgb(HSV hsv) {
 #ifdef RGB_MATRIX_CUSTOM_USER
 #    include "rgb_matrix_user.inc"
 #endif
+#ifdef SIGNALRGB_ENABLE
+#    include "signalrgb_anim.h"
+#endif
 
 #undef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 #undef RGB_MATRIX_EFFECT
@@ -359,9 +362,9 @@ static void rgb_task_render(uint8_t effect) {
 // ---------------------------------------------
 // -----Begin rgb effect switch case macros-----
 #define RGB_MATRIX_EFFECT(name, ...)          \
-    case RGB_MATRIX_##name:                   \
-        rendering = name(&rgb_effect_params); \
-        break;
+        case RGB_MATRIX_##name:                   \
+            rendering = name(&rgb_effect_params); \
+            break;
 #include "rgb_matrix_effects.inc"
 #undef RGB_MATRIX_EFFECT
 
@@ -376,6 +379,15 @@ static void rgb_task_render(uint8_t effect) {
 #    ifdef RGB_MATRIX_CUSTOM_USER
 #        include "rgb_matrix_user.inc"
 #    endif
+#    undef RGB_MATRIX_EFFECT
+#endif
+
+#ifdef SIGNALRGB_ENABLE
+#define RGB_MATRIX_EFFECT(name, ...)              \
+        case RGB_MATRIX_##name:                   \
+            rendering = name(&rgb_effect_params); \
+            break;
+#    include "signalrgb_anim.h"
 #    undef RGB_MATRIX_EFFECT
 #endif
             // -----End rgb effect switch case macros-------
@@ -433,8 +445,23 @@ void rgb_matrix_task(void) {
         case RENDERING:
             rgb_task_render(effect);
             if (effect) {
-                rgb_matrix_indicators();
-                rgb_matrix_indicators_advanced(&rgb_effect_params);
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+                underglow_rgb_matrix_task();
+#endif
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+                if (indicator_rgb_is_override() == 1) 
+                {
+                    rgb_matrix_control_task();
+                    RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
+                }
+                else
+                {
+                    RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
+                    rgb_matrix_control_task();
+                }
+#else
+                RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
+#endif
             }
             break;
         case FLUSHING:
@@ -491,6 +518,10 @@ void rgb_matrix_init(void) {
         last_hit_buffer.tick[i] = UINT16_MAX;
     }
 #endif // RGB_MATRIX_KEYREACTIVE_ENABLED
+
+#if defined(ENABLE_RGB_MATRIX_CYCLE_ALTER) || defined (ENABLE_RGB_MATRIX_RAINBOW_ALTER)
+    ALTER_init();
+#endif
 
     if (!eeconfig_is_enabled()) {
         dprintf("rgb_matrix_init_drivers eeconfig is not enabled.\n");

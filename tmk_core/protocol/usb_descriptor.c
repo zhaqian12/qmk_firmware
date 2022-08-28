@@ -236,6 +236,36 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM SharedReport[] = {
         HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_ARRAY | HID_IOF_ABSOLUTE),
     HID_RI_END_COLLECTION(0),
 
+#ifdef RADIAL_CONTROLLER_ENABLE
+    0x05, 0x01,                 // USAGE_PAGE (Generic Desktop)
+    0x09, 0x0e,                 // USAGE (System Multi-Axis Controller)
+    0xa1, 0x01,                 // COLLECTION (Application)
+    0x85, REPORT_ID_RADIAL,       //   REPORT_ID (Radial Controller)
+    0x05, 0x0d,                 //   USAGE_PAGE (Digitizers)
+    0x09, 0x21,                 //   USAGE (Puck)
+    0xa1, 0x00,                 //   COLLECTION (Physical)
+    0x05, 0x09,                 //     USAGE_PAGE (Buttons)
+    0x09, 0x01,                 //     USAGE (Button 1)
+    0x95, 0x01,                 //     REPORT_COUNT (1)
+    0x75, 0x01,                 //     REPORT_SIZE (1)
+    0x15, 0x00,                 //     LOGICAL_MINIMUM (0)
+    0x25, 0x01,                 //     LOGICAL_MAXIMUM (1)
+    0x81, 0x02,                 //     INPUT (Data,Var,Abs)
+    0x05, 0x01,                 //     USAGE_PAGE (Generic Desktop)
+    0x09, 0x37,                 //     USAGE (Dial)
+    0x95, 0x01,                 //     REPORT_COUNT (1)
+    0x75, 0x0f,                 //     REPORT_SIZE (15)
+    0x55, 0x0f,                 //     UNIT_EXPONENT (-1)
+    0x65, 0x14,                 //     UNIT (Degrees, English Rotation)
+    0x36, 0xf0, 0xf1,           //     PHYSICAL_MINIMUM (-3600)
+    0x46, 0x10, 0x0e,           //     PHYSICAL_MAXIMUM (3600)
+    0x16, 0xf0, 0xf1,           //     LOGICAL_MINIMUM (-3600)
+    0x26, 0x10, 0x0e,           //     LOGICAL_MAXIMUM (3600)
+    0x81, 0x06,                 //     INPUT (Data,Var,Rel)
+    0xc0,                       //   END_COLLECTION
+    0xc0,                       // END_COLLECTION
+#endif
+
     HID_RI_USAGE_PAGE(8, 0x0C),           // Consumer
     HID_RI_USAGE(8, 0x01),                // Consumer Control
     HID_RI_COLLECTION(8, 0x01),           // Application
@@ -329,6 +359,30 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM RawReport[] = {
         HID_RI_LOGICAL_MINIMUM(8, 0x00),
         HID_RI_LOGICAL_MAXIMUM(16, 0x00FF),
         HID_RI_REPORT_COUNT(8, RAW_EPSIZE),
+        HID_RI_REPORT_SIZE(8, 0x08),
+        HID_RI_OUTPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE | HID_IOF_NON_VOLATILE),
+    HID_RI_END_COLLECTION(0),
+};
+#endif
+
+#ifdef HIDRGB_PROTOCOL_ENABLE
+const USB_Descriptor_HIDReport_Datatype_t PROGMEM HIDRGBReport[] = {
+    HID_RI_USAGE_PAGE(16, HIDRGB_USAGE_PAGE), // Vendor Defined
+    HID_RI_USAGE(8, HIDRGB_USAGE_ID),         // Vendor Defined
+    HID_RI_COLLECTION(8, 0x01),    // Application
+        // Data to host
+        HID_RI_USAGE(8, 0x62),     // Vendor Defined
+        HID_RI_LOGICAL_MINIMUM(8, 0x00),
+        HID_RI_LOGICAL_MAXIMUM(16, 0x00FF),
+        HID_RI_REPORT_COUNT(8, HIDRGB_EPSIZE),
+        HID_RI_REPORT_SIZE(8, 0x08),
+        HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
+
+        // Data from host
+        HID_RI_USAGE(8, 0x63),     // Vendor Defined
+        HID_RI_LOGICAL_MINIMUM(8, 0x00),
+        HID_RI_LOGICAL_MAXIMUM(16, 0x00FF),
+        HID_RI_REPORT_COUNT(8, HIDRGB_EPSIZE),
         HID_RI_REPORT_SIZE(8, 0x08),
         HID_RI_OUTPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE | HID_IOF_NON_VOLATILE),
     HID_RI_END_COLLECTION(0),
@@ -563,6 +617,53 @@ const USB_Descriptor_Configuration_t PROGMEM ConfigurationDescriptor = {
         .EndpointAddress        = (ENDPOINT_DIR_OUT | RAW_OUT_EPNUM),
         .Attributes             = (EP_TYPE_INTERRUPT | ENDPOINT_ATTR_NO_SYNC | ENDPOINT_USAGE_DATA),
         .EndpointSize           = RAW_EPSIZE,
+        .PollingIntervalMS      = 0x01
+    },
+#endif
+
+#ifdef HIDRGB_PROTOCOL_ENABLE
+    .HIDRGB_Interface = {
+        .Header = {
+            .Size               = sizeof(USB_Descriptor_Interface_t),
+            .Type               = DTYPE_Interface
+        },
+        .InterfaceNumber        = HIDRGB_INTERFACE,
+        .AlternateSetting       = 0x00,
+        .TotalEndpoints         = 2,
+        .Class                  = HID_CSCP_HIDClass,
+        .SubClass               = HID_CSCP_NonBootSubclass,
+        .Protocol               = HID_CSCP_NonBootProtocol,
+        .InterfaceStrIndex      = NO_DESCRIPTOR
+    },
+    .HIDRGB_HID = {
+        .Header = {
+            .Size               = sizeof(USB_HID_Descriptor_HID_t),
+            .Type               = HID_DTYPE_HID
+        },
+        .HIDSpec                = VERSION_BCD(1, 1, 1),
+        .CountryCode            = 0x00,
+        .TotalReportDescriptors = 1,
+        .HIDReportType          = HID_DTYPE_Report,
+        .HIDReportLength        = sizeof(HIDRGBReport)
+    },
+    .HIDRGB_INEndpoint = {
+        .Header = {
+            .Size               = sizeof(USB_Descriptor_Endpoint_t),
+            .Type               = DTYPE_Endpoint
+        },
+        .EndpointAddress        = (ENDPOINT_DIR_IN | HIDRGB_IN_EPNUM),
+        .Attributes             = (EP_TYPE_INTERRUPT | ENDPOINT_ATTR_NO_SYNC | ENDPOINT_USAGE_DATA),
+        .EndpointSize           = HIDRGB_EPSIZE,
+        .PollingIntervalMS      = 0x01
+    },
+    .HIDRGB_OUTEndpoint = {
+        .Header = {
+            .Size               = sizeof(USB_Descriptor_Endpoint_t),
+            .Type               = DTYPE_Endpoint
+        },
+        .EndpointAddress        = (ENDPOINT_DIR_OUT | HIDRGB_OUT_EPNUM),
+        .Attributes             = (EP_TYPE_INTERRUPT | ENDPOINT_ATTR_NO_SYNC | ENDPOINT_USAGE_DATA),
+        .EndpointSize           = HIDRGB_EPSIZE,
         .PollingIntervalMS      = 0x01
     },
 #endif
@@ -1161,6 +1262,14 @@ uint16_t get_usb_descriptor(const uint16_t wValue, const uint16_t wIndex, const 
                     break;
 #endif
 
+#ifdef HIDRGB_PROTOCOL_ENABLE
+                case HIDRGB_INTERFACE:
+                    Address = &ConfigurationDescriptor.HIDRGB_HID;
+                    Size    = sizeof(USB_HID_Descriptor_HID_t);
+
+                    break;
+#endif
+
 #ifdef CONSOLE_ENABLE
                 case CONSOLE_INTERFACE:
                     Address = &ConfigurationDescriptor.Console_HID;
@@ -1218,6 +1327,14 @@ uint16_t get_usb_descriptor(const uint16_t wValue, const uint16_t wIndex, const 
                     break;
 #endif
 
+#ifdef HIDRGB_PROTOCOL_ENABLE
+                case HIDRGB_INTERFACE:
+                    Address = &HIDRGBReport;
+                    Size    = sizeof(HIDRGBReport);
+
+                    break;
+#endif
+
 #ifdef CONSOLE_ENABLE
                 case CONSOLE_INTERFACE:
                     Address = &ConsoleReport;
@@ -1225,12 +1342,14 @@ uint16_t get_usb_descriptor(const uint16_t wValue, const uint16_t wIndex, const 
 
                     break;
 #endif
+
 #ifdef JOYSTICK_ENABLE
                 case JOYSTICK_INTERFACE:
                     Address = &JoystickReport;
                     Size    = sizeof(JoystickReport);
                     break;
 #endif
+
 #if defined(DIGITIZER_ENABLE) && !defined(DIGITIZER_SHARED_EP)
                 case DIGITIZER_INTERFACE:
                     Address = &DigitizerReport;
