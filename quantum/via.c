@@ -254,24 +254,22 @@ __attribute__((weak)) void via_custom_value_command(uint8_t *data, uint8_t lengt
 }
 
 // Keyboard level code can override this, but shouldn't need to.
-// Override via_custom_value_command_kb() or via_custom_value_command()
-// instead.
-// DO NOT call raw_hid_send() in the override function.
-__attribute__((weak)) void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
-    uint8_t *command_id = &(data[0]);
-    *command_id         = id_unhandled;
+// Controlling custom features should be done by overriding 
+// via_custom_value_command_kb() instead. 
+__attribute__((weak)) bool via_command_kb(uint8_t *data, uint8_t length) {
+    return false;
 }
 
-// VIA handles received HID messages first, and will route to
-// raw_hid_receive_kb() for command IDs that are not handled here.
-// This gives the keyboard code level the ability to handle the command
-// specifically.
-//
-// raw_hid_send() is called at the end, with the same buffer, which was
-// possibly modified with returned values.
 void raw_hid_receive(uint8_t *data, uint8_t length) {
     uint8_t *command_id   = &(data[0]);
     uint8_t *command_data = &(data[1]);
+
+    // If via_command_kb() returns true, the command was fully
+    // handled, including calling raw_hid_send()
+    if ( via_command_kb(data, length) ) {
+        return;
+    }
+
     switch (*command_id) {
         case id_get_protocol_version: {
             command_data[0] = VIA_PROTOCOL_VERSION >> 8;
@@ -327,7 +325,9 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
                     break;
                 }
                 default: {
-                    raw_hid_receive_kb(data, length);
+                    // The value ID is not known
+                    // Return the unhandled state
+                    *command_id = id_unhandled;
                     break;
                 }
             }
@@ -346,7 +346,9 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
                     break;
                 }
                 default: {
-                    raw_hid_receive_kb(data, length);
+                    // The value ID is not known
+                    // Return the unhandled state
+                    *command_id = id_unhandled;
                     break;
                 }
             }
@@ -484,7 +486,7 @@ void via_qmk_backlight_get_value(uint8_t *data) {
     switch (*value_id) {
         case id_qmk_backlight_brightness: {
             // level / BACKLIGHT_LEVELS * 255
-            value_data[0] = ((uint16_t)get_backlight_level() * UINT8_MAX) / BACKLIGHT_LEVELS;
+            value_data[0] = ((uint16_t)get_backlight_level()) * 255 / BACKLIGHT_LEVELS;
             break;
         }
         case id_qmk_backlight_effect: {
@@ -505,7 +507,7 @@ void via_qmk_backlight_set_value(uint8_t *data) {
     switch (*value_id) {
         case id_qmk_backlight_brightness: {
             // level / 255 * BACKLIGHT_LEVELS
-            backlight_level_noeeprom(((uint16_t)value_data[0] * BACKLIGHT_LEVELS) / UINT8_MAX);
+            backlight_level_noeeprom(((uint16_t)value_data[0]) * BACKLIGHT_LEVELS / 255);
             break;
         }
         case id_qmk_backlight_effect: {
@@ -558,7 +560,7 @@ void via_qmk_rgblight_get_value(uint8_t *data) {
     uint8_t *value_data = &(data[1]);
     switch (*value_id) {
         case id_qmk_rgblight_brightness: {
-            value_data[0] = ((uint16_t)rgblight_get_val() * UINT8_MAX) / RGBLIGHT_LIMIT_VAL;
+            value_data[0] = rgblight_get_val();
             break;
         }
         case id_qmk_rgblight_effect: {
@@ -583,7 +585,7 @@ void via_qmk_rgblight_set_value(uint8_t *data) {
     uint8_t *value_data = &(data[1]);
     switch (*value_id) {
         case id_qmk_rgblight_brightness: {
-            rgblight_sethsv_noeeprom(rgblight_get_hue(), rgblight_get_sat(), ((uint16_t)value_data[0] * RGBLIGHT_LIMIT_VAL) / UINT8_MAX);
+            rgblight_sethsv_noeeprom(rgblight_get_hue(), rgblight_get_sat(), value_data[0]);
             break;
         }
         case id_qmk_rgblight_effect: {
