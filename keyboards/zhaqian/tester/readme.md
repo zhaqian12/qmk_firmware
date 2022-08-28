@@ -45,12 +45,6 @@ Make example for this keyboard (after setting up your build environment):
     make zhaqian/tester/gd32vf103:via
     ```
     
-* MCU:cm32m101a
-    ```
-    make zhaqian/tester/cm32m101a:default
-    make zhaqian/tester/cm32m101a:via
-    ```
-    
 * MCU:stm32l433
     ```
     make zhaqian/tester/l433:default
