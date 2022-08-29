@@ -290,6 +290,7 @@ void rgb_matrix_test(void) {
 }
 
 static bool rgb_matrix_none(effect_params_t *params) {
+#ifdef RGB_MATRIX_CONTROL_ENABLE
     static uint8_t changed = 0;
     uint8_t override = indicator_rgb_is_override();
     changed ^= override;
@@ -300,7 +301,11 @@ static bool rgb_matrix_none(effect_params_t *params) {
     if (!params->init && override == 0) {
         return false;
     }
-
+#else
+    if (!params->init) {
+        return false;
+    }
+#endif
     rgb_matrix_set_color_all(0, 0, 0);
     return false;
 }
@@ -413,7 +418,11 @@ static void rgb_task_render(uint8_t effect) {
     // next task
     if (!rendering) {
         rgb_task_state = FLUSHING;
-        if (!rgb_effect_params.init && effect == RGB_MATRIX_NONE && (indicator_rgb_is_override() == 0)) {
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+        if (!rgb_effect_params.init && effect == RGB_MATRIX_NONE && indicator_rgb_is_override() == 0) {
+#else
+        if (!rgb_effect_params.init && effect == RGB_MATRIX_NONE) {
+#endif
             // We only need to flush once if we are RGB_MATRIX_NONE
             rgb_task_state = SYNCING;
         }
@@ -469,11 +478,14 @@ void rgb_matrix_task(void) {
 #else
                 RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
 #endif
-            } else {
+            } 
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+            else {
                 if (indicator_rgb_is_override() == 1) {
                     RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
                 }
             }
+#endif
             break;
         case FLUSHING:
             rgb_task_flush(effect);

@@ -1,0 +1,10 @@
+{
+    "keyboard_name": "zq48",
+    "manufacturer": "ZhaQian",
+    "maintainer": "ZhaQian",
+    "usb": {
+        "vid": "0x00AA",
+        "pid": "0xAA07",
+        "device_version": "0.0.1"
+    }
+}

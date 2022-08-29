@@ -1,23 +1,13 @@
 {
-    "name": "zq64",
+    "name": "ZQ64",
     "vendorId": "0x00AA",
-    "productId": "0xAA11",
+    "productId": "0xAA0E",
     "lighting": {
       "extends": "none",
       "keycodes": "qmk"
     },
-    "matrix": { "rows": 4, "cols": 13 },
+    "matrix": { "rows": 5, "cols": 14 },
     "customKeycodes": [
-      {
-        "name": "Alt\nTab\nForward",
-        "title": "Alt Tab Marco in Windows",
-        "shortName": "Alt Tab\nForward"
-      },
-      {
-        "name": "Alt\nTab\nReverse",
-        "title": "Alt Tab Shift Marco in Windows",
-        "shortName": "Alt Tab\nReverse"
-      },
       {
         "name": "Radial\nButton",
         "title": "Radial Controller Button in Windows 10",
@@ -42,42 +32,23 @@
         "name": "Radial\nRight\nHold",
         "title": "Radial Controller Continue Clockwise in Windows 10",
         "shortName": "Radial\nRightC"
-      },
-      {
-        "name": "Underglow\nRGB\nToggle",
-        "title": "Underglow RGB Toggle",
-        "shortName": "UGRGB Tog"
-      },
-      {
-        "name": "Key\nRGB\nToggle",
-        "title": "Key RGB Toggle",
-        "shortName": "KeyRGB\nTog"
-      },
-      {
-        "name": "Logo\nRGB\nToggle",
-        "title": "Logo RGB Toggle",
-        "shortName": "LogoRGB\nTog"
-      },
-      {
-        "name": "Underglow\nRGB\nMode\nSync",
-        "title": "Underglow RGB Mode Sync With Key RGB Mode",
-        "shortName": "UGRGB\nMODS"
-      },
-      {
-        "name": "Underglow\nRGB\nMode+",
-        "title": "Underglow RGB Mode Step",
-        "shortName": "UGRGB\nMOD+"
-      },
-      {
-        "name": "Underglow\nRGB\nMode-",
-        "title": "Underglow RGB Mode Step Reverse",
-        "shortName": "UGRGB\nMOD-"
       }
     ],
     "layouts": {
+      "labels": [
+        "Encoder"
+      ],
       "keymap":[
         [
-          "0,0",
+          "0,0\n\n\n0,1\n\n\n\n\n\ne0",
+          {
+            "x": -1,
+            "c": "#777777"
+          },
+          "0,0\n\n\n0,0",
+          {
+            "c": "#cccccc"
+          },
           "0,1",
           "0,2",
           "0,3",
@@ -88,18 +59,16 @@
           "0,8",
           "0,9",
           "0,10",
-          {
-            "w": 1.5
-          },
           "0,11",
+          "0,12",
           {
-            "x": 0.5
+            "w": 2
           },
-          "0,12"
+          "0,13"
         ],
         [
           {
-            "w": 1.25
+            "w": 1.5
           },
           "1,0",
           "1,1",
@@ -112,12 +81,12 @@
           "1,8",
           "1,9",
           "1,10",
-          {
-            "w": 1.25
-          },
           "1,11",
-          "2,12",
-          "1,12"
+          "1,12",
+          {
+            "w": 1.5
+          },
+          "1,13"
         ],
         [
           {
@@ -133,55 +102,57 @@
           "2,7",
           "2,8",
           "2,9",
+          "2,10",
+          "2,11",
           {
-            "w": 1.25
+            "c": "#777777",
+            "w": 2.25
           },
-          "2,10"
+          "2,13"
         ],
         [
           {
-            "y": -0.75,
-            "x": 12.25
-          },
-          "2,11"
-        ],
-        [
-          {
-            "y": -0.25,
-            "w": 1.25
+            "c": "#cccccc",
+            "w": 2
           },
           "3,0",
           "3,1",
-          {
-            "w": 1.25
-          },
           "3,2",
-          {
-            "w": 2.25
-          },
           "3,3",
-          {
-            "w": 2.75
-          },
+          "3,4",
+          "3,5",
           "3,6",
-          {
-            "w": 1.25
-          },
+          "3,7",
           "3,8",
-          {
-            "w": 1.25
-          },
-          "3,9"
+          "3,9",
+          "3,10",
+          "3,11",
+          "3,12",
+          "3,13"
         ],
         [
           {
-            "y": -0.75,
-            "x": 11.25
+            "w": 1.25
           },
-          "3,10",
-          "3,11",
-          "3,12"
+          "4,0",
+          {
+            "w": 1.25
+          },
+          "4,1",
+          {
+            "w": 1.25
+          },
+          "4,2",
+          {
+            "w": 6.25
+          },
+          "4,5",
+          "4,9",
+          "4,10",
+          "4,11",
+          "4,12",
+          "4,13"
         ]
       ]
     }
-}
+  }

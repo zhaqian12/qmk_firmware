@@ -4,7 +4,7 @@ A 80% keyboard.
 
 * Keyboard Maintainer: [zhaqian](https://github.com/zhaqian12)
 * Hardware Supported: Jane_v2_ce_slot
-* Hardware Availability: [qmk-zq](https://github.com/zhaqian12/qmk_firmware)
+* Hardware Availability: [zq-kb](https://github.com/zhaqian12/ZQ-Keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 

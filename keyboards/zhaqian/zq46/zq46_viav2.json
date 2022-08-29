@@ -1,13 +1,23 @@
 {
-    "name": "ZQ64",
+    "name": "zq64",
     "vendorId": "0x00AA",
-    "productId": "0xAA0E",
+    "productId": "0xAA11",
     "lighting": {
       "extends": "none",
       "keycodes": "qmk"
     },
-    "matrix": { "rows": 5, "cols": 14 },
+    "matrix": { "rows": 4, "cols": 13 },
     "customKeycodes": [
+      {
+        "name": "Alt\nTab\nForward",
+        "title": "Alt Tab Marco in Windows",
+        "shortName": "Alt Tab\nForward"
+      },
+      {
+        "name": "Alt\nTab\nReverse",
+        "title": "Alt Tab Shift Marco in Windows",
+        "shortName": "Alt Tab\nReverse"
+      },
       {
         "name": "Radial\nButton",
         "title": "Radial Controller Button in Windows 10",
@@ -32,29 +42,42 @@
         "name": "Radial\nRight\nHold",
         "title": "Radial Controller Continue Clockwise in Windows 10",
         "shortName": "Radial\nRightC"
+      },
+      {
+        "name": "Underglow\nRGB\nToggle",
+        "title": "Underglow RGB Toggle",
+        "shortName": "UGRGB Tog"
+      },
+      {
+        "name": "Key\nRGB\nToggle",
+        "title": "Key RGB Toggle",
+        "shortName": "KeyRGB\nTog"
+      },
+      {
+        "name": "Logo\nRGB\nToggle",
+        "title": "Logo RGB Toggle",
+        "shortName": "LogoRGB\nTog"
+      },
+      {
+        "name": "Underglow\nRGB\nMode\nSync",
+        "title": "Underglow RGB Mode Sync With Key RGB Mode",
+        "shortName": "UGRGB\nMODS"
+      },
+      {
+        "name": "Underglow\nRGB\nMode+",
+        "title": "Underglow RGB Mode Step",
+        "shortName": "UGRGB\nMOD+"
+      },
+      {
+        "name": "Underglow\nRGB\nMode-",
+        "title": "Underglow RGB Mode Step Reverse",
+        "shortName": "UGRGB\nMOD-"
       }
     ],
     "layouts": {
-      "labels": [
-        ["Encoder","CLOSE","OPEN"]
-      ],
       "keymap":[
         [
-          "4,3\n\n\n0,1",
-          {
-            "x": -1,
-            "d": true
-          },
-          "\n\n\n0,0",
-          "0,0\n\n\n0,1",
-          {
-            "x": -1,
-            "c": "#777777"
-          },
-          "0,0\n\n\n0,0",
-          {
-            "c": "#cccccc"
-          },
+          "0,0",
           "0,1",
           "0,2",
           "0,3",
@@ -65,22 +88,18 @@
           "0,8",
           "0,9",
           "0,10",
-          "0,11",
-          "0,12",
-          {
-            "w": 2
-          },
-          "0,13"
-        ],
-        [
-          "4,4\n\n\n0,1",
-          {
-            "x": -1,
-            "d": true
-          },
-          "\n\n\n0,0",
           {
             "w": 1.5
+          },
+          "0,11",
+          {
+            "x": 0.5
+          },
+          "0,12\n\n\n\n\n\n\n\n\ne0"
+        ],
+        [
+          {
+            "w": 1.25
           },
           "1,0",
           "1,1",
@@ -93,16 +112,13 @@
           "1,8",
           "1,9",
           "1,10",
-          "1,11",
-          "1,12",
           {
-            "w": 1.5
+            "w": 1.25
           },
-          "1,13"
+          "1,11"
         ],
         [
           {
-            "x": 1,
             "w": 1.75
           },
           "2,0",
@@ -115,59 +131,55 @@
           "2,7",
           "2,8",
           "2,9",
-          "2,10",
-          "2,11",
           {
-            "c": "#777777",
-            "w": 2.25
+            "w": 1.25
           },
-          "2,13"
+          "2,10"
         ],
         [
           {
-            "x": 1,
-            "c": "#cccccc",
-            "w": 2
+            "y": -0.75,
+            "x": 12.25
+          },
+          "2,11"
+        ],
+        [
+          {
+            "y": -0.25,
+            "w": 1.25
           },
           "3,0",
           "3,1",
+          {
+            "w": 1.25
+          },
           "3,2",
+          {
+            "w": 2.25
+          },
           "3,3",
-          "3,4",
-          "3,5",
+          {
+            "w": 2.75
+          },
           "3,6",
-          "3,7",
+          {
+            "w": 1.25
+          },
           "3,8",
-          "3,9",
-          "3,10",
-          "3,11",
-          "3,12",
-          "3,13"
+          {
+            "w": 1.25
+          },
+          "3,9"
         ],
         [
           {
-            "x": 1,
-            "w": 1.25
+            "y": -0.75,
+            "x": 11.25
           },
-          "4,0",
-          {
-            "w": 1.25
-          },
-          "4,1",
-          {
-            "w": 1.25
-          },
-          "4,2",
-          {
-            "w": 6.25
-          },
-          "4,5",
-          "4,9",
-          "4,10",
-          "4,11",
-          "4,12",
-          "4,13"
+          "3,10",
+          "3,11",
+          "3,12"
         ]
       ]
     }
-  }
+}

@@ -18,25 +18,15 @@
 
 #include "config_common.h"
 
-/* USB Device descriptor parameter */
-#define VENDOR_ID       0x00AA
-#define PRODUCT_ID      0xAAAA
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    ZhaQian
-#define PRODUCT         Mpad12
-
-/* key matrix size */
 #define MATRIX_ROWS 4
 #define MATRIX_COLS 6
 
-/* key matrix pins */
 #define MATRIX_ROW_PINS { B7, D2, D3, D5 }
 #define MATRIX_COL_PINS { B4, B5, B6, C6, C7, F0 }
-#define UNUSED_PINS
 
 #define DIODE_DIRECTION COL2ROW
 
-#define DEBOUNCING_DELAY 5
+#define DEBOUNCE 5
 
 #define LOCKING_SUPPORT_ENABLE
 #define LOCKING_RESYNC_ENABLE

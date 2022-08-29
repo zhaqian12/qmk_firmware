@@ -43,9 +43,10 @@
 #ifdef RGB_MATRIX_CUSTOM_KB
 #define RGB_MATRIX_CUSTOM_ANIMATION
 #endif
+#endif
+
 #ifdef UNDERGLOW_RGB_MATRIX_ENABLE
 #define UG_RGB_MATRIX_ANIMATIONS
-#endif
 #endif
 
 #ifdef ENCODER_ENABLE

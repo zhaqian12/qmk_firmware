@@ -24,7 +24,7 @@
 | zq75          | 0x00AA    | 0xAA03     | Hotswap  | Atmel atmega32u4  | RGB, SPLIT SPACE                             |
 | zq60          | 0x00AA    | 0xAA04     | Hotswap  | Atmel atmega32u4  | ESCRGB, COMPATIBILITY LAYOUT                 |
 | zq80          | 0x00AA    | 0xAA05     | Hotswap  | Atmel atmega32u4  | RGB, UGRGB, LOGORGB                          |
-| tester        | 0x00AA    | 0xAA06     | Hotswap  | f103/401/411/vf103/l433/m101a/air32/f407 | RGB, UGRGB, ENCODER                          |
+| tester        | 0x00AA    | 0xAA06     | Hotswap  | f103/401/411/vf103/l433/air32/f407 | RGB, UGRGB, ENCODER                          |
 | zq48          | 0x00AA    | 0xAA07     | Hotswap  | Atmel atmega32u4  | RGB, UGRGB                                   |
 | zq61          | 0x00AA    | 0xAA08     | Hotswap  | ST stm32f401      | RGB, UGRGB                                   |
 | zq67          | 0x00AA    | 0xAA09     | Hotswap  | Atmel atmega32u4  | RGB, UGRGB                                   |

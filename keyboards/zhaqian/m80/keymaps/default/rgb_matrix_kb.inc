@@ -8,7 +8,6 @@
 #include "zqlib/rgb_matrix_effect/cycle_down_up.h"
 #include "zqlib/rgb_matrix_effect/cycle_in_out.h"
 #include "zqlib/rgb_matrix_effect/cycle_in_out_dual.h"
-#include "zqlib/rgb_matrix_effect/fractal.h"
 #include "zqlib/rgb_matrix_effect/fractal_rgb.h"
 #include "zqlib/rgb_matrix_effect/kitt_rgb.h"
 #include "zqlib/rgb_matrix_effect/cycle_sin_wave.h"

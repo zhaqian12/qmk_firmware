@@ -18,18 +18,11 @@
 
 #include "config_common.h"
 
-#define VENDOR_ID       0x00AA
-#define PRODUCT_ID      0xAA18
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    ZhaQian
-#define PRODUCT         S80
-
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 17
 
 #define MATRIX_ROW_PINS { A0, A1, A2, A4, A5, B9 }
 #define MATRIX_COL_PINS { A15, B3, B4, B5, B6, B7, B8, A6, A7, B0, B1, B12, B13, B14, B15, A8, A9 }
-#define UNUSED_PINS
 
 #define DIODE_DIRECTION COL2ROW
 
@@ -38,7 +31,6 @@
 #define LOCKING_SUPPORT_ENABLE
 #define LOCKING_RESYNC_ENABLE
 
-#define QMK_KEYS_PER_SCAN 12
 // #define FORCE_NKRO
 
 #ifdef RGB_MATRIX_ENABLE
@@ -77,5 +69,3 @@
 #ifdef UNDERGLOW_RGB_MATRIX_ENABLE
 #define UG_RGB_MATRIX_ANIMATIONS
 #endif
-
-#define FEE_MCU_FLASH_SIZE 64

@@ -18,25 +18,16 @@
 
 #include "config_common.h"
 
-#define VENDOR_ID       0x00AA
-#define PRODUCT_ID      0xAA12
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    ZhaQian
-#define PRODUCT         osu
-
-
 #define DIRECT_PINS { \
     {B12, B13, B14, A15, B3, B4, B5}, \
     {B6, B8, B7} \
 }
-#define UNUSED_PINS
 
 #define DEBOUNCE 5
 
 #define LOCKING_SUPPORT_ENABLE
 #define LOCKING_RESYNC_ENABLE
 
-#define QMK_KEYS_PER_SCAN 12
 #define FORCE_NKRO
 
 #ifdef RGB_MATRIX_ENABLE

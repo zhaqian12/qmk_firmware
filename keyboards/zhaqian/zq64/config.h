@@ -18,19 +18,11 @@
 
 #include "config_common.h"
 
-#define VENDOR_ID       0x00AA
-#define PRODUCT_ID      0xAA0E
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    ZhaQian
-#define PRODUCT         zq64
-
-
 #define MATRIX_ROWS 5
 #define MATRIX_COLS 14
 
 #define MATRIX_ROW_PINS { B15, A8, A9, B3, B10 }
 #define MATRIX_COL_PINS { B12, B13, B14, A15, B4, B5, A2, A3, A4, A5, A6, A7, B0, B1}
-#define UNUSED_PINS
 
 #define DIODE_DIRECTION COL2ROW
 
@@ -39,7 +31,6 @@
 #define LOCKING_SUPPORT_ENABLE
 #define LOCKING_RESYNC_ENABLE
 
-// #define QMK_KEYS_PER_SCAN 12
 // #define FORCE_NKRO
 
 #ifdef RGB_MATRIX_ENABLE
