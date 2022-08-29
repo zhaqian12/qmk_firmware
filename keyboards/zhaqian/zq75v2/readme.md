@@ -5,7 +5,7 @@ This keyboard use st90usb1286 as mcu.
 
 * Keyboard Maintainer: [zhaqian](https://github.com/zhaqian12)
 * Hardware Supported: zq75v2
-* Hardware Availability: [qmk-zq](https://github.com/zhaqian12/qmk_firmware)
+* Hardware Availability: [zq-kb](https://github.com/zhaqian12/ZQ-Keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 

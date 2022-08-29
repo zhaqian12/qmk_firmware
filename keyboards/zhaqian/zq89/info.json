@@ -1,0 +1,10 @@
+{
+    "keyboard_name": "zq89",
+    "manufacturer": "ZhaQian",
+    "maintainer": "ZhaQian",
+    "usb": {
+        "vid": "0x00AA",
+        "pid": "0xAA13",
+        "device_version": "0.0.1"
+    }
+}

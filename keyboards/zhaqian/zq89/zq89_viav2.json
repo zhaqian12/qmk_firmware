@@ -46,8 +46,8 @@
     ],
     "layouts": {
       "labels": [
-            ["Encoder1","CLOSE","OPEN"],
-            ["Encoder2","CLOSE","OPEN"]
+            "Encoder1",
+            "Encoder2"
       ],
       "keymap":[
         [

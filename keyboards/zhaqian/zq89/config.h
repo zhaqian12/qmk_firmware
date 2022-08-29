@@ -18,13 +18,6 @@
 
 #include "config_common.h"
 
-#define VENDOR_ID       0x00AA
-#define PRODUCT_ID      0xAA13
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    ZhaQian
-#define PRODUCT         zq89
-
-
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 17
 
@@ -39,7 +32,6 @@
 #define LOCKING_SUPPORT_ENABLE
 #define LOCKING_RESYNC_ENABLE
 
-#define QMK_KEYS_PER_SCAN 12
 #define FORCE_NKRO
 
 #ifdef RGB_MATRIX_ENABLE

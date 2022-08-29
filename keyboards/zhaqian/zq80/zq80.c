@@ -56,4 +56,5 @@ void rgb_matrix_indicators_kb(void) {
             rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
     }
 }
+
 #endif

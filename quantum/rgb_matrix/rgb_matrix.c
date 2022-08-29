@@ -290,7 +290,14 @@ void rgb_matrix_test(void) {
 }
 
 static bool rgb_matrix_none(effect_params_t *params) {
-    if (!params->init) {
+    static uint8_t changed = 0;
+    uint8_t override = indicator_rgb_is_override();
+    changed ^= override;
+    if (changed == 1 && override == 0) {
+        rgb_matrix_set_color_all(0, 0, 0);
+        rgb_matrix_update_pwm_buffers();
+    }
+    if (!params->init && override == 0) {
         return false;
     }
 
@@ -406,7 +413,7 @@ static void rgb_task_render(uint8_t effect) {
     // next task
     if (!rendering) {
         rgb_task_state = FLUSHING;
-        if (!rgb_effect_params.init && effect == RGB_MATRIX_NONE) {
+        if (!rgb_effect_params.init && effect == RGB_MATRIX_NONE && (indicator_rgb_is_override() == 0)) {
             // We only need to flush once if we are RGB_MATRIX_NONE
             rgb_task_state = SYNCING;
         }
@@ -462,6 +469,10 @@ void rgb_matrix_task(void) {
 #else
                 RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
 #endif
+            } else {
+                if (indicator_rgb_is_override() == 1) {
+                    RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
+                }
             }
             break;
         case FLUSHING:

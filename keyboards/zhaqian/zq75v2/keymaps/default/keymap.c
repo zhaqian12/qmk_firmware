@@ -14,7 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "zq75v2.h"
+#include QMK_KEYBOARD_H
+
 #ifdef OLED_ENABLE
 #include "render_anime.c"
 #endif
@@ -28,6 +29,7 @@ extern bool anime_cleared;
 extern bool is_cat_anime_active;
 #define OLED_SHOW_STATE_TIMEOUT 60000
 #endif
+
 
 #ifdef UNICODEMAP_ENABLE
 enum unicode_names {
@@ -58,6 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_VOLU,
 		KC_TRNS, RGB_TOG, RGB_MOD, RGB_RMOD, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD, KC_TRNS, KC_TRNS, KC_VOLD,
 		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_VAD, RGB_VAI,
+
 #if defined RGB_MATRIX_CONTROL_ENABLE && defined UNDERGLOW_RGB_MATRIX_ENABLE
 		KC_TRNS, X(BANG), X(IRONY), X(SNEK), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, K_R_T,
 		KC_TRNS, KC_TRNS, VLK_TOG, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, UG_R_MF, UG_R_T , UG_R_MR),
@@ -65,6 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS, X(BANG), X(IRONY), X(SNEK), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
 		KC_TRNS, KC_TRNS, VLK_TOG, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_LOCK),
 #endif
+
 	LAYOUT(
 		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
 		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
@@ -178,6 +182,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS)
 
 };
+
 
 #ifdef OLED_ENABLE
 char wpm_str[10];
@@ -481,10 +486,10 @@ bool oled_task_user(void) {
         } else {
             render_anime();
         }
-        return;
+        return true;
     } else if (timer_elapsed32(oled_timer) > OLED_TIMEOUT) {
         oled_off();
-        return;
+        return true;
     } else {
         if (master_oled_cleared) {
             oled_on();
@@ -536,3 +541,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 }
+
+#if defined(ENCODER_MAP_ENABLE)
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
+    [0] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [1] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [2] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [3] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [4] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [5] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [6] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [7] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [8] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [9] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [10] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [11] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [12] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [13] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [14] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [15] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+};
+#endif
+
