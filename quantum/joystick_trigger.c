@@ -17,6 +17,23 @@
 #include "joystick_trigger.h"
 #include "analog.h"
 
+#ifndef JOYSTICK_LPF_PROPORTION 
+#define JOYSTICK_LPF_PROPORTION (0.2)
+#endif
+
+// Low Pass Filter Calculate
+#ifdef JOYSTICK_USE_LPF
+#define JOYSTICK_LPF_CAL(in, out)                    \
+do {                                                 \
+    out += (in - out) * JOYSTICK_LPF_PROPORTION;     \
+} while (0)
+#else
+#define JOYSTICK_LPF_CAL(in, out)                    \
+do {                                                 \
+    out = in;                                        \
+} while (0)
+#endif
+
 #ifndef JOYSTICK_ADC_RESOLUTION
 #define JOYSTICK_ADC_RESOLUTION 10
 #elif JOYSTICK_ADC_RESOLUTION < 8 || JOYSTICK_ADC_RESOLUTION > 16
@@ -111,8 +128,8 @@ static bool joystick_update(uint8_t index) {
 bool joystick_trigger_task(void) {
     bool changed = false;
     for (uint8_t i = 0; i < NUMBER_OF_JOYSTICKS; i++) {
-        joystick_axes_state[i].joystick_axes_x_value = analogReadPin(joystick_axes_x_pin[i]);
-        joystick_axes_state[i].joystick_axes_y_value = analogReadPin(joystick_axes_y_pin[i]);
+        JOYSTICK_LPF_CAL(analogReadPin(joystick_axes_x_pin[i]), joystick_axes_state[i].joystick_axes_x_value);
+        JOYSTICK_LPF_CAL(analogReadPin(joystick_axes_y_pin[i]), joystick_axes_state[i].joystick_axes_y_value);
         changed |= joystick_update(i);
     }
     return changed;
