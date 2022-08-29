@@ -7,17 +7,12 @@ BOARD = STM32_F103_STM32DUINO
 # Bootloader selection
 BOOTLOADER = custom
 
-# Build Options
-#   comment out to disable the options.
-#
-BOOTMAGIC_ENABLE = yes
-MOUSEKEY_ENABLE = yes
-EXTRAKEY_ENABLE = yes
-CONSOLE_ENABLE = no
-COMMAND_ENABLE = no
-SLEEP_LED_ENABLE = no
-NKRO_ENABLE = yes
-RGBLIGHT_ENABLE = no
+WS2812_DRIVER = pwm
+
+EEPROM_DRIVER = wear_leveling
+WEAR_LEVELING_DRIVER = embedded_flash
+
+KEYBOARD_SHARED_EP = yes
 LTO_ENABLE = yes
 
 OPT_DEFS += -DCORTEX_ENABLE_WFI_IDLE=TRUE

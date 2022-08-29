@@ -568,7 +568,7 @@
       ],
     "layouts": {
       "labels": [
-        ["Encoder","CLOSE","OPEN"]
+        "Encoder"
       ],
       "keymap": [
         [

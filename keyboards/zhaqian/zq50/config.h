@@ -16,19 +16,11 @@
 
 #include "config_common.h"
 
-#define VENDOR_ID       0x00AA
-#define PRODUCT_ID      0xAA16
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    ZhaQian
-#define PRODUCT         zq50
-
-
 #define MATRIX_ROWS 4
 #define MATRIX_COLS 14
 
 #define MATRIX_ROW_PINS { B3, B4, B9, B8 }
 #define MATRIX_COL_PINS { B14, B13, B12, B0, A7, A6, A5, A4, A3, A2, A1, A0, B15, B7 }
-#define UNUSED_PINS
 
 #define DIODE_DIRECTION COL2ROW
 
@@ -42,7 +34,6 @@
 #ifdef RGB_MATRIX_ENABLE
 #define RGBLED_NUM 66
 #define DRIVER_LED_TOTAL RGBLED_NUM
-// #define WS2812_BYTE_ORDER WS2812_BYTE_ORDER_RGB
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 200
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 #define RGB_MATRIX_ANIMATION
@@ -52,10 +43,9 @@
 #ifdef RGB_MATRIX_CUSTOM_KB
 #define RGB_MATRIX_CUSTOM_ANIMATION
 #endif
-#endif
-
 #ifdef UNDERGLOW_RGB_MATRIX_ENABLE
 #define UG_RGB_MATRIX_ANIMATIONS
+#endif
 #endif
 
 #ifdef ENCODER_ENABLE

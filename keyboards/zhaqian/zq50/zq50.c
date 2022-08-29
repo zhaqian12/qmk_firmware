@@ -15,6 +15,7 @@
  */
 
 #include "zq50.h"
+
 #ifdef RGB_MATRIX_ENABLE
 
 led_config_t g_led_config = {
@@ -55,13 +56,3 @@ void rgb_matrix_indicators_kb(void) {
 }
 #endif
 
-#if defined(ENCODER_MAP_ENABLE)
-const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
-    [0] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [1] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-    [2] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-    [3] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-	[4] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-	[5] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-};
-#endif
