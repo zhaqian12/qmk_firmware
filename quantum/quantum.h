@@ -235,6 +235,54 @@ extern layer_state_t layer_state;
 #    include "process_caps_word.h"
 #endif
 
+#ifdef ALT_TAB_MARCO_ENABLE
+#    include "alt_tab_marco.h"
+#endif
+
+#ifdef ENCODER_TRIGGER_ENABLE
+#    include "encoder_trigger.h"
+#endif
+
+#ifdef JOYSTICK_TRIGGER_ENABLE
+#    include "joystick_trigger.h"
+#endif
+
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+#    include "rgb_matrix_control.h"
+#endif
+
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+#    include "underglow_rgb_matrix.h"
+#endif
+
+#ifdef OPENRGB_ENABLE
+#    include "openrgb.h"
+#endif
+
+#ifdef RADIAL_CONTROLLER_ENABLE
+#   include "radial_controller.h"
+#endif
+
+#ifdef VIA_CUSTOM_KEYCODE_ENABLE
+#   include "via_custom_keycode.h"
+#endif
+
+#ifdef VIA_CUSTOM_CONTROL_ENABLE
+#   include "via_custom_control.h"
+#endif
+
+#ifdef RGB_INDICATORS_ENABLE
+#ifdef DYNAMIC_RGB_INDICATORS_ENABLE
+#   include "dynamic_rgb_indicators.h"
+#else
+#   include "rgb_indicators.h"
+#endif
+#endif
+
+#ifdef SIGNALRGB_ENABLE
+#    include "signalrgb.h"
+#endif
+
 // For tri-layer
 void          update_tri_layer(uint8_t layer1, uint8_t layer2, uint8_t layer3);
 layer_state_t update_tri_layer_state(layer_state_t state, uint8_t layer1, uint8_t layer2, uint8_t layer3);
