@@ -28,10 +28,8 @@ enum hid_report_ids {
     REPORT_ID_KEYBOARD = 1,
     REPORT_ID_MOUSE,
     REPORT_ID_SYSTEM,
-#ifdef RADIAL_CONTROLLER_ENABLE
-    REPORT_ID_RADIAL,
-#endif
     REPORT_ID_CONSUMER,
+    REPORT_ID_RADIAL,
     REPORT_ID_PROGRAMMABLE_BUTTON,
     REPORT_ID_NKRO,
     REPORT_ID_JOYSTICK,
@@ -198,6 +196,11 @@ typedef struct {
     uint8_t  report_id;
     uint16_t usage;
 } __attribute__((packed)) report_extra_t;
+
+typedef struct {
+    uint8_t  report_id;
+    uint16_t usage;
+} __attribute__((packed)) report_radial_t;
 
 typedef struct {
     uint8_t  report_id;

@@ -106,17 +106,10 @@ static uint8_t keyboard_leds(void);
 static void    send_keyboard(report_keyboard_t *report);
 static void    send_mouse(report_mouse_t *report);
 static void    send_system(uint16_t data);
-#ifdef RADIAL_CONTROLLER_ENABLE
-static void    send_radial(uint16_t data);
-#endif
 static void    send_consumer(uint16_t data);
+static void    send_radial(uint16_t data);
 static void    send_programmable_button(uint32_t data);
-host_driver_t  lufa_driver = {keyboard_leds, send_keyboard, send_mouse, send_system, \
-
-#ifdef RADIAL_CONTROLLER_ENABLE
-        send_radial,
-#endif
-        send_consumer, send_programmable_button};
+host_driver_t  lufa_driver = {keyboard_leds, send_keyboard, send_mouse, send_system, send_consumer, send_radial, send_programmable_button};
 
 #ifdef VIRTSER_ENABLE
 // clang-format off
@@ -853,13 +846,6 @@ static void send_system(uint16_t data) {
 #endif
 }
 
-#ifdef RADIAL_CONTROLLER_ENABLE
-static void send_radial(uint16_t data) {
-#ifdef EXTRAKEY_ENABLE
-    send_extra(REPORT_ID_RADIAL, data);
-#endif
-}
-#endif
 /** \brief Send Consumer
  *
  * FIXME: Needs doc
@@ -878,6 +864,18 @@ static void send_consumer(uint16_t data) {
 #    endif
 
     send_extra(REPORT_ID_CONSUMER, data);
+#endif
+}
+
+/** \brief Send Radial
+ *
+ * FIXME: Needs doc
+ */
+static void send_radial(uint16_t data) {
+#ifdef RADIAL_CONTROLLER_ENABLE
+    static report_radial_t r;
+    r = (report_radial_t){.report_id = REPORT_ID_RADIAL, .usage = data};
+    send_report(&r, sizeof(r));
 #endif
 }
 

@@ -992,17 +992,36 @@ void send_system(uint16_t data) {
 #endif
 }
 
-#ifdef RADIAL_CONTROLLER_ENABLE
-void send_radial(uint16_t data) {
-#ifdef EXTRAKEY_ENABLE
-    send_extra(REPORT_ID_RADIAL, data);
-#endif
-}
-#endif
-
 void send_consumer(uint16_t data) {
 #ifdef EXTRAKEY_ENABLE
     send_extra(REPORT_ID_CONSUMER, data);
+#endif
+}
+
+void send_radial(uint16_t data) {
+#ifdef RADIAL_CONTROLLER_ENABLE
+    osalSysLock();
+    if (usbGetDriverStateI(&USB_DRIVER) != USB_ACTIVE) {
+        osalSysUnlock();
+        return;
+    }
+
+    if (usbGetTransmitStatusI(&USB_DRIVER, SHARED_IN_EPNUM)) {
+        /* Need to either suspend, or loop and call unlock/lock during
+         * every iteration - otherwise the system will remain locked,
+         * no interrupts served, so USB not going through as well.
+         * Note: for suspend, need USB_USE_WAIT == TRUE in halconf.h */
+        if (osalThreadSuspendTimeoutS(&(&USB_DRIVER)->epc[SHARED_IN_EPNUM]->in_state->thread, TIME_MS2I(10)) == MSG_TIMEOUT) {
+            osalSysUnlock();
+            return;
+        }
+    }
+
+    static report_radial_t report;
+    report = (report_radial_t){.report_id = REPORT_ID_RADIAL, .usage = data};
+
+    usbStartTransmitI(&USB_DRIVER, SHARED_IN_EPNUM, (uint8_t *)&report, sizeof(report_radial_t));
+    osalSysUnlock();
 #endif
 }
 

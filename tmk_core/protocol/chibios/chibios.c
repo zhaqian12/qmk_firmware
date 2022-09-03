@@ -59,20 +59,13 @@ uint8_t keyboard_leds(void);
 void    send_keyboard(report_keyboard_t *report);
 void    send_mouse(report_mouse_t *report);
 void    send_system(uint16_t data);
-#ifdef RADIAL_CONTROLLER_ENABLE
-void    send_radial(uint16_t data);
-#endif
 void    send_consumer(uint16_t data);
+void    send_radial(uint16_t data);
 void    send_programmable_button(uint32_t data);
 void    send_digitizer(report_digitizer_t *report);
 
 /* host struct */
-host_driver_t chibios_driver = {keyboard_leds, send_keyboard, send_mouse, send_system, \
-
-#ifdef RADIAL_CONTROLLER_ENABLE
-    send_radial,
-#endif
-    send_consumer, send_programmable_button};
+host_driver_t chibios_driver = {keyboard_leds, send_keyboard, send_mouse, send_system, send_consumer, send_radial, send_programmable_button};
 
 #ifdef VIRTSER_ENABLE
 void virtser_task(void);
@@ -89,6 +82,7 @@ void hidrgb_hid_task(void);
 #ifdef CONSOLE_ENABLE
 void console_task(void);
 #endif
+
 #ifdef MIDI_ENABLE
 void midi_ep_task(void);
 #endif
