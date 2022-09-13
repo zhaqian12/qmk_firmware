@@ -41,6 +41,7 @@ enum via_custom_keycodes {
 #else
     R_C_SW,
 #endif
+    IND_ON_TOG,
 #endif
 
 #ifdef UNDERGLOW_RGB_MATRIX_ENABLE

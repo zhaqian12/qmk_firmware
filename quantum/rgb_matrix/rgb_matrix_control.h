@@ -40,6 +40,7 @@ void rgb_matrix_control_task(void);
 void key_rgb_toggle(void);
 void underglow_rgb_toggle(void);
 void logo_rgb_toggle(void);
+void indicator_rgb_override_toggle(void);
 void underglow_rgb_enable(bool update);
 void underglow_rgb_disable(bool update);
 void key_rgb_enable(bool update);

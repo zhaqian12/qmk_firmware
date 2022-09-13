@@ -92,6 +92,11 @@ bool process_via_custom_keycode(const uint16_t keycode, const keyrecord_t *recor
             }
             return false;
 #endif
+        case IND_ON_TOG:
+            if (record->event.pressed) {
+                indicator_rgb_override_toggle();
+            }
+            return false;     
 #endif
 
 #ifdef UNDERGLOW_RGB_MATRIX_ENABLE

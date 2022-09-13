@@ -18,8 +18,8 @@ NKRO_ENABLE = yes
 RGBLIGHT_ENABLE = no
 AUDIO_ENABLE = no
 
-EEPROM_DRIVER = wear_leveling
-WEAR_LEVELING_DRIVER = embedded_flash
+# EEPROM_DRIVER = wear_leveling
+# WEAR_LEVELING_DRIVER = embedded_flash
 
 LTO_ENABLE = yes
 

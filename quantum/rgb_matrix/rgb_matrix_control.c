@@ -83,6 +83,11 @@ void logo_rgb_toggle(void) {
     }
 }
 
+void indicator_rgb_override_toggle(void) {
+    rgb_matrix_control_config.is_indicator_override ^= 1;
+    eeconfig_update_rgb_matrix_control();
+}
+
 void key_rgb_enable(bool update) {
     if (rgb_matrix_is_enabled()) {
         rgb_matrix_control_config.is_key_rgb_enable = 0;
