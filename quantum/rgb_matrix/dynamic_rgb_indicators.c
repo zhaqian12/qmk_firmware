@@ -20,12 +20,80 @@
 #include <stdlib.h>
 #include "eeprom.h"
 
+#ifdef DEFAULT_NUM_LOCK_ENABLE 
+#define DEFAULT_NUM_LOCK_ENABLE_VAL 1
+#else
+#define DEFAULT_NUM_LOCK_ENABLE_VAL 0
+#endif
+
+#ifdef DEFAULT_NUM_LOCK_ALL_LED
+#define DEFAULT_NUM_LOCK_ALL_LED_VAL 1
+#else
+#define DEFAULT_NUM_LOCK_ALL_LED_VAL 0
+#endif
+
+#ifdef DEFAULT_NUM_LOCK_KEY_LED
+#define DEFAULT_NUM_LOCK_KEY_LED_VAL 1
+#else
+#define DEFAULT_NUM_LOCK_KEY_LED_VAL 0
+#endif
+
+#ifdef DEFAULT_NUM_LOCK_UNDERGLOW_LED
+#define DEFAULT_NUM_LOCK_UNDERGLOW_LED_VAL 1
+#else
+#define DEFAULT_NUM_LOCK_UNDERGLOW_LED_VAL 0
+#endif
+
+#ifndef DEFAULT_NUM_LOCK_MODE
+#define DEFAULT_NUM_LOCK_MODE 1
+#endif
+
+#ifdef DEFAULT_NUM_LOCK_LOGO_LED
+#define DEFAULT_NUM_LOCK_LOGO_LED_VAL 1
+#else
+#define DEFAULT_NUM_LOCK_LOGO_LED_VAL 0
+#endif
+
 #ifndef DEFAULT_NUM_LOCK_LED
 #define DEFAULT_NUM_LOCK_LED 0
 #endif
 
 #ifndef DEFAULT_NUM_LOCK_HSV
 #define DEFAULT_NUM_LOCK_HSV {240, 255, 200}
+#endif
+
+#ifdef DEFAULT_CAPS_LOCK_ENABLE 
+#define DEFAULT_CAPS_LOCK_ENABLE_VAL 1
+#else
+#define DEFAULT_CAPS_LOCK_ENABLE_VAL 0
+#endif
+
+#ifdef DEFAULT_CAPS_LOCK_ALL_LED
+#define DEFAULT_CAPS_LOCK_ALL_LED_VAL 1
+#else
+#define DEFAULT_CAPS_LOCK_ALL_LED_VAL 0
+#endif
+
+#ifdef DEFAULT_CAPS_LOCK_KEY_LED
+#define DEFAULT_CAPS_LOCK_KEY_LED_VAL 1
+#else
+#define DEFAULT_CAPS_LOCK_KEY_LED_VAL 0
+#endif
+
+#ifdef DEFAULT_CAPS_LOCK_UNDERGLOW_LED
+#define DEFAULT_CAPS_LOCK_UNDERGLOW_LED_VAL 1
+#else
+#define DEFAULT_CAPS_LOCK_UNDERGLOW_LED_VAL 0
+#endif
+
+#ifndef DEFAULT_CAPS_LOCK_MODE
+#define DEFAULT_CAPS_LOCK_MODE 1
+#endif
+
+#ifdef DEFAULT_CAPS_LOCK_LOGO_LED
+#define DEFAULT_CAPS_LOCK_LOGO_LED_VAL 1
+#else
+#define DEFAULT_CAPS_LOCK_LOGO_LED_VAL 0
 #endif
 
 #ifndef DEFAULT_CAPS_LOCK_LED
@@ -36,6 +104,40 @@
 #define DEFAULT_CAPS_LOCK_HSV {0, 255, 200}
 #endif
 
+#ifdef DEFAULT_SCROLL_LOCK_ENABLE 
+#define DEFAULT_SCROLL_LOCK_ENABLE_VAL 1
+#else
+#define DEFAULT_SCROLL_LOCK_ENABLE_VAL 0
+#endif
+
+#ifdef DEFAULT_SCROLL_LOCK_ALL_LED
+#define DEFAULT_SCROLL_LOCK_ALL_LED_VAL 1
+#else
+#define DEFAULT_SCROLL_LOCK_ALL_LED_VAL 0
+#endif
+
+#ifdef DEFAULT_SCROLL_LOCK_KEY_LED
+#define DEFAULT_SCROLL_LOCK_KEY_LED_VAL 1
+#else
+#define DEFAULT_SCROLL_LOCK_KEY_LED_VAL 0
+#endif
+
+#ifdef DEFAULT_SCROLL_LOCK_UNDERGLOW_LED
+#define DEFAULT_SCROLL_LOCK_UNDERGLOW_LED_VAL 1
+#else
+#define DEFAULT_SCROLL_LOCK_UNDERGLOW_LED_VAL 0
+#endif
+
+#ifndef DEFAULT_SCROLL_LOCK_MODE
+#define DEFAULT_SCROLL_LOCK_MODE 1
+#endif
+
+#ifdef DEFAULT_SCROLL_LOCK_LOGO_LED
+#define DEFAULT_SCROLL_LOCK_LOGO_LED_VAL 1
+#else
+#define DEFAULT_SCROLL_LOCK_LOGO_LED_VAL 0
+#endif
+
 #ifndef DEFAULT_SCROLL_LOCK_LED
 #define DEFAULT_SCROLL_LOCK_LED 2
 #endif
@@ -43,6 +145,7 @@
 #ifndef DEFAULT_SCROLL_LOCK_HSV
 #define DEFAULT_SCROLL_LOCK_HSV {120, 255, 200}
 #endif
+
 
 static const uint8_t rgb_indicators_effect_index[] = {
 // to enable mode step reverse (uint8_t >= 0)
@@ -89,30 +192,30 @@ void update_dynamic_rgb_indicators(void) {
 
 static void update_dynamic_rgb_indicators_default(void) {
     HSV tmp_hsv[3] = {DEFAULT_NUM_LOCK_HSV, DEFAULT_CAPS_LOCK_HSV, DEFAULT_SCROLL_LOCK_HSV};
-    rgb_indicators_config.num_lock_config.enable = 1;
-    rgb_indicators_config.num_lock_config.all_led = 0;
-    rgb_indicators_config.num_lock_config.key_led = 0;
-    rgb_indicators_config.num_lock_config.underglow_led = 0;
-    rgb_indicators_config.num_lock_config.logo_led = 0;
-    rgb_indicators_config.num_lock_config.mode = 1;
+    rgb_indicators_config.num_lock_config.enable = DEFAULT_NUM_LOCK_ENABLE_VAL;
+    rgb_indicators_config.num_lock_config.all_led = DEFAULT_NUM_LOCK_ALL_LED_VAL;
+    rgb_indicators_config.num_lock_config.key_led = DEFAULT_NUM_LOCK_KEY_LED_VAL;
+    rgb_indicators_config.num_lock_config.underglow_led = DEFAULT_NUM_LOCK_UNDERGLOW_LED_VAL;
+    rgb_indicators_config.num_lock_config.logo_led = DEFAULT_NUM_LOCK_LOGO_LED_VAL;
+    rgb_indicators_config.num_lock_config.mode = DEFAULT_NUM_LOCK_MODE;
     rgb_indicators_config.num_lock_config.led = DEFAULT_NUM_LOCK_LED;
     rgb_indicators_config.num_lock_config.hsv = tmp_hsv[0];
 
-    rgb_indicators_config.caps_lock_config.enable = 1;
-    rgb_indicators_config.caps_lock_config.all_led = 0;
-    rgb_indicators_config.caps_lock_config.key_led = 0;
-    rgb_indicators_config.caps_lock_config.underglow_led = 0;
-    rgb_indicators_config.caps_lock_config.logo_led = 0;
-    rgb_indicators_config.caps_lock_config.mode = 1;
+    rgb_indicators_config.caps_lock_config.enable = DEFAULT_CAPS_LOCK_ENABLE_VAL;
+    rgb_indicators_config.caps_lock_config.all_led = DEFAULT_CAPS_LOCK_ALL_LED_VAL;
+    rgb_indicators_config.caps_lock_config.key_led = DEFAULT_CAPS_LOCK_KEY_LED_VAL;
+    rgb_indicators_config.caps_lock_config.underglow_led = DEFAULT_CAPS_LOCK_UNDERGLOW_LED_VAL;
+    rgb_indicators_config.caps_lock_config.logo_led = DEFAULT_CAPS_LOCK_LOGO_LED_VAL;
+    rgb_indicators_config.caps_lock_config.mode = DEFAULT_CAPS_LOCK_MODE;
     rgb_indicators_config.caps_lock_config.led = DEFAULT_CAPS_LOCK_LED;
     rgb_indicators_config.caps_lock_config.hsv = tmp_hsv[1];
 
-    rgb_indicators_config.scroll_lock_config.enable = 1;
-    rgb_indicators_config.scroll_lock_config.all_led = 0;
-    rgb_indicators_config.scroll_lock_config.key_led = 0;
-    rgb_indicators_config.scroll_lock_config.underglow_led = 0;
-    rgb_indicators_config.scroll_lock_config.logo_led = 0;
-    rgb_indicators_config.scroll_lock_config.mode = 1;
+    rgb_indicators_config.scroll_lock_config.enable = DEFAULT_SCROLL_LOCK_ENABLE_VAL;
+    rgb_indicators_config.scroll_lock_config.all_led = DEFAULT_SCROLL_LOCK_ALL_LED_VAL;
+    rgb_indicators_config.scroll_lock_config.key_led = DEFAULT_SCROLL_LOCK_KEY_LED_VAL;
+    rgb_indicators_config.scroll_lock_config.underglow_led = DEFAULT_SCROLL_LOCK_UNDERGLOW_LED_VAL;
+    rgb_indicators_config.scroll_lock_config.logo_led = DEFAULT_SCROLL_LOCK_LOGO_LED_VAL;
+    rgb_indicators_config.scroll_lock_config.mode = DEFAULT_SCROLL_LOCK_MODE;
     rgb_indicators_config.scroll_lock_config.led = DEFAULT_SCROLL_LOCK_LED;
     rgb_indicators_config.scroll_lock_config.hsv = tmp_hsv[2];
 
