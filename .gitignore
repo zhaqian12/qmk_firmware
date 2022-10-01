@@ -30,6 +30,15 @@ quantum/version.h
 *.qmk
 *.uf2
 
+!uf2boot_f401_25MHz.bin 
+!uf2boot_f411_25MHz.bin 
+!uf2boot_f401_8MHz.bin 
+!uf2boot_f411_8MHz.bin 
+!uf2boot_f103_8MHz.bin
+!uf2boot_gd32vf103_8MHz.bin
+!uf2boot_air32f103xB_8MHz.bin
+!uf2boot_air32f103xC_8MHz.bin
+
 # Old-style QMK Makefiles
 /keyboards/**/Makefile
 
@@ -95,3 +104,9 @@ compile_commands.json
 
 # VIA(L) json files that don't belong in QMK repo
 via*.json
+
+!via_rgb_control_setting.json
+!via_rgb_matrix_no_openrgb.json
+!via_rgb_matrix_with_openrgb.json
+!via_underglow_rgb_matrix.json
+!via_rgb_indicators.json

@@ -1,0 +1,10 @@
+{
+    "keyboard_name": " gh60_example",
+    "manufacturer": "ZhaQian",
+    "maintainer": "ZhaQian",
+    "usb": {
+        "vid": "0xFEED",
+        "pid": "0x6060",
+        "device_version": "0.0.1"
+    }
+}

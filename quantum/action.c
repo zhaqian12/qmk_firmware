@@ -45,7 +45,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    include "pointing_device.h"
 #endif
 
+#if defined(PS2_MOUSE_ENABLE) || defined(POINTING_DEVICE_ENABLE)
 int tp_buttons;
+#endif
 
 #if defined(RETRO_TAPPING) || defined(RETRO_TAPPING_PER_KEY) || (defined(AUTO_SHIFT_ENABLE) && defined(RETRO_SHIFT))
 int retro_tapping_counter = 0;

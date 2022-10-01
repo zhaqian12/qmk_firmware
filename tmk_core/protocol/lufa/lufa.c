@@ -86,6 +86,10 @@ extern keymap_config_t keymap_config;
 #    include "raw_hid.h"
 #endif
 
+#if (defined(HIDRGB_PROTOCOL_ENABLE) && !defined(RAW_ENABLE))
+#    include "raw_hid.h"
+#endif
+
 #ifdef JOYSTICK_ENABLE
 #    include "joystick.h"
 #endif
@@ -103,8 +107,9 @@ static void    send_keyboard(report_keyboard_t *report);
 static void    send_mouse(report_mouse_t *report);
 static void    send_system(uint16_t data);
 static void    send_consumer(uint16_t data);
+static void    send_radial(uint16_t data);
 static void    send_programmable_button(uint32_t data);
-host_driver_t  lufa_driver = {keyboard_leds, send_keyboard, send_mouse, send_system, send_consumer, send_programmable_button};
+host_driver_t  lufa_driver = {keyboard_leds, send_keyboard, send_mouse, send_system, send_consumer, send_radial, send_programmable_button};
 
 #ifdef VIRTSER_ENABLE
 // clang-format off
@@ -204,6 +209,78 @@ static void raw_hid_task(void) {
 
         if (data_read) {
             raw_hid_receive(data, sizeof(data));
+        }
+    }
+}
+#endif
+
+#ifdef HIDRGB_PROTOCOL_ENABLE
+
+void hidrgb_hid_send(uint8_t *data, uint8_t length) {
+    // TODO: implement variable size packet
+    if (length != HIDRGB_EPSIZE) {
+        return;
+    }
+
+    if (USB_DeviceState != DEVICE_STATE_Configured) {
+        return;
+    }
+
+    // TODO: decide if we allow calls to raw_hid_send() in the middle
+    // of other endpoint usage.
+    uint8_t ep = Endpoint_GetCurrentEndpoint();
+
+    Endpoint_SelectEndpoint(HIDRGB_IN_EPNUM);
+
+    // Check to see if the host is ready to accept another packet
+    if (Endpoint_IsINReady()) {
+        // Write data
+        Endpoint_Write_Stream_LE(data, HIDRGB_EPSIZE, NULL);
+        // Finalize the stream transfer to send the last packet
+        Endpoint_ClearIN();
+    }
+
+    Endpoint_SelectEndpoint(ep);
+}
+
+/** \brief Raw HID Receive
+ *
+ * FIXME: Needs doc
+ */
+__attribute__((weak)) void hidrgb_hid_receive(uint8_t *data, uint8_t length) {
+    // Users should #include "raw_hid.h" in their own code
+    // and implement this function there. Leave this as weak linkage
+    // so users can opt to not handle data coming in.
+}
+
+/** \brief Raw HID Task
+ *
+ * FIXME: Needs doc
+ */
+static void hidrgb_hid_task(void) {
+    // Create a temporary buffer to hold the read in data from the host
+    uint8_t data[HIDRGB_EPSIZE];
+    bool    data_read = false;
+
+    // Device must be connected and configured for the task to run
+    if (USB_DeviceState != DEVICE_STATE_Configured) return;
+
+    Endpoint_SelectEndpoint(HIDRGB_OUT_EPNUM);
+
+    // Check to see if a packet has been sent from the host
+    if (Endpoint_IsOUTReceived()) {
+        // Check to see if the packet contains data
+        if (Endpoint_IsReadWriteAllowed()) {
+            /* Read data */
+            Endpoint_Read_Stream_LE(data, sizeof(data), NULL);
+            data_read = true;
+        }
+
+        // Finalize the stream transfer to receive the last packet
+        Endpoint_ClearOUT();
+
+        if (data_read) {
+            hidrgb_hid_receive(data, sizeof(data));
         }
     }
 }
@@ -469,6 +546,11 @@ void EVENT_USB_Device_ConfigurationChanged(void) {
     /* Setup raw HID endpoints */
     ConfigSuccess &= Endpoint_ConfigureEndpoint((RAW_IN_EPNUM | ENDPOINT_DIR_IN), EP_TYPE_INTERRUPT, RAW_EPSIZE, 1);
     ConfigSuccess &= Endpoint_ConfigureEndpoint((RAW_OUT_EPNUM | ENDPOINT_DIR_OUT), EP_TYPE_INTERRUPT, RAW_EPSIZE, 1);
+#endif
+
+#ifdef HIDRGB_PROTOCOL_ENABLE
+    ConfigSuccess &= Endpoint_ConfigureEndpoint((HIDRGB_IN_EPNUM | ENDPOINT_DIR_IN), EP_TYPE_INTERRUPT, HIDRGB_EPSIZE, 1);
+    ConfigSuccess &= Endpoint_ConfigureEndpoint((HIDRGB_OUT_EPNUM | ENDPOINT_DIR_OUT), EP_TYPE_INTERRUPT, HIDRGB_EPSIZE, 1);
 #endif
 
 #ifdef CONSOLE_ENABLE
@@ -785,6 +867,18 @@ static void send_consumer(uint16_t data) {
 #endif
 }
 
+/** \brief Send Radial
+ *
+ * FIXME: Needs doc
+ */
+static void send_radial(uint16_t data) {
+#ifdef RADIAL_CONTROLLER_ENABLE
+    static report_radial_t r;
+    r = (report_radial_t){.report_id = REPORT_ID_RADIAL, .usage = data};
+    send_report(&r, sizeof(r));
+#endif
+}
+
 static void send_programmable_button(uint32_t data) {
 #ifdef PROGRAMMABLE_BUTTON_ENABLE
     static report_programmable_button_t r;
@@ -1094,6 +1188,10 @@ void protocol_post_task(void) {
 
 #ifdef RAW_ENABLE
     raw_hid_task();
+#endif
+
+#ifdef HIDRGB_PROTOCOL_ENABLE
+    hidrgb_hid_task();
 #endif
 
 #if !defined(INTERRUPT_CONTROL_ENDPOINT)

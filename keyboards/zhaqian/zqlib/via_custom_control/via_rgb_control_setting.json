@@ -1,0 +1,30 @@
+  {
+    "label": "Lighting",
+    "content": [
+      {
+        "label": "Settings",
+        "content": [
+          {
+            "label": "Global",
+            "type": "toggle",
+            "content": ["id_rgb_matrix_toggle[0]", 5, 1, 0]
+          },
+          {
+            "label": "Backlight",
+            "type": "toggle",
+            "content": ["id_rgb_matrix_toggle[1]", 5, 1, 1]
+          },
+          {
+            "label": "Underglow",
+            "type": "toggle",
+            "content": ["id_rgb_matrix_toggle[2]", 5, 1, 2]
+          },
+          {
+            "label": "Logo",
+            "type": "toggle",
+            "content": ["id_rgb_matrix_toggle[3]", 5, 1, 3]
+          }
+        ]
+      }
+    ]
+  }   

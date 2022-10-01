@@ -1,0 +1,10 @@
+{
+    "keyboard_name": "zq80",
+    "manufacturer": "ZhaQian",
+    "maintainer": "ZhaQian",
+    "usb": {
+        "vid": "0x00AA",
+        "pid": "0xAA05",
+        "device_version": "0.0.1"
+    }
+}

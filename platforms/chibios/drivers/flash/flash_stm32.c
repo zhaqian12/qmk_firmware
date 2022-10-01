@@ -19,7 +19,7 @@
 #include <hal.h>
 #include "flash_stm32.h"
 
-#if defined(STM32F1XX)
+#if defined(STM32F1XX) 
 #    define FLASH_SR_WRPERR FLASH_SR_WRPRTERR
 #endif
 
@@ -49,6 +49,12 @@ static uint8_t ADDR2PAGE(uint32_t Page_Address) {
     // TODO: bad times...
     return 7;
 }
+#endif
+
+#if defined(AIR32F10x)
+#    define FLASH_SR_WRPERR FLASH_SR_WRPRTERR
+#    define FLASH_KEY1 0x45670123U
+#    define FLASH_KEY2 0xCDEF89ABU
 #endif
 
 /* Delay definition */
@@ -125,7 +131,10 @@ FLASH_Status FLASH_ErasePage(uint32_t Page_Address) {
 
     if (status == FLASH_COMPLETE) {
         /* if the previous operation is completed, proceed to erase the page */
-#if defined(FLASH_CR_SNB)
+#if defined(FLASH_CR_PNB)
+        FLASH->CR &= ~FLASH_CR_PNB;
+        FLASH->CR |= FLASH_CR_PER | (ADDR2PAGE(Page_Address) << FLASH_CR_PNB_Pos);
+#elif defined(FLASH_CR_SNB)
         FLASH->CR &= ~FLASH_CR_SNB;
         FLASH->CR |= FLASH_CR_SER | (ADDR2PAGE(Page_Address) << FLASH_CR_SNB_Pos);
 #else
@@ -138,7 +147,9 @@ FLASH_Status FLASH_ErasePage(uint32_t Page_Address) {
         status = FLASH_WaitForLastOperation(EraseTimeout);
         if (status != FLASH_TIMEOUT) {
             /* if the erase operation is completed, disable the configured Bits */
-#if defined(FLASH_CR_SNB)
+#if defined(FLASH_CR_PNB)
+            FLASH->CR &= ~(FLASH_CR_PER | FLASH_CR_PNB);
+#elif defined(FLASH_CR_SNB)
             FLASH->CR &= ~(FLASH_CR_SER | FLASH_CR_SNB);
 #else
             FLASH->CR &= ~FLASH_CR_PER;

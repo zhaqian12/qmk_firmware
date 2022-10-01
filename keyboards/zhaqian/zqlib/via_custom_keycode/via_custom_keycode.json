@@ -1,0 +1,127 @@
+"customKeycodes": [
+    {
+        "name": "Alt\nTab\nForward",
+        "title": "Alt Tab Marco in Windows",
+        "shortName": "Alt Tab\nForward"
+    },
+    {
+        "name": "Alt\nTab\nReverse",
+        "title": "Alt Tab Shift Marco in Windows",
+        "shortName": "Alt Tab\nReverse"
+    },
+    {
+        "name": "Radial\nButton",
+        "title": "Radial Controller Button in Windows 10",
+        "shortName": "Radial\nButton"
+    },
+    {
+        "name": "Radial\nLeft",
+        "title": "Radial Controller Counter Clockwise in Windows 10",
+        "shortName": "Radial\nLeft"
+    },
+    {
+        "name": "Radial\nRight",
+        "title": "Radial Controller Clockwise in Windows 10",
+        "shortName": "Radial\nRight"
+    },
+    {
+        "name": "Radial\nLeft\nHold",
+        "title": "Radial Controller Continue Counter Clockwise in Windows 10",
+        "shortName": "Radial\nLeftC"
+    },
+    {
+        "name": "Radial\nRight\nHold",
+        "title": "Radial Controller Continue Clockwise in Windows 10",
+        "shortName": "Radial\nRightC"
+    },
+    {
+        "name": "Underglow\nRGB\nToggle",
+        "title": "Underglow RGB Toggle",
+        "shortName": "UGRGB Tog"
+    },
+    {
+        "name": "Key\nRGB\nToggle",
+        "title": "Key RGB Toggle",
+        "shortName": "KeyRGB\nTog"
+    },
+    {
+        "name": "Indicator\nRGB\nToggle",
+        "title": "Ind RGB Toggle",
+        "shortName": "IndRGB\nTog"
+    },
+    {
+        "name": "Underglow\nRGB\nMode\nSync",
+        "title": "Underglow RGB Mode Sync With Key RGB Mode",
+        "shortName": "UGRGB\nMODS"
+    },
+    {
+        "name": "Underglow\nRGB\nMode+",
+        "title": "Underglow RGB Mode Step",
+        "shortName": "UGRGB\nMOD+"
+    },
+    {
+        "name": "Underglow\nRGB\nMode-",
+        "title": "Underglow RGB Mode Step Reverse",
+        "shortName": "UGRGB\nMOD-"
+    },
+    {
+        "name": "Underglow\nRGB\nHue+",
+        "title": "Underglow RGB Hue Increase",
+        "shortName": "UGRGB\nHue+"
+    },
+    {
+        "name": "Underglow\nRGB\nHue-",
+        "title": "Underglow RGB Hue Decrease",
+        "shortName": "UGRGB\nHue-"
+    },
+    {
+        "name": "Underglow\nRGB\nSat+",
+        "title": "Underglow RGB Sat Increase",
+        "shortName": "UGRGB\nSat+"
+    },
+    {
+        "name": "Underglow\nRGB\nSat-",
+        "title": "Underglow RGB Sat Decrease",
+        "shortName": "UGRGB\nSat-"
+    },
+    {
+        "name": "Underglow\nRGB\nVal+",
+        "title": "Underglow RGB Val Increase",
+        "shortName": "UGRGB\nVal+"
+    },
+    {
+        "name": "Underglow\nRGB\nVal-",
+        "title": "Underglow RGB Val Decrease",
+        "shortName": "UGRGB\nVal-"
+    },
+    {
+        "name": "Underglow\nRGB\nSPD+",
+        "title": "Underglow RGB Speed Increase",
+        "shortName": "UGRGB\nSPD+"
+    },
+    {
+        "name": "Underglow\nRGB\nSPD-",
+        "title": "Underglow RGB Speed Decrease",
+        "shortName": "UGRGB\nSPD-"
+    },
+    {
+        "name": "RGB\nControl\nSwitch",
+        "title": "RGB Matrix Control Switch",
+        "shortName": "RGB\nCTSW"
+    },
+    {
+        "name": "RGB\nIndicator\nToggle",
+        "title": "RGB Indicator Toggle",
+        "shortName": "RGB\nINDTOG"
+    },
+    {
+        "name": "RGB\nIndicator\nMod+",
+        "title": "RGB Indicator Mode Step",
+        "shortName": "RGB\nINDMOD+"
+    },
+    {
+        "name": "RGB\nIndicator\nMod-",
+        "title": "RGB Indicator Mode Step Reverse",
+        "shortName": "RGB\nINDMOD-"
+    }
+]

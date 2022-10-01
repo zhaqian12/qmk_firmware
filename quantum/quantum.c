@@ -336,6 +336,24 @@ bool process_record_quantum(keyrecord_t *record) {
 #ifdef PROGRAMMABLE_BUTTON_ENABLE
             process_programmable_button(keycode, record) &&
 #endif
+#ifdef ALT_TAB_MARCO_ENABLE
+            process_alt_tab_marco(keycode, record) &&
+#endif
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+            process_rgb_matrix_control(keycode, record) &&
+#endif
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+            process_underglow_rgb_matrix(keycode, record) &&
+#endif
+#ifdef RADIAL_CONTROLLER_ENABLE
+            process_radial_controller(keycode, record) &&
+#endif
+#ifdef RGB_INDICATORS_ENABLE
+            process_rgb_indicators(keycode, record) &&
+#endif
+#ifdef VIA_CUSTOM_KEYCODE_ENABLE
+            process_via_custom_keycode(keycode, record) &&
+#endif
             true)) {
         return false;
     }
