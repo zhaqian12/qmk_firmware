@@ -108,6 +108,12 @@ enum rgb_matrix_effects {
 #    endif
 #    undef RGB_MATRIX_EFFECT
 #endif
+
+#ifdef SIGNALRGB_ENABLE
+#    define RGB_MATRIX_EFFECT(name, ...) RGB_MATRIX_##name,
+#    include "signalrgb_anim.h"
+#    undef RGB_MATRIX_EFFECT
+#endif
     // --------------------------------------
     // -----End rgb effect enum macros-------
 
@@ -183,6 +189,7 @@ void        rgb_matrix_increase_speed_noeeprom(void);
 void        rgb_matrix_decrease_speed(void);
 void        rgb_matrix_decrease_speed_noeeprom(void);
 led_flags_t rgb_matrix_get_flags(void);
+led_flags_t rgb_matrix_get_flags_noeeprom(void);
 void        rgb_matrix_set_flags(led_flags_t flags);
 
 #ifndef RGBLIGHT_ENABLE

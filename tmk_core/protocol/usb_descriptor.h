@@ -47,6 +47,9 @@
 
 #ifdef PROTOCOL_CHIBIOS
 #    include <hal.h>
+#    if STM32_USB_USE_OTG1 == TRUE
+#        define USB_ENDPOINTS_ARE_REORDERABLE
+#    endif
 #endif
 
 /*
@@ -73,6 +76,13 @@ typedef struct {
     USB_HID_Descriptor_HID_t   Raw_HID;
     USB_Descriptor_Endpoint_t  Raw_INEndpoint;
     USB_Descriptor_Endpoint_t  Raw_OUTEndpoint;
+#endif
+
+#ifdef HIDRGB_PROTOCOL_ENABLE
+    USB_Descriptor_Interface_t HIDRGB_Interface;
+    USB_HID_Descriptor_HID_t   HIDRGB_HID;
+    USB_Descriptor_Endpoint_t  HIDRGB_INEndpoint;
+    USB_Descriptor_Endpoint_t  HIDRGB_OUTEndpoint;
 #endif
 
 #if defined(MOUSE_ENABLE) && !defined(MOUSE_SHARED_EP)
@@ -162,6 +172,10 @@ enum usb_interfaces {
     RAW_INTERFACE,
 #endif
 
+#ifdef HIDRGB_PROTOCOL_ENABLE
+    HIDRGB_INTERFACE,
+#endif
+
 #if defined(MOUSE_ENABLE) && !defined(MOUSE_SHARED_EP)
     MOUSE_INTERFACE,
 #endif
@@ -216,10 +230,19 @@ enum usb_endpoints {
 
 #ifdef RAW_ENABLE
     RAW_IN_EPNUM = NEXT_EPNUM,
-#    if STM32_USB_USE_OTG1
+#    ifdef USB_ENDPOINTS_ARE_REORDERABLE
 #        define RAW_OUT_EPNUM RAW_IN_EPNUM
 #    else
     RAW_OUT_EPNUM         = NEXT_EPNUM,
+#    endif
+#endif
+
+#ifdef HIDRGB_PROTOCOL_ENABLE
+    HIDRGB_IN_EPNUM = NEXT_EPNUM,
+#    if STM32_USB_USE_OTG1
+#        define HIDRGB_OUT_EPNUM HIDRGB_IN_EPNUM
+#    else
+    HIDRGB_OUT_EPNUM         = NEXT_EPNUM,
 #    endif
 #endif
 
@@ -234,7 +257,7 @@ enum usb_endpoints {
 // ChibiOS has enough memory and descriptor to actually enable the endpoint
 // It could use the same endpoint numbers, as that's supported by ChibiOS
 // But the QMK code currently assumes that the endpoint numbers are different
-#        if STM32_USB_USE_OTG1
+#        ifdef USB_ENDPOINTS_ARE_REORDERABLE
 #            define CONSOLE_OUT_EPNUM CONSOLE_IN_EPNUM
 #        else
     CONSOLE_OUT_EPNUM   = NEXT_EPNUM,
@@ -246,7 +269,7 @@ enum usb_endpoints {
 
 #ifdef MIDI_ENABLE
     MIDI_STREAM_IN_EPNUM = NEXT_EPNUM,
-#    if STM32_USB_USE_OTG1
+#    ifdef USB_ENDPOINTS_ARE_REORDERABLE
 #        define MIDI_STREAM_OUT_EPNUM MIDI_STREAM_IN_EPNUM
 #    else
     MIDI_STREAM_OUT_EPNUM = NEXT_EPNUM,
@@ -256,7 +279,7 @@ enum usb_endpoints {
 #ifdef VIRTSER_ENABLE
     CDC_NOTIFICATION_EPNUM = NEXT_EPNUM,
     CDC_IN_EPNUM           = NEXT_EPNUM,
-#    if STM32_USB_USE_OTG1
+#    ifdef USB_ENDPOINTS_ARE_REORDERABLE
 #        define CDC_OUT_EPNUM CDC_IN_EPNUM
 #    else
     CDC_OUT_EPNUM         = NEXT_EPNUM,
@@ -264,7 +287,7 @@ enum usb_endpoints {
 #endif
 #ifdef JOYSTICK_ENABLE
     JOYSTICK_IN_EPNUM = NEXT_EPNUM,
-#    if STM32_USB_USE_OTG1
+#    ifdef USB_ENDPOINTS_ARE_REORDERABLE
     JOYSTICK_OUT_EPNUM = JOYSTICK_IN_EPNUM,
 #    else
     JOYSTICK_OUT_EPNUM    = NEXT_EPNUM,
@@ -274,7 +297,7 @@ enum usb_endpoints {
 #ifdef DIGITIZER_ENABLE
 #    if !defined(DIGITIZER_SHARED_EP)
     DIGITIZER_IN_EPNUM = NEXT_EPNUM,
-#        if STM32_USB_USE_OTG1
+#        ifdef USB_ENDPOINTS_ARE_REORDERABLE
     DIGITIZER_OUT_EPNUM = DIGITIZER_IN_EPNUM,
 #        else
     DIGITIZER_OUT_EPNUM = NEXT_EPNUM,
@@ -303,6 +326,7 @@ enum usb_endpoints {
 #define SHARED_EPSIZE 32
 #define MOUSE_EPSIZE 8
 #define RAW_EPSIZE 32
+#define HIDRGB_EPSIZE 64
 #define CONSOLE_EPSIZE 32
 #define MIDI_STREAM_EPSIZE 64
 #define CDC_NOTIFICATION_EPSIZE 8

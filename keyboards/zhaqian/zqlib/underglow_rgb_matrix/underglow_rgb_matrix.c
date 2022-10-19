@@ -170,6 +170,8 @@ void underglow_rgb_matrix_task(void) {
 #endif
 
     switch (ug_rgb_matrix_effect_index[underglow_rgb_matrix_config.mode]) {
+        case 0:
+        case 1: break;
 #ifdef UG_RGB_MATRIX_BREATHING
         case 2: Breathing(); break;
 #endif

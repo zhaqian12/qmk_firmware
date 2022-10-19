@@ -18,13 +18,6 @@
 
 #include "config_common.h"
 
-#define VENDOR_ID       0x00AA
-#define PRODUCT_ID      0xAA06
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    ZhaQian
-#define PRODUCT         Tester
-#define DESCRIPTION     Keyboard
-
 #define MATRIX_ROWS 3
 #define MATRIX_COLS 5
 
@@ -35,14 +28,13 @@
 #define LOCKING_SUPPORT_ENABLE
 #define LOCKING_RESYNC_ENABLE
 
-#define QMK_KEYS_PER_SCAN 12
 #define FORCE_NKRO
 
 #ifdef RGB_MATRIX_ENABLE
 #define RGBLED_NUM 128
 #define DRIVER_LED_TOTAL RGBLED_NUM
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150
-#define RGB_DISABLE_WHEN_USB_SUSPENDED true
+#define RGB_DISABLE_WHEN_USB_SUSPENDED
 #define RGB_MATRIX_ANIMATION
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES

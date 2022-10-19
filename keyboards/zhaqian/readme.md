@@ -24,7 +24,7 @@
 | zq75          | 0x00AA    | 0xAA03     | Hotswap  | Atmel atmega32u4  | RGB, SPLIT SPACE                             |
 | zq60          | 0x00AA    | 0xAA04     | Hotswap  | Atmel atmega32u4  | ESCRGB, COMPATIBILITY LAYOUT                 |
 | zq80          | 0x00AA    | 0xAA05     | Hotswap  | Atmel atmega32u4  | RGB, UGRGB, LOGORGB                          |
-| tester        | 0x00AA    | 0xAA06     | Hotswap  | f103/401/411/vf103/l433/m101a| RGB, UGRGB, ENCODER                          |
+| tester        | 0x00AA    | 0xAA06     | Hotswap  | f103/401/411/vf103/l433/air32/f407 | RGB, UGRGB, ENCODER                          |
 | zq48          | 0x00AA    | 0xAA07     | Hotswap  | Atmel atmega32u4  | RGB, UGRGB                                   |
 | zq61          | 0x00AA    | 0xAA08     | Hotswap  | ST stm32f401      | RGB, UGRGB                                   |
 | zq67          | 0x00AA    | 0xAA09     | Hotswap  | Atmel atmega32u4  | RGB, UGRGB                                   |
@@ -38,11 +38,15 @@
 | zq46	        | 0x00AA    | 0xAA11     | Hotswap  | ST stm32f401      | RGB, UGRGB, LOGORGB, ENCODER                 |
 | osu	        | 0x00AA    | 0xAA12     | Hotswap  | ST stm32f401      | UGRGB                                        |
 | zq89	        | 0x00AA    | 0xAA13     | Hotswap  | ST stm32f411      | RGB, ENCODERS                                |
-| s80	        | 0x00AA    | 0xAA14     | Hotswap  | ST stm32f103/f103 | RGB                                          |
+| m80	        | 0x00AA    | 0xAA14     | Hotswap  | ST stm32f103/f103 | RGB                                          |
 | sp67	        | 0x00AA    | 0xAA15     | Hotswap  | ST stm32f103/f103 | ENCODER                                      |
 | zq50	        | 0x00AA    | 0xAA16     | Hotswap  | ST stm32f103/f103 | RGB, UGRGB, ENCODER                          |
+| Jane_v2_ce_slot	| 0x00AA    | 0xAA17     | Hotswap  | Atmel atmega32u4 |                          |
+| m80_solder	        | 0x00AA    | 0xAA18     | Solder  | ST stm32f103/f103 | RGB                                          |
+| s75	        | 0x00AA    | 0xAA19     | Hotswap  | ST stm32f103/f103 | RGB                                          |
 | Mpad12        | 0x00AA    | 0xAAAA     | Hotswap  | Atmel atmega32u4  | RGB, UGRGB, JOYSTICK, ENCODER, OLED          |
 | split69       | 0x00AA    | 0xAAAB     | Solder   | Atmel atmega32u4  | SPLIT, UGRGB, OLED, ENCODER                  |
+| joystickex    | 0x00AA    | 0xAAAC     | Hotswap  | f103/401/411/vf103/l433/air32 | JOYSTICK |
 | GH60        | 0xFEED    | 0x6060    | Hotswap  | ST stm32f103/f103 | RGB          |
 # TODO LIST
 - BLE 
@@ -60,10 +64,10 @@
  - RGB Matrix Control
  - Underglow RGB Matrix
  - Via Custom Keycode
+ - Via Custom Control
  - Custom RGB Matrix Effects
  - UF2 Bootloader
- - ST7789 Driver
-
+ - Signalrgb Protocol
 ## Alt Tab Marco
 This feature integrates the toggle window function in window system.It is supported by adding this to your `rules.mk`:
 ```make
@@ -176,12 +180,12 @@ You can also alternate these defines to control these feature:
 ```
 
 ## UF2 Bootloader
-| Support Devices  |
-|---------- |
-|STM32F103x8|
-|STM32F103xB|
-|STM32F401xC|
-|STM32F411xE|
-|GD32VF103xB|
-
-
+| Support Devices  |  Description |
+|---------- | ---------- |
+|STM32F103x8||
+|STM32F103xB||
+|STM32F401xC||
+|STM32F411xE||
+|GD32VF103xB||
+|AIR32F103xB| No hardware DP pull-up required|
+|AIR32F103xC| No hardware DP pull-up required|

@@ -1,0 +1,10 @@
+{
+    "keyboard_name": " comb67",
+    "manufacturer": "ZhaQian",
+    "maintainer": "ZhaQian",
+    "usb": {
+        "vid": "0x00AA",
+        "pid": "0xAA02",
+        "device_version": "0.0.1"
+    }
+}

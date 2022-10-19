@@ -18,25 +18,16 @@
 
 #include "config_common.h"
 
-#define VENDOR_ID       0x00AA
-#define PRODUCT_ID      0xAA12
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    ZhaQian
-#define PRODUCT         osu
-#define DESCRIPTION     Keyboard
-
 #define DIRECT_PINS { \
     {B12, B13, B14, A15, B3, B4, B5}, \
     {B6, B8, B7} \
 }
-#define UNUSED_PINS
 
 #define DEBOUNCE 5
 
 #define LOCKING_SUPPORT_ENABLE
 #define LOCKING_RESYNC_ENABLE
 
-#define QMK_KEYS_PER_SCAN 12
 #define FORCE_NKRO
 
 #ifdef RGB_MATRIX_ENABLE
@@ -49,7 +40,7 @@
 #define RGBLED_NUM 12
 #define DRIVER_LED_TOTAL RGBLED_NUM
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 255
-#define RGB_DISABLE_WHEN_USB_SUSPENDED true
+#define RGB_DISABLE_WHEN_USB_SUSPENDED
 #define RGB_MATRIX_CENTER {110, 34}
 #define RGB_MATRIX_ANIMATION
 #endif

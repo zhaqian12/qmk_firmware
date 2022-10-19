@@ -5,7 +5,7 @@ This keyboard use different mcus.
 
 * Keyboard Maintainer: [zhaqian](https://github.com/zhaqian12)
 * Hardware Supported: tester
-* Hardware Availability: [qmk-zq](https://github.com/zhaqian12/qmk_firmware)
+* Hardware Availability: [zq-kb](https://github.com/zhaqian12/ZQ-Keyboard)
 
 Make example for this keyboard (after setting up your build environment):
 
@@ -45,16 +45,16 @@ Make example for this keyboard (after setting up your build environment):
     make zhaqian/tester/gd32vf103:via
     ```
     
-* MCU:cm32m101a
-    ```
-    make zhaqian/tester/cm32m101a:default
-    make zhaqian/tester/cm32m101a:via
-    ```
-    
 * MCU:stm32l433
     ```
     make zhaqian/tester/l433:default
     make zhaqian/tester/l433:via
+    ```
+    
+ * MCU:air32f103xB/xC
+    ```
+    make zhaqian/tester/air32f103:default
+    make zhaqian/tester/air32f103:via
     ```
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).

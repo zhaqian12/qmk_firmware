@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "zq75v2.h"
+#include QMK_KEYBOARD_H
 
 #ifdef OLED_ENABLE
 #include "render_anime.c"
@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, KC_SPC, KC_SPC, MO(1), KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT),
 
 	LAYOUT(
-		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_PSCR, KC_SLCK, KC_PAUS, KC_HOME, KC_END, RESET, KC_TRNS,
+		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_PSCR, KC_SLCK, KC_PAUS, KC_HOME, KC_END, QK_BOOT, KC_TRNS,
 		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_VOLU,
 		KC_TRNS, RGB_TOG, RGB_MOD, RGB_RMOD, RGB_VAI, RGB_VAD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_SPI, RGB_SPD, KC_TRNS, KC_TRNS, KC_VOLD,
 		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_VAD, RGB_VAI,
@@ -541,4 +541,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 }
+
+#if defined(ENCODER_MAP_ENABLE)
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
+    [0] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [1] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [2] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [3] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [4] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [5] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [6] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [7] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [8] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [9] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [10] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [11] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [12] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [13] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [14] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [15] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+};
+#endif
 

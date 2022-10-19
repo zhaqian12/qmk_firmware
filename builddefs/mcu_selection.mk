@@ -1,36 +1,5 @@
 MCU_ORIG := $(MCU)
 
-ifneq ($(findstring CH582, $(MCU)),)
-  # RISC-V
-  MCU = risc-v
-
-  # RISC-V extensions and abi configuration
-  MCU_ARCH = rv32imac
-  MCU_ABI = ilp32
-  MCU_CMODEL = medlow
-
-  ## chip/board settings
-  # - the next two should match the directories in
-  #   <chibios>/os/hal/ports/$(MCU_FAMILY)/$(MCU_SERIES)
-  MCU_FAMILY = CH58x
-  MCU_SERIES = CH582
-
-  # Linker script to use
-  # - it should exist either in <chibios>/os/common/startup/RISCV-ECLIC/compilers/GCC/ld/
-  #   or <keyboard_dir>/ld/
-  MCU_LDSCRIPT ?= CH582M
-
-  # Startup code to use
-  #  - it should exist in <chibios>/os/common/startup/RISCV-ECLIC/compilers/GCC/mk/
-  MCU_STARTUP ?= ch582m
-
-  # Board: it should exist either in <chibios>/os/hal/boards/,
-  # <keyboard_dir>/boards/, or drivers/boards/
-  BOARD ?= CH582_DEMO
-
-  USE_FPU ?= no
-endif
-
 ifneq ($(findstring MKL26Z64, $(MCU)),)
   # Cortex version
   MCU = cortex-m0plus
@@ -118,6 +87,33 @@ ifneq ($(findstring MK20DX256, $(MCU)),)
   BOARD ?= PJRC_TEENSY_3_1
 endif
 
+ifneq ($(findstring MK64FX512, $(MCU)),)
+  # Cortex version
+  MCU = cortex-m4
+
+  # ARM version, CORTEX-M0/M1 are 6, CORTEX-M3/M4/M7 are 7
+  ARMV = 7
+
+  ## chip/board settings
+  # - the next two should match the directories in
+  #   <chibios>/os/hal/ports/$(MCU_FAMILY)/$(MCU_SERIES)
+  MCU_FAMILY = KINETIS
+  MCU_SERIES = K60x
+
+  # Linker script to use
+  # - it should exist either in <chibios>/os/common/ports/ARMCMx/compilers/GCC/ld/
+  #   or <keyboard_dir>/ld/
+  MCU_LDSCRIPT ?= MK64FX512
+
+  # Startup code to use
+  #  - it should exist in <chibios>/os/common/startup/ARMCMx/compilers/GCC/mk/
+  MCU_STARTUP ?= k60x
+
+  # Board: it should exist either in <chibios>/os/hal/boards/,
+  # <keyboard_dir>/boards/, or drivers/boards/
+  BOARD ?= PJRC_TEENSY_3_5
+endif
+
 ifneq ($(findstring MK66FX1M0, $(MCU)),)
   # Cortex version
   MCU = cortex-m4
@@ -145,6 +141,41 @@ ifneq ($(findstring MK66FX1M0, $(MCU)),)
   # Board: it should exist either in <chibios>/os/hal/boards/,
   # <keyboard_dir>/boards/, or drivers/boards/
   BOARD ?= PJRC_TEENSY_3_6
+endif
+
+ifneq ($(findstring RP2040, $(MCU)),)
+  # Cortex version
+  MCU = cortex-m0plus
+
+  # ARM version, CORTEX-M0/M1 are 6, CORTEX-M3/M4/M7 are 7
+  CHIBIOS_PORT = ARMv6-M-RP2
+
+  ## chip/board settings
+  # - the next two should match the directories in
+  #   <chibios[-contrib]>/os/hal/ports/$(MCU_PORT_NAME)/$(MCU_SERIES)
+  #   OR
+  #   <chibios[-contrib]>/os/hal/ports/$(MCU_FAMILY)/$(MCU_SERIES)
+  MCU_FAMILY = RP
+  MCU_SERIES = RP2040
+
+  # Linker script to use
+  # - it should exist either in <chibios>/os/common/ports/ARMCMx/compilers/GCC/ld/
+  #   or <keyboard_dir>/ld/
+  STARTUPLD_CONTRIB = $(CHIBIOS_CONTRIB)/os/common/startup/ARMCMx/compilers/GCC/ld
+  MCU_LDSCRIPT ?= RP2040_FLASH_TIMECRIT
+  LDFLAGS += -L $(STARTUPLD_CONTRIB)
+
+  # Startup code to use
+  #  - it should exist in <chibios>/os/common/startup/ARMCMx/compilers/GCC/mk/
+  MCU_STARTUP ?= rp2040
+
+  # Board: it should exist either in <chibios>/os/hal/boards/,
+  # <keyboard_dir>/boards/, or drivers/boards/
+  BOARD ?= GENERIC_PROMICRO_RP2040
+
+  # Default UF2 Bootloader settings
+  UF2_FAMILY ?= RP2040
+  FIRMWARE_FORMAT ?= uf2
 endif
 
 ifneq ($(findstring STM32F042, $(MCU)),)
@@ -311,7 +342,8 @@ ifneq ($(findstring STM32F401, $(MCU)),)
   #   or <keyboard_dir>/ld/
   ifeq ($(strip $(BOOTLOADER)), tinyuf2)
     MCU_LDSCRIPT ?= STM32F401xC_tinyuf2
-    FIRMWARE_FORMAT ?= uf2
+    EEPROM_DRIVER ?= wear_leveling
+    WEAR_LEVELING_DRIVER ?= legacy
   else
     MCU_LDSCRIPT ?= STM32F401xC
   endif
@@ -322,7 +354,7 @@ ifneq ($(findstring STM32F401, $(MCU)),)
 
   # Board: it should exist either in <chibios>/os/hal/boards/,
   # <keyboard_dir>/boards/, or drivers/boards/
-  BOARD ?= BLACKPILL_STM32_F401
+  BOARD ?= GENERIC_STM32_F401XC
 
   USE_FPU ?= yes
 
@@ -427,7 +459,8 @@ ifneq ($(findstring STM32F411, $(MCU)),)
   #   or <keyboard_dir>/ld/
   ifeq ($(strip $(BOOTLOADER)), tinyuf2)
     MCU_LDSCRIPT ?= STM32F411xE_tinyuf2
-    FIRMWARE_FORMAT ?= uf2
+    EEPROM_DRIVER ?= wear_leveling
+    WEAR_LEVELING_DRIVER ?= legacy
   else
     MCU_LDSCRIPT ?= STM32F411xE
   endif
@@ -438,7 +471,7 @@ ifneq ($(findstring STM32F411, $(MCU)),)
 
   # Board: it should exist either in <chibios>/os/hal/boards/,
   # <keyboard_dir>/boards/, or drivers/boards/
-  BOARD ?= BLACKPILL_STM32_F411
+  BOARD ?= GENERIC_STM32_F411XE
 
   USE_FPU ?= yes
 
@@ -742,9 +775,9 @@ ifneq ($(findstring WB32FQ95, $(MCU)),)
   WB32_BOOTLOADER_ADDRESS ?= 0x1FFFE000
 endif
 
-ifneq ($(findstring CM32M101A, $(MCU)),)
+ifneq ($(findstring AIR32F103, $(MCU)),)
   # Cortex version
-  MCU = cortex-m4
+  MCU = cortex-m3
 
   # ARM version, CORTEX-M0/M1 are 6, CORTEX-M3/M4/M7 are 7
   ARMV = 7
@@ -752,30 +785,26 @@ ifneq ($(findstring CM32M101A, $(MCU)),)
   ## chip/board settings
   # - the next two should match the directories in
   #   <chibios>/os/hal/ports/$(MCU_FAMILY)/$(MCU_SERIES)
-  MCU_FAMILY = CM32
-  MCU_SERIES = CM32M101A
+  MCU_FAMILY = AIR32
+  MCU_SERIES = AIR32F10x
 
   # Linker script to use
   # - it should exist either in <chibios>/os/common/ports/ARMCMx/compilers/GCC/ld/
   #   or <keyboard_dir>/ld/
-  MCU_LDSCRIPT ?= CM32M101A
+  MCU_LDSCRIPT ?= AIR32F103xC
 
   # Startup code to use
   #  - it should exist in <chibios>/os/common/startup/ARMCMx/compilers/GCC/mk/
-  MCU_STARTUP ?= cm32m101a
+  MCU_STARTUP ?= air32f10x
 
   # Board: it should exist either in <chibios>/os/hal/boards/,
   # <keyboard_dir>/boards/, or drivers/boards/
-  BOARD ?= GENERIC_CM32_M101A
+  BOARD ?= GENERIC_AIR32_F103
 
   USE_FPU ?= no
 
   # UF2 settings
-  UF2_FAMILY ?= CM32M101A
-
-  # Bootloader address for CM32 DFU
-  STM32_BOOTLOADER_ADDRESS ?= 0x1FFF0000
-  CM32_BOOTLOADER_ADDRESS ?= 0x1FFF0000
+  UF2_FAMILY ?= STM32F1
 endif
 
 ifneq ($(findstring GD32VF103, $(MCU)),)

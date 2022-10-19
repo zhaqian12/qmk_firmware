@@ -34,6 +34,7 @@ void eeconfig_update_rgb_matrix_control_default(void) {
     rgb_matrix_control_config.is_key_rgb_enable = 0;
     rgb_matrix_control_config.is_underglow_rgb_enable = 0;
     rgb_matrix_control_config.is_logo_rgb_enable = 0;
+    rgb_matrix_control_config.is_indicator_override = 0;
     rgb_matrix_control_config.reverse = 0;
     eeconfig_update_rgb_matrix_control();
 }
@@ -82,6 +83,65 @@ void logo_rgb_toggle(void) {
     }
 }
 
+void indicator_rgb_override_toggle(void) {
+    rgb_matrix_control_config.is_indicator_override ^= 1;
+    eeconfig_update_rgb_matrix_control();
+}
+
+void key_rgb_enable(bool update) {
+    if (rgb_matrix_is_enabled()) {
+        rgb_matrix_control_config.is_key_rgb_enable = 0;
+        if (update)
+            eeconfig_update_rgb_matrix_control();
+    }
+}
+
+void key_rgb_disable(bool update) {
+    if (rgb_matrix_is_enabled()) {
+        rgb_matrix_control_config.is_key_rgb_enable = 1;
+        if (update)
+            eeconfig_update_rgb_matrix_control();
+    }
+}
+
+void underglow_rgb_enable(bool update) {
+    if (rgb_matrix_is_enabled()) {
+        rgb_matrix_control_config.is_underglow_rgb_enable = 0;
+        if (update)
+            eeconfig_update_rgb_matrix_control();
+    }
+}
+
+void underglow_rgb_disable(bool update) {
+    if (rgb_matrix_is_enabled()) {
+        rgb_matrix_control_config.is_underglow_rgb_enable = 1;
+        if (update)
+            eeconfig_update_rgb_matrix_control();
+    }
+}
+
+void logo_rgb_enable(bool update) {
+    if (rgb_matrix_is_enabled()) {
+        rgb_matrix_control_config.is_logo_rgb_enable = 0;
+        if (update)
+            eeconfig_update_rgb_matrix_control();
+    }
+}
+
+void logo_rgb_disable(bool update) {
+    if (rgb_matrix_is_enabled()) {
+        rgb_matrix_control_config.is_logo_rgb_enable = 1;
+        if (update)
+            eeconfig_update_rgb_matrix_control();
+    }
+}
+
+void set_indicator_rgb_override(uint8_t enable, bool update) {
+    rgb_matrix_control_config.is_indicator_override = enable;
+    if (update)
+        eeconfig_update_rgb_matrix_control();
+}
+
 #ifdef RGB_MATRIX_CONTROL_SWITCH_ENABLE
 void rgb_matrix_control_switch(void) {
     if (rgb_matrix_is_enabled()) {
@@ -93,15 +153,19 @@ void rgb_matrix_control_switch(void) {
 #endif
 
 bool key_rgb_is_enabled(void) {
-    return rgb_matrix_control_config.is_key_rgb_enable;
+    return !(rgb_matrix_control_config.is_key_rgb_enable);
 }
 
 bool underglow_rgb_is_enabled(void) {
-    return rgb_matrix_control_config.is_underglow_rgb_enable;
+    return !(rgb_matrix_control_config.is_underglow_rgb_enable);
 }
 
 bool logo_rgb_is_enabled(void) {
-    return rgb_matrix_control_config.is_logo_rgb_enable;
+    return !(rgb_matrix_control_config.is_logo_rgb_enable);
+}
+
+uint8_t indicator_rgb_is_override(void) {
+    return rgb_matrix_control_config.is_indicator_override;
 }
 
 bool process_rgb_matrix_control(const uint16_t keycode, const keyrecord_t *record) {

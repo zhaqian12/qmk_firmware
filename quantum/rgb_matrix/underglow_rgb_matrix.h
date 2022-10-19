@@ -19,7 +19,7 @@
 #include "quantum.h"
 #include "color.h"
 
-typedef struct {
+typedef struct __attribute__((__packed__)) {
     uint8_t mode;
     HSV hsv;
     uint8_t speed;
@@ -27,22 +27,33 @@ typedef struct {
 
 #define EECONFIG_UNDERGLOW_RGB_MATRIX (uint8_t *)16
 
+#if !defined(UNDERGLOW_RGB_MATRIX_MAXIMUM_BRIGHTNESS) || UNDERGLOW_RGB_MATRIX_MAXIMUM_BRIGHTNESS > UINT8_MAX
+#undef UNDERGLOW_RGB_MATRIX_MAXIMUM_BRIGHTNESS
+#define UNDERGLOW_RGB_MATRIX_MAXIMUM_BRIGHTNESS RGB_MATRIX_MAXIMUM_BRIGHTNESS
+#endif
+
 void underglow_rgb_matrix_init(void);
 void underglow_rgb_matrix_task(void);
 void underglow_rgb_mode_sync(void);
 void underglow_rgb_mode_step(void);
 void underglow_rgb_mode_step_reverse(void);
+void eeconfig_read_underglow_rgb_matrix(void);
+void eeconfig_update_underglow_rgb_matrix(void);
 
 #ifndef UNDERGLOW_RGB_MATRIX_API_DISABLE
+uint8_t underglow_rgb_matrix_get_mode_num(void);
 uint8_t underglow_rgb_matrix_get_mode(void);
-HSV undeglow_rgb_matrix_get_hsv(void);
+HSV underglow_rgb_matrix_get_hsv(void);
+uint8_t underglow_rgb_matrix_get_hue(void);
+uint8_t underglow_rgb_matrix_get_sat(void);
+uint8_t underglow_rgb_matrix_get_val(void);
 uint8_t underglow_rgb_matrix_get_speed(void);
-void underglow_rgb_matrix_set_mode(uint8_t mode);
-void underglow_rgb_matrix_set_hsv(uint8_t hue, uint8_t sat, uint8_t val);
-void underglow_rgb_matrix_set_hue(uint8_t hue);
-void underglow_rgb_matrix_set_sat(uint8_t sat);
-void underglow_rgb_matrix_set_val(uint8_t val);
-void underglow_rgb_matrix_set_speed(uint8_t speed);
+void underglow_rgb_matrix_set_mode(uint8_t mode, bool update);
+void underglow_rgb_matrix_set_hsv(uint8_t hue, uint8_t sat, uint8_t val, bool update);
+void underglow_rgb_matrix_set_hue(uint8_t hue, bool update);
+void underglow_rgb_matrix_set_sat(uint8_t sat, bool update);
+void underglow_rgb_matrix_set_val(uint8_t val, bool update);
+void underglow_rgb_matrix_set_speed(uint8_t speed, bool update);
 void underglow_rgb_matrix_increase_hue(void);
 void underglow_rgb_matrix_decrease_hue(void);
 void underglow_rgb_matrix_increase_sat(void);

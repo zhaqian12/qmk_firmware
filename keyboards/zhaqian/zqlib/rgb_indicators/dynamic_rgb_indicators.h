@@ -22,7 +22,10 @@
 typedef struct __attribute__((packed)) {
         uint8_t enable : 1;
         uint8_t all_led: 1;
-        uint8_t mode : 6;
+        uint8_t key_led: 1;
+        uint8_t underglow_led : 1;
+        uint8_t logo_led : 1;
+        uint8_t mode : 3;
         uint8_t led;
         HSV hsv;
 } rgb_indicators_config_t;
@@ -64,6 +67,7 @@ void rgb_indicators_init(void);
 void rgb_indicators_task(void);
 void rgb_indicators_state_update(void);
 uint8_t is_rgb_indicators_enabled(void);
+uint8_t is_rgb_indicators_enabled(uint8_t indicator);
 uint8_t is_num_lock_enabled(void);
 uint8_t is_caps_lock_enabled(void);
 uint8_t is_scroll_lock_enabled(void);
@@ -79,10 +83,17 @@ void scroll_lock_indicator_mode_step_reverse(void);
 void rgb_indicators_enable(uint8_t indicator, bool update);
 void rgb_indicators_disable(uint8_t indicator, bool update);
 void rgb_indicators_enable_all_led(uint8_t indicator, uint8_t enable, bool update);
+void rgb_indicators_enable_key_led(uint8_t indicator, uint8_t enable, bool update);
+void rgb_indicators_enable_underglow_led(uint8_t indicator, uint8_t enable, bool update);
+void rgb_indicators_enable_logo_led(uint8_t indicator, uint8_t enable, bool update);
 void rgb_indicators_set_mode(uint8_t indicator, uint8_t mod, bool update);
 void rgb_indicators_set_led(uint8_t indicator, uint8_t led, bool update);
 void rgb_indicators_set_hsv(uint8_t indicator, uint8_t hue, uint8_t sat, uint8_t val, bool update);
+void rgb_indicators_set_val(uint8_t indicator, uint8_t val, bool update);
 uint8_t rgb_indicators_get_all_led(uint8_t indicator);
+uint8_t rgb_indicators_get_key_led(uint8_t indicator);
+uint8_t rgb_indicators_get_underglow_led(uint8_t indicator);
+uint8_t rgb_indicators_get_logo_led(uint8_t indicator);
 uint8_t rgb_indicators_get_led(uint8_t indicator);
 uint8_t rgb_indicators_get_mode(uint8_t indicator);
 uint8_t rgb_indicators_get_hue(uint8_t indicator);
@@ -112,4 +123,3 @@ void rgb_indicators_random_once(uint8_t indicator);
 #endif
 
 bool process_rgb_indicators(const uint16_t keycode, const keyrecord_t *record);
-

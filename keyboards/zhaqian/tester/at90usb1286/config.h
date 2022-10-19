@@ -20,7 +20,6 @@
 
 #define MATRIX_ROW_PINS { B4, B3, B2 }
 #define MATRIX_COL_PINS { F2, F3, F4, F5, F6 }
-#define UNUSED_PINS
 
 #ifdef RGB_MATRIX_ENABLE
 #define RGB_DI_PIN F7

@@ -19,7 +19,7 @@
 #include "quantum.h"
 #include "color.h"
 
-typedef struct {
+typedef struct __attribute__((__packed__)) {
     uint8_t mode;
     HSV hsv;
     uint8_t speed;

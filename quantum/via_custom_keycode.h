@@ -41,6 +41,7 @@ enum via_custom_keycodes {
 #else
     R_C_SW,
 #endif
+    IND_ON_TOG,
 #endif
 
 #ifdef UNDERGLOW_RGB_MATRIX_ENABLE
@@ -58,7 +59,7 @@ enum via_custom_keycodes {
     UG_R_SPD,
 #endif
 #endif
-#ifdef RGB_INDICATORS_ENABLE
+#if defined(RGB_INDICATORS_ENABLE) && !defined(DYNAMIC_RGB_INDICATORS_ENABLE)
     RGB_IND_TOG,
     RGB_IND_MF,
     RGB_IND_MR,

@@ -50,6 +50,9 @@ __attribute__((weak)) RGB rgb_matrix_hsv_to_rgb(HSV hsv) {
 #ifdef RGB_MATRIX_CUSTOM_USER
 #    include "rgb_matrix_user.inc"
 #endif
+#ifdef SIGNALRGB_ENABLE
+#    include "signalrgb_anim.h"
+#endif
 
 #undef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 #undef RGB_MATRIX_EFFECT
@@ -249,8 +252,15 @@ void process_rgb_matrix(uint8_t row, uint8_t col, bool pressed) {
 #endif // RGB_MATRIX_KEYREACTIVE_ENABLED
 
 #if defined(RGB_MATRIX_FRAMEBUFFER_EFFECTS) && defined(ENABLE_RGB_MATRIX_TYPING_HEATMAP)
-    if (rgb_matrix_config.mode == RGB_MATRIX_TYPING_HEATMAP) {
-        process_rgb_matrix_typing_heatmap(row, col);
+#    if defined(RGB_MATRIX_KEYRELEASES)
+    if (!pressed)
+#    else
+    if (pressed)
+#    endif // defined(RGB_MATRIX_KEYRELEASES)
+    {
+        if (rgb_matrix_config.mode == RGB_MATRIX_TYPING_HEATMAP) {
+            process_rgb_matrix_typing_heatmap(row, col);
+        }
     }
 #endif // defined(RGB_MATRIX_FRAMEBUFFER_EFFECTS) && defined(ENABLE_RGB_MATRIX_TYPING_HEATMAP)
 }
@@ -280,10 +290,22 @@ void rgb_matrix_test(void) {
 }
 
 static bool rgb_matrix_none(effect_params_t *params) {
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+    static uint8_t changed = 0;
+    uint8_t override = indicator_rgb_is_override();
+    changed ^= override;
+    if (changed == 1 && override == 0) {
+        rgb_matrix_set_color_all(0, 0, 0);
+        rgb_matrix_update_pwm_buffers();
+    }
+    if (!params->init && override == 0) {
+        return false;
+    }
+#else
     if (!params->init) {
         return false;
     }
-
+#endif
     rgb_matrix_set_color_all(0, 0, 0);
     return false;
 }
@@ -352,9 +374,9 @@ static void rgb_task_render(uint8_t effect) {
 // ---------------------------------------------
 // -----Begin rgb effect switch case macros-----
 #define RGB_MATRIX_EFFECT(name, ...)          \
-    case RGB_MATRIX_##name:                   \
-        rendering = name(&rgb_effect_params); \
-        break;
+        case RGB_MATRIX_##name:                   \
+            rendering = name(&rgb_effect_params); \
+            break;
 #include "rgb_matrix_effects.inc"
 #undef RGB_MATRIX_EFFECT
 
@@ -369,6 +391,15 @@ static void rgb_task_render(uint8_t effect) {
 #    ifdef RGB_MATRIX_CUSTOM_USER
 #        include "rgb_matrix_user.inc"
 #    endif
+#    undef RGB_MATRIX_EFFECT
+#endif
+
+#ifdef SIGNALRGB_ENABLE
+#define RGB_MATRIX_EFFECT(name, ...)              \
+        case RGB_MATRIX_##name:                   \
+            rendering = name(&rgb_effect_params); \
+            break;
+#    include "signalrgb_anim.h"
 #    undef RGB_MATRIX_EFFECT
 #endif
             // -----End rgb effect switch case macros-------
@@ -387,7 +418,11 @@ static void rgb_task_render(uint8_t effect) {
     // next task
     if (!rendering) {
         rgb_task_state = FLUSHING;
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+        if (!rgb_effect_params.init && effect == RGB_MATRIX_NONE && indicator_rgb_is_override() == 0) {
+#else
         if (!rgb_effect_params.init && effect == RGB_MATRIX_NONE) {
+#endif
             // We only need to flush once if we are RGB_MATRIX_NONE
             rgb_task_state = SYNCING;
         }
@@ -426,32 +461,31 @@ void rgb_matrix_task(void) {
         case RENDERING:
             rgb_task_render(effect);
             if (effect) {
-#ifdef RGB_MATRIX_INDICATORS_OVERRIDE
 #ifdef UNDERGLOW_RGB_MATRIX_ENABLE
                 underglow_rgb_matrix_task();
 #endif
 #ifdef RGB_MATRIX_CONTROL_ENABLE
-                rgb_matrix_control_task();
-#endif
-#ifdef RGB_INDICATORS_ENABLE
-                rgb_indicators_task();
-#endif
-                rgb_matrix_indicators();
-                rgb_matrix_indicators_advanced(&rgb_effect_params);
+                if (indicator_rgb_is_override() == 1) 
+                {
+                    rgb_matrix_control_task();
+                    RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
+                }
+                else
+                {
+                    RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
+                    rgb_matrix_control_task();
+                }
 #else
-#ifdef RGB_INDICATORS_ENABLE
-                rgb_indicators_task();
+                RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
 #endif
-                rgb_matrix_indicators();
-                rgb_matrix_indicators_advanced(&rgb_effect_params);
-#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
-                underglow_rgb_matrix_task();
-#endif
+            } 
 #ifdef RGB_MATRIX_CONTROL_ENABLE
-                rgb_matrix_control_task();
-#endif
-#endif
+            else {
+                if (indicator_rgb_is_override() == 1) {
+                    RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
+                }
             }
+#endif
             break;
         case FLUSHING:
             rgb_task_flush(effect);
@@ -751,10 +785,20 @@ void rgb_matrix_decrease_speed(void) {
     rgb_matrix_decrease_speed_helper(true);
 }
 
+void rgb_matrix_set_flags_eeprom_helper(led_flags_t flags, bool write_to_eeprom) {
+    rgb_matrix_config.flags = flags;
+    eeconfig_flag_rgb_matrix(write_to_eeprom);
+    dprintf("rgb matrix set speed [%s]: %u\n", (write_to_eeprom) ? "EEPROM" : "NOEEPROM", rgb_matrix_config.flags);
+}
+
 led_flags_t rgb_matrix_get_flags(void) {
     return rgb_matrix_config.flags;
 }
 
 void rgb_matrix_set_flags(led_flags_t flags) {
-    rgb_matrix_config.flags = flags;
+    rgb_matrix_set_flags_eeprom_helper(flags, true);
+}
+
+void rgb_matrix_set_flags_noeeprom(led_flags_t flags) {
+    rgb_matrix_set_flags_eeprom_helper(flags, false);
 }

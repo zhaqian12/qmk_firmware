@@ -45,6 +45,11 @@
         "shortName": "KeyRGB\nTog"
     },
     {
+        "name": "Indicator\nRGB\nToggle",
+        "title": "Ind RGB Toggle",
+        "shortName": "IndRGB\nTog"
+    },
+    {
         "name": "Underglow\nRGB\nMode\nSync",
         "title": "Underglow RGB Mode Sync With Key RGB Mode",
         "shortName": "UGRGB\nMODS"

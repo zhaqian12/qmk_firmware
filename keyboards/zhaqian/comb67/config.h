@@ -18,26 +18,19 @@
 
 #include "config_common.h"
 
-#define VENDOR_ID       0x00AA
-#define PRODUCT_ID      0xAA02
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    ZhaQian
-#define PRODUCT         Comb67
-#define DESCRIPTION     Keyboard
-
 #define MATRIX_ROWS 5
 #define MATRIX_COLS 15
 
 #define MATRIX_ROW_PINS { D0, D1, D2, D3, D5 }
 #define MATRIX_COL_PINS { F0, F1, E6, C7, C6, B6, D4, B1, B7, B5, B4, D7, D6, B3, F4 }
-#define UNUSED_PINS
 
 #define DIODE_DIRECTION COL2ROW
+
 #define DEBOUNCE 5
+
 #define LOCKING_SUPPORT_ENABLE
 #define LOCKING_RESYNC_ENABLE
 
-#define QMK_KEYS_PER_SCAN 12
 #define FORCE_NKRO
 
 #ifdef RGB_MATRIX_ENABLE
@@ -45,7 +38,7 @@
 #define RGBLED_NUM 83
 #define DRIVER_LED_TOTAL RGBLED_NUM
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 200
-#define RGB_DISABLE_WHEN_USB_SUSPENDED true
+#define RGB_DISABLE_WHEN_USB_SUSPENDED
 #define RGB_MATRIX_CENTER {112, 32}
 #define RGB_MATRIX_ANIMATION
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS

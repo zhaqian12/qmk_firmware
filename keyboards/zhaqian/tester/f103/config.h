@@ -20,7 +20,6 @@
 
 #define MATRIX_COL_PINS { A9, A0, B15, B14, B13 }
 #define MATRIX_ROW_PINS { A10, B6, C14 }
-#define UNUSED_PINS
 
 #ifdef RGB_MATRIX_ENABLE
 #define RGB_DI_PIN B3
@@ -47,7 +46,7 @@
 #undef UG_RGB_MATRIX_WPM_ANIMATIONS
 #endif
 // #define DEBUG_EEPROM_OUTPUT
-// #define DEBUG_MATRIX_SCAN_RATE
+#define DEBUG_MATRIX_SCAN_RATE
 
 #define SERIAL_DRIVER SD2
 #define SD1_TX_PIN A2

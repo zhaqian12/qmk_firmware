@@ -60,11 +60,12 @@ void    send_keyboard(report_keyboard_t *report);
 void    send_mouse(report_mouse_t *report);
 void    send_system(uint16_t data);
 void    send_consumer(uint16_t data);
+void    send_radial(uint16_t data);
 void    send_programmable_button(uint32_t data);
 void    send_digitizer(report_digitizer_t *report);
 
 /* host struct */
-host_driver_t chibios_driver = {keyboard_leds, send_keyboard, send_mouse, send_system, send_consumer, send_programmable_button};
+host_driver_t chibios_driver = {keyboard_leds, send_keyboard, send_mouse, send_system, send_consumer, send_radial, send_programmable_button};
 
 #ifdef VIRTSER_ENABLE
 void virtser_task(void);
@@ -74,9 +75,14 @@ void virtser_task(void);
 void raw_hid_task(void);
 #endif
 
+#ifdef HIDRGB_PROTOCOL_ENABLE
+void hidrgb_hid_task(void);
+#endif
+
 #ifdef CONSOLE_ENABLE
 void console_task(void);
 #endif
+
 #ifdef MIDI_ENABLE
 void midi_ep_task(void);
 #endif
@@ -217,5 +223,8 @@ void protocol_post_task(void) {
 #endif
 #ifdef RAW_ENABLE
     raw_hid_task();
+#endif
+#ifdef HIDRGB_PROTOCOL_ENABLE
+    hidrgb_hid_task();
 #endif
 }

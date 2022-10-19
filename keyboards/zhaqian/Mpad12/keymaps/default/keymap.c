@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Mpad12.h"
+#include QMK_KEYBOARD_H
 
 enum layer_number {
     First = 0,

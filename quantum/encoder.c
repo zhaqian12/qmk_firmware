@@ -168,21 +168,20 @@ static bool encoder_update(uint8_t index, uint8_t state) {
         changed = true;
 #ifdef ENCODER_MAP_ENABLE
         encoder_exec_mapping(index, ENCODER_COUNTER_CLOCKWISE);
-#elif defined (ENCODER_TRIGGER_ENABLE)
+#elif defined(ENCODER_TRIGGER_ENABLE)
         encoder_trigger(index, ENCODER_COUNTER_CLOCKWISE);
-#else  
+#else
         encoder_update_kb(index, ENCODER_COUNTER_CLOCKWISE);
 #endif // ENCODER_MAP_ENABLE
-
     }
     if (encoder_pulses[i] <= -resolution) { // direction is arbitrary here, but this clockwise
         encoder_value[index]--;
         changed = true;
 #ifdef ENCODER_MAP_ENABLE
         encoder_exec_mapping(index, ENCODER_CLOCKWISE);
-#elif defined (ENCODER_TRIGGER_ENABLE)
+#elif defined(ENCODER_TRIGGER_ENABLE)
         encoder_trigger(index, ENCODER_CLOCKWISE);
-#else  
+#else
         encoder_update_kb(index, ENCODER_CLOCKWISE);
 #endif // ENCODER_MAP_ENABLE
     }

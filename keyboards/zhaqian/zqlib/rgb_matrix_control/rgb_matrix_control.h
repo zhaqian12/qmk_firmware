@@ -26,7 +26,8 @@ typedef union {
         uint8_t is_key_rgb_enable : 1;
         uint8_t is_underglow_rgb_enable : 1;
         uint8_t is_logo_rgb_enable : 1;
-        uint8_t reverse : 5;
+        uint8_t is_indicator_override: 1;
+        uint8_t reverse : 4;
     };
 } rgb_matrix_control_config_t;
 
@@ -45,7 +46,7 @@ void key_rgb_enable(bool update);
 void key_rgb_disable(bool update);
 void logo_rgb_enable(bool update);
 void logo_rgb_disable(bool update);
-
+void set_indicator_rgb_override(uint8_t enable, bool update);
 #ifdef RGB_MATRIX_CONTROL_SWITCH_ENABLE
 void rgb_matrix_control_switch(void);
 #endif
@@ -53,5 +54,5 @@ void rgb_matrix_control_switch(void);
 bool key_rgb_is_enabled(void);
 bool underglow_rgb_is_enabled(void);
 bool logo_rgb_is_enabled(void);
-
+uint8_t indicator_rgb_is_override(void);
 bool process_rgb_matrix_control(const uint16_t keycode, const keyrecord_t *record);
