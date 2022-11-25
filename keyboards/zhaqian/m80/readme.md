@@ -1,7 +1,8 @@
 # M80
 
 A 80%  keyboard with rgb.
-Note: The source code for this keyboard has only been tested in this repository!
+
+Note: The source code for this keyboard has only been tested in this repository[[zhaqian](https://github.com/zhaqian12/qmk_firmware/tree/zhaqian)]!
 
 * Keyboard Maintainer: [zhaqian](https://github.com/zhaqian12)
 * Hardware Supported: M80
