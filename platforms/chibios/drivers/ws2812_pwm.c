@@ -326,6 +326,7 @@ void ws2812_init(void) {
         .dier = ((0x100 << WS2812_PWM_CHANNEL) | TIM_DIER_TDE),
 #else
         .dier = TIM_DIER_UDE, // DMA on update event for next period
+#endif
     };
     //#pragma GCC diagnostic pop  // Restore command-line warning options
 
