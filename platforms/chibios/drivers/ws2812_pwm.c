@@ -33,10 +33,10 @@
  * figure out if we are using a 32bit timer. This is needed to setup the DMA controller correctly.
  * Ignore STM32H7XX and STM32U5XX as they are not supported by ChibiOS.
  */
-#if !defined(STM32F1XX) && !defined(STM32L0XX) && !defined(STM32L1XX)
+#if !defined(STM32F1XX) && !defined(STM32L0XX) && !defined(STM32L1XX) && !defined(AIR32F10x)
 #    define WS2812_PWM_TIMER_32BIT_PWMD2 1
 #endif
-#if !defined(STM32F1XX)
+#if !defined(STM32F1XX) && !defined(AIR32F10x)
 #    define WS2812_PWM_TIMER_32BIT_PWMD5 1
 #endif
 #define WS2812_CONCAT1(a, b) a##b
@@ -322,6 +322,9 @@ void ws2812_init(void) {
                 [WS2812_PWM_CHANNEL - 1] = {.mode = WS2812_PWM_OUTPUT_MODE, .callback = NULL}, // Turn on the channel we care about
             },
         .cr2  = 0,
+#if defined(AIR32F10x) || defined(WS2812_PWM_DRIVER_USE_DMA_CC)
+        .dier = ((0x100 << WS2812_PWM_CHANNEL) | TIM_DIER_TDE),
+#else
         .dier = TIM_DIER_UDE, // DMA on update event for next period
     };
     //#pragma GCC diagnostic pop  // Restore command-line warning options

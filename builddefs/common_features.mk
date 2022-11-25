@@ -226,7 +226,7 @@ else
         COMMON_VPATH += $(PLATFORM_PATH)/$(PLATFORM_KEY)/$(DRIVER_DIR)/flash
         COMMON_VPATH += $(DRIVER_PATH)/flash
         SRC += eeprom_driver.c eeprom_legacy_emulated_flash.c legacy_flash_ops.c
-      else ifneq ($(filter $(MCU_SERIES),STM32F1xx STM32F3xx STM32F4xx STM32L4xx STM32G4xx WB32F3G71xx WB32FQ95xx GD32VF103),)
+      else ifneq ($(filter $(MCU_SERIES),STM32F1xx STM32F3xx STM32F4xx STM32L4xx STM32G4xx WB32F3G71xx WB32FQ95xx GD32VF103 AIR32F10x),)
         # Wear-leveling EEPROM implementation, backed by MCU flash
         OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_WEAR_LEVELING
         SRC += eeprom_driver.c eeprom_wear_leveling.c
@@ -906,4 +906,89 @@ ifeq ($(strip $(ENCODER_ENABLE)), yes)
     ifeq ($(strip $(ENCODER_MAP_ENABLE)), yes)
         OPT_DEFS += -DENCODER_MAP_ENABLE
     endif
+endif
+
+ifeq ($(strip $(JOYSTICK_TRIGGER_ENABLE)), yes)
+    SRC += $(QUANTUM_DIR)/joystick_trigger.c
+	QUANTUM_LIB_SRC += analog.c
+    OPT_DEFS += -DJOYSTICK_TRIGGER_ENABLE
+endif
+
+ifeq ($(strip $(RADIAL_CONTROLLER_ENABLE)), yes)
+    SRC += $(QUANTUM_DIR)/radial_controller.c
+    OPT_DEFS += -DRADIAL_CONTROLLER_ENABLE
+endif
+
+ifeq ($(strip $(RGB_MATRIX_CONTROL_ENABLE)), yes)
+	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
+        $(error RGB_MATRIX_CONTROL_ENABLE requires RGB_MATRIX_ENABLE, either disable RGB_MATRIX_CONTROL explicitly or enable RGB_MATRIX)
+    endif
+    SRC += $(QUANTUM_DIR)/rgb_matrix/rgb_matrix_control.c
+	OPT_DEFS += -DRGB_MATRIX_CONTROL_ENABLE
+endif
+
+ifeq ($(strip $(UNDERGLOW_RGB_MATRIX_ENABLE)), yes)
+	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
+        $(error UNDERGLOW_RGB_MATRIX_ENABLE requires RGB_MATRIX_ENABLE, either disable UNDERGLOW_RGB_MATRIX explicitly or enable RGB_MATRIX)
+    endif
+    SRC += $(QUANTUM_DIR)/rgb_matrix/underglow_rgb_matrix.c
+    OPT_DEFS += -DUNDERGLOW_RGB_MATRIX_ENABLE
+endif
+
+ifeq ($(strip $(OPENRGB_ENABLE)), yes)
+	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
+        $(error OPENRGB_ENABLE requires RGB_MATRIX_ENABLE, either disable OPENRGB_ENABLE explicitly or enable RGB_MATRIX)
+    endif
+    HIDRGB_PROTOCOL_ENABLE := yes
+    SRC += $(QUANTUM_DIR)/rgb_matrix/openrgb.c
+    OPT_DEFS += -DOPENRGB_ENABLE 
+endif
+
+ifeq ($(strip $(SIGNALRGB_ENABLE)), yes)
+	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
+        $(error SIGNALRGB_ENABLE requires RGB_MATRIX_ENABLE, either disable SIGNALRGB_ENABLE explicitly or enable RGB_MATRIX)
+    endif
+    HIDRGB_PROTOCOL_ENABLE := yes
+    SRC += $(QUANTUM_DIR)/rgb_matrix/signalrgb.c
+    OPT_DEFS += -DSIGNALRGB_ENABLE
+endif
+
+ifeq ($(strip $(HIDRGB_PROTOCOL_ENABLE)), yes)
+    SRC += $(QUANTUM_DIR)/hidrgb_protocol.c
+    OPT_DEFS += -DHIDRGB_PROTOCOL_ENABLE
+endif
+
+VALID_RGB_INDICATORS_TYPES := solid dynamic
+
+RGB_INDICATORS ?= solid
+ifeq ($(strip $(RGB_INDICATORS_ENABLE)), yes)
+	ifeq ($(strip $(RGB_MATRIX_ENABLE)), no)
+        $(error RGB_INDICATORS_ENABLE requires RGB_MATRIX_ENABLE, either disable RGB_INDICATORS explicitly or enable RGB_MATRIX)
+    endif
+	ifeq ($(filter $(RGB_INDICATORS),$(VALID_RGB_INDICATORS_TYPES)),)
+        $(error RGB_INDICATORS="$(RGB_INDICATORS)" is not a valid driver)
+    endif
+	ifeq ($(strip $(RGB_INDICATORS)), solid)
+    	SRC += $(QUANTUM_DIR)/rgb_matrix/rgb_indicators.c
+    else ifeq ($(strip $(RGB_INDICATORS)), dynamic)
+		SRC += $(QUANTUM_DIR)/rgb_matrix/dynamic_rgb_indicators.c
+		OPT_DEFS += -DDYNAMIC_RGB_INDICATORS_ENABLE
+    endif
+	OPT_DEFS += -DRGB_INDICATORS_ENABLE
+endif
+
+ifeq ($(strip $(VIA_CUSTOM_KEYCODE_ENABLE)), yes)
+	ifeq ($(strip $(VIA_ENABLE)), no)
+        $(error VIA_CUSTOM_KEYCODE_ENABLE requires VIA_ENABLE, either disable VIA_CUSTOM_KEYCODE explicitly or enable VIA)
+    endif
+    SRC += $(QUANTUM_DIR)/via_custom_keycode.c
+	OPT_DEFS += -DVIA_CUSTOM_KEYCODE_ENABLE
+endif
+
+ifeq ($(strip $(VIA_CUSTOM_CONTROL_ENABLE)), yes)
+	ifeq ($(strip $(VIA_ENABLE)), no)
+        $(error VIA_CUSTOM_CONTROL_ENABLE requires VIA_ENABLE, either disable VIA_CUSTOM_CONTROL explicitly or enable VIA)
+    endif
+    SRC += $(QUANTUM_DIR)/via_custom_control.c
+	OPT_DEFS += -DVIA_CUSTOM_CONTROL_ENABLE
 endif

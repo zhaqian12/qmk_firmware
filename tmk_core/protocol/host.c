@@ -159,6 +159,14 @@ void host_consumer_send(uint16_t usage) {
     (*driver->send_extra)(&report);
 }
 
+void host_radial_send(uint16_t usage) {
+    report_radial_t report = {
+        .report_id = REPORT_ID_RADIAL,
+        .usage     = usage,
+    };
+    send_radial(&report);
+}
+
 #ifdef JOYSTICK_ENABLE
 void host_joystick_send(joystick_t *joystick) {
     if (!driver) return;

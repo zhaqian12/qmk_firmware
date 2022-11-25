@@ -19,7 +19,7 @@
 #include <hal.h>
 #include "legacy_flash_ops.h"
 
-#if defined(STM32F1XX)
+#if defined(STM32F1XX) || defined(AIR32F10x)
 #    define FLASH_SR_WRPERR FLASH_SR_WRPRTERR
 #endif
 
