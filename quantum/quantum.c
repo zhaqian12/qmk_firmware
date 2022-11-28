@@ -343,6 +343,21 @@ bool process_record_quantum(keyrecord_t *record) {
 #ifdef AUTOCORRECT_ENABLE
             process_autocorrect(keycode, record) &&
 #endif
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+            process_rgb_matrix_control(keycode, record) &&
+#endif
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+            process_underglow_rgb_matrix(keycode, record) &&
+#endif
+#ifdef RGB_INDICATORS_ENABLE
+            process_rgb_indicators(keycode, record) &&
+#endif
+#ifdef RADIAL_CONTROLLER_ENABLE
+            process_radial_controller(keycode, record) &&
+#endif
+#ifdef VIA_CUSTOM_KEYCODE_ENABLE
+            process_via_custom_keycode(keycode, record) &&
+#endif
             true)) {
         return false;
     }

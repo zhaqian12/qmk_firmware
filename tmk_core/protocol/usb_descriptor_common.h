@@ -32,3 +32,11 @@
 #ifndef RAW_USAGE_ID
 #    define RAW_USAGE_ID 0x61
 #endif
+
+#ifndef HIDRGB_USAGE_PAGE
+#    define HIDRGB_USAGE_PAGE 0xFF59
+#endif
+
+#ifndef HIDRGB_USAGE_ID
+#    define HIDRGB_USAGE_ID 0x60
+#endif
