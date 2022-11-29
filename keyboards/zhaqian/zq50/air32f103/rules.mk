@@ -1,0 +1,16 @@
+# MCU name
+MCU = AIR32F103
+MCU_LDSCRIPT = AIR32F103xBuf2
+FIRMWARE_FORMAT = uf2
+
+# Bootloader selection
+BOOTLOADER = custom
+
+WS2812_DRIVER = pwm
+
+KEYBOARD_SHARED_EP = yes
+LTO_ENABLE = yes
+
+OPT_DEFS += -DCORTEX_ENABLE_WFI_IDLE=TRUE
+SRC += uf2_boot.c
+
