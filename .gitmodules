@@ -21,4 +21,3 @@
 [submodule "lib/pico-sdk"]
 	path = lib/pico-sdk
 	url = https://github.com/qmk/pico-sdk.git
-
