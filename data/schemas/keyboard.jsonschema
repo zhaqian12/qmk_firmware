@@ -246,6 +246,7 @@
                         "items": {
                             "type": "object",
                             "additionalProperties": false,
+                            "required": ["x", "y"],
                             "properties": {
                                 "label": {
                                     "type": "string",
