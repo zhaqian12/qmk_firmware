@@ -1,0 +1,10 @@
+{
+    "keyboard_name": "FK750Pro",
+    "manufacturer": "blockboy",
+    "maintainer": "blockboy",
+    "usb": {
+        "vid": "0x1027",
+        "pid": "0x6060",
+        "device_version": "0.0.1"
+    }
+}
