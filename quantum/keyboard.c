@@ -414,6 +414,18 @@ void keyboard_init(void) {
 #ifdef BLUETOOTH_ENABLE
     bluetooth_init();
 #endif
+#ifdef JOYSTICK_TRIGGER_ENABLE
+    joystick_trigger_init();
+#endif
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+    rgb_matrix_control_init();
+#endif
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+    underglow_rgb_matrix_init();
+#endif
+#ifdef RGB_INDICATORS_ENABLE
+    rgb_indicators_init();
+#endif
 
 #if defined(DEBUG_MATRIX_SCAN_RATE) && defined(CONSOLE_ENABLE)
     debug_enable = true;
@@ -588,6 +600,10 @@ void quantum_task(void) {
 #ifdef SECURE_ENABLE
     secure_task();
 #endif
+
+#ifdef RADIAL_CONTROLLER_ENABLE
+    radial_controller_task();
+#endif
 }
 
 /** \brief Main task that is repeatedly called as fast as possible. */
@@ -680,6 +696,10 @@ void keyboard_task(void) {
 
 #ifdef BLUETOOTH_ENABLE
     bluetooth_task();
+#endif
+
+#ifdef JOYSTICK_TRIGGER_ENABLE
+    joystick_trigger_task();
 #endif
 
     led_task();
