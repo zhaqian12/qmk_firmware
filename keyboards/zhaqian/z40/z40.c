@@ -14,9 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "z40.h"
+#include QMK_KEYBOARD_H
 
 #ifdef RGB_MATRIX_ENABLE
+
 led_config_t g_led_config = {
 	{
 		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11},
@@ -35,4 +36,5 @@ led_config_t g_led_config = {
 		4, 4, 4, 4, 4, 4, 4, 4, 4, 
 	}
 };
+
 #endif
