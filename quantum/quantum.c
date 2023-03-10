@@ -345,6 +345,7 @@ bool process_record_quantum(keyrecord_t *record) {
 #endif
 #ifdef TRI_LAYER_ENABLE
             process_tri_layer(keycode, record) &&
+#endif
 #ifdef RGB_MATRIX_CONTROL_ENABLE
             process_rgb_matrix_control(keycode, record) &&
 #endif
