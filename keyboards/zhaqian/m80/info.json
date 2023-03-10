@@ -2,6 +2,7 @@
     "keyboard_name": "m80",
     "manufacturer": "ZhaQian",
     "maintainer": "ZhaQian",
+    "url": "https://github.com/zhaqian12/qmk_firmware/tree/zhaqian",
     "usb": {
         "vid": "0x00AA",
         "pid": "0xAA14",
