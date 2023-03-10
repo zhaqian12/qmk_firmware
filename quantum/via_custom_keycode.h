@@ -17,7 +17,7 @@
 #pragma once
 
 enum via_custom_keycodes {
-    REV = 0x7EFF,
+    REV = 0x7DFF,
 
 #ifdef RADIAL_CONTROLLER_ENABLE
     RD_BUT,

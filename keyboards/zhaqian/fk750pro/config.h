@@ -16,33 +16,14 @@
 
 #pragma once
 
-#include "config_common.h"
-
-#define MATRIX_ROWS 6
-#define MATRIX_COLS 16
-
-#define MATRIX_ROW_PINS { A1, A2, A3, A4, A5, A6 }
-#define MATRIX_COL_PINS { A7, B0, B1, B10, B11, B12, B13, B14, B15, A8, A9, A10, A15, B3, B4, B5}
-
-#define DIODE_DIRECTION COL2ROW
-
-#define DEBOUNCE 5
-
 #define LOCKING_SUPPORT_ENABLE
 #define LOCKING_RESYNC_ENABLE
 
 #define FORCE_NKRO
 
-#ifdef BOOTMAGIC_LITE
-#define BOOTMAGIC_LITE_ROW 0
-#define BOOTMAGIC_LITE_COLUMN 0
-#endif
-
 #ifdef ENCODER_ENABLE
 #define ENCODERS 1
 #define ENCODER_RESOLUTION 2
-#define ENCODERS_PAD_A { B6 }
-#define ENCODERS_PAD_B { B7 }
 #define ENCODERS_CCW_KEY { { 13, 0 } }
 #define ENCODERS_CW_KEY  { { 15, 0 } }
 #endif
