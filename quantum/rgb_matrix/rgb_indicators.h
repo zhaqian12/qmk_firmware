@@ -18,8 +18,6 @@
 
 #include "quantum.h"
 
-#define EECONFIG_RGB_INDICATORS (uint8_t *)21
-
 typedef union {
     uint8_t raw;
     struct __attribute__((packed)) {

@@ -34,6 +34,14 @@ void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
         return;
     }
 #endif
+
+#if defined(VIA_CUSTOM_MAGIC_SETTINGS_ENABLE)
+    if (*channel_id == id_custom_magic_setting_channel) {
+        via_custom_magic_setting_command(data, length);
+        return;
+    }
+#endif
+
     *command_id = id_unhandled;
     *channel_id = *channel_id;  // force use of variable
 }
@@ -320,6 +328,169 @@ void via_custom_rgb_indicators_get_value(uint8_t *data) {
 
 void via_custom_rgb_indicators_save(void) {
     update_dynamic_rgb_indicators();
+}
+
+#endif
+
+#if defined(VIA_CUSTOM_MAGIC_SETTINGS_ENABLE)
+
+extern keymap_config_t keymap_config;
+
+void via_custom_magic_setting_command(uint8_t *data, uint8_t length) {
+    // data = [ command_id, channel_id, value_id, value_data ]
+    uint8_t *command_id        = &(data[0]);
+    uint8_t *value_id_and_data = &(data[2]);
+
+    switch (*command_id) {
+        case id_custom_set_value: {
+            via_custom_magic_setting_set_value(value_id_and_data);
+            break;
+        }
+        case id_custom_get_value: {
+            via_custom_magic_setting_get_value(value_id_and_data);
+            break;
+        }
+        case id_custom_save: {
+            via_custom_magic_setting_save();
+            break;
+        }
+        default: {
+            *command_id = id_unhandled;
+            break;
+        }
+    }
+}
+
+void via_custom_magic_setting_set_value(uint8_t *data) {
+    // data = [ value_id, value_data ]
+    uint8_t *value_id   = &(data[0]);
+    uint8_t *value_data = &(data[1]);
+    switch (*value_id) {
+        case id_magic_nkro: {
+            clear_keyboard(); 
+            keymap_config.nkro = value_data[0];
+            break;
+        }
+        case id_magic_no_gui: {
+            keymap_config.no_gui = value_data[0];
+            break;
+        }
+        case id_magic_capslock_to_control: {
+            keymap_config.capslock_to_control = value_data[0];
+            break;
+        }
+        case id_magic_swap_control_capslock: {
+            keymap_config.swap_control_capslock = value_data[0];
+            break;
+        }
+        case id_magic_swap_escape_capslock: {
+            keymap_config.swap_escape_capslock = value_data[0];
+            break;
+        }
+        case id_magic_swap_lalt_lgui: {
+            keymap_config.swap_lalt_lgui = value_data[0];
+            break;
+        }
+        case id_magic_swap_ralt_rgui: {
+            keymap_config.swap_ralt_rgui = value_data[0];
+            break;
+        }
+        case id_magic_swap_lctl_lgui: {
+            keymap_config.swap_lctl_lgui = value_data[0];
+            break;
+        }
+        case id_magic_swap_rctl_rgui: {
+            keymap_config.swap_rctl_rgui = value_data[0];
+            break;
+        }
+        case id_magic_swap_grave_esc: {
+            keymap_config.swap_grave_esc = value_data[0];
+            break;
+        }
+        case id_magic_swap_backslash_backspace: {
+            keymap_config.swap_backslash_backspace = value_data[0];
+            break;
+        }
+        case id_magic_oneshot_enable: {
+            keymap_config.oneshot_enable = value_data[0];
+            break;
+        }
+        case id_magic_autocorrect_enable: {
+            keymap_config.autocorrect_enable = value_data[0];
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+    clear_keyboard();
+}
+
+void via_custom_magic_setting_get_value(uint8_t *data) {
+    // data = [ value_id, value_data ]
+    uint8_t *value_id   = &(data[0]);
+    uint8_t *value_data = &(data[1]);
+    switch (*value_id) {
+        case id_magic_nkro: {
+            value_data[0] = keymap_config.nkro;
+            break;
+        }
+        case id_magic_no_gui: {
+            value_data[0] =  keymap_config.no_gui;
+            break;
+        }
+        case id_magic_capslock_to_control: {
+            value_data[0] = keymap_config.capslock_to_control;
+            break;
+        }
+        case id_magic_swap_control_capslock: {
+            value_data[0] = keymap_config.swap_control_capslock;
+            break;
+        }
+        case id_magic_swap_escape_capslock: {
+            value_data[0] = keymap_config.swap_escape_capslock;
+            break;
+        }
+        case id_magic_swap_lalt_lgui: {
+            value_data[0] = keymap_config.swap_lalt_lgui;
+            break;
+        }
+        case id_magic_swap_ralt_rgui: {
+            value_data[0] = keymap_config.swap_ralt_rgui;
+            break;
+        }
+        case id_magic_swap_lctl_lgui: {
+            value_data[0] = keymap_config.swap_lctl_lgui;
+            break;
+        }
+        case id_magic_swap_rctl_rgui: {
+            value_data[0] = keymap_config.swap_rctl_rgui;
+            break;
+        }
+        case id_magic_swap_grave_esc: {
+            value_data[0] = keymap_config.swap_grave_esc;
+            break;
+        }
+        case id_magic_swap_backslash_backspace: {
+            value_data[0] = keymap_config.swap_backslash_backspace;
+            break;
+        }
+        case id_magic_oneshot_enable: {
+            value_data[0] = keymap_config.oneshot_enable;
+            break;
+        }
+        case id_magic_autocorrect_enable: {
+            value_data[0] = keymap_config.autocorrect_enable;
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+}
+
+void via_custom_magic_setting_save(void) {
+    eeconfig_update_keymap(keymap_config.raw);
 }
 
 #endif

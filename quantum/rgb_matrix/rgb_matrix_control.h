@@ -18,8 +18,6 @@
 
 #include "quantum.h"
 
-#define EECONFIG_RGB_MATRIX_CONTROL (uint8_t *)15
-
 typedef union {
     uint8_t raw;
     struct __attribute__((packed)) {

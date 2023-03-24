@@ -183,11 +183,11 @@ static uint8_t changed[3] = {0};
 #endif
 
 void read_dynamic_rgb_indicators(void) {
-    eeprom_read_block(&rgb_indicators_config, (void*)RGB_INDICATORS_EEPROM_ADDR, sizeof(rgb_indicators_config));
+    eeprom_read_block(&rgb_indicators_config, EECONFIG_RGB_INDICATORS, sizeof(rgb_indicators_config));
 }
 
 void update_dynamic_rgb_indicators(void) {
-    eeprom_update_block(&rgb_indicators_config, (void*)RGB_INDICATORS_EEPROM_ADDR, sizeof(rgb_indicators_config));
+    eeprom_update_block(&rgb_indicators_config, EECONFIG_RGB_INDICATORS, sizeof(rgb_indicators_config));
 }
 
 static void update_dynamic_rgb_indicators_default(void) {

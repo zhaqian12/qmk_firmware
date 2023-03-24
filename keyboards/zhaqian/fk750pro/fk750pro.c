@@ -25,7 +25,7 @@ led_config_t g_led_config = {
         {38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, NO_LED},
         {24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, NO_LED, 36, 37, NO_LED},
         {11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, NO_LED, 22, 23, NO_LED, NO_LED},
-        {0, 1, 2, NO_LED, 3, 4, 5, NO_LED, NO_LED, 6, 7, NO_LED, 8, 9, 10, NO_LED},
+        {0, 1, 2, NO_LED, NO_LED, 4, NO_LED, NO_LED, NO_LED, 6, 7, NO_LED, 8, 9, 10, NO_LED},
     }, {
         {8, 62},   {26, 62},  {43, 62},  {71, 62},  {95, 62},  {119, 62}, {147, 62}, {164, 62}, {186, 62}, {200, 62}, {214, 62},
         {15, 51},  {38, 51},  {52, 51},  {65, 51},  {79, 51},  {93, 51},  {107, 51}, {121, 51}, {135, 51}, {148, 51}, {162, 51}, {181, 51}, {200, 51},
@@ -50,6 +50,15 @@ led_config_t g_led_config = {
         2, 2, 2, 2, 2, 2, 2, 2,
     }
 };
+
+uint8_t rgb_matrix_map_row_column_to_led_kb(uint8_t row, uint8_t column, uint8_t *led_i) {
+    if (row == 5 && column == 5) {
+        led_i[0] = 3;
+        led_i[1] = 5;
+        return 2;
+    }
+    return 0;
+}
 
 bool rgb_matrix_indicators_kb(void) {
     if (!rgb_matrix_indicators_user()) { 

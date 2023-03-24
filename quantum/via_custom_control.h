@@ -26,9 +26,14 @@
 #define VIA_CUSTOM_RGB_INDICATORS_ENABLE
 #endif
 
+#if defined(MAGIC_SETTINGS_ENABLE)
+#define VIA_CUSTOM_MAGIC_SETTINGS_ENABLE
+#endif
+
 enum via_custom_channel_id {
     id_custom_rgb_matrix_channel = 5,
     id_custom_rgb_indicators_channel = 6,
+    id_custom_magic_setting_channel = 7,
 };
 
 enum via_custom_rgb_matrix_value {
@@ -48,6 +53,22 @@ enum via_custom_rgb_indicators_value {
     id_rgb_indicators_led                   = 5,       // rgb indicator led
 };
 
+enum via_custom_magic_setting_value {
+    id_magic_nkro                           = 1,
+    id_magic_no_gui                         = 2,
+    id_magic_capslock_to_control            = 3,
+    id_magic_swap_control_capslock          = 4,  
+    id_magic_swap_escape_capslock           = 5,
+    id_magic_swap_lalt_lgui                 = 6,
+    id_magic_swap_ralt_rgui                 = 7,     
+    id_magic_swap_lctl_lgui                 = 8,
+    id_magic_swap_rctl_rgui                 = 9,
+    id_magic_swap_grave_esc                 = 10,
+    id_magic_swap_backslash_backspace       = 11, 
+    id_magic_oneshot_enable                 = 12,
+    id_magic_autocorrect_enable             = 13,
+};
+
 #if defined(VIA_CUSTOM_RGB_MATRIX_ENABLE)
 void via_custom_rgb_matrix_command(uint8_t *data, uint8_t length);
 void via_custom_rgb_matrix_set_value(uint8_t *data);
@@ -60,4 +81,11 @@ void via_custom_rgb_indicators_command(uint8_t *data, uint8_t length);
 void via_custom_rgb_indicators_set_value(uint8_t *data);
 void via_custom_rgb_indicators_get_value(uint8_t *data);
 void via_custom_rgb_indicators_save(void);
+#endif
+
+#if defined(VIA_CUSTOM_MAGIC_SETTINGS_ENABLE)
+void via_custom_magic_setting_command(uint8_t *data, uint8_t length);
+void via_custom_magic_setting_set_value(uint8_t *data);
+void via_custom_magic_setting_get_value(uint8_t *data);
+void via_custom_magic_setting_save(void);
 #endif
