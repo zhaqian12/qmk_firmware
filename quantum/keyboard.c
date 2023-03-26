@@ -426,7 +426,9 @@ void keyboard_init(void) {
 #ifdef RGB_INDICATORS_ENABLE
     rgb_indicators_init();
 #endif
-
+#ifdef MAGIC_SETTINGS_ENABLE
+    magic_settings_init();
+#endif 
 #if defined(DEBUG_MATRIX_SCAN_RATE) && defined(CONSOLE_ENABLE)
     debug_enable = true;
 #endif

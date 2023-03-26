@@ -1,0 +1,45 @@
+{
+    "label": "Grave Esc",
+    "content": [
+        {
+            "label": "Always send Escape if Alt is pressed",
+            "type": "toggle",
+            "content": [
+                "id_advanced_magic_grave_esc_override[0]",
+                8,
+                11,
+                0
+            ]
+        },
+        {
+            "label": "Always send Escape if Ctrl is pressed",
+            "type": "toggle",
+            "content": [
+                "id_advanced_magic_grave_esc_override[1]",
+                8,
+                11,
+                1
+            ]
+        },
+        {
+            "label": "Always send Escape if Gui is pressed",
+            "type": "toggle",
+            "content": [
+                "id_advanced_magic_grave_esc_override[2]",
+                8,
+                11,
+                2
+            ]
+        },
+        {
+            "label": "Always send Escape if Shift is pressed",
+            "type": "toggle",
+            "content": [
+                "id_advanced_magic_grave_esc_override[3]",
+                8,
+                11,
+                3
+            ]
+        }
+    ]
+}

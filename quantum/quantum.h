@@ -286,6 +286,8 @@ extern layer_state_t layer_state;
 #   include "via_custom_control.h"
 #endif
 
+#   include "magic_settings.h"
+
 void set_single_persistent_default_layer(uint8_t default_layer);
 
 #define IS_LAYER_ON(layer) layer_state_is(layer)

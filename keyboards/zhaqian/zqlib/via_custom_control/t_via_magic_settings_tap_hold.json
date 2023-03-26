@@ -1,0 +1,100 @@
+{
+    "label": "Tap-Hold",
+    "content": [
+        {
+            "label": "Permissive Hold",
+            "type": "toggle",
+            "content": [
+                "id_advanced_magic_tap_hold_config[0]",
+                8,
+                12,
+                0
+            ]
+        },
+        {
+            "label": "Retro Tapping",
+            "type": "toggle",
+            "content": [
+                "id_advanced_magic_tap_hold_config[1]",
+                8,
+                12,
+                1
+            ]
+        },
+        {
+            "label": "Hold On Other Key Press",
+            "type": "toggle",
+            "content": [
+                "id_advanced_magic_tap_hold_config[2]",
+                8,
+                12,
+                2
+            ]
+        },
+        {
+            "label": "Tapping Toggle Times",
+            "type": "range",
+            "options": [
+                0,
+                255
+            ],
+            "content": [
+                "id_advanced_magic_tapping_toggle_times",
+                8,
+                13
+            ]
+        },
+        {
+            "label": "Tapping Term(ms)",
+            "type": "range",
+            "options": [
+                0,
+                9999
+            ],
+            "content": [
+                "id_advanced_magic_tapping_term",
+                8,
+                14
+            ]
+        },
+        {
+            "label": "Quick Tap Term(ms)",
+            "type": "range",
+            "options": [
+                0,
+                9999
+            ],
+            "content": [
+                "id_advanced_magic_quick_tap_term",
+                8,
+                15
+            ]
+        },
+        {
+            "label": "Tap Code Delay(ms)",
+            "type": "range",
+            "options": [
+                0,
+                9999
+            ],
+            "content": [
+                "id_advanced_magic_tap_code_delay",
+                8,
+                16
+            ]
+        },
+        {
+            "label": "Tap Hold Caps Delay(ms)",
+            "type": "range",
+            "options": [
+                0,
+                9999
+            ],
+            "content": [
+                "id_advanced_magic_tap_hold_caps_delay",
+                8,
+                17
+            ]
+        }
+    ]
+}

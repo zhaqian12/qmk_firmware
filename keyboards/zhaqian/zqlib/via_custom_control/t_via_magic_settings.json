@@ -1,0 +1,127 @@
+{
+    "label": "QMK Settings",
+    "content": [
+        {
+            "label": "Magic Settings",
+            "content": [
+                {
+                    "label": "Enable N-Key Rollover",
+                    "type": "toggle",
+                    "content": [
+                        "id_magic_nkro",
+                        7,
+                        1
+                    ]
+                },
+                {
+                    "label": "Disabled Gui",
+                    "type": "toggle",
+                    "content": [
+                        "id_magic_no_gui",
+                        7,
+                        2
+                    ]
+                },
+                {
+                    "label": "Treat Capslock as Ctrl",
+                    "type": "toggle",
+                    "content": [
+                        "id_magic_capslock_to_control",
+                        7,
+                        3
+                    ]
+                },
+                {
+                    "label": "Swap Ctrl and Capslock",
+                    "type": "toggle",
+                    "content": [
+                        "id_magic_swap_control_capslock",
+                        7,
+                        4
+                    ]
+                },
+                {
+                    "label": "Swap Esc and Capslock",
+                    "type": "toggle",
+                    "content": [
+                        "id_magic_swap_escape_capslock",
+                        7,
+                        5
+                    ]
+                },
+                {
+                    "label": "Swap Left Alt and Gui",
+                    "type": "toggle",
+                    "content": [
+                        "id_magic_swap_lalt_lgui",
+                        7,
+                        6
+                    ]
+                },
+                {
+                    "label": "Swap Right Alt and Gui",
+                    "type": "toggle",
+                    "content": [
+                        "id_magic_swap_ralt_rgui",
+                        7,
+                        7
+                    ]
+                },
+                {
+                    "label": "Swap Left Ctrl and Gui",
+                    "type": "toggle",
+                    "content": [
+                        "id_magic_swap_lctl_lgui",
+                        7,
+                        8
+                    ]
+                },
+                {
+                    "label": "Swap Right Ctrl and Gui",
+                    "type": "toggle",
+                    "content": [
+                        "id_magic_swap_rctl_rgui",
+                        7,
+                        9
+                    ]
+                },
+                {
+                    "label": "Swap ` and Esc",
+                    "type": "toggle",
+                    "content": [
+                        "id_magic_swap_grave_esc",
+                        7,
+                        10
+                    ]
+                },
+                {
+                    "label": "Swap \\ and Backspace",
+                    "type": "toggle",
+                    "content": [
+                        "id_magic_swap_backslash_backspace",
+                        7,
+                        11
+                    ]
+                },
+                {
+                    "label": "Enable Oneshot",
+                    "type": "toggle",
+                    "content": [
+                        "id_magic_oneshot_enable",
+                        7,
+                        12
+                    ]
+                },
+                {
+                    "label": "Enable Autocorrect",
+                    "type": "toggle",
+                    "content": [
+                        "id_magic_autocorrect_enable",
+                        7,
+                        13
+                    ]
+                }
+            ]
+        }
+    ]
+}

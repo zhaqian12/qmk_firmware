@@ -1,0 +1,122 @@
+{
+    "label": "Mouse Key",
+    "content": [
+        {
+            "label": "Delay between pressing a movement key and cursor movement",
+            "type": "range",
+            "options": [
+                0,
+                255
+            ],
+            "content": [
+                "id_advanced_magic_mk_delay",
+                8,
+                2
+            ]
+        },
+        {
+            "label": "Time between cursor movements in milliseconds",
+            "type": "range",
+            "options": [
+                0,
+                255
+            ],
+            "content": [
+                "id_advanced_magic_mk_interval",
+                8,
+                3
+            ]
+        },
+        {
+            "label": "Step size",
+            "type": "range",
+            "options": [
+                0,
+                255
+            ],
+            "content": [
+                "id_advanced_magic_mk_move_delta",
+                8,
+                4
+            ]
+        },
+        {
+            "label": "Maximum cursor speed at which acceleration stops",
+            "type": "range",
+            "options": [
+                0,
+                255
+            ],
+            "content": [
+                "id_advanced_magic_mk_max_speed",
+                8,
+                5
+            ]
+        },
+        {
+            "label": "Time until maximum cursor speed is reached",
+            "type": "range",
+            "options": [
+                0,
+                255
+            ],
+            "content": [
+                "id_advanced_magic_mk_time_to_max",
+                8,
+                6
+            ]
+        },
+        {
+            "label": "Delay between pressing a wheel key and wheel movement",
+            "type": "range",
+            "options": [
+                0,
+                255
+            ],
+            "content": [
+                "id_advanced_magic_mk_wheel_delay",
+                8,
+                7
+            ]
+        },
+        {
+            "label": "Time between wheel movements",
+            "type": "range",
+            "options": [
+                0,
+                255
+            ],
+            "content": [
+                "id_advanced_magic_mk_wheel_interval",
+                8,
+                8
+            ]
+        },
+        {
+            "label": "Maximum number of scroll steps per scroll action",
+            "type": "range",
+            "options": [
+                0,
+                255
+            ],
+            "content": [
+                "id_advanced_magic_mk_wheel_max_speed",
+                8,
+                9
+            ]
+        },
+        {
+            "label": "Time until maximum scroll speed is reached",
+            "type": "range",
+            "options": [
+                0,
+                255
+            ],
+            "content": [
+                "id_advanced_magic_mk_wheel_time_to_max",
+                8,
+                10
+            ]
+        }
+    ]
+}

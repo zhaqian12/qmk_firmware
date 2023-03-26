@@ -1,0 +1,27 @@
+{
+    "label": "Keyboard",
+    "content": [
+        {
+            "label": "Reset All Settings",
+            "type": "toggle",
+            "content": [
+                "id_advanced_magic_settings_reset",
+                8,
+                0
+            ]
+        },
+        {
+            "label": "Debounce Time",
+            "type": "range",
+            "options": [
+                0,
+                255
+            ],
+            "content": [
+                "id_advanced_magic_debounce",
+                8,
+                1
+            ]
+        }
+    ]
+}

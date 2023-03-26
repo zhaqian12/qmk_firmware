@@ -1019,6 +1019,6 @@ ifeq ($(strip $(EECONFIG_EXTENDED_FOR_ZQ)), yes)
 endif
 
 ifeq ($(strip $(MAGIC_SETTINGS_ENABLE)), yes)
-    # SRC += $(QUANTUM_DIR)/magic_settings.c
+    SRC += $(QUANTUM_DIR)/magic_settings.c
 	OPT_DEFS += -DMAGIC_SETTINGS_ENABLE
 endif

@@ -957,7 +957,34 @@
       "label": "QMK Settings",
       "content": [
         {
-          "label": "Magic Settings",
+          "label": "Keyboard",
+          "content": [
+            {
+              "label": "Reset All Settings",
+              "type": "toggle",
+              "content": [
+                "id_advanced_magic_settings_reset",
+                8,
+                0
+              ]
+            },
+            {
+              "label": "Debounce Time",
+              "type": "range",
+              "options": [
+                0,
+                255
+              ],
+              "content": [
+                "id_advanced_magic_debounce",
+                8,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Magic",
           "content": [
             {
               "label": "Enable N-Key Rollover",
@@ -1074,6 +1101,361 @@
                 "id_magic_autocorrect_enable",
                 7,
                 13
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Grave Esc",
+          "content": [
+            {
+              "label": "Always send Escape if Alt is pressed",
+              "type": "toggle",
+              "content": [
+                "id_advanced_magic_grave_esc_override[0]",
+                8,
+                11,
+                0
+              ]
+            },
+            {
+              "label": "Always send Escape if Ctrl is pressed",
+              "type": "toggle",
+              "content": [
+                "id_advanced_magic_grave_esc_override[1]",
+                8,
+                11,
+                1
+              ]
+            },
+            {
+              "label": "Always send Escape if Gui is pressed",
+              "type": "toggle",
+              "content": [
+                "id_advanced_magic_grave_esc_override[2]",
+                8,
+                11,
+                2
+              ]
+            },
+            {
+              "label": "Always send Escape if Shift is pressed",
+              "type": "toggle",
+              "content": [
+                "id_advanced_magic_grave_esc_override[3]",
+                8,
+                11,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Tap-Hold",
+          "content": [
+            {
+              "label": "Permissive Hold",
+              "type": "toggle",
+              "content": [
+                "id_advanced_magic_tap_hold_config[0]",
+                8,
+                12,
+                0
+              ]
+            },
+            {
+              "label": "Retro Tapping",
+              "type": "toggle",
+              "content": [
+                "id_advanced_magic_tap_hold_config[1]",
+                8,
+                12,
+                1
+              ]
+            },
+            {
+              "label": "Hold On Other Key Press",
+              "type": "toggle",
+              "content": [
+                "id_advanced_magic_tap_hold_config[2]",
+                8,
+                12,
+                2
+              ]
+            },
+            {
+              "label": "Tapping Toggle Times",
+              "type": "range",
+              "options": [
+                0,
+                255
+              ],
+              "content": [
+                "id_advanced_magic_tapping_toggle_times",
+                8,
+                13
+              ]
+            },
+            {
+              "label": "Tapping Term(ms)",
+              "type": "range",
+              "options": [
+                0,
+                9999
+              ],
+              "content": [
+                "id_advanced_magic_tapping_term",
+                8,
+                14
+              ]
+            },
+            {
+              "label": "Quick Tap Term(ms)",
+              "type": "range",
+              "options": [
+                0,
+                9999
+              ],
+              "content": [
+                "id_advanced_magic_quick_tap_term",
+                8,
+                15
+              ]
+            },
+            {
+              "label": "Tap Code Delay(ms)",
+              "type": "range",
+              "options": [
+                0,
+                9999
+              ],
+              "content": [
+                "id_advanced_magic_tap_code_delay",
+                8,
+                16
+              ]
+            },
+            {
+              "label": "Tap Hold Caps Delay(ms)",
+              "type": "range",
+              "options": [
+                0,
+                9999
+              ],
+              "content": [
+                "id_advanced_magic_tap_hold_caps_delay",
+                8,
+                17
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Auto Shift",
+          "content": [
+            {
+              "label": "Enable Auto Shift",
+              "type": "toggle",
+              "content": [
+                "id_advanced_magic_auto_shift_config[0]",
+                8,
+                18,
+                0
+              ]
+            },
+            {
+              "label": "Enable Auto Shift for Modifiers",
+              "type": "toggle",
+              "content": [
+                "id_advanced_magic_auto_shift_config[1]",
+                8,
+                18,
+                1
+              ]
+            },
+            {
+              "label": "Disable Auto Shift for Alpha Keys",
+              "type": "toggle",
+              "content": [
+                "id_advanced_magic_auto_shift_config[2]",
+                8,
+                18,
+                2
+              ]
+            },
+            {
+              "label": "Disable Auto Shift for Numeric Keys",
+              "type": "toggle",
+              "content": [
+                "id_advanced_magic_auto_shift_config[3]",
+                8,
+                18,
+                3
+              ]
+            },
+            {
+              "label": "Disable Auto Shift for Special Keys",
+              "type": "toggle",
+              "content": [
+                "id_advanced_magic_auto_shift_config[4]",
+                8,
+                18,
+                4
+              ]
+            },
+            {
+              "label": "Enable Keyrepeat",
+              "type": "toggle",
+              "content": [
+                "id_advanced_magic_auto_shift_config[5]",
+                8,
+                18,
+                5
+              ]
+            },
+            {
+              "label": "Disable Automatically Keyrepeating when is exceeded.",
+              "type": "toggle",
+              "content": [
+                "id_advanced_magic_auto_shift_config[6]",
+                8,
+                18,
+                6
+              ]
+            },
+            {
+              "label": "Auto Shift Timeout(ms)",
+              "type": "range",
+              "options": [
+                0,
+                9999
+              ],
+              "content": [
+                "id_advanced_magic_tap_hold_caps_delay",
+                8,
+                17
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Mouse Key",
+          "content": [
+            {
+              "label": "Delay between pressing a movement key and cursor movement",
+              "type": "range",
+              "options": [
+                0,
+                255
+              ],
+              "content": [
+                "id_advanced_magic_mk_delay",
+                8,
+                2
+              ]
+            },
+            {
+              "label": "Time between cursor movements in milliseconds",
+              "type": "range",
+              "options": [
+                0,
+                255
+              ],
+              "content": [
+                "id_advanced_magic_mk_interval",
+                8,
+                3
+              ]
+            },
+            {
+              "label": "Step size",
+              "type": "range",
+              "options": [
+                0,
+                255
+              ],
+              "content": [
+                "id_advanced_magic_mk_move_delta",
+                8,
+                4
+              ]
+            },
+            {
+              "label": "Maximum cursor speed at which acceleration stops",
+              "type": "range",
+              "options": [
+                0,
+                255
+              ],
+              "content": [
+                "id_advanced_magic_mk_max_speed",
+                8,
+                5
+              ]
+            },
+            {
+              "label": "Time until maximum cursor speed is reached",
+              "type": "range",
+              "options": [
+                0,
+                255
+              ],
+              "content": [
+                "id_advanced_magic_mk_time_to_max",
+                8,
+                6
+              ]
+            },
+            {
+              "label": "Delay between pressing a wheel key and wheel movement",
+              "type": "range",
+              "options": [
+                0,
+                255
+              ],
+              "content": [
+                "id_advanced_magic_mk_wheel_delay",
+                8,
+                7
+              ]
+            },
+            {
+              "label": "Time between wheel movements",
+              "type": "range",
+              "options": [
+                0,
+                255
+              ],
+              "content": [
+                "id_advanced_magic_mk_wheel_interval",
+                8,
+                8
+              ]
+            },
+            {
+              "label": "Maximum number of scroll steps per scroll action",
+              "type": "range",
+              "options": [
+                0,
+                255
+              ],
+              "content": [
+                "id_advanced_magic_mk_wheel_max_speed",
+                8,
+                9
+              ]
+            },
+            {
+              "label": "Time until maximum scroll speed is reached",
+              "type": "range",
+              "options": [
+                0,
+                255
+              ],
+              "content": [
+                "id_advanced_magic_mk_wheel_time_to_max",
+                8,
+                10
               ]
             }
           ]
