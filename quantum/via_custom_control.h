@@ -93,6 +93,8 @@ enum via_custom_advanced_magic_setting_value {
     id_advanced_magic_tap_hold_caps_delay       = 17,
     id_advanced_magic_auto_shift_config         = 18,
     id_advanced_magic_auto_shift_timeout        = 19,
+    id_advanced_magic_oneshot_tap_toggle        = 20,
+    id_advanced_magic_oneshot_timeout           = 21,
 };
 
 #if defined(VIA_CUSTOM_RGB_MATRIX_ENABLE)

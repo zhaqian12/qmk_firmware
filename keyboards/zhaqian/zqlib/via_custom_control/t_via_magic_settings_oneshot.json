@@ -1,0 +1,24 @@
+{
+    "label": "One Shot",
+    "content": [
+        {
+            "label": "Enable Oneshot",
+            "type": "toggle",
+            "content": ["id_magic_oneshot_enable", 7, 12]
+        },
+        {
+            "showIf": "{id_magic_oneshot_enable} != 0",
+            "label": "Oneshot Tap Toggle",
+            "type": "range",
+            "options": [0, 255],
+            "content": ["id_advanced_magic_oneshot_tap_toggle", 8, 20]
+        },
+        {
+            "showIf": "{id_magic_oneshot_enable} != 0",
+            "label": "Oneshot Timeout",
+            "type": "range",
+            "options": [0, 9999],
+            "content": ["id_advanced_magic_oneshot_timeout", 8, 21]
+        }
+    ]
+}

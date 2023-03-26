@@ -43,6 +43,9 @@ void eeconfig_update_magic_settings_default(void) {
 #ifdef AUTO_SHIFT_ENABLE
     auto_shift_maigc_settings_reset();
 #endif
+#ifndef NO_ACTION_ONESHOT
+    oneshot_maigc_settings_reset();
+#endif
     eeconfig_update_magic_settings();
     clear_keyboard();
 };
@@ -59,6 +62,7 @@ void magic_settings_init(void) {
 #ifdef AUTO_SHIFT_ENABLE
     auto_shift_maigc_settings_update();
 #endif
+
 }
 
 void magic_settings_reset(void) {
@@ -72,6 +76,9 @@ void magic_settings_reset(void) {
 #endif
 #ifdef AUTO_SHIFT_ENABLE
     auto_shift_maigc_settings_reset();
+#endif
+#ifndef NO_ACTION_ONESHOT
+    oneshot_maigc_settings_reset();
 #endif
     eeconfig_update_magic_settings();
     clear_keyboard();
@@ -175,5 +182,12 @@ void auto_shift_maigc_settings_reset(void) {
     magic_settings_config.auto_shift_config = 0;
     magic_settings_config.auto_shift_timeout = AUTO_SHIFT_TIMEOUT;
     auto_shift_maigc_settings_update();
+}
+#endif
+
+#ifndef NO_ACTION_ONESHOT
+void oneshot_maigc_settings_reset(void) {
+    magic_settings_config.oneshot_tap_toggle = ONESHOT_TAP_TOGGLE;
+    magic_settings_config.oneshot_timeout = ONESHOT_TIMEOUT;
 }
 #endif

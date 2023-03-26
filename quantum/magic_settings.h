@@ -44,6 +44,9 @@ typedef struct __attribute__((packed)) {
     // Auto Shift
     uint8_t auto_shift_config;
     uint16_t auto_shift_timeout;
+    // One Shot Key
+    uint8_t oneshot_tap_toggle;
+    uint16_t oneshot_timeout;
 } magic_settings_t;
 
 extern magic_settings_t magic_settings_config;
@@ -113,6 +116,19 @@ void auto_shift_maigc_settings_update(void);
 void auto_shift_maigc_settings_reset(void);
 #endif
 
+// One Shot Keys Settings
+#ifndef NO_ACTION_ONESHOT
+#ifndef ONESHOT_TAP_TOGGLE
+#    define ONESHOT_TAP_TOGGLE 5
+#endif
+
+#ifndef ONESHOT_TIMEOUT
+#    define ONESHOT_TIMEOUT 5000
+#endif
+
+void oneshot_maigc_settings_reset(void);
+#endif
+
 // Custom Parameters for Debounce
 #define CUSTOM_DEBOUNCE (magic_settings_config.debounce)
 
@@ -133,6 +149,10 @@ void auto_shift_maigc_settings_reset(void);
 // Custom Parameters for Auto Shift
 #define CUSTOM_AUTO_SHIFT_ENABLE (magic_settings_config.auto_shift_config & 0x01)
 #define CUSTOM_AUTO_SHIFT_MODIFIERS (magic_settings_config.auto_shift_config & 0x02)
+
+// Custom Parameters for One Shot Keys
+#define CUSTOM_ONESHOT_TAP_TOGGLE (magic_settings_config.oneshot_tap_toggle)
+#define CUSTOM_ONESHOT_TIMEOUT (magic_settings_config.oneshot_timeout)
 
 #else  
 // Custom Parameters for Debounce
@@ -183,5 +203,9 @@ void auto_shift_maigc_settings_reset(void);
 #else
 #    define CUSTOM_AUTO_SHIFT_MODIFIERS 0
 #endif
+
+// Custom Parameters for One Shot Keys
+#define CUSTOM_ONESHOT_TAP_TOGGLE ONESHOT_TIMEOUT
+#define CUSTOM_ONESHOT_TIMEOUT ONESHOT_TAP_TOGGLE
 
 #endif

@@ -631,6 +631,16 @@ void via_custom_advanced_magic_setting_set_value(uint8_t *data) {
             break;
         }
 #endif
+#ifndef NO_ACTION_ONESHOT
+        case id_advanced_magic_oneshot_tap_toggle: {
+            MAGIC_SETTINGS_SET(oneshot_tap_toggle, value_data[0]);
+            break;
+        }
+        case id_advanced_magic_oneshot_timeout: {
+            MAGIC_SETTINGS_SET(oneshot_timeout, (value_data[0] << 8 | value_data[1]));
+            break;
+        }
+#endif
         default: {
             break;
         }
@@ -730,6 +740,17 @@ void via_custom_advanced_magic_setting_get_value(uint8_t *data) {
         case id_advanced_magic_auto_shift_timeout: {
             value_data[0] = MAGIC_SETTINGS_GET(auto_shift_timeout) >> 8;
             value_data[1] = MAGIC_SETTINGS_GET(auto_shift_timeout) & 0xFF;
+            break;
+        }
+#endif
+#ifndef NO_ACTION_ONESHOT
+        case id_advanced_magic_oneshot_tap_toggle: {
+            value_data[0] = MAGIC_SETTINGS_GET(oneshot_tap_toggle);
+            break;
+        }
+        case id_advanced_magic_oneshot_timeout: {
+            value_data[0] = MAGIC_SETTINGS_GET(oneshot_timeout) >> 8;
+            value_data[1] = MAGIC_SETTINGS_GET(oneshot_timeout) & 0xFF;
             break;
         }
 #endif

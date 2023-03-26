@@ -65,7 +65,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #undef EECONFIG_BASE_SIZE
-#define EECONFIG_BASE_SIZE 80
+#define EECONFIG_BASE_SIZE 85
 #endif
 
 // Size of EEPROM dedicated to keyboard- and user-specific data
