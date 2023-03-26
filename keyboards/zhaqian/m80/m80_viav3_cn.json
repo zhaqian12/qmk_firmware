@@ -74,82 +74,25 @@
                 2
               ],
               "options": [
-                [
-                  "Solid Color",
-                  1
-                ],
-                [
-                  "Gradient Up/Down",
-                  2
-                ],
-                [
-                  "Gradient Left/Right",
-                  3
-                ],
-                [
-                  "Breathing",
-                  4
-                ],
-                [
-                  "Band Sat.",
-                  5
-                ],
-                [
-                  "Band Val.",
-                  6
-                ],
-                [
-                  "Cycle All",
-                  7
-                ],
-                [
-                  "Cycle Left/Right",
-                  8
-                ],
-                [
-                  "Cycle Up/Down",
-                  9
-                ],
-                [
-                  "Rainbow Moving Chevron",
-                  10
-                ],
-                [
-                  "Cycle Out/In",
-                  11
-                ],
-                [
-                  "Cycle Pinwheel",
-                  12
-                ],
-                [
-                  "Cycle Spiral",
-                  13
-                ],
-                [
-                  "Cycle Breathing",
-                  14
-                ],
-                [
-                  "Cycle Band Val.",
-                  15
-                ],
-                [
-                  "Cycle Right/Left",
-                  16
-                ],
-                [
-                  "Cycle Down/Up",
-                  17
-                ],
-                [
-                  "Cycle In/Out",
-                  18
-                ],
-                [
-                  "Snake",
-                  19
-                ]
+                ["\u9759\u6001\u5355\u8272", 1],
+                ["\u9759\u6001\u7eb5\u5411\u6e10\u53d8", 2],
+                ["\u9759\u6001\u6a2a\u5411\u6e10\u53d8", 3],
+                ["\u5355\u8272\u547c\u5438", 4],
+                ["\u80cc\u5149\u6a2a\u5411\u6eda\u52a8", 5],
+                ["\u5355\u8272\u6a2a\u5411\u6eda\u52a8", 6],
+                ["\u5f69\u8679\u5faa\u73af", 7],
+                ["\u6a2a\u5411\u5f69\u8679", 8],
+                ["\u7eb5\u5411\u5f69\u8679", 9],
+                ["V\u578b\u5f69\u8679", 10],
+                ["\u5f69\u8679\u6f29\u6da1", 11],
+                ["\u5f69\u8679\u98ce\u8f66", 12],
+                ["\u5f69\u8679\u87ba\u65cb", 13],
+                ["\u5faa\u73af\u547c\u5438", 14],
+                ["\u5faa\u73af\u6a2a\u5411\u6eda\u52a8", 15],
+                ["\u53cd\u5411\u6a2a\u5411\u5f69\u8679", 16],
+                ["\u53cd\u5411\u7eb5\u5411\u5f69\u8679", 17],
+                ["\u5f69\u8679\u6d9f\u6f2a", 18],
+                ["\u5faa\u73af\u86c7\u5f62\u706f\u6548", 19]
               ]
             },
             {
@@ -182,7 +125,7 @@
           "label": "\u5e95\u706f",
           "content": [
             {
-              "showIf": "{id_\u5e95\u706f_rgb_matrix_effect} != 1",
+              "showIf": "{id_underglow_rgb_matrix_effect} != 1",
               "label": "\u4eae\u5ea6",
               "type": "range",
               "options": [
@@ -190,7 +133,7 @@
                 200
               ],
               "content": [
-                "id_\u5e95\u706f_rgb_matrix_brightness",
+                "id_underglow_rgb_matrix_brightness",
                 5,
                 2
               ]
@@ -199,63 +142,27 @@
               "label": "\u706f\u6548",
               "type": "dropdown",
               "content": [
-                "id_\u5e95\u706f_rgb_matrix_effect",
+                "id_underglow_rgb_matrix_effect",
                 5,
                 3
               ],
               "options": [
-                [
-                  "Sync",
-                  1
-                ],
-                [
-                  "Breathing",
-                  2
-                ],
-                [
-                  "Cycle Breathing",
-                  3
-                ],
-                [
-                  "Cycle Band Val.",
-                  4
-                ],
-                [
-                  "Cycle Pinwheel Val.",
-                  5
-                ],
-                [
-                  "Cycle All",
-                  6
-                ],
-                [
-                  "Cycle Left/Right",
-                  7
-                ],
-                [
-                  "Cycle Up/Down",
-                  8
-                ],
-                [
-                  "Cycle Out/In",
-                  9
-                ],
-                [
-                  "Cycle In/Out",
-                  10
-                ],
-                [
-                  "Rainbow Pinwheel",
-                  11
-                ],
-                [
-                  "Cycle Spiral",
-                  12
-                ]
+                ["\u540c\u6b65\u5168\u5c40", 1],
+                ["\u5355\u8272\u547c\u5438", 2],
+                ["\u5faa\u73af\u547c\u5438", 3],
+                ["\u5faa\u73af\u6a2a\u5411\u6eda\u52a8", 4], 
+                ["\u5faa\u73af\u98ce\u8f66", 5],
+                ["\u5f69\u8679\u5faa\u73af", 6],
+                ["\u6a2a\u5411\u5f69\u8679", 7],
+                ["\u7eb5\u5411\u5f69\u8679", 8],
+                ["\u5f69\u8679\u6f29\u6da1", 9],
+                ["\u5f69\u8679\u6d9f\u6f2a", 10],
+                ["\u5f69\u8679\u98ce\u8f66", 11],
+                ["\u5f69\u8679\u87ba\u65cb", 12]
               ]
             },
             {
-              "showIf": "{id_\u5e95\u706f_rgb_matrix_effect} != 1",
+              "showIf": "{id_underglow_rgb_matrix_effect} != 1",
               "label": "\u901f\u5ea6",
               "type": "range",
               "options": [
@@ -263,17 +170,17 @@
                 255
               ],
               "content": [
-                "id_\u5e95\u706f_rgb_matrix_effect_speed",
+                "id_underglow_rgb_matrix_effect_speed",
                 5,
                 4
               ]
             },
             {
-              "showIf": "{id_\u5e95\u706f_rgb_matrix_effect} != 1",
+              "showIf": "{id_underglow_rgb_matrix_effect} != 1",
               "label": "\u989c\u8272",
               "type": "color",
               "content": [
-                "id_\u5e95\u706f_rgb_matrix_color",
+                "id_underglow_rgb_matrix_color",
                 5,
                 5
               ]
@@ -317,34 +224,13 @@
                 1
               ],
               "options": [
-                [
-                  "\u5173\u95ed",
-                  0
-                ],
-                [
-                  "Solid Color",
-                  1
-                ],
-                [
-                  "Breathing",
-                  2
-                ],
-                [
-                  "Cycle Breathing",
-                  3
-                ],
-                [
-                  "Cycle All",
-                  4
-                ],
-                [
-                  "Twinkle",
-                  5
-                ],
-                [
-                  "Random Color",
-                  6
-                ]
+                ["\u5173\u95ed", 0],
+                ["\u9759\u6001\u5355\u8272", 1],
+                ["\u5355\u8272\u547c\u5438", 2],
+                ["\u5faa\u73af\u547c\u5438", 3],
+                ["\u5f69\u8679\u5faa\u73af", 4],
+                ["\u968f\u673a\u53d8\u6362", 5],
+                ["\u968f\u673a\u8272\u5f69", 6]
               ]
             },
             {
@@ -371,131 +257,131 @@
                   2
                 ],
                 [
-                  "Led 0",
+                  "\u706f\u73e00",
                   4
                 ],
                 [
-                  "Led 1",
+                  "\u706f\u73e01",
                   5
                 ],
                 [
-                  "Led 2",
+                  "\u706f\u73e02",
                   6
                 ],
                 [
-                  "Led 3",
+                  "\u706f\u73e03",
                   7
                 ],
                 [
-                  "Led 4",
+                  "\u706f\u73e04",
                   8
                 ],
                 [
-                  "Led 5",
+                  "\u706f\u73e05",
                   9
                 ],
                 [
-                  "Led 6",
+                  "\u706f\u73e06",
                   10
                 ],
                 [
-                  "Led 7",
+                  "\u706f\u73e07",
                   11
                 ],
                 [
-                  "Led 8",
+                  "\u706f\u73e08",
                   12
                 ],
                 [
-                  "Led 9",
+                  "\u706f\u73e09",
                   13
                 ],
                 [
-                  "Led 10",
+                  "\u706f\u73e010",
                   14
                 ],
                 [
-                  "Led 11",
+                  "\u706f\u73e011",
                   15
                 ],
                 [
-                  "Led 12",
+                  "\u706f\u73e012",
                   16
                 ],
                 [
-                  "Led 13",
+                  "\u706f\u73e013",
                   17
                 ],
                 [
-                  "Led 14",
+                  "\u706f\u73e014",
                   18
                 ],
                 [
-                  "Led 15",
+                  "\u706f\u73e015",
                   19
                 ],
                 [
-                  "Led 16",
+                  "\u706f\u73e016",
                   20
                 ],
                 [
-                  "Led 17",
+                  "\u706f\u73e017",
                   21
                 ],
                 [
-                  "Led 18",
+                  "\u706f\u73e018",
                   22
                 ],
                 [
-                  "Led 19",
+                  "\u706f\u73e019",
                   23
                 ],
                 [
-                  "Led 20",
+                  "\u706f\u73e020",
                   24
                 ],
                 [
-                  "Led 21",
+                  "\u706f\u73e021",
                   25
                 ],
                 [
-                  "Led 22",
+                  "\u706f\u73e022",
                   26
                 ],
                 [
-                  "Led 23",
+                  "\u706f\u73e023",
                   27
                 ],
                 [
-                  "Led 24",
+                  "\u706f\u73e024",
                   28
                 ],
                 [
-                  "Led 25",
+                  "\u706f\u73e025",
                   29
                 ],
                 [
-                  "Led 26",
+                  "\u706f\u73e026",
                   30
                 ],
                 [
-                  "Led 27",
+                  "\u706f\u73e027",
                   31
                 ],
                 [
-                  "Led 28",
+                  "\u706f\u73e028",
                   32
                 ],
                 [
-                  "Led 29",
+                  "\u706f\u73e029",
                   33
                 ],
                 [
-                  "Led 30",
+                  "\u706f\u73e030",
                   34
                 ],
                 [
-                  "Led 31",
+                  "\u706f\u73e031",
                   35
                 ]
               ]
@@ -536,34 +422,13 @@
                 0
               ],
               "options": [
-                [
-                  "\u5173\u95ed",
-                  0
-                ],
-                [
-                  "Solid Color",
-                  1
-                ],
-                [
-                  "Breathing",
-                  2
-                ],
-                [
-                  "Cycle Breathing",
-                  3
-                ],
-                [
-                  "Cycle All",
-                  4
-                ],
-                [
-                  "Twinkle",
-                  5
-                ],
-                [
-                  "Random Color",
-                  6
-                ]
+                ["\u5173\u95ed", 0],
+                ["\u9759\u6001\u5355\u8272", 1],
+                ["\u5355\u8272\u547c\u5438", 2],
+                ["\u5faa\u73af\u547c\u5438", 3],
+                ["\u5f69\u8679\u5faa\u73af", 4],
+                ["\u968f\u673a\u53d8\u6362", 5],
+                ["\u968f\u673a\u8272\u5f69", 6]
               ]
             },
             {
@@ -590,131 +455,131 @@
                   2
                 ],
                 [
-                  "Led 0",
+                  "\u706f\u73e00",
                   4
                 ],
                 [
-                  "Led 1",
+                  "\u706f\u73e01",
                   5
                 ],
                 [
-                  "Led 2",
+                  "\u706f\u73e02",
                   6
                 ],
                 [
-                  "Led 3",
+                  "\u706f\u73e03",
                   7
                 ],
                 [
-                  "Led 4",
+                  "\u706f\u73e04",
                   8
                 ],
                 [
-                  "Led 5",
+                  "\u706f\u73e05",
                   9
                 ],
                 [
-                  "Led 6",
+                  "\u706f\u73e06",
                   10
                 ],
                 [
-                  "Led 7",
+                  "\u706f\u73e07",
                   11
                 ],
                 [
-                  "Led 8",
+                  "\u706f\u73e08",
                   12
                 ],
                 [
-                  "Led 9",
+                  "\u706f\u73e09",
                   13
                 ],
                 [
-                  "Led 10",
+                  "\u706f\u73e010",
                   14
                 ],
                 [
-                  "Led 11",
+                  "\u706f\u73e011",
                   15
                 ],
                 [
-                  "Led 12",
+                  "\u706f\u73e012",
                   16
                 ],
                 [
-                  "Led 13",
+                  "\u706f\u73e013",
                   17
                 ],
                 [
-                  "Led 14",
+                  "\u706f\u73e014",
                   18
                 ],
                 [
-                  "Led 15",
+                  "\u706f\u73e015",
                   19
                 ],
                 [
-                  "Led 16",
+                  "\u706f\u73e016",
                   20
                 ],
                 [
-                  "Led 17",
+                  "\u706f\u73e017",
                   21
                 ],
                 [
-                  "Led 18",
+                  "\u706f\u73e018",
                   22
                 ],
                 [
-                  "Led 19",
+                  "\u706f\u73e019",
                   23
                 ],
                 [
-                  "Led 20",
+                  "\u706f\u73e020",
                   24
                 ],
                 [
-                  "Led 21",
+                  "\u706f\u73e021",
                   25
                 ],
                 [
-                  "Led 22",
+                  "\u706f\u73e022",
                   26
                 ],
                 [
-                  "Led 23",
+                  "\u706f\u73e023",
                   27
                 ],
                 [
-                  "Led 24",
+                  "\u706f\u73e024",
                   28
                 ],
                 [
-                  "Led 25",
+                  "\u706f\u73e025",
                   29
                 ],
                 [
-                  "Led 26",
+                  "\u706f\u73e026",
                   30
                 ],
                 [
-                  "Led 27",
+                  "\u706f\u73e027",
                   31
                 ],
                 [
-                  "Led 28",
+                  "\u706f\u73e028",
                   32
                 ],
                 [
-                  "Led 29",
+                  "\u706f\u73e029",
                   33
                 ],
                 [
-                  "Led 30",
+                  "\u706f\u73e030",
                   34
                 ],
                 [
-                  "Led 31",
+                  "\u706f\u73e031",
                   35
                 ]
               ]
@@ -755,34 +620,13 @@
                 2
               ],
               "options": [
-                [
-                  "\u5173\u95ed",
-                  0
-                ],
-                [
-                  "Solid Color",
-                  1
-                ],
-                [
-                  "Breathing",
-                  2
-                ],
-                [
-                  "Cycle Breathing",
-                  3
-                ],
-                [
-                  "Cycle All",
-                  4
-                ],
-                [
-                  "Twinkle",
-                  5
-                ],
-                [
-                  "Random Color",
-                  6
-                ]
+                ["\u5173\u95ed", 0],
+                ["\u9759\u6001\u5355\u8272", 1],
+                ["\u5355\u8272\u547c\u5438", 2],
+                ["\u5faa\u73af\u547c\u5438", 3],
+                ["\u5f69\u8679\u5faa\u73af", 4],
+                ["\u968f\u673a\u53d8\u6362", 5],
+                ["\u968f\u673a\u8272\u5f69", 6]
               ]
             },
             {
@@ -809,131 +653,131 @@
                   2
                 ],
                 [
-                  "Led 0",
+                  "\u706f\u73e00",
                   4
                 ],
                 [
-                  "Led 1",
+                  "\u706f\u73e01",
                   5
                 ],
                 [
-                  "Led 2",
+                  "\u706f\u73e02",
                   6
                 ],
                 [
-                  "Led 3",
+                  "\u706f\u73e03",
                   7
                 ],
                 [
-                  "Led 4",
+                  "\u706f\u73e04",
                   8
                 ],
                 [
-                  "Led 5",
+                  "\u706f\u73e05",
                   9
                 ],
                 [
-                  "Led 6",
+                  "\u706f\u73e06",
                   10
                 ],
                 [
-                  "Led 7",
+                  "\u706f\u73e07",
                   11
                 ],
                 [
-                  "Led 8",
+                  "\u706f\u73e08",
                   12
                 ],
                 [
-                  "Led 9",
+                  "\u706f\u73e09",
                   13
                 ],
                 [
-                  "Led 10",
+                  "\u706f\u73e010",
                   14
                 ],
                 [
-                  "Led 11",
+                  "\u706f\u73e011",
                   15
                 ],
                 [
-                  "Led 12",
+                  "\u706f\u73e012",
                   16
                 ],
                 [
-                  "Led 13",
+                  "\u706f\u73e013",
                   17
                 ],
                 [
-                  "Led 14",
+                  "\u706f\u73e014",
                   18
                 ],
                 [
-                  "Led 15",
+                  "\u706f\u73e015",
                   19
                 ],
                 [
-                  "Led 16",
+                  "\u706f\u73e016",
                   20
                 ],
                 [
-                  "Led 17",
+                  "\u706f\u73e017",
                   21
                 ],
                 [
-                  "Led 18",
+                  "\u706f\u73e018",
                   22
                 ],
                 [
-                  "Led 19",
+                  "\u706f\u73e019",
                   23
                 ],
                 [
-                  "Led 20",
+                  "\u706f\u73e020",
                   24
                 ],
                 [
-                  "Led 21",
+                  "\u706f\u73e021",
                   25
                 ],
                 [
-                  "Led 22",
+                  "\u706f\u73e022",
                   26
                 ],
                 [
-                  "Led 23",
+                  "\u706f\u73e023",
                   27
                 ],
                 [
-                  "Led 24",
+                  "\u706f\u73e024",
                   28
                 ],
                 [
-                  "Led 25",
+                  "\u706f\u73e025",
                   29
                 ],
                 [
-                  "Led 26",
+                  "\u706f\u73e026",
                   30
                 ],
                 [
-                  "Led 27",
+                  "\u706f\u73e027",
                   31
                 ],
                 [
-                  "Led 28",
+                  "\u706f\u73e028",
                   32
                 ],
                 [
-                  "Led 29",
+                  "\u706f\u73e029",
                   33
                 ],
                 [
-                  "Led 30",
+                  "\u706f\u73e030",
                   34
                 ],
                 [
-                  "Led 31",
+                  "\u706f\u73e031",
                   35
                 ]
               ]
