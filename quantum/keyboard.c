@@ -350,6 +350,21 @@ void quantum_init(void) {
 #ifdef HAPTIC_ENABLE
     haptic_init();
 #endif
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+    rgb_matrix_control_init();
+#endif
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+    underglow_rgb_matrix_init();
+#endif
+#ifdef RGB_INDICATORS_ENABLE
+    rgb_indicators_init();
+#endif
+#ifdef MAGIC_SETTINGS_ENABLE
+    magic_settings_init();
+#endif
+#ifdef AUTO_SWITCH_LAYERS_ENABLE 
+    auto_switch_layers_init();
+#endif
 }
 
 /** \brief keyboard_init
@@ -417,18 +432,7 @@ void keyboard_init(void) {
 #ifdef JOYSTICK_TRIGGER_ENABLE
     joystick_trigger_init();
 #endif
-#ifdef RGB_MATRIX_CONTROL_ENABLE
-    rgb_matrix_control_init();
-#endif
-#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
-    underglow_rgb_matrix_init();
-#endif
-#ifdef RGB_INDICATORS_ENABLE
-    rgb_indicators_init();
-#endif
-#ifdef MAGIC_SETTINGS_ENABLE
-    magic_settings_init();
-#endif 
+
 #if defined(DEBUG_MATRIX_SCAN_RATE) && defined(CONSOLE_ENABLE)
     debug_enable = true;
 #endif

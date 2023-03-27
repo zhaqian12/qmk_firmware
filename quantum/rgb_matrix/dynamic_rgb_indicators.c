@@ -222,10 +222,6 @@ static void update_dynamic_rgb_indicators_default(void) {
     update_dynamic_rgb_indicators();
 }
 
-void via_init_kb(void) {
-    rgb_indicators_init();
-}
-
 void rgb_indicators_init(void) {
     if (!eeconfig_is_enabled()) {
         eeconfig_init();

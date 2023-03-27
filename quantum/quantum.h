@@ -287,6 +287,7 @@ extern layer_state_t layer_state;
 #endif
 
 #   include "magic_settings.h"
+#   include "auto_switch_layers.h"
 
 void set_single_persistent_default_layer(uint8_t default_layer);
 
