@@ -115,4 +115,4 @@ void rgb_indicators_random(uint8_t indicator);
 void rgb_indicators_random_once(uint8_t indicator);
 #endif
 
-bool process_rgb_indicators(const uint16_t keycode, const keyrecord_t *record);
+bool process_rgb_indicators(uint16_t keycode, keyrecord_t *record);

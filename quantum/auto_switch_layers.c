@@ -28,6 +28,16 @@ system_layers_t system_layers;
 #    define DEFAULT_MACOS_LAYER 2
 #endif
 
+#ifndef DEFAULT_WINDOWS_FN_KEY_POS
+#    define DEFAULT_WINDOWS_FN_KEY_POS {0, 0}
+#endif
+
+#ifndef DEFAULT_MACOS_FN_KEY_POS
+#    define DEFAULT_MACOS_FN_KEY_POS {0, 0}
+#endif
+
+static keypos_t system_fn_key_pos[] = {DEFAULT_WINDOWS_FN_KEY_POS, DEFAULT_MACOS_FN_KEY_POS};
+
 void eeconfig_read_auto_switch_layers(void) {
     eeprom_read_block(&system_layers, EECONFIG_AUTO_SWITCH_LAYERS, sizeof(system_layers));
 }
@@ -38,9 +48,9 @@ void eeconfig_update_auto_switch_layers(void) {
 
 void eeconfig_update_auto_switch_layers_default(void) {
     system_layers.windows_layer = DEFAULT_WINDOWS_LAYER;
-    // system_layers.windows_fn_layer = DEFAULT_WINDOWS_FN_LAYER;
+    system_layers.windows_fn_layer = DEFAULT_WINDOWS_FN_LAYER;
     system_layers.macos_layer = DEFAULT_MACOS_LAYER;
-    // system_layers.macos_fn_layer = DEFAULT_MACOS_FN_LAYER;
+    system_layers.macos_fn_layer = DEFAULT_MACOS_FN_LAYER;
     eeconfig_update_auto_switch_layers();
 };
 
@@ -50,23 +60,61 @@ void auto_switch_layers_init(void) {
         eeconfig_update_auto_switch_layers_default();
     }
     eeconfig_read_auto_switch_layers();
-    auto_switch_layers_task();
+    auto_switch_layers_update();
 }
 
-void auto_switch_layers_task(void) {
+void auto_switch_layers_update(void) {
     os_variant_t os = detected_host_os();
     switch (os) {
         case OS_WINDOWS: {
-            default_layer_set(system_layers.windows_layer);
+            default_layer_set(0x01<<system_layers.windows_layer);
+#if defined(VIA_ENABLE)
+            dynamic_keymap_set_keycode(system_layers.windows_layer, system_fn_key_pos[0].row, system_fn_key_pos[0].col, WINDOWS_FN_KEY);
+#else
+            dynamic_keymap_set_keycode(system_layers.windows_layer, system_fn_key_pos[0].row, system_fn_key_pos[0].col, WINDOWS_FN_VKEY);
+#endif          
+#if defined(CONSOLE_ENABLE)
+            dprintf("win default layer set: %d\n", system_layers.windows_layer);
+#endif
             break;
         }
         case OS_MACOS: {
-            default_layer_set(system_layers.macos_layer);
+            default_layer_set(0x01<<system_layers.macos_layer);
+#if defined(VIA_ENABLE)
+            dynamic_keymap_set_keycode(system_layers.macos_layer, system_fn_key_pos[1].row, system_fn_key_pos[1].col, MACOS_FN_KEY);
+#else
+            dynamic_keymap_set_keycode(system_layers.macos_layer, system_fn_key_pos[1].row, system_fn_key_pos[1].col, MACOS_FN_VKEY);
+#endif   
+#if defined(CONSOLE_ENABLE)
+            dprintf("mac default layer set: %d\n", system_layers.macos_layer);
+#endif
             break;
         }
         default: {
-            default_layer_set(0);
+            default_layer_set(0x01);
+#if defined(CONSOLE_ENABLE)
+            dprintf("oth default layer set: %d\n", 0);
+#endif
             break;
         }
     }
 }
+
+bool process_auto_switch_layers(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case WINDOWS_FN_KEY: {
+            action_t action;
+            action.code = ACTION_LAYER_MOMENTARY(system_layers.windows_fn_layer);
+            process_action(record, action);
+            return false;
+        }
+        case MACOS_FN_KEY: {
+            action_t action;
+            action.code = ACTION_LAYER_MOMENTARY(system_layers.macos_fn_layer);
+            process_action(record, action);
+            return false;
+        }
+    }
+    return true;
+}
+

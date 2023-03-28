@@ -33,9 +33,9 @@
 
 typedef struct __attribute__((packed)) {
     uint8_t windows_layer;
-    // uint8_t windows_fn_layer;
+    uint8_t windows_fn_layer;
     uint8_t macos_layer;
-    // uint8_t macos_fn_layer;
+    uint8_t macos_fn_layer;
 } system_layers_t;
 
 extern system_layers_t system_layers;
@@ -43,7 +43,7 @@ extern system_layers_t system_layers;
 void eeconfig_read_auto_switch_layers(void);
 void eeconfig_update_auto_switch_layers(void);
 void auto_switch_layers_init(void);
-void auto_switch_layers_task(void);
+void auto_switch_layers_update(void);
 
 #define AUTO_SWITCH_LAYERS_SET(var, val)    \
 do {                                        \
@@ -53,7 +53,5 @@ do {                                        \
 
 #define AUTO_SWITCH_LAYERS_GET(var) system_layers.var
 
-// #define WINDOWS_FN (system_layers.windows_fn_layer)
-// #define MACOS_FN (system_layers.macos_fn_layer)
-
+bool process_auto_switch_layers(uint16_t keycode, keyrecord_t *record);
 #endif

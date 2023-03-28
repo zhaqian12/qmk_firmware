@@ -60,15 +60,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define EECONFIG_RGB_INDICATORS (uint8_t *)40
 #ifdef DYNAMIC_RGB_INDICATORS_ENABLE
 #define EECONFIG_MAGIC_SETTINGS (uint8_t *)55
-#define EECONFIG_AUTO_SWITCH_LAYERS (uint8_t *)79
+#define EECONFIG_AUTO_SWITCH_LAYERS (uint8_t *)82
 #else
 #define EECONFIG_MAGIC_SETTINGS (uint8_t *)41
-#define EECONFIG_AUTO_SWITCH_LAYERS (uint8_t *)65
+#define EECONFIG_AUTO_SWITCH_LAYERS (uint8_t *)68
 #endif
 
-
 #undef EECONFIG_BASE_SIZE
-#define EECONFIG_BASE_SIZE 85
+#define EECONFIG_BASE_SIZE 86
 #endif
 
 // Size of EEPROM dedicated to keyboard- and user-specific data

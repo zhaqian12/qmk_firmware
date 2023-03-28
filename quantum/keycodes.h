@@ -824,6 +824,9 @@ enum qk_keycode_defines {
     RGB_IND_SCROLL_LOCK_MF = 0x7FC0,
     RGB_IND_SCROLL_LOCK_MR = 0x7FC1,
 
+    WINDOWS_FN_KEY = 0x7FC2,
+    MACOS_FN_KEY = 0x7FC3,
+    
 // Alias
     XXXXXXX    = KC_NO,
     _______    = KC_TRANSPARENT,

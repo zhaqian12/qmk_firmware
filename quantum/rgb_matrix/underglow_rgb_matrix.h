@@ -62,7 +62,7 @@ void underglow_rgb_matrix_increase_speed(void);
 void underglow_rgb_matrix_decrease_speed(void);
 #endif
 
-bool process_underglow_rgb_matrix(const uint16_t keycode, const keyrecord_t *record);
+bool process_underglow_rgb_matrix(uint16_t keycode, keyrecord_t *record);
 
 #define UG_RGB_MATRIX_SYNC 1
 

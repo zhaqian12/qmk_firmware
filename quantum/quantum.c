@@ -361,6 +361,9 @@ bool process_record_quantum(keyrecord_t *record) {
 #ifdef VIA_CUSTOM_KEYCODE_ENABLE
             process_via_custom_keycode(keycode, record) &&
 #endif
+#ifdef AUTO_SWITCH_LAYERS_ENABLE
+            process_auto_switch_layers(keycode, record) &&
+#endif
             true)) {
         return false;
     }

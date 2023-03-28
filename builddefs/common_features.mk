@@ -920,6 +920,7 @@ endif
 
 ifeq ($(strip $(AUTO_SWITCH_LAYERS_ENABLE)), yes)
     OS_DETECTION_ENABLE := yes
+    EECONFIG_EXTENDED_FOR_ZQ := yes
     SRC += $(QUANTUM_DIR)/auto_switch_layers.c
 	OPT_DEFS += -DAUTO_SWITCH_LAYERS_ENABLE
 endif

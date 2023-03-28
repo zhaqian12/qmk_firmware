@@ -46,7 +46,7 @@ void rgb_indicators_render(void);
 void rgb_indicators_toggle(void);
 void rgb_indicators_mode_step(void);
 void rgb_indicators_mode_step_reverse(void);
-bool process_rgb_indicators(const uint16_t keycode, const keyrecord_t *record);
+bool process_rgb_indicators(uint16_t keycode, keyrecord_t *record);
 void rgb_indicators_static(void);
 #ifdef RGB_INDICATORS_BREATHING
 void rgb_indicators_breathing(void);
