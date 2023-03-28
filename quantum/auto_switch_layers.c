@@ -69,9 +69,9 @@ void auto_switch_layers_update(void) {
         case OS_WINDOWS: {
             default_layer_set(0x01<<system_layers.windows_layer);
 #if defined(VIA_ENABLE)
-            dynamic_keymap_set_keycode(system_layers.windows_layer, system_fn_key_pos[0].row, system_fn_key_pos[0].col, WINDOWS_FN_KEY);
-#else
             dynamic_keymap_set_keycode(system_layers.windows_layer, system_fn_key_pos[0].row, system_fn_key_pos[0].col, WINDOWS_FN_VKEY);
+#else
+            dynamic_keymap_set_keycode(system_layers.windows_layer, system_fn_key_pos[0].row, system_fn_key_pos[0].col, WINDOWS_FN_KEY);
 #endif          
 #if defined(CONSOLE_ENABLE)
             dprintf("win default layer set: %d\n", system_layers.windows_layer);
@@ -81,9 +81,9 @@ void auto_switch_layers_update(void) {
         case OS_MACOS: {
             default_layer_set(0x01<<system_layers.macos_layer);
 #if defined(VIA_ENABLE)
-            dynamic_keymap_set_keycode(system_layers.macos_layer, system_fn_key_pos[1].row, system_fn_key_pos[1].col, MACOS_FN_KEY);
-#else
             dynamic_keymap_set_keycode(system_layers.macos_layer, system_fn_key_pos[1].row, system_fn_key_pos[1].col, MACOS_FN_VKEY);
+#else
+            dynamic_keymap_set_keycode(system_layers.macos_layer, system_fn_key_pos[1].row, system_fn_key_pos[1].col, MACOS_FN_KEY);
 #endif   
 #if defined(CONSOLE_ENABLE)
             dprintf("mac default layer set: %d\n", system_layers.macos_layer);
