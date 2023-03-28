@@ -51,23 +51,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		QK_BOOT, QK_RBT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
 
 };
-
-void keyboard_post_init_user(void) {
-  // Customise these values to desired behaviour
-  //debug_keyboard=true;
-  //debug_mouse=true;
-//   uint8_t os = (uint8_t)detected_host_os();
-//   xprintf("os: %d\n", os);
-}
-
-// void matrix_init_kb(void) {
-// //   uint8_t os = (uint8_t)detected_host_os();
-// //   xprintf("os: %d\n", os);
-// 	auto_switch_layers_task();
-// }
-
-// void matrix_scan_kb(void) {
-// //   uint8_t os = (uint8_t)detected_host_os();
-// //   xprintf("os: %d\n", os);
-// 	auto_switch_layers_init();
-// }

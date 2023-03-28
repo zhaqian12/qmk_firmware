@@ -28,15 +28,15 @@ system_layers_t system_layers;
 #    define DEFAULT_MACOS_LAYER 2
 #endif
 
-#ifndef DEFAULT_WINDOWS_FN_KEY_POS
-#    define DEFAULT_WINDOWS_FN_KEY_POS {0, 0}
-#endif
+// #ifndef DEFAULT_WINDOWS_FN_KEY_POS
+// #    define DEFAULT_WINDOWS_FN_KEY_POS {0, 0}
+// #endif
 
-#ifndef DEFAULT_MACOS_FN_KEY_POS
-#    define DEFAULT_MACOS_FN_KEY_POS {0, 0}
-#endif
+// #ifndef DEFAULT_MACOS_FN_KEY_POS
+// #    define DEFAULT_MACOS_FN_KEY_POS {0, 0}
+// #endif
 
-static keypos_t system_fn_key_pos[] = {DEFAULT_WINDOWS_FN_KEY_POS, DEFAULT_MACOS_FN_KEY_POS};
+// static keypos_t system_fn_key_pos[] = {DEFAULT_WINDOWS_FN_KEY_POS, DEFAULT_MACOS_FN_KEY_POS};
 
 void eeconfig_read_auto_switch_layers(void) {
     eeprom_read_block(&system_layers, EECONFIG_AUTO_SWITCH_LAYERS, sizeof(system_layers));
@@ -60,7 +60,8 @@ void auto_switch_layers_init(void) {
         eeconfig_update_auto_switch_layers_default();
     }
     eeconfig_read_auto_switch_layers();
-    auto_switch_layers_update();
+    // need time to guess
+    // auto_switch_layers_update(); 
 }
 
 void auto_switch_layers_update(void) {
@@ -68,11 +69,11 @@ void auto_switch_layers_update(void) {
     switch (os) {
         case OS_WINDOWS: {
             default_layer_set(0x01<<system_layers.windows_layer);
-#if defined(VIA_ENABLE)
-            dynamic_keymap_set_keycode(system_layers.windows_layer, system_fn_key_pos[0].row, system_fn_key_pos[0].col, WINDOWS_FN_VKEY);
-#else
-            dynamic_keymap_set_keycode(system_layers.windows_layer, system_fn_key_pos[0].row, system_fn_key_pos[0].col, WINDOWS_FN_KEY);
-#endif          
+// #if defined(VIA_ENABLE)
+//             dynamic_keymap_set_keycode(system_layers.windows_layer, system_fn_key_pos[0].row, system_fn_key_pos[0].col, WINDOWS_FN_VKEY);
+// #else
+//             dynamic_keymap_set_keycode(system_layers.windows_layer, system_fn_key_pos[0].row, system_fn_key_pos[0].col, WINDOWS_FN_KEY);
+// #endif          
 #if defined(CONSOLE_ENABLE)
             dprintf("win default layer set: %d\n", system_layers.windows_layer);
 #endif
@@ -80,11 +81,11 @@ void auto_switch_layers_update(void) {
         }
         case OS_MACOS: {
             default_layer_set(0x01<<system_layers.macos_layer);
-#if defined(VIA_ENABLE)
-            dynamic_keymap_set_keycode(system_layers.macos_layer, system_fn_key_pos[1].row, system_fn_key_pos[1].col, MACOS_FN_VKEY);
-#else
-            dynamic_keymap_set_keycode(system_layers.macos_layer, system_fn_key_pos[1].row, system_fn_key_pos[1].col, MACOS_FN_KEY);
-#endif   
+// #if defined(VIA_ENABLE)
+//             dynamic_keymap_set_keycode(system_layers.macos_layer, system_fn_key_pos[1].row, system_fn_key_pos[1].col, MACOS_FN_VKEY);
+// #else
+//             dynamic_keymap_set_keycode(system_layers.macos_layer, system_fn_key_pos[1].row, system_fn_key_pos[1].col, MACOS_FN_KEY);
+// #endif   
 #if defined(CONSOLE_ENABLE)
             dprintf("mac default layer set: %d\n", system_layers.macos_layer);
 #endif
@@ -98,6 +99,11 @@ void auto_switch_layers_update(void) {
             break;
         }
     }
+}
+
+bool os_detection_update(os_variant_t os) {
+    auto_switch_layers_update();
+    return os_detection_update_kb(os);
 }
 
 bool process_auto_switch_layers(uint16_t keycode, keyrecord_t *record) {

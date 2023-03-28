@@ -30,6 +30,9 @@ typedef enum {
 void         process_wlength(const uint16_t w_length);
 os_variant_t detected_host_os(void);
 void         erase_wlength_data(void);
+bool         os_detection_update(os_variant_t os);
+bool         os_detection_update_kb(os_variant_t os);
+bool         os_detection_update_user(os_variant_t os);
 #endif
 
 #ifdef OS_DETECTION_DEBUG_ENABLE

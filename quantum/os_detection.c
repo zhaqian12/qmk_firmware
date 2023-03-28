@@ -47,6 +47,18 @@ struct setups_data_t setups_data = {
     .detected_os = OS_UNSURE,
 };
 
+__attribute__((weak)) bool os_detection_update(os_variant_t os) {
+    return os_detection_update_kb(os);
+}
+
+__attribute__((weak)) bool os_detection_update_kb(os_variant_t os) {
+    return os_detection_update_user(os);
+}
+
+__attribute__((weak)) bool os_detection_update_user(os_variant_t os) {
+    return true;
+}
+
 // Some collected sequences of wLength can be found in tests.
 void make_guess(void) {
     if (setups_data.count < 3) {
@@ -54,30 +66,36 @@ void make_guess(void) {
     }
     if (setups_data.cnt_ff >= 2 && setups_data.cnt_04 >= 1) {
         setups_data.detected_os = OS_WINDOWS;
+        os_detection_update(setups_data.detected_os);
         return;
     }
     if (setups_data.count == setups_data.cnt_ff) {
         // Linux has 3 packets with 0xFF.
         setups_data.detected_os = OS_LINUX;
+        os_detection_update(setups_data.detected_os);
         return;
     }
     if (setups_data.count == 5 && setups_data.last_wlength == 0xFF && setups_data.cnt_ff == 1 && setups_data.cnt_02 == 2) {
         setups_data.detected_os = OS_MACOS;
+        os_detection_update(setups_data.detected_os);
         return;
     }
     if (setups_data.count == 4 && setups_data.cnt_ff == 0 && setups_data.cnt_02 == 2) {
         // iOS and iPadOS don't have the last 0xFF packet.
         setups_data.detected_os = OS_IOS;
+        os_detection_update(setups_data.detected_os);
         return;
     }
     if (setups_data.cnt_ff == 0 && setups_data.cnt_02 == 3 && setups_data.cnt_04 == 1) {
         // This is actually PS5.
         setups_data.detected_os = OS_LINUX;
+        os_detection_update(setups_data.detected_os);
         return;
     }
     if (setups_data.cnt_ff >= 1 && setups_data.cnt_02 == 0 && setups_data.cnt_04 == 0) {
         // This is actually Quest 2 or Nintendo Switch.
         setups_data.detected_os = OS_LINUX;
+        os_detection_update(setups_data.detected_os);
         return;
     }
 }
