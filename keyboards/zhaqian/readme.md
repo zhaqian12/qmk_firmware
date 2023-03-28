@@ -60,6 +60,7 @@
  - UF2 Bootloader
  - Signalrgb Protocol
  - Magic Setting
+ - Auto Switch Layers
 
 ## Joystick Trigger
 This feature integrates the trigger of joystick which has two axes,it maps the joystick to four buttons in the keyboard matrix.It is supported by adding this to your `rules.mk`:

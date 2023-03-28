@@ -59,7 +59,8 @@
  - UF2 Bootloader
  - Signalrgb Protocol
  - Magic Setting
-  
+ - Auto Switch Layers
+
 ## Joystick Trigger
 Joystick Trigger功能实现了具有X,Y轴的摇杆电位器四个方向的按键的矩阵映射触发功能.如果需要使用该功能,请在 `rules.mk`中添加:
 ```make
