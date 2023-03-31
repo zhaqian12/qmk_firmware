@@ -18,6 +18,16 @@
 
 #include "quantum.h"
 
+#ifndef NO_ACTION_ONESHOT
+#ifndef ONESHOT_TAP_TOGGLE
+#    define ONESHOT_TAP_TOGGLE 5
+#endif
+
+#ifndef ONESHOT_TIMEOUT
+#    define ONESHOT_TIMEOUT 5000
+#endif
+#endif
+
 #ifdef MAGIC_SETTINGS_ENABLE
 typedef struct __attribute__((packed)) {
     // Debounce
@@ -118,14 +128,6 @@ void auto_shift_maigc_settings_reset(void);
 
 // One Shot Keys Settings
 #ifndef NO_ACTION_ONESHOT
-#ifndef ONESHOT_TAP_TOGGLE
-#    define ONESHOT_TAP_TOGGLE 5
-#endif
-
-#ifndef ONESHOT_TIMEOUT
-#    define ONESHOT_TIMEOUT 5000
-#endif
-
 void oneshot_maigc_settings_reset(void);
 #endif
 
@@ -205,7 +207,7 @@ void oneshot_maigc_settings_reset(void);
 #endif
 
 // Custom Parameters for One Shot Keys
-#define CUSTOM_ONESHOT_TAP_TOGGLE ONESHOT_TIMEOUT
-#define CUSTOM_ONESHOT_TIMEOUT ONESHOT_TAP_TOGGLE
+#define CUSTOM_ONESHOT_TAP_TOGGLE ONESHOT_TAP_TOGGLE
+#define CUSTOM_ONESHOT_TIMEOUT ONESHOT_TIMEOUT
 
 #endif
