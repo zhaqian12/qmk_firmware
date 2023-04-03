@@ -362,8 +362,11 @@ void quantum_init(void) {
 #ifdef MAGIC_SETTINGS_ENABLE
     magic_settings_init();
 #endif
-#ifdef AUTO_SWITCH_LAYERS_ENABLE 
+#ifdef AUTO_SWITCH_LAYERS_ENABLE
     auto_switch_layers_init();
+#endif
+#ifdef DYNAMIC_TAP_DANCE_ENABLE
+    dynamic_tap_dance_init();
 #endif
 }
 

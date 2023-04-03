@@ -182,12 +182,15 @@ static rgb_indicator_t rgb_indicators_state;
 static uint8_t changed[3] = {0};
 #endif
 
+EECONFIG_DEBOUNCE_HELPER(dynamic_rgb_indicators, EECONFIG_RGB_INDICATORS, rgb_indicators_config);
+
 void read_dynamic_rgb_indicators(void) {
     eeprom_read_block(&rgb_indicators_config, EECONFIG_RGB_INDICATORS, sizeof(rgb_indicators_config));
 }
 
 void update_dynamic_rgb_indicators(void) {
-    eeprom_update_block(&rgb_indicators_config, EECONFIG_RGB_INDICATORS, sizeof(rgb_indicators_config));
+    eeconfig_flush_dynamic_rgb_indicators(true);
+    // eeprom_update_block(&rgb_indicators_config, EECONFIG_RGB_INDICATORS, sizeof(rgb_indicators_config));
 }
 
 static void update_dynamic_rgb_indicators_default(void) {
@@ -227,6 +230,7 @@ void rgb_indicators_init(void) {
         eeconfig_init();
         update_dynamic_rgb_indicators_default();
     }
+    eeconfig_init_dynamic_rgb_indicators();
     read_dynamic_rgb_indicators();
     rgb_indicators_state_update();
 }

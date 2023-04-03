@@ -30,13 +30,17 @@
 #    define VIA_CUSTOM_MAGIC_SETTINGS_ENABLE
 #endif
 
+#if defined(DYNAMIC_TAP_DANCE_ENABLE)
+#    define VIA_CUSTOM_DYNAMIC_TAP_DANCE_ENABLE
+#endif
+
 enum via_custom_channel_id {
     id_custom_rgb_matrix_channel             = 5,
     id_custom_rgb_indicators_channel         = 6,
     id_custom_magic_setting_channel          = 7,
     id_custom_advanced_magic_setting_channel = 8,
-    id_custom_tap_dance_channel              = 9,
-    id_custom_combo_channel                  = 10,
+    id_custom_dynamic_tap_dance_channel      = 9,
+    id_custom_dynamic_combo_channel          = 10,
 };
 
 enum via_custom_rgb_matrix_value {
@@ -97,6 +101,15 @@ enum via_custom_advanced_magic_setting_value {
     id_advanced_magic_oneshot_timeout           = 21,
 };
 
+enum via_custom_dynamic_tap_dance_value {
+    id_dynamic_tap_dance_reset                   = 0,
+    id_dynamic_tap_dance_on_tap_keycode          = 1,
+    id_dynamic_tap_dance_on_hold_keycode         = 2,
+    id_dynamic_tap_dance_on_double_tap_keycode   = 3,
+    id_dynamic_tap_dance_on_tap_hold_keycode     = 4,
+    id_dynamic_tap_dance_tapping_term            = 5,
+};
+
 #if defined(VIA_CUSTOM_RGB_MATRIX_ENABLE)
 void via_custom_rgb_matrix_command(uint8_t *data, uint8_t length);
 void via_custom_rgb_matrix_set_value(uint8_t *data);
@@ -121,4 +134,11 @@ void via_custom_advanced_magic_setting_command(uint8_t *data, uint8_t length);
 void via_custom_advanced_magic_setting_set_value(uint8_t *data);
 void via_custom_advanced_magic_setting_get_value(uint8_t *data);
 void via_custom_advanced_magic_setting_save(void);
+#endif
+
+#if defined(VIA_CUSTOM_DYNAMIC_TAP_DANCE_ENABLE)
+void via_custom_dynamic_tap_dance_command(uint8_t *data, uint8_t length);
+void via_custom_dynamic_tap_dance_set_value(uint8_t *data);
+void via_custom_dynamic_tap_dance_get_value(uint8_t *data);
+void via_custom_dynamic_tap_dance_save(void);
 #endif

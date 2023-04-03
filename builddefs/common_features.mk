@@ -1030,4 +1030,11 @@ ifeq ($(strip $(MAGIC_SETTINGS_ENABLE)), yes)
 	OPT_DEFS += -DMAGIC_SETTINGS_ENABLE
 endif
 
+ifeq ($(strip $(DYNAMIC_TAP_DANCE_ENABLE)), yes)
+	ifeq ($(strip $(TAP_DANCE_ENABLE)), no)
+        $(error DYNAMIC_TAP_DANCE_ENABLE requires TAP_DANCE_ENABLE, either disable DYNAMIC_TAP_DANCE explicitly or enable TAP_DANCE)
+    endif
+    SRC += $(QUANTUM_DIR)/dynamic_tap_dance.c
+	OPT_DEFS += -DDYNAMIC_TAP_DANCE_ENABLE
+endif
 

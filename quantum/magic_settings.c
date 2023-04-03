@@ -23,12 +23,15 @@
 
 magic_settings_t magic_settings_config;
 
+EECONFIG_DEBOUNCE_HELPER(magic_settings, EECONFIG_MAGIC_SETTINGS, magic_settings_config);
+
 void eeconfig_read_magic_settings(void) {
     eeprom_read_block(&magic_settings_config, EECONFIG_MAGIC_SETTINGS, sizeof(magic_settings_config));
 }
 
 void eeconfig_update_magic_settings(void) {
-    eeprom_update_block(&magic_settings_config, EECONFIG_MAGIC_SETTINGS, sizeof(magic_settings_config));
+    eeconfig_flush_magic_settings(true);
+    // eeprom_update_block(&magic_settings_config, EECONFIG_MAGIC_SETTINGS, sizeof(magic_settings_config));
 }
 
 void eeconfig_update_magic_settings_default(void) {
@@ -55,6 +58,7 @@ void magic_settings_init(void) {
         eeconfig_init();
         eeconfig_update_magic_settings_default();
     }
+    eeconfig_init_magic_settings();
     eeconfig_read_magic_settings();
 #ifdef MOUSEKEY_ENABLE
     mousekey_maigc_settings_update();
@@ -62,7 +66,6 @@ void magic_settings_init(void) {
 #ifdef AUTO_SHIFT_ENABLE
     auto_shift_maigc_settings_update();
 #endif
-
 }
 
 void magic_settings_reset(void) {
@@ -112,6 +115,14 @@ void mousekey_maigc_settings_reset(void) {
 
 #ifndef NO_ACTION_TAPPING
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+#ifdef DYNAMIC_TAP_DANCE_ENABLE
+    if (keycode >= QK_TAP_DANCE && keycode <= QK_TAP_DANCE_MAX) {
+        uint8_t index = keycode - QK_TAP_DANCE;
+        if (index < DYNAMIC_TAP_DANCE_ENTRIES) {
+            return dynamic_get_tap_dance_term(index);
+        }
+    }
+#endif
     return magic_settings_config.tapping_term;
 }
 
