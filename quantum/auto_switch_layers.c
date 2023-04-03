@@ -28,14 +28,6 @@ system_layers_t system_layers;
 #    define DEFAULT_MACOS_LAYER 2
 #endif
 
-#if defined(VIA_ENABLE)
-#    define ASL_WIN_FN_KEY WINDOWS_FN_VKEY
-#    define ASL_MAC_FN_KEY MACOS_FN_VKEY
-#else 
-#    define ASL_WIN_FN_KEY WINDOWS_FN_KEY
-#    define ASL_MAC_FN_KEY MACOS_FN_KEY
-#endif
-
 // #ifndef DEFAULT_WINDOWS_FN_KEY_POS
 // #    define DEFAULT_WINDOWS_FN_KEY_POS {0, 0}
 // #endif
@@ -48,16 +40,11 @@ system_layers_t system_layers;
 
 EECONFIG_DEBOUNCE_HELPER(auto_switch_layers, EECONFIG_AUTO_SWITCH_LAYERS, system_layers);
 
-void eeconfig_read_auto_switch_layers(void) {
-    eeprom_read_block(&system_layers, EECONFIG_AUTO_SWITCH_LAYERS, sizeof(system_layers));
-}
-
 void eeconfig_update_auto_switch_layers(void) {
     eeconfig_flush_auto_switch_layers(true);
-    // eeprom_update_block(&system_layers, EECONFIG_AUTO_SWITCH_LAYERS, sizeof(system_layers));
 }
 
-void eeconfig_update_auto_switch_layers_default(void) {
+static void eeconfig_update_auto_switch_layers_default(void) {
     system_layers.windows_layer = DEFAULT_WINDOWS_LAYER;
     system_layers.windows_fn_layer = DEFAULT_WINDOWS_FN_LAYER;
     system_layers.macos_layer = DEFAULT_MACOS_LAYER;
@@ -71,10 +58,10 @@ void auto_switch_layers_init(void) {
         eeconfig_update_auto_switch_layers_default();
     }
     eeconfig_init_auto_switch_layers();
+    // need to improve
     if (system_layers.windows_fn_layer == system_layers.windows_layer) {
         eeconfig_update_auto_switch_layers_default();
     }
-    eeconfig_read_auto_switch_layers();
     // need time to guess
     // auto_switch_layers_update(); 
 }
@@ -84,7 +71,7 @@ void auto_switch_layers_update(void) {
     switch (os) {
         case OS_WINDOWS: {
             default_layer_set(0x01<<system_layers.windows_layer);
-            // need interface to increase
+            // need interface to improve
             // dynamic_keymap_set_keycode(system_layers.windows_layer, system_fn_key_pos[0].row, system_fn_key_pos[0].col, ASL_WIN_FN_KEY);
 #if defined(CONSOLE_ENABLE)
             dprintf("win default layer set: %d\n", system_layers.windows_layer);
@@ -93,7 +80,7 @@ void auto_switch_layers_update(void) {
         }
         case OS_MACOS: {
             default_layer_set(0x01<<system_layers.macos_layer);
-            // need interface to increase
+            // need interface to improve
             // dynamic_keymap_set_keycode(system_layers.macos_layer, system_fn_key_pos[1].row, system_fn_key_pos[1].col, ASL_MAC_FN_KEY);
 #if defined(CONSOLE_ENABLE)
             dprintf("mac default layer set: %d\n", system_layers.macos_layer);

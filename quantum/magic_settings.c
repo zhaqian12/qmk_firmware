@@ -25,21 +25,16 @@ magic_settings_t magic_settings_config;
 
 EECONFIG_DEBOUNCE_HELPER(magic_settings, EECONFIG_MAGIC_SETTINGS, magic_settings_config);
 
-void eeconfig_read_magic_settings(void) {
-    eeprom_read_block(&magic_settings_config, EECONFIG_MAGIC_SETTINGS, sizeof(magic_settings_config));
-}
-
 void eeconfig_update_magic_settings(void) {
     eeconfig_flush_magic_settings(true);
-    // eeprom_update_block(&magic_settings_config, EECONFIG_MAGIC_SETTINGS, sizeof(magic_settings_config));
 }
 
-void eeconfig_update_magic_settings_default(void) {
+static void eeconfig_update_magic_settings_default(void) {
     magic_settings_config.debounce = DEBOUNCE;
 #ifdef MOUSEKEY_ENABLE
     mousekey_maigc_settings_reset();
 #endif
-    magic_settings_config.grave_esc_override = 0;
+    magic_settings_config.grave_esc_override = 0x10;    // bit for eeconfig init check
 #ifndef NO_ACTION_TAPPING
     tap_hold_maigc_settings_reset();
 #endif
@@ -59,7 +54,9 @@ void magic_settings_init(void) {
         eeconfig_update_magic_settings_default();
     }
     eeconfig_init_magic_settings();
-    eeconfig_read_magic_settings();
+    if (!(magic_settings_config.grave_esc_override & 0x10)) {
+        eeconfig_update_magic_settings_default();
+    }
 #ifdef MOUSEKEY_ENABLE
     mousekey_maigc_settings_update();
 #endif
@@ -69,22 +66,7 @@ void magic_settings_init(void) {
 }
 
 void magic_settings_reset(void) {
-    magic_settings_config.debounce = DEBOUNCE;
-#ifdef MOUSEKEY_ENABLE
-    mousekey_maigc_settings_reset();
-#endif
-    // magic_settings_config.grave_esc_override = 0;
-#ifndef NO_ACTION_TAPPING
-    tap_hold_maigc_settings_reset();
-#endif
-#ifdef AUTO_SHIFT_ENABLE
-    auto_shift_maigc_settings_reset();
-#endif
-#ifndef NO_ACTION_ONESHOT
-    oneshot_maigc_settings_reset();
-#endif
-    eeconfig_update_magic_settings();
-    clear_keyboard();
+    eeconfig_update_magic_settings_default();
 }
 
 #ifdef MOUSEKEY_ENABLE

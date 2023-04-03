@@ -24,32 +24,28 @@ static uint16_t   td_keycode;
 static td_info_t  td_infos[DYNAMIC_TAP_DANCE_ENTRIES];
 tap_dance_action_t tap_dance_actions[DYNAMIC_TAP_DANCE_ENTRIES];
 
-#define TD_REGISTER_KEYCODE(td_kc, kc)          \
-do {                                            \
-    td_kc = kc;                                 \
-    action_exec((keyevent_t){                   \
-        .key = (keypos_t){                      \
-            .row = KEYLOC_DYNAMIC_TAP_DANCE,    \
-            .col = KEYLOC_DYNAMIC_TAP_DANCE     \
-            },                                  \
-        .pressed = 1,                           \
-        .time = (timer_read() | 1)              \
-        }                                       \
-    );                                          \
+
+
+#define TD_REGISTER_KEYCODE(td_kc, kc)                      \
+do {                                                        \
+    td_kc = kc;                                             \
+    if (kc < QK_MODS_MAX) {                                 \
+        register_code16(kc);                                \
+    } else {                                                \
+        action_exec(MAKE_KEYEVENT(KEYLOC_DYNAMIC_TAP_DANCE, \
+                    KEYLOC_DYNAMIC_TAP_DANCE, true));       \
+    }                                                       \
 } while(0)
 
-#define TD_UNREGISTER_KEYCODE(td_kc, kc)        \
-do {                                            \
-    td_kc = kc;                                 \
-    action_exec((keyevent_t){                   \
-        .key = (keypos_t){                      \
-            .row = KEYLOC_DYNAMIC_TAP_DANCE,    \
-            .col = KEYLOC_DYNAMIC_TAP_DANCE     \
-            },                                  \
-        .pressed = 0,                           \
-        .time = (timer_read() | 1)              \
-        }                                       \
-    );                                          \
+#define TD_UNREGISTER_KEYCODE(td_kc, kc)                    \
+do {                                                        \
+    td_kc = kc;                                             \
+    if (kc < QK_MODS_MAX) {                                 \
+        unregister_code16(kc);                              \
+    } else {                                                \
+        action_exec(MAKE_KEYEVENT(KEYLOC_DYNAMIC_TAP_DANCE, \
+                    KEYLOC_DYNAMIC_TAP_DANCE, false));      \
+    }                                                       \
 } while(0)
 
 #define TD_TAP_KEYCODE(td_kc, kc)               \
@@ -60,7 +56,7 @@ do {                                            \
 } while(0)
 
 uint16_t keymap_key_to_keycode(uint8_t layer, keypos_t key) {
-#if (defined(TAP_DANCE_ENABLE) && defined(VIA_ENABLE))
+#ifdef DYNAMIC_TAP_DANCE_ENABLE
     if (key.row == KEYLOC_DYNAMIC_TAP_DANCE && key.col == KEYLOC_DYNAMIC_TAP_DANCE) {
         return td_keycode;
     }
@@ -74,7 +70,7 @@ uint16_t keymap_key_to_keycode(uint8_t layer, keypos_t key) {
     } else if (key.row == KEYLOC_ENCODER_CCW && key.col < NUM_ENCODERS) {
         return keycode_at_encodermap_location(layer, key.col, false);
     }
-#endif // ENCODER_MAP_ENABLE
+#endif
     return KC_NO;
 }
 
@@ -166,8 +162,8 @@ static void on_dance_reset(tap_dance_state_t *state, void *user_data) {
             break;
         }
         case TD_DOUBLE_TAP: {
-            if (td_entry.on_tap_hold) {
-                TD_UNREGISTER_KEYCODE(td_keycode, td_entry.on_tap_hold);
+            if (td_entry.on_double_tap) {
+                TD_UNREGISTER_KEYCODE(td_keycode, td_entry.on_double_tap);
             }
             break;
         }

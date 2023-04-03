@@ -360,7 +360,7 @@ void dynamic_keymap_macro_send(uint8_t id) {
 uint16_t dynamic_get_tap_dance_keycode(uint8_t entry, uint8_t index) {
     uint16_t keycode = KC_NO;
     if (entry < DYNAMIC_TAP_DANCE_ENTRIES) {
-        keycode = eeprom_read_word((uint16_t *)(DYNAMIC_TAP_DANCE_EEPROM_ADDR + sizeof(td_entry_t) * entry + index));
+        keycode = eeprom_read_word((uint16_t *)(DYNAMIC_TAP_DANCE_EEPROM_ADDR + sizeof(td_entry_t) * entry + index * 2));
     }
     xprintf("dynamic_get_tap_dance_keycode: %d,%d,%d\n", entry, index, keycode);
     return keycode;

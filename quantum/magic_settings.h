@@ -64,7 +64,6 @@ extern magic_settings_t magic_settings_config;
 #define MAGIC_SETTINGS_SET(var, val) magic_settings_config.var = val
 #define MAGIC_SETTINGS_GET(var) magic_settings_config.var
 
-void eeconfig_read_magic_settings(void);
 void eeconfig_update_magic_settings(void);
 void magic_settings_init(void);
 void magic_settings_reset(void);
