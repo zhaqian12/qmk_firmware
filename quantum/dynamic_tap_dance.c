@@ -24,8 +24,6 @@ static uint16_t   td_keycode;
 static td_info_t  td_infos[DYNAMIC_TAP_DANCE_ENTRIES];
 tap_dance_action_t tap_dance_actions[DYNAMIC_TAP_DANCE_ENTRIES];
 
-
-
 #define TD_REGISTER_KEYCODE(td_kc, kc)                      \
 do {                                                        \
     td_kc = kc;                                             \
@@ -48,11 +46,11 @@ do {                                                        \
     }                                                       \
 } while(0)
 
-#define TD_TAP_KEYCODE(td_kc, kc)               \
-do {                                            \
-    TD_REGISTER_KEYCODE(td_kc, kc);             \
-    wait_ms(CUSTOM_TAP_CODE_DELAY);             \
-    TD_UNREGISTER_KEYCODE(td_kc, kc);           \
+#define TD_TAP_KEYCODE(td_kc, kc)                           \
+do {                                                        \
+    TD_REGISTER_KEYCODE(td_kc, kc);                         \
+    wait_ms(CUSTOM_TAP_CODE_DELAY);                         \
+    TD_UNREGISTER_KEYCODE(td_kc, kc);                       \
 } while(0)
 
 uint16_t keymap_key_to_keycode(uint8_t layer, keypos_t key) {
