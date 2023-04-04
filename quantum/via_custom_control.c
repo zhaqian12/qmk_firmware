@@ -58,6 +58,13 @@ void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
     }
 #endif
 
+#if defined(VIA_CUSTOM_DYNAMIC_COMBOS_ENABLE)
+    if (*channel_id == id_custom_dynamic_combos_channel) {
+        via_custom_dynamic_combos_command(data, length);
+        return;
+    }
+#endif
+
     *command_id = id_unhandled;
     *channel_id = *channel_id;  // force use of variable
 }
@@ -646,6 +653,22 @@ void via_custom_advanced_magic_setting_set_value(uint8_t *data) {
             break;
         }
 #endif
+#if defined(COMBO_ENABLE)
+        case id_advanced_magic_combo_config: {
+            uint8_t tmp = MAGIC_SETTINGS_GET(combo_config) & (~(0x1 << value_data[0]));
+            tmp |= value_data[1] << value_data[0];
+            MAGIC_SETTINGS_SET(combo_config, tmp);
+            break;
+        }
+        case id_advanced_magic_combo_term: {
+            MAGIC_SETTINGS_SET(combo_term, (value_data[0] << 8 | value_data[1]));
+            break;
+        }
+        case id_advanced_magic_combo_hold_term: {
+            MAGIC_SETTINGS_SET(combo_hold_term, (value_data[0] << 8 | value_data[1]));
+            break;
+        }
+#endif
         default: {
             break;
         }
@@ -759,6 +782,22 @@ void via_custom_advanced_magic_setting_get_value(uint8_t *data) {
             break;
         }
 #endif
+#if defined(COMBO_ENABLE)
+        case id_advanced_magic_combo_config: {
+            value_data[1] = MAGIC_SETTINGS_GET(combo_config) & (0x1 << value_data[0]) ? 1 : 0;
+            break;
+        }
+        case id_advanced_magic_combo_term: {
+            value_data[0] = MAGIC_SETTINGS_GET(combo_term) >> 8;
+            value_data[1] = MAGIC_SETTINGS_GET(combo_term) & 0xFF;
+            break;
+        }
+        case id_advanced_magic_combo_hold_term: {
+            value_data[0] = MAGIC_SETTINGS_GET(combo_hold_term) >> 8;
+            value_data[1] = MAGIC_SETTINGS_GET(combo_hold_term) & 0xFF;
+            break;
+        }
+#endif
         default: {
             break;
         }
@@ -842,7 +881,7 @@ void via_custom_dynamic_tap_dance_set_value(uint8_t *data) {
 }
 
 void via_custom_dynamic_tap_dance_get_value(uint8_t *data) {
-        // data = [ value_id, value_data ]
+    // data = [ value_id, value_data ]
     uint8_t *value_id   = &(data[0]);
     uint8_t *value_data = &(data[1]);
     switch (*value_id) {
@@ -887,6 +926,103 @@ void via_custom_dynamic_tap_dance_get_value(uint8_t *data) {
 }
 
 void via_custom_dynamic_tap_dance_save(void) {
+    // No action is required
+}
+#endif
+
+#if defined(VIA_CUSTOM_DYNAMIC_COMBOS_ENABLE)
+void via_custom_dynamic_combos_command(uint8_t *data, uint8_t length) {
+    // data = [ command_id, channel_id, value_id, value_data ]
+    uint8_t *command_id        = &(data[0]);
+    uint8_t *value_id_and_data = &(data[2]);
+
+    switch (*command_id) {
+        case id_custom_set_value: {
+            via_custom_dynamic_combos_set_value(value_id_and_data);
+            break;
+        }
+        case id_custom_get_value: {
+            via_custom_dynamic_combos_get_value(value_id_and_data);
+            break;
+        }
+        case id_custom_save: {
+            via_custom_dynamic_combos_save();
+            break;
+        }
+        default: {
+            *command_id = id_unhandled;
+            break;
+        }
+    }
+}
+
+void via_custom_dynamic_combos_set_value(uint8_t *data) {
+    // data = [ value_id, value_data ]
+    uint8_t *value_id   = &(data[0]);
+    uint8_t *value_data = &(data[1]);
+    switch (*value_id) {
+        case id_dynamic_combos_reset: {
+            dynamic_combos_reset();
+            break;
+        }
+        case id_dynamic_combos_keys: {
+            uint16_t keycode = KC_NO;
+            keycode = ((value_data[2] << 8) | value_data[3]);
+            dynamic_set_combos_keycode(value_data[0], value_data[1], keycode);
+            break;
+        }
+        case id_dynamic_combos_keycode: {
+            uint16_t keycode = KC_NO;
+            keycode = ((value_data[1] << 8) | value_data[2]);
+            dynamic_set_combos_keycode(value_data[0], 4, keycode);
+            break;
+        }
+        case id_dynamic_combos_combo_term: {
+            uint16_t term = 0;
+            term = ((value_data[1] << 8) | value_data[2]);
+            dynamic_set_combos_term(value_data[0], term);
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+}
+
+void via_custom_dynamic_combos_get_value(uint8_t *data) {
+    // data = [ value_id, value_data ]
+    uint8_t *value_id   = &(data[0]);
+    uint8_t *value_data = &(data[1]);
+    switch (*value_id) {
+        case id_dynamic_combos_reset: {
+            value_data[0] = 0;
+            break;
+        }
+        case id_dynamic_combos_keys: {
+            uint16_t keycode = dynamic_get_combos_keycode(value_data[0], value_data[1]);
+            value_data[2] = keycode >> 8;
+            value_data[3] = keycode & 0xFF;
+            break;
+        }
+        case id_dynamic_combos_keycode: {
+            uint16_t keycode = dynamic_get_combos_keycode(value_data[0], 4);
+            value_data[1] = keycode >> 8;
+            value_data[2] = keycode & 0xFF;
+            break;
+        }
+        case id_dynamic_combos_combo_term: {
+            uint16_t term = dynamic_get_combos_term(value_data[0]);
+            value_data[1] = term >> 8;
+            value_data[2] = term & 0xFF;
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+}
+
+void via_custom_dynamic_combos_save(void) {
     // No action is required
 }
 #endif

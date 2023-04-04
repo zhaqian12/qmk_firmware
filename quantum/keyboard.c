@@ -368,6 +368,9 @@ void quantum_init(void) {
 #ifdef DYNAMIC_TAP_DANCE_ENABLE
     dynamic_tap_dance_init();
 #endif
+#ifdef DYNAMIC_COMBOS_ENABLE
+    dynamic_combos_init();
+#endif
 }
 
 /** \brief keyboard_init

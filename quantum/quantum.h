@@ -286,12 +286,18 @@ extern layer_state_t layer_state;
 #   include "via_custom_control.h"
 #endif
 
+#   include "magic_settings.h"
+#   include "auto_switch_layers.h"
+
 #ifdef DYNAMIC_TAP_DANCE_ENABLE
 #   include "dynamic_tap_dance.h"
 #endif
 
-#   include "magic_settings.h"
-#   include "auto_switch_layers.h"
+#ifdef DYNAMIC_COMBOS_ENABLE
+#   include "dynamic_combos.h"
+#endif
+
+
 
 void set_single_persistent_default_layer(uint8_t default_layer);
 

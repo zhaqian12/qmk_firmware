@@ -364,6 +364,9 @@ bool process_record_quantum(keyrecord_t *record) {
 #ifdef AUTO_SWITCH_LAYERS_ENABLE
             process_auto_switch_layers(keycode, record) &&
 #endif
+#ifdef DYNAMIC_TAP_DANCE_ENABLE
+            process_dynamic_tap_dance(keycode, record) &&
+#endif
             true)) {
         return false;
     }

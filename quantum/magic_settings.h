@@ -57,6 +57,10 @@ typedef struct __attribute__((packed)) {
     // One Shot Key
     uint8_t oneshot_tap_toggle;
     uint16_t oneshot_timeout;
+    // combos
+    uint8_t combo_config;
+    uint16_t combo_term;
+    uint16_t combo_hold_term;
 } magic_settings_t;
 
 extern magic_settings_t magic_settings_config;
@@ -130,6 +134,28 @@ void auto_shift_maigc_settings_reset(void);
 void oneshot_maigc_settings_reset(void);
 #endif
 
+// Combo Settings
+#ifdef COMBO_ENABLE
+#ifndef COMBO_MUST_HOLD_PER_COMBO
+#    define COMBO_MUST_HOLD_PER_COMBO
+#endif
+
+#ifndef COMBO_MUST_TAP_PER_COMBO
+#    define COMBO_MUST_TAP_PER_COMBO
+#endif
+
+#ifndef COMBO_TERM_PER_COMBO
+#    define COMBO_TERM_PER_COMBO
+#endif
+
+#ifndef COMBO_MUST_PRESS_IN_ORDER_PER_COMBO
+#    define COMBO_MUST_PRESS_IN_ORDER_PER_COMBO
+#endif
+
+void combo_maigc_settings_update(void);
+void combo_maigc_settings_reset(void);
+#endif
+
 // Custom Parameters for Debounce
 #define CUSTOM_DEBOUNCE (magic_settings_config.debounce)
 
@@ -154,6 +180,9 @@ void oneshot_maigc_settings_reset(void);
 // Custom Parameters for One Shot Keys
 #define CUSTOM_ONESHOT_TAP_TOGGLE (magic_settings_config.oneshot_tap_toggle)
 #define CUSTOM_ONESHOT_TIMEOUT (magic_settings_config.oneshot_timeout)
+
+// Custom Parameters for Combo
+#define CUSTOM_COMBO_HOLD_TERM (magic_settings_config.combo_hold_term)
 
 #else  
 // Custom Parameters for Debounce
@@ -208,5 +237,8 @@ void oneshot_maigc_settings_reset(void);
 // Custom Parameters for One Shot Keys
 #define CUSTOM_ONESHOT_TAP_TOGGLE ONESHOT_TAP_TOGGLE
 #define CUSTOM_ONESHOT_TIMEOUT ONESHOT_TIMEOUT
+
+// Custom Parameters for Combo
+#define CUSTOM_COMBO_HOLD_TERM COMBO_HOLD_TERM
 
 #endif

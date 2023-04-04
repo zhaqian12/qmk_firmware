@@ -71,7 +71,7 @@ void eeconfig_init_quantum(void) {
 #endif
 
 #if defined(EECONFIG_EXTENDED_FOR_ZHAQIAN)
-    for (uint8_t i = 0; i < 13; i ++) {
+    for (uint8_t i = 0; i < 15; i ++) {
         eeprom_update_dword((uint32_t *)(EECONFIG_RGB_MATRIX_CONTROL + i * 4), 0);    
     }
 #endif

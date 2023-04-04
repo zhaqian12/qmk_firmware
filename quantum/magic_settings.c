@@ -44,6 +44,9 @@ static void eeconfig_update_magic_settings_default(void) {
 #ifndef NO_ACTION_ONESHOT
     oneshot_maigc_settings_reset();
 #endif
+#ifdef COMBO_ENABLE
+    combo_maigc_settings_reset();
+#endif
     eeconfig_update_magic_settings();
     clear_keyboard();
 };
@@ -62,6 +65,9 @@ void magic_settings_init(void) {
 #endif
 #ifdef AUTO_SHIFT_ENABLE
     auto_shift_maigc_settings_update();
+#endif
+#ifdef COMBO_ENABLE
+    combo_maigc_settings_update();
 #endif
 }
 
@@ -182,5 +188,44 @@ void auto_shift_maigc_settings_reset(void) {
 void oneshot_maigc_settings_reset(void) {
     magic_settings_config.oneshot_tap_toggle = ONESHOT_TAP_TOGGLE;
     magic_settings_config.oneshot_timeout = ONESHOT_TIMEOUT;
+}
+#endif
+
+#ifdef COMBO_ENABLE
+
+bool get_combo_must_hold(uint16_t index, combo_t *combo) {
+    return (magic_settings_config.combo_config & 0x02);
+}
+
+bool get_combo_must_tap(uint16_t index, combo_t *combo) {
+    return (magic_settings_config.combo_config & 0x04);
+}
+
+bool get_combo_must_press_in_order(uint16_t combo_index, combo_t *combo) {
+    return (magic_settings_config.combo_config & 0x08);
+}
+
+uint16_t get_combo_term(uint16_t index, combo_t *combo) {
+#ifdef DYNAMIC_COMBOS_ENABLE
+    if (index < DYNAMIC_COMBOS_ENTRIES) {
+        return dynamic_get_combos_term(index);
+    }
+#endif
+    return magic_settings_config.combo_term;
+}
+
+void combo_maigc_settings_update(void) {
+    if (magic_settings_config.combo_config & 0x01) {
+        combo_enable();
+    } else {
+        combo_disable();
+    }
+}
+
+void combo_maigc_settings_reset(void) {
+    magic_settings_config.combo_config = 0x09;
+    magic_settings_config.combo_term = COMBO_TERM;
+    magic_settings_config.combo_hold_term = COMBO_HOLD_TERM;
+    combo_maigc_settings_update();
 }
 #endif

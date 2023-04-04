@@ -33,7 +33,15 @@
 #define DYNAMIC_TAP_DANCE_EEPROM_SIZE 0
 #endif
 
-#define DYNAMIC_KEYMAP_EEPROM_START (DYNAMIC_TAP_DANCE_EEPROM_ADDR + DYNAMIC_TAP_DANCE_EEPROM_SIZE)
+#define DYNAMIC_COMBOS_EEPROM_ADDR (DYNAMIC_TAP_DANCE_EEPROM_ADDR + DYNAMIC_TAP_DANCE_EEPROM_SIZE)
+
+#ifdef DYNAMIC_COMBOS_ENABLE
+#define DYNAMIC_COMBOS_EEPROM_SIZE (sizeof(combo_entry_t) * DYNAMIC_COMBOS_ENTRIES)
+#else
+#define DYNAMIC_COMBOS_EEPROM_SIZE 0
+#endif
+
+#define DYNAMIC_KEYMAP_EEPROM_START (DYNAMIC_COMBOS_EEPROM_ADDR + DYNAMIC_COMBOS_EEPROM_SIZE)
 
 #ifdef ENCODER_ENABLE
 #    include "encoder.h"
@@ -181,6 +189,9 @@ void dynamic_keymap_reset(void) {
     }
 #ifdef DYNAMIC_TAP_DANCE_ENABLE
     dynamic_tap_dance_reset();
+#endif
+#ifdef DYNAMIC_COMBOS_ENABLE
+    dynamic_combos_reset();
 #endif
 }
 
@@ -362,7 +373,6 @@ uint16_t dynamic_get_tap_dance_keycode(uint8_t entry, uint8_t index) {
     if (entry < DYNAMIC_TAP_DANCE_ENTRIES) {
         keycode = eeprom_read_word((uint16_t *)(DYNAMIC_TAP_DANCE_EEPROM_ADDR + sizeof(td_entry_t) * entry + index * 2));
     }
-    xprintf("dynamic_get_tap_dance_keycode: %d,%d,%d\n", entry, index, keycode);
     return keycode;
 }
 
@@ -370,7 +380,6 @@ void dynamic_set_tap_dance_keycode(uint8_t entry, uint8_t index, uint16_t keycod
     if (entry < DYNAMIC_TAP_DANCE_ENTRIES) {
         eeprom_update_word((uint16_t *)(DYNAMIC_TAP_DANCE_EEPROM_ADDR + sizeof(td_entry_t) * entry + index * 2), keycode);
     }
-    xprintf("dynamic_set_tap_dance_keycode: %d,%d,%d\n", entry, index, keycode);
 }
 
 uint16_t dynamic_get_tap_dance_term(uint8_t entry) {
@@ -399,6 +408,51 @@ void dynamic_tap_dance_reset(void) {
     td_entry_t ins = {KC_NO, KC_NO, KC_NO, KC_NO, TAPPING_TERM};
     for (uint8_t i = 0; i < DYNAMIC_TAP_DANCE_ENTRIES; i++) {
         dynamic_set_tap_dance(i, &ins);
+    }
+}
+#endif
+
+#ifdef DYNAMIC_COMBOS_ENABLE
+uint16_t dynamic_get_combos_keycode(uint8_t entry, uint8_t index) {
+    uint16_t keycode = KC_NO;
+    if (entry < DYNAMIC_COMBOS_ENTRIES) {
+        keycode = eeprom_read_word((uint16_t *)(DYNAMIC_COMBOS_EEPROM_ADDR + sizeof(combo_entry_t) * entry + index * 2));
+    }
+    return keycode;
+}
+
+void dynamic_set_combos_keycode(uint8_t entry, uint8_t index, uint16_t keycode) {
+    if (entry < DYNAMIC_COMBOS_ENTRIES) {
+        eeprom_update_word((uint16_t *)(DYNAMIC_COMBOS_EEPROM_ADDR + sizeof(combo_entry_t) * entry + index * 2), keycode);
+    }
+}
+
+uint16_t dynamic_get_combos_term(uint8_t entry) {
+    uint16_t term = 0;
+    if (entry < DYNAMIC_COMBOS_ENTRIES) {
+        term = eeprom_read_word((uint16_t *)(DYNAMIC_COMBOS_EEPROM_ADDR + sizeof(combo_entry_t) * entry + 10));
+    }
+    return term;
+}
+
+void dynamic_set_combos_term(uint8_t entry, uint16_t term) {
+    if (entry < DYNAMIC_COMBOS_ENTRIES) {
+        eeprom_update_word((uint16_t *)(DYNAMIC_COMBOS_EEPROM_ADDR + sizeof(combo_entry_t) * entry + 10), term);
+    }
+}
+
+void dynamic_get_combos(uint8_t entry, void *ins) {
+    eeprom_read_block((combo_entry_t *)ins, (void *)(DYNAMIC_COMBOS_EEPROM_ADDR + sizeof(combo_entry_t) * entry), sizeof(combo_entry_t));
+}
+
+void dynamic_set_combos(uint8_t entry, void *ins) {
+    eeprom_update_block((combo_entry_t *)ins, (void *)(DYNAMIC_COMBOS_EEPROM_ADDR + sizeof(combo_entry_t) * entry), sizeof(combo_entry_t));
+}
+
+void dynamic_combos_reset(void) {
+    combo_entry_t ins = {{KC_NO, KC_NO, KC_NO, KC_NO}, KC_NO, COMBO_TERM};
+    for (uint8_t i = 0; i < DYNAMIC_COMBOS_ENTRIES; i++) {
+        dynamic_set_combos(i, &ins);
     }
 }
 #endif

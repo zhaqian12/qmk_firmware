@@ -78,3 +78,13 @@ void     dynamic_get_tap_dance(uint8_t entry, void *ins);
 void     dynamic_set_tap_dance(uint8_t entry, void *ins);
 void     dynamic_tap_dance_reset(void);
 #endif
+
+#ifdef DYNAMIC_COMBOS_ENABLE
+uint16_t dynamic_get_combos_keycode(uint8_t entry, uint8_t index);
+void     dynamic_set_combos_keycode(uint8_t entry, uint8_t index, uint16_t keycode);
+uint16_t dynamic_get_combos_term(uint8_t entry);
+void     dynamic_set_combos_term(uint8_t entry, uint16_t term);
+void     dynamic_get_combos(uint8_t entry, void *ins);
+void     dynamic_set_combos(uint8_t entry, void *ins);
+void     dynamic_combos_reset(void);
+#endif
