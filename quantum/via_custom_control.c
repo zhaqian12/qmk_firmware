@@ -658,6 +658,9 @@ void via_custom_advanced_magic_setting_set_value(uint8_t *data) {
             uint8_t tmp = MAGIC_SETTINGS_GET(combo_config) & (~(0x1 << value_data[0]));
             tmp |= value_data[1] << value_data[0];
             MAGIC_SETTINGS_SET(combo_config, tmp);
+            if (value_data[0] == 0) {
+                combo_maigc_settings_update();
+            }
             break;
         }
         case id_advanced_magic_combo_term: {
@@ -969,12 +972,14 @@ void via_custom_dynamic_combos_set_value(uint8_t *data) {
             uint16_t keycode = KC_NO;
             keycode = ((value_data[2] << 8) | value_data[3]);
             dynamic_set_combos_keycode(value_data[0], value_data[1], keycode);
+            dynamic_combos_update(value_data[0]);
             break;
         }
         case id_dynamic_combos_keycode: {
             uint16_t keycode = KC_NO;
             keycode = ((value_data[1] << 8) | value_data[2]);
             dynamic_set_combos_keycode(value_data[0], 4, keycode);
+            dynamic_combos_update(value_data[0]);
             break;
         }
         case id_dynamic_combos_combo_term: {

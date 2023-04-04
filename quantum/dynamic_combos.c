@@ -26,7 +26,6 @@ void dynamic_combos_update(uint8_t entry) {
     }
     combo_entry_t combo;
     dynamic_get_combos(entry, &combo);
-
     memcpy(keys_buf[entry], combo.keys, sizeof(combo.keys));
     key_combos[entry].keys = keys_buf[entry];
     key_combos[entry].keycode = combo.keycode;

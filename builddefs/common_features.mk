@@ -1038,3 +1038,10 @@ ifeq ($(strip $(DYNAMIC_TAP_DANCE_ENABLE)), yes)
 	OPT_DEFS += -DDYNAMIC_TAP_DANCE_ENABLE
 endif
 
+ifeq ($(strip $(DYNAMIC_COMBOS_ENABLE)), yes)
+	ifeq ($(strip $(COMBO_ENABLE)), no)
+        $(error DYNAMIC_COMBOS_ENABLE requires COMBO_ENABLE, either disable DYNAMIC_COMBOS explicitly or enable COMBO)
+    endif
+    SRC += $(QUANTUM_DIR)/dynamic_combos.c
+	OPT_DEFS += -DDYNAMIC_COMBOS_ENABLE
+endif
