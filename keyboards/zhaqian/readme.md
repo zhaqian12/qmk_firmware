@@ -8,9 +8,17 @@
 - [Keyboards Released by ZhaQian](#keyboards-released-by-zhaqian)
 - [ZhaQian library](#zhaqian-library)
   - [Joystick Trigger](#joystick-trigger)
+  - [Openrgb Protocol](#openrgb-protocol)
   - [Radial Controller](#radial-controller)
   - [RGB Matrix Control](#rgb-matrix-control)
   - [Underglow RGB Matrix](#underglow-rgb-matrix)
+  - [Via Custom Keycode](#via-custom-keycode)
+  - [Via Custom Control](#via-custom-control)
+  - [Signalrgb Protocol](#signalrgb-protocol)
+  - [Magic Setting](#magic-setting)
+  - [Auto Switch Layers](#auto-switch-layers)
+  - [Dynamic Tap Dance](#dynamic-tap-dance)
+  - [Dynamic Combos](#dynamic-combos)
   - [UF2 Bootloader](#uf2-bootloader)
 
 # Keyboards Released by ZhaQian
@@ -61,6 +69,8 @@
  - Signalrgb Protocol
  - Magic Setting
  - Auto Switch Layers
+ - Dynamic Tap Dance
+ - Dynamic Combos
 
 ## Joystick Trigger
 This feature integrates the trigger of joystick which has two axes,it maps the joystick to four buttons in the keyboard matrix.It is supported by adding this to your `rules.mk`:
@@ -80,6 +90,11 @@ and these to your `config.h`:
 
 It can also use if you need multiple joysticks.
 
+## Openrgb Protocol
+This feature was designed by [Kasper](!https://github.com/Kasper24/QMK-OpenRGB) and I modified it a little bit.This feature requires RGB_MATRIX to be enabled.It is supported by adding this to your `rules.mk`:
+```make
+OPENRGB_ENABLE = yes
+```
 ## Radial Controller
 This feature virtualize the function of radial controller in windows 10.It is supported by adding this to your `rules.mk`:
 ```make
@@ -101,7 +116,7 @@ RGB_MATRIX_CONTROL_ENABLE = yes
 ```
 
 ## Underglow RGB Matrix
-This feature supports independent effect of underglow area in rgb matrix .It is supported by adding this to your `rules.mk`:
+This feature supports independent effect of underglow area in rgb matrix.It is supported by adding this to your `rules.mk`:
 ```make
 RGB_MATRIX_ENABLE = yes
 UNDERGLOW_RGB_MATRIX_ENABLE = yes
@@ -145,7 +160,41 @@ You can also alternate these defines to control these feature:
 #define UNDERGLOW_RGB_MATRIX_STARTUP_VAL UNDERGLOW_RGB_MATRIX_MAXIMUM_BRIGHTNESS
 #define UNDERGLOW_RGB_MATRIX_STARTUP_SPD (UINT8_MAX / 2)
 ```
-
+## Via Custom Keycode
+This feature integrates custom keycodes for these features.It is supported by adding this to your `rules.mk`:
+```make
+VIA_CUSTOM_KEYCODE_ENABLE = yes
+```
+## Via Custom Control
+This feature integrates custom controls for these features.It is supported by adding this to your `rules.mk`:
+```make
+VIA_CUSTOM_CONTROL_ENABLE = yes
+```
+## Signalrgb Protocol
+This feature supports the protocol of signalrgb.It is supported by adding this to your `rules.mk`:
+```make
+SIGNALRGB_ENABLE = yes
+```
+## Magic Setting
+This feature supports magic settings.It is supported by adding this to your `rules.mk`:
+```make
+MAGIC_SETTINGS_ENABLE = yes
+```
+## Auto Switch Layers
+This feature supports automatic layer switching by detecting the operating system.It is supported by adding this to your `rules.mk`:
+```make
+AUTO_SWITCH_LAYERS_ENABLE = yes
+```
+## Dynamic Tap Dance 
+This feature supports dynamic tap dance.It is supported by adding this to your `rules.mk`:
+```make
+DYNAMIC_TAP_DANCE_ENABLE = yes
+```
+## Dynamic Combos
+This feature supports dynamic combos.It is supported by adding this to your `rules.mk`:
+```make
+DYNAMIC_COMBOS_ENABLE = yes
+```
 ## UF2 Bootloader
 | Support Devices  |  Description |
 |---------- | ---------- |
