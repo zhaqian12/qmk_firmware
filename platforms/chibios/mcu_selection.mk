@@ -803,11 +803,13 @@ ifneq ($(findstring AIR32F103, $(MCU)),)
   MCU_FAMILY = AIR32
   MCU_SERIES = AIR32F10x
 
+  USE_CHIBIOS_CONTRIB = yes
+  
   # Linker script to use
   # - it should exist either in <chibios>/os/common/ports/ARMCMx/compilers/GCC/ld/
   #   or <keyboard_dir>/ld/
   MCU_LDSCRIPT ?= AIR32F103xB
-
+  
   # Startup code to use
   #  - it should exist in <chibios>/os/common/startup/ARMCMx/compilers/GCC/mk/
   MCU_STARTUP ?= air32f10x

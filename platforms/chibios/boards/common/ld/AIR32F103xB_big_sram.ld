@@ -1,5 +1,5 @@
 /*
-    ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
+    COPYRIGHT(C) 2020, China Mobile IOT
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
 */
 
 /*
- * AIR32F103xB_uf2 memory setup.
+ * AIR32F103 memory setup.
  */
 MEMORY
 {
-    flash0 (rx) : org = 0x08000000 + 16k, len = 128k - 16k
+    flash0 (rx) : org = 0x08000000, len = 128k
     flash1 (rx) : org = 0x00000000, len = 0
     flash2 (rx) : org = 0x00000000, len = 0
     flash3 (rx) : org = 0x00000000, len = 0
@@ -27,7 +27,7 @@ MEMORY
     flash5 (rx) : org = 0x00000000, len = 0
     flash6 (rx) : org = 0x00000000, len = 0
     flash7 (rx) : org = 0x00000000, len = 0
-    ram0   (wx) : org = 0x20000000, len = 32k
+    ram0   (wx) : org = 0x20000000, len = 96k
     ram1   (wx) : org = 0x00000000, len = 0
     ram2   (wx) : org = 0x00000000, len = 0
     ram3   (wx) : org = 0x00000000, len = 0
@@ -83,6 +83,3 @@ REGION_ALIAS("HEAP_RAM", ram0);
 
 /* Generic rules inclusion.*/
 INCLUDE rules.ld
-
-/* Bootloader reset support */
-_board_magic_reg = ORIGIN(ram0) + 16k; /* this is based off the code within backup.c */
