@@ -28,4 +28,4 @@
 // PLLCLKOUT = 216MHz
 #define AIR32_PLLMUL_VALUE                  27
 #define AIR32_ADCPRE                        AIR32_ADCPRE_DIV32
-#define AIR32_USBPRE                        AIR32_USBPRE_DIV4P5 
+#define AIR32_USBPRE                        AIR32_USBPRE_DIV4P5
