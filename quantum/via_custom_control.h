@@ -131,7 +131,7 @@ enum via_custom_dynamic_combos_value {
 
 enum via_custom_auto_switch_layers {
     id_auto_switch_layers_layer                  = 1,
-}
+};
 
 #if defined(VIA_CUSTOM_RGB_MATRIX_ENABLE)
 void via_custom_rgb_matrix_command(uint8_t *data, uint8_t length);

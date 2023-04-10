@@ -28,7 +28,7 @@ system_layers_t system_layers;
 #    define DEFAULT_MACOS_LAYER 2
 #endif
 
-#if !defined(ASL_NO_UPDATE_FN_KEYCODES)
+#if !defined(ASL_NO_UPDATE_FN_KEYCODE)
 #ifndef DEFAULT_WINDOWS_FN_KEY_POS
 #    define DEFAULT_WINDOWS_FN_KEY_POS {0, 0}
 #endif

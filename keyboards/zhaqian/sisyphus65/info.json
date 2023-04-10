@@ -7,7 +7,7 @@
         "vid": "0x00AA",
         "pid": "0xAA1C",
         "device_version": "0.0.1",
-        "force_nkro": "true"
+        "force_nkro": true
     },
     "processor": "STM32F103",
     "bootloader": "uf2boot",
@@ -34,6 +34,9 @@
     },
     "rgb_matrix": {
         "driver": "WS2812"
+    },
+    "build": {
+        "lto": true
     },
     "layouts": {
         "LAYOUT": {

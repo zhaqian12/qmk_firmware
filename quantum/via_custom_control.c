@@ -21,6 +21,13 @@
 #include "mousekey.h"
 #endif
 
+__attribute__((weak)) void via_custom_value_command_user(uint8_t *data, uint8_t length) {
+    // data = [ command_id, channel_id, value_id, value_data ]
+    uint8_t *command_id = &(data[0]);
+    // Return the unhandled state
+    *command_id = id_unhandled;
+}
+
 void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
     // data = [ command_id, channel_id, value_id, value_data ]
     uint8_t *command_id = &(data[0]);
@@ -72,6 +79,7 @@ void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
     }
 #endif
 
+    via_custom_value_command_user(data, length);
     *command_id = id_unhandled;
     *channel_id = *channel_id;  // force use of variable
 }
@@ -1077,7 +1085,7 @@ void via_custom_auto_switch_layers_set_value(uint8_t *data) {
     uint8_t *value_data = &(data[1]);
     switch (*value_id) {
         case id_auto_switch_layers_layer: {
-            auto_switch_layers_set_layer(value_data[0], value_data[1], false),
+            auto_switch_layers_set_layer(value_data[0], value_data[1], false);
             break;
         }
         default: {
@@ -1092,7 +1100,7 @@ void via_custom_auto_switch_layers_get_value(uint8_t *data) {
     uint8_t *value_data = &(data[1]);
     switch (*value_id) {
         case id_auto_switch_layers_layer: {
-            value_data[1] = auto_switch_layers_get_layer(value_data[0]),
+            value_data[1] = auto_switch_layers_get_layer(value_data[0]);
             break;
         }
         default: {
