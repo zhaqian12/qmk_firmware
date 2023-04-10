@@ -107,3 +107,5 @@ compile_commands.json
 
 # VIA(L) json files that don't belong in QMK repo
 via*.json
+
+!uf2boot_stm32g431xB_HSI48.bin
