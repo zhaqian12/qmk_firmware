@@ -31,7 +31,7 @@
 #undef STM32_PLLQ_VALUE
 #undef STM32_PLLR_VALUE
 #undef STM32_CLK48SEL
-#undef STM32_FLASH_SECTORS_PER_BANK
+// #undef STM32_FLASH_SECTORS_PER_BANK
 
 // Only use HSE 8MHz
 #define STM32_HSI16_ENABLED                 FALSE
@@ -44,4 +44,4 @@
 #define STM32_PLLQ_VALUE                    6
 #define STM32_PLLR_VALUE                    2
 #define STM32_CLK48SEL                      STM32_CLK48SEL_PLLQCLK 
-#define STM32_FLASH_SECTORS_PER_BANK        32  // for stm32g431xb
+// #define STM32_FLASH_SECTORS_PER_BANK        32  // for stm32g431xb

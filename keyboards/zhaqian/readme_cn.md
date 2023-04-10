@@ -160,4 +160,4 @@ UF2 Bootloader储存了预编译好的MSC下载方式的引导程序,目前支�
 |GD32VF103xB||
 |AIR32F103xB| 无需硬件DP上拉|
 |AIR32F103xC| 无需硬件DP上拉|
-
+|STM32G431xB||

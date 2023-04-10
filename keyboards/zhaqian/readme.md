@@ -207,3 +207,4 @@ DYNAMIC_COMBOS_ENABLE = yes
 |GD32VF103xB||
 |AIR32F103xB| No hardware DP pull-up required|
 |AIR32F103xC| No hardware DP pull-up required|
+|STM32G431xB||
