@@ -1,4 +1,4 @@
-/* Copyright 2022 ZhaQian
+/* Copyright 2020 QMK
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,8 +16,6 @@
 
 #pragma once
 
-#define LOCKING_SUPPORT_ENABLE
-#define LOCKING_RESYNC_ENABLE
+#define HAL_USE_PWM    TRUE
 
-// #define FORCE_NKRO
-
+#include_next <halconf.h>

@@ -1,4 +1,4 @@
-/* Copyright 2022 ZhaQian
+/* Copyright 2023 ZhaQian
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,5 +19,18 @@
 #define LOCKING_SUPPORT_ENABLE
 #define LOCKING_RESYNC_ENABLE
 
-// #define FORCE_NKRO
+#ifdef RGB_MATRIX_ENABLE
+#define RGB_DI_PIN B3
+#define WS2812_PWM_DRIVER PWMD2
+#define WS2812_PWM_CHANNEL 2
+#define WS2812_DMA_STREAM STM32_DMA1_STREAM2
+#define WS2812_DMA_CHANNEL 2
+#define RGB_MATRIX_LED_COUNT 3
+#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 255
+#define RGB_DISABLE_WHEN_USB_SUSPENDED
 
+#define ENABLE_RGB_MATRIX_BREATHING
+#define ENABLE_RGB_MATRIX_CYCLE_ALL
+#define ENABLE_RGB_MATRIX_CYCLE_BREATHING
+#define VIA_CUSTOM_RGB_INDICATORS_ENABLE
+#endif

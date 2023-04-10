@@ -1,4 +1,4 @@
-/* Copyright 2022 ZhaQian
+/* Copyright 2020 QMK
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,8 +16,10 @@
 
 #pragma once
 
-#define LOCKING_SUPPORT_ENABLE
-#define LOCKING_RESYNC_ENABLE
+#include_next <mcuconf.h>
 
-// #define FORCE_NKRO
+#undef STM32_PWM_USE_TIM2
+#define STM32_PWM_USE_TIM2 TRUE
 
+#undef STM32_ST_USE_TIMER
+#define STM32_ST_USE_TIMER 1

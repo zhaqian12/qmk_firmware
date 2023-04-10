@@ -65,6 +65,13 @@ void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
     }
 #endif
 
+#if defined(VIA_CUSTOM_AUTO_SWITCH_LAYERS_ENABLE)
+    if (*channel_id == id_custom_auto_switch_layers_channel) {
+        via_custom_auto_switch_layers_command(data, length);
+        return;
+    }
+#endif
+
     *command_id = id_unhandled;
     *channel_id = *channel_id;  // force use of variable
 }
@@ -255,6 +262,7 @@ void via_custom_rgb_indicators_set_value(uint8_t *data) {
             break;
         }
 #endif
+#if defined(DYNAMIC_RGB_INDICATORS_ENABLE)
         case id_rgb_indicators_brightness: {
             rgb_indicators_set_val(value_data[0], value_data[1], false);
             break;
@@ -301,6 +309,7 @@ void via_custom_rgb_indicators_set_value(uint8_t *data) {
             }
             break;
         }
+#endif
     }
 }
 
@@ -315,6 +324,7 @@ void via_custom_rgb_indicators_get_value(uint8_t *data) {
             break;
         }
 #endif
+#if defined(DYNAMIC_RGB_INDICATORS_ENABLE)
         case id_rgb_indicators_brightness: {
             value_data[1] = rgb_indicators_get_val(value_data[0]);
             break;
@@ -346,11 +356,14 @@ void via_custom_rgb_indicators_get_value(uint8_t *data) {
             }
             break;
         }
+#endif
     }
 }
 
 void via_custom_rgb_indicators_save(void) {
+#if defined(DYNAMIC_RGB_INDICATORS_ENABLE)
     update_dynamic_rgb_indicators();
+#endif
 }
 #endif
 
@@ -1029,5 +1042,66 @@ void via_custom_dynamic_combos_get_value(uint8_t *data) {
 
 void via_custom_dynamic_combos_save(void) {
     // No action is required
+}
+#endif
+
+#if defined(VIA_CUSTOM_AUTO_SWITCH_LAYERS_ENABLE)
+void via_custom_auto_switch_layers_command(uint8_t *data, uint8_t length) {
+    // data = [ command_id, channel_id, value_id, value_data ]
+    uint8_t *command_id        = &(data[0]);
+    uint8_t *value_id_and_data = &(data[2]);
+
+    switch (*command_id) {
+        case id_custom_set_value: {
+            via_custom_auto_switch_layers_set_value(value_id_and_data);
+            break;
+        }
+        case id_custom_get_value: {
+            via_custom_auto_switch_layers_get_value(value_id_and_data);
+            break;
+        }
+        case id_custom_save: {
+            via_custom_auto_switch_layers_save();
+            break;
+        }
+        default: {
+            *command_id = id_unhandled;
+            break;
+        }
+    }
+}
+
+void via_custom_auto_switch_layers_set_value(uint8_t *data) {
+    // data = [ value_id, value_data ]
+    uint8_t *value_id   = &(data[0]);
+    uint8_t *value_data = &(data[1]);
+    switch (*value_id) {
+        case id_auto_switch_layers_layer: {
+            auto_switch_layers_set_layer(value_data[0], value_data[1], false),
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+}
+
+void via_custom_auto_switch_layers_get_value(uint8_t *data) {
+    // data = [ value_id, value_data ]
+    uint8_t *value_id   = &(data[0]);
+    uint8_t *value_data = &(data[1]);
+    switch (*value_id) {
+        case id_auto_switch_layers_layer: {
+            value_data[1] = auto_switch_layers_get_layer(value_data[0]),
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+}
+
+void via_custom_auto_switch_layers_save(void) {
+    eeconfig_update_auto_switch_layers();
 }
 #endif

@@ -38,6 +38,10 @@
 #    define VIA_CUSTOM_DYNAMIC_COMBOS_ENABLE
 #endif
 
+#if defined(AUTO_SWITCH_LAYERS_ENABLE)
+#    define VIA_CUSTOM_AUTO_SWITCH_LAYERS_ENABLE
+#endif
+
 enum via_custom_channel_id {
     id_custom_rgb_matrix_channel             = 5,
     id_custom_rgb_indicators_channel         = 6,
@@ -45,6 +49,7 @@ enum via_custom_channel_id {
     id_custom_advanced_magic_setting_channel = 8,
     id_custom_dynamic_tap_dance_channel      = 9,
     id_custom_dynamic_combos_channel         = 10,
+    id_custom_auto_switch_layers_channel     = 11,
 };
 
 enum via_custom_rgb_matrix_value {
@@ -124,6 +129,10 @@ enum via_custom_dynamic_combos_value {
     id_dynamic_combos_combo_term                 = 3,
 };
 
+enum via_custom_auto_switch_layers {
+    id_auto_switch_layers_layer                  = 1,
+}
+
 #if defined(VIA_CUSTOM_RGB_MATRIX_ENABLE)
 void via_custom_rgb_matrix_command(uint8_t *data, uint8_t length);
 void via_custom_rgb_matrix_set_value(uint8_t *data);
@@ -162,4 +171,11 @@ void via_custom_dynamic_combos_command(uint8_t *data, uint8_t length);
 void via_custom_dynamic_combos_set_value(uint8_t *data);
 void via_custom_dynamic_combos_get_value(uint8_t *data);
 void via_custom_dynamic_combos_save(void);
+#endif
+
+#if defined(VIA_CUSTOM_AUTO_SWITCH_LAYERS_ENABLE)
+void via_custom_auto_switch_layers_command(uint8_t *data, uint8_t length);
+void via_custom_auto_switch_layers_set_value(uint8_t *data);
+void via_custom_auto_switch_layers_get_value(uint8_t *data);
+void via_custom_auto_switch_layers_save(void);
 #endif

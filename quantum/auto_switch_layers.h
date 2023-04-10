@@ -51,11 +51,13 @@ extern system_layers_t system_layers;
 void eeconfig_update_auto_switch_layers(void);
 void auto_switch_layers_init(void);
 void auto_switch_layers_update(void);
+void auto_switch_layers_set_layer(uint8_t sys, uint8_t layer, bool update);
+uint8_t auto_switch_layers_get_layer(uint8_t sys);
 
 #define AUTO_SWITCH_LAYERS_SET(var, val)    \
 do {                                        \
     system_layers.var = val;                \
-    auto_switch_layers_task();              \
+    auto_switch_layers_update();            \
 } while (0)
 
 #define AUTO_SWITCH_LAYERS_GET(var) system_layers.var
