@@ -109,3 +109,11 @@ compile_commands.json
 via*.json
 
 !uf2boot_stm32g431xB_HSI48.bin
+!uf2boot_gd32vf103_8MHz.bin
+!uf2boot_f411_25MHz.bin
+!uf2boot_f411_8MHz.bin
+!uf2boot_f401_25MHz.bin
+!uf2boot_f401_8MHz.bin
+!uf2boot_f103_8MHz.bin
+!uf2boot_air32f103xC_8MHz.bin
+!uf2boot_air32f103xB_8MHz.bin
