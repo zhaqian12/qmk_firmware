@@ -1,4 +1,4 @@
-/* Copyright 2020 QMK
+/* Copyright 2021 ZhaQian
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,12 @@
 
 #pragma once
 
-#include_next <mcuconf.h>
+#ifdef RGB_MATRIX_ENABLE
+#define RGB_DI_PIN F0
+#endif
 
-#undef STM32_PWM_USE_TIM1
-#define STM32_PWM_USE_TIM1 TRUE
+#define NO_ACTION_TAPPING
+#define NO_ACTION_ONESHOT
+#define NO_ACTION_FUNCTION
+#define NO_MUSIC_MODE
+

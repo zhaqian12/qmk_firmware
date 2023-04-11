@@ -1,4 +1,4 @@
-/* Copyright 2020 QMK
+/* Copyright 2021 ZhaQian
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,11 @@
 
 #pragma once
 
-#include_next <mcuconf.h>
-
-#undef STM32_PWM_USE_TIM1
-#define STM32_PWM_USE_TIM1 TRUE
+#ifdef RGB_MATRIX_ENABLE
+#define RGB_DI_PIN B5
+#define WS2812_PWM_DRIVER PWMD3
+#define WS2812_PWM_CHANNEL 2
+#define WS2812_PWM_PAL_MODE 2
+#define WS2812_DMA_STREAM STM32_DMA1_STREAM2
+#define WS2812_DMA_CHANNEL 5
+#endif

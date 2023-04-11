@@ -18,5 +18,5 @@
 
 #include_next <mcuconf.h>
 
-#undef STM32_PWM_USE_TIM1
-#define STM32_PWM_USE_TIM1 TRUE
+// #undef GD32_PWM_USE_TIM3
+// #define GD32_PWM_USE_TIM3 TRUE

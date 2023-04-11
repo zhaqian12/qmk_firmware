@@ -18,5 +18,14 @@
 
 #include_next <mcuconf.h>
 
-#undef STM32_PWM_USE_TIM1
-#define STM32_PWM_USE_TIM1 TRUE
+#undef AIR32_PWM_USE_TIM1
+#define AIR32_PWM_USE_TIM1 TRUE
+
+#undef AIR32_PLLMUL_VALUE
+#undef AIR32_ADCPRE 
+#undef AIR32_USBPRE
+
+// PLLCLKOUT = 216MHz
+#define AIR32_PLLMUL_VALUE                  27
+#define AIR32_ADCPRE                        AIR32_ADCPRE_DIV32
+#define AIR32_USBPRE                        AIR32_USBPRE_DIV4P5

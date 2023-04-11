@@ -7,7 +7,7 @@
         "vid": "0x00AA",
         "pid": "0xAA15",
         "device_version": "0.0.1",
-        "force_nkro": "true"
+        "force_nkro": true
     },    
     "processor": "STM32F103",
     "bootloader": "uf2boot",
