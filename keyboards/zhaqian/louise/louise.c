@@ -88,16 +88,17 @@ void via_custom_rgb_control_get_value(uint8_t *data);
 void via_custom_rgb_control_save(void);
 
 // via custom control
-void via_custom_value_command_user(uint8_t *data, uint8_t length) {
+bool via_custom_value_command_user(uint8_t *data, uint8_t length) {
     // data = [ command_id, channel_id, value_id, value_data ]
     uint8_t *command_id = &(data[0]);
     uint8_t *channel_id = &(data[1]);
     if (*channel_id == 66) {
         via_custom_rgb_control_command(data, length);
-        return;
+        return true;
     }
     *command_id = id_unhandled;
     *channel_id = *channel_id;  // force use of variable
+    return false;
 }
 
 void via_custom_rgb_control_command(uint8_t *data, uint8_t length) {

@@ -21,11 +21,12 @@
 #include "mousekey.h"
 #endif
 
-__attribute__((weak)) void via_custom_value_command_user(uint8_t *data, uint8_t length) {
+__attribute__((weak)) bool via_custom_value_command_user(uint8_t *data, uint8_t length) {
     // data = [ command_id, channel_id, value_id, value_data ]
     uint8_t *command_id = &(data[0]);
     // Return the unhandled state
     *command_id = id_unhandled;
+    return false;
 }
 
 void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
@@ -79,7 +80,9 @@ void via_custom_value_command_kb(uint8_t *data, uint8_t length) {
     }
 #endif
 
-    via_custom_value_command_user(data, length);
+    if (via_custom_value_command_user(data, length)) {
+        return;
+    }   
     *command_id = id_unhandled;
     *channel_id = *channel_id;  // force use of variable
 }
