@@ -125,6 +125,27 @@
 #    endif
 #endif
 
+// AIR32 compatibility
+#if defined(MCU_AT32)
+#    define CPU_CLOCK AT32_SYSCLK
+
+#    if defined(AT32F415xx)
+#        define USE_GPIOV1
+#        define USE_I2CV1
+#        define PAL_MODE_ALTERNATE_OPENDRAIN PAL_MODE_AT32_ALTERNATE_OPENDRAIN
+#        define PAL_MODE_ALTERNATE_PUSHPULL PAL_MODE_AT32_ALTERNATE_PUSHPULL
+#        define STM32_DMA_STREAM(stream) AT32_DMA_STREAM(stream)
+#        define STM32_DMA_STREAM_ID(peripheral, channel) AT32_DMA_STREAM_ID(peripheral, channel)
+#        define STM32_DMA_CR_DIR_M2P AT32_DMA_CR_DIR_M2P
+#        define STM32_DMA_CR_MSIZE_BYTE AT32_DMA_CR_MSIZE_BYTE
+#        define STM32_DMA_CR_PSIZE_WORD AT32_DMA_CR_PSIZE_WORD
+#        define STM32_DMA_CR_PSIZE_HWORD AT32_DMA_CR_PSIZE_HWORD
+#        define STM32_DMA_CR_MINC AT32_DMA_CR_MINC
+#        define STM32_DMA_CR_CIRC AT32_DMA_CR_CIRC
+#        define STM32_DMA_CR_PL AT32_DMA_CR_PL
+#        define STM32_DMA_CR_CHSEL AT32_DMA_CR_CHSEL
+#    endif
+#endif
 #if defined(GD32VF103)
 /* This chip has the same API as STM32F103, but uses different names for literally the same thing.
  * As of 4.7.2021 QMK is tailored to use STM32 defines/names, for compatibility sake

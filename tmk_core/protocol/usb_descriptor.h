@@ -47,7 +47,7 @@
 
 #ifdef PROTOCOL_CHIBIOS
 #    include <hal.h>
-#    if STM32_USB_USE_OTG1 == TRUE
+#    if ((STM32_USB_USE_OTG1 == TRUE) || (AT32_USB_USE_OTG1 == TRUE))
 #        define USB_ENDPOINTS_ARE_REORDERABLE
 #    endif
 #endif
@@ -239,7 +239,7 @@ enum usb_endpoints {
 
 #ifdef HIDRGB_PROTOCOL_ENABLE
     HIDRGB_IN_EPNUM = NEXT_EPNUM,
-#    if STM32_USB_USE_OTG1
+#    if USB_ENDPOINTS_ARE_REORDERABLE
 #        define HIDRGB_OUT_EPNUM HIDRGB_IN_EPNUM
 #    else
     HIDRGB_OUT_EPNUM         = NEXT_EPNUM,
