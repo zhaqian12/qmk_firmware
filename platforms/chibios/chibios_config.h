@@ -144,8 +144,11 @@
 #        define STM32_DMA_CR_CIRC AT32_DMA_CR_CIRC
 #        define STM32_DMA_CR_PL AT32_DMA_CR_PL
 #        define STM32_DMA_CR_CHSEL AT32_DMA_CR_CHSEL
+#        define TIM_DIER_UDE TMR_IDEN_OVFDEN
+#        define TIM_DIER_TDE TMR_IDEN_TDEN
 #    endif
 #endif
+
 #if defined(GD32VF103)
 /* This chip has the same API as STM32F103, but uses different names for literally the same thing.
  * As of 4.7.2021 QMK is tailored to use STM32 defines/names, for compatibility sake

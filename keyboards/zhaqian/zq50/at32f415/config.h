@@ -1,4 +1,4 @@
-/* Copyright 2020 QMK
+/* Copyright 2021 ZhaQian
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,12 @@
 
 #pragma once
 
-#include_next <mcuconf.h>
+#ifdef RGB_MATRIX_ENABLE
+#define RGB_DI_PIN A10
+#define WS2812_PWM_DRIVER PWMD1
+#define WS2812_PWM_CHANNEL 3
+#define WS2812_DMA_STREAM AT32_DMA1_STREAM5
+#endif
 
-#undef AIR32_PWM_USE_TIM1
-#define AIR32_PWM_USE_TIM1 TRUE
+#define WEAR_LEVELING_LOGICAL_SIZE 2048
+#define WEAR_LEVELING_BACKING_SIZE 4096

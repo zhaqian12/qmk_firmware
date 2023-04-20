@@ -29,10 +29,9 @@
 /*
  * Port A setup.
  * Everything input with pull-up except:
- * PA11 - Alternate output  (DP PUUP).
  */
 #define VAL_GPIOACRL            0x88888888      /*  PA7...PA0 */
-#define VAL_GPIOACRH            0x44888888      /* PA15...PA8 */
+#define VAL_GPIOACRH            0x88888888      /* PA15...PA8 */
 #define VAL_GPIOAODR            0xFFFFFFFF
 
 /*
@@ -82,17 +81,6 @@
   #define AT32F415xx
 #endif
 
-/*
- * Board oscillators-related settings.
- * NOTE: LSE not fitted.
- */
-#if !defined(AT32_LSECLK)
-#define AT32_LSECLK                32768U
-#endif
-
-#if !defined(AT32_HSECLK)
-#define AT32_HSECLK                8000000U
-#endif
 /*===========================================================================*/
 /* External declarations.                                                    */
 /*===========================================================================*/
