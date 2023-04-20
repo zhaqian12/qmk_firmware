@@ -18,5 +18,5 @@
 
 #include_next <mcuconf.h>
 
-#undef STM32_ADC_USE_ADC1
-#define STM32_ADC_USE_ADC1 TRUE
+#undef AT32_ADC_USE_ADC1
+#define AT32_ADC_USE_ADC1 TRUE

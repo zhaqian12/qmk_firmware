@@ -36,7 +36,7 @@
  */
 #define AT32_NO_INIT                       FALSE
 #define AT32_HSI_ENABLED                   TRUE
-#define AT32_LSI_ENABLED                   FALSE
+#define AT32_LSI_ENABLED                   TRUE
 #define AT32_HSE_ENABLED                   TRUE
 #define AT32_LSE_ENABLED                   FALSE
 #define AT32_SW                            AT32_SW_PLL
@@ -210,12 +210,17 @@
 #define AT32_UART_USE_USART1               FALSE
 #define AT32_UART_USE_USART2               FALSE
 #define AT32_UART_USE_USART3               FALSE
+#define AT32_UART_USE_UART4                FALSE
+#define AT32_UART_USE_UART5                FALSE
 #define AT32_UART_USART1_IRQ_PRIORITY      12
 #define AT32_UART_USART2_IRQ_PRIORITY      12
 #define AT32_UART_USART3_IRQ_PRIORITY      12
+#define AT32_UART_UART4_PRIORITY           12
+#define AT32_UART_UART5_PRIORITY           12
 #define AT32_UART_USART1_DMA_PRIORITY      0
 #define AT32_UART_USART2_DMA_PRIORITY      0
 #define AT32_UART_USART3_DMA_PRIORITY      0
+#define AT32_UART_UART4_DMA_PRIORITY       0
 #define AT32_UART_DMA_ERROR_HOOK(uartp)    osalSysHalt("DMA failure")
 
 /*
