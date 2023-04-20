@@ -62,7 +62,6 @@ const PALConfig pal_default_config =
  * any other initialization.
  */
 void __early_init(void) {
-  // enter_bootloader_mode_if_requested();
   at32_clock_init();
 }
 
@@ -71,6 +70,5 @@ void __early_init(void) {
  * @note    You can add your board-specific code here.
  */
 void boardInit(void) {
-  IOMUX->REMAP |= (0x2U << 24);
-  crmEnableAPB1((0x1U << 23),true);
+  IOMUX->REMAP |= IOMUX_REMAP_SWJTAG_MUX_JTAGDISABLE;
 }
