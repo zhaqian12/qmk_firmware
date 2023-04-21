@@ -20,15 +20,13 @@
 #include <hal.h>
 #include "wait.h"
 
-extern uint32_t __ram0_end__;
-
-/* This code should be checked whether it runs correctly on platforms */
-#    define SYMVAL(sym) (uint32_t)(((uint8_t *)&(sym)) - ((uint8_t *)0))
-#    define BOOTLOADER_MAGIC 0xDEADBEEF
-#    define MAGIC_ADDR (unsigned long *)(SYMVAL(__ram0_end__) - 4)
+#define BOOTLOADER_MAGIC 0x5AA5
+#if defined(AT32F415xx)
+#define MAGIC_ADDR (__IO uint32_t *)(ERTC_BASE + 0x50)
+#endif
 
 __attribute__((weak)) void bootloader_jump(void) {
-    *MAGIC_ADDR = BOOTLOADER_MAGIC; // set magic flag => reset handler will jump into boot loader
+    *MAGIC_ADDR = (uint32_t)BOOTLOADER_MAGIC;
     NVIC_SystemReset();
 }
 
@@ -37,9 +35,8 @@ __attribute__((weak)) void mcu_reset(void) {
 }
 
 void enter_bootloader_mode_if_requested(void) {
-    unsigned long *check = MAGIC_ADDR;
-    if (*check == BOOTLOADER_MAGIC) {
-        *check = 0;
+    if (*MAGIC_ADDR == BOOTLOADER_MAGIC) {
+        *MAGIC_ADDR = 0;
         __set_CONTROL(0);
         __set_MSP(*(__IO uint32_t *)AT32_BOOTLOADER_ADDRESS);
         __enable_irq();
@@ -47,8 +44,7 @@ void enter_bootloader_mode_if_requested(void) {
         typedef void (*BootJump_t)(void);
         BootJump_t boot_jump = *(BootJump_t *)(AT32_BOOTLOADER_ADDRESS + 4);
         boot_jump();
-        while (1)
-            ;
+        while (1);
     }
 }
 
