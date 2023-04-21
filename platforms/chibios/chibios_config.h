@@ -144,8 +144,10 @@
 #        define STM32_DMA_CR_CIRC AT32_DMA_CR_CIRC
 #        define STM32_DMA_CR_PL AT32_DMA_CR_PL
 #        define STM32_DMA_CR_CHSEL AT32_DMA_CR_CHSEL
+
 #        define TIM_DIER_UDE TMR_IDEN_OVFDEN
 #        define TIM_DIER_TDE TMR_IDEN_TDEN
+
 #    if HAL_USE_ADC
 #        define ADC_SMPR2_SMP_AN0 ADC_SPT2_SMP_AN0
 #        define ADC_SMPR2_SMP_AN1 ADC_SPT2_SMP_AN1
@@ -165,7 +167,27 @@
 #        define ADC_SMPR1_SMP_AN15 ADC_SPT1_SMP_AN15
 #        define ADC_SQR3_SQ1_N ADC_OSQ3_SQ1_N
 #    endif
+
+#if  HAL_USE_SERIAL
+#    if !defined(SERIAL_USART_CR1)
+#        define SERIAL_USART_CR1 (USART_CTRL1_PEN | USART_CTRL1_PSEL | USART_CTRL1_DBN)
 #    endif
+#    if !defined(SERIAL_USART_CR2)
+#        define SERIAL_USART_CR2 USART_CTRL2_STOPBN_2_BITS
+#    endif
+#    if !defined(SERIAL_USART_CR3)
+#        define SERIAL_USART_CR3 0x0
+#    endif
+#        define USART_CR3_HDSEL USART_CTRL3_SLBEN\
+#        define AFIO IOMUX
+#        define MAPR REMAP
+#        define AFIO_MAPR_USART1_REMAP IOMUX_REMAP_USART1_MUX
+#        define AFIO_MAPR_USART3_REMAP_PARTIALREMAP IOMUX_REMAP_USART3_MUX_PARTIALREMAP
+#        define AFIO_MAPR_USART3_REMAP_FULLREMAP IOMUX_REMAP_USART3_MUX_FULLREMAP
+#    endif 
+
+#    endif 
+
 #endif
 
 #if defined(GD32VF103)
