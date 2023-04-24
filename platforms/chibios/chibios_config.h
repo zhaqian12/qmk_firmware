@@ -129,7 +129,7 @@
 #if defined(MCU_AT32)
 #    define CPU_CLOCK AT32_SYSCLK
 
-#    if defined(AT32F415xx)
+#    if defined(AT32F415xx) || defined(AT32F413xx)
 #        define USE_GPIOV1
 #        define USE_I2CV1
 #        define PAL_MODE_ALTERNATE_OPENDRAIN PAL_MODE_AT32_ALTERNATE_OPENDRAIN
@@ -168,7 +168,7 @@
 #        define ADC_SQR3_SQ1_N ADC_OSQ3_SQ1_N
 #    endif
 
-#if  HAL_USE_SERIAL
+#    if HAL_USE_SERIAL
 #    if !defined(SERIAL_USART_CR1)
 #        define SERIAL_USART_CR1 (USART_CTRL1_PEN | USART_CTRL1_PSEL | USART_CTRL1_DBN)
 #    endif
@@ -178,7 +178,7 @@
 #    if !defined(SERIAL_USART_CR3)
 #        define SERIAL_USART_CR3 0x0
 #    endif
-#        define USART_CR3_HDSEL USART_CTRL3_SLBEN\
+#        define USART_CR3_HDSEL USART_CTRL3_SLBEN
 #        define AFIO IOMUX
 #        define MAPR REMAP
 #        define AFIO_MAPR_USART1_REMAP IOMUX_REMAP_USART1_MUX
