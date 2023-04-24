@@ -250,6 +250,8 @@
 #define AT32_USB_USB1_HP_IRQ_PRIORITY      5
 #define AT32_USB_USB1_LP_IRQ_PRIORITY      6
 #define AT32_USBRAM_USE_EXTENDED_RAM       TRUE
+#define AT32_USB_USB1_IRQ_REMAP            FALSE
+
 /*
  * WDG driver system settings.
  */
