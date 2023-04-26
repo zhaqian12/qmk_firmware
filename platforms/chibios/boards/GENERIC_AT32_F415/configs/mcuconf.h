@@ -241,4 +241,9 @@
  */
 #define AT32_WDG_USE_IWDG                  FALSE
 
+/*
+ * DMA driver system settings.
+ */
+#define AT32_DMA_USE_DMAMUX                FALSE
+
 #endif /* MCUCONF_H */
