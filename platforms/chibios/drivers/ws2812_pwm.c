@@ -28,6 +28,9 @@
 #if (STM32_DMA_SUPPORTS_DMAMUX == TRUE) && !defined(WS2812_DMAMUX_ID)
 #    error "please consult your MCU's datasheet and specify in your config.h: #define WS2812_DMAMUX_ID STM32_DMAMUX1_TIM?_UP"
 #endif
+#if (AT32_DMA_SUPPORTS_DMAMUX == TRUE) && (AT32_DMA_USE_DMAMUX == TRUE) && !defined(WS2812_DMAMUX_CHANNEL) && !defined(WS2812_DMAMUX_ID)
+#    error "please consult your MCU's datasheet and specify in your config.h: #define WS2812_DMAMUX_CHANNEL 1 #define WS2812_DMAMUX_ID AT32_DMAMUX_TIM?_OVERFLOW"
+#endif
 
 /* Summarize https://www.st.com/resource/en/application_note/an4013-stm32-crossseries-timer-overview-stmicroelectronics.pdf to
  * figure out if we are using a 32bit timer. This is needed to setup the DMA controller correctly.
@@ -350,7 +353,10 @@ void ws2812_init(void) {
     // If the MCU has a DMAMUX we need to assign the correct resource
     dmaSetRequestSource(WS2812_DMA_STREAM, WS2812_DMAMUX_ID);
 #endif
-
+#if (AT32_DMA_SUPPORTS_DMAMUX == TRUE) && (AT32_DMA_USE_DMAMUX == TRUE)
+    // If the MCU has a DMAMUX we need to assign the correct resource
+    dmaSetRequestSource(WS2812_DMA_STREAM, WS2812_DMAMUX_CHANNEL, WS2812_DMAMUX_ID);
+#endif
     // Start DMA
     dmaStreamEnable(WS2812_DMA_STREAM);
 
