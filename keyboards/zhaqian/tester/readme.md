@@ -81,6 +81,18 @@ Make example for this keyboard (after setting up your build environment):
     make zhaqian/tester/at32f413:default
     make zhaqian/tester/at32f413:via
     ```
+    
+ * MCU:at32f403a
+    ```
+    make zhaqian/tester/at32f403a:default
+    make zhaqian/tester/at32f403a:via
+    ```
+    
+ * MCU:at32f407
+    ```
+    make zhaqian/tester/at32f407:default
+    make zhaqian/tester/at32f407:via
+    ```
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
  ## Bootloader

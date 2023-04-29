@@ -17,10 +17,10 @@
 #ifndef MCUCONF_H
 #define MCUCONF_H
 
-#define AT32F413xx_MCUCONF  TRUE
+#define AT32F40x_MCUCONF  TRUE
 
 /*
- * AT32F413xx drivers configuration.
+ * AT32F40x drivers configuration.
  * The following settings override the default settings present in
  * the various device driver implementation headers.
  * Note that the settings for each driver only have effect if the whole
@@ -42,7 +42,8 @@
 #define AT32_PLL_ENABLED                   TRUE
 #define AT32_SCLKSEL                       AT32_SCLKSEL_PLL
 #define AT32_PLLRCS                        AT32_PLLRCS_HSE
-#define AT32_PLLHEXTDIV                    AT32_PLLHEXTDIV_DIV1
+#define AT32_PLLHEXTDIV                    AT32_PLLHEXTDIV_NODIV
+#define AT32_HEXTDIV                       AT32_HEXTDIV_DIV2
 #define AT32_PLLMUL_VALUE                  24
 #define AT32_AHBDIV                        AT32_AHBDIV_DIV1
 #define AT32_APB1DIV                       AT32_APB1DIV_DIV2
@@ -69,6 +70,7 @@
 #define AT32_IRQ_EXTI16_PRIORITY           6
 #define AT32_IRQ_EXTI17_PRIORITY           6
 #define AT32_IRQ_EXTI18_PRIORITY           6
+#define AT32_IRQ_EXTI19_PRIORITY           6
 
 #define AT32_IRQ_TIM1_BRK_TIM9_PRIORITY    7
 #define AT32_IRQ_TIM1_UP_TIM10_PRIORITY    7
@@ -78,6 +80,8 @@
 #define AT32_IRQ_TIM3_PRIORITY             7
 #define AT32_IRQ_TIM4_PRIORITY             7
 #define AT32_IRQ_TIM5_PRIORITY             7
+#define AT32_IRQ_TIM6_PRIORITY             7
+#define AT32_IRQ_TIM7_PRIORITY             7
 #define AT32_IRQ_TIM8_BRK_TIM12_PRIORITY   7
 #define AT32_IRQ_TIM8_UP_TIM13_PRIORITY    7
 #define AT32_IRQ_TIM8_TRGCO_TIM14_PRIORITY 7
@@ -88,18 +92,25 @@
 #define AT32_IRQ_USART3_PRIORITY           12
 #define AT32_IRQ_UART4_PRIORITY            12
 #define AT32_IRQ_UART5_PRIORITY            12
+#define AT32_IRQ_USART6_PRIORITY           12
+#define AT32_IRQ_UART7_PRIORITY            12
+#define AT32_IRQ_UART8_PRIORITY            12
 
 /*
  * ADC driver system settings.
  */
 #define AT32_ADC_USE_ADC1                  FALSE
 #define AT32_ADC_USE_ADC2                  FALSE
+#define AT32_ADC_USE_ADC3                  FALSE
 #define AT32_ADC_ADC1_DMA_STREAM           AT32_DMA_STREAM_ID(1, 1)
 #define AT32_ADC_ADC2_DMA_STREAM           AT32_DMA_STREAM_ID(1, 1)
+#define AT32_ADC_ADC3_DMA_STREAM           AT32_DMA_STREAM_ID(2, 5)
 #define AT32_ADC_ADC1_DMA_PRIORITY         2
 #define AT32_ADC_ADC2_DMA_PRIORITY         2
+#define AT32_ADC_ADC3_DMA_PRIORITY         2
 #define AT32_ADC_ADC1_IRQ_PRIORITY         6
 #define AT32_ADC_ADC2_IRQ_PRIORITY         6
+#define AT32_ADC_ADC3_IRQ_PRIORITY         6
 
 /*
  * CAN driver system settings.
@@ -110,6 +121,19 @@
 #define AT32_CAN_CAN2_IRQ_PRIORITY         11
 
 /*
+ * DAC driver system settings.
+ */
+#define AT32_DAC_DUAL_MODE                 FALSE
+#define AT32_DAC_USE_DAC1_CH1              FALSE
+#define AT32_DAC_USE_DAC1_CH2              FALSE
+#define AT32_DAC_DAC1_CH1_IRQ_PRIORITY     10
+#define AT32_DAC_DAC1_CH2_IRQ_PRIORITY     10
+#define AT32_DAC_DAC1_CH1_DMA_PRIORITY     2
+#define AT32_DAC_DAC1_CH2_DMA_PRIORITY     2
+#define AT32_DAC_DAC1_CH1_DMA_STREAM       AT32_DMA_STREAM_ID(2, 3)
+#define AT32_DAC_DAC1_CH2_DMA_STREAM       AT32_DMA_STREAM_ID(2, 4)
+
+/*
  * GPT driver system settings.
  */
 #define AT32_GPT_USE_TIM1                  FALSE
@@ -117,25 +141,35 @@
 #define AT32_GPT_USE_TIM3                  FALSE
 #define AT32_GPT_USE_TIM4                  FALSE
 #define AT32_GPT_USE_TIM5                  FALSE
+#define AT32_GPT_USE_TIM6                  FALSE
+#define AT32_GPT_USE_TIM7                  FALSE
 #define AT32_GPT_USE_TIM8                  FALSE
 #define AT32_GPT_USE_TIM9                  FALSE
 #define AT32_GPT_USE_TIM10                 FALSE
 #define AT32_GPT_USE_TIM11                 FALSE
+#define AT32_GPT_USE_TIM12                 FALSE
+#define AT32_GPT_USE_TIM13                 FALSE
+#define AT32_GPT_USE_TIM14                 FALSE
 
 /*
  * I2C driver system settings.
  */
 #define AT32_I2C_USE_I2C1                  FALSE
 #define AT32_I2C_USE_I2C2                  FALSE
+#define AT32_I2C_USE_I2C3                  FALSE
 #define AT32_I2C_BUSY_TIMEOUT              50
 #define AT32_I2C_I2C1_RX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 7)
 #define AT32_I2C_I2C1_TX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 6)
 #define AT32_I2C_I2C2_RX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 5)
 #define AT32_I2C_I2C2_TX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 4)
+#define AT32_I2C_I2C3_RX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 3)
+#define AT32_I2C_I2C3_TX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 2)
 #define AT32_I2C_I2C1_IRQ_PRIORITY         5
 #define AT32_I2C_I2C2_IRQ_PRIORITY         5
+#define AT32_I2C_I2C3_IRQ_PRIORITY         5
 #define AT32_I2C_I2C1_DMA_PRIORITY         3
 #define AT32_I2C_I2C2_DMA_PRIORITY         3
+#define AT32_I2C_I2C3_DMA_PRIORITY         3
 #define AT32_I2C_DMA_ERROR_HOOK(i2cp)      osalSysHalt("DMA failure")
 
 /*
@@ -150,6 +184,9 @@
 #define AT32_ICU_USE_TIM9                  FALSE
 #define AT32_ICU_USE_TIM10                 FALSE
 #define AT32_ICU_USE_TIM11                 FALSE
+#define AT32_ICU_USE_TIM12                 FALSE
+#define AT32_ICU_USE_TIM13                 FALSE
+#define AT32_ICU_USE_TIM14                 FALSE
 
 /*
  * PWM driver system settings.
@@ -164,6 +201,9 @@
 #define AT32_PWM_USE_TIM9                  FALSE
 #define AT32_PWM_USE_TIM10                 FALSE
 #define AT32_PWM_USE_TIM11                 FALSE
+#define AT32_PWM_USE_TIM12                 FALSE
+#define AT32_PWM_USE_TIM13                 FALSE
+#define AT32_PWM_USE_TIM14                 FALSE
 
 /*
  * RTC driver system settings.
@@ -178,20 +218,33 @@
 #define AT32_SERIAL_USE_USART3             FALSE
 #define AT32_SERIAL_USE_UART4              FALSE
 #define AT32_SERIAL_USE_UART5              FALSE
+#define AT32_SERIAL_USE_USART6             FALSE
+#define AT32_SERIAL_USE_UART7              FALSE
+#define AT32_SERIAL_USE_UART8              FALSE
 
 /*
  * SPI driver system settings.
  */
 #define AT32_SPI_USE_SPI1                  FALSE
 #define AT32_SPI_USE_SPI2                  FALSE
+#define AT32_SPI_USE_SPI3                  FALSE
+#define AT32_SPI_USE_SPI4                  FALSE
 #define AT32_SPI_SPI1_RX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 2)
 #define AT32_SPI_SPI1_TX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 3)
 #define AT32_SPI_SPI2_RX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 4)
 #define AT32_SPI_SPI2_TX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 5)
+#define AT32_SPI_SPI3_RX_DMA_STREAM        AT32_DMA_STREAM_ID(2, 1)
+#define AT32_SPI_SPI3_TX_DMA_STREAM        AT32_DMA_STREAM_ID(2, 2)
+#define AT32_SPI_SPI4_RX_DMA_STREAM        AT32_DMA_STREAM_ID(2, 3)
+#define AT32_SPI_SPI4_TX_DMA_STREAM        AT32_DMA_STREAM_ID(2, 4)
 #define AT32_SPI_SPI1_DMA_PRIORITY         1
 #define AT32_SPI_SPI2_DMA_PRIORITY         1
+#define AT32_SPI_SPI3_DMA_PRIORITY         1
+#define AT32_SPI_SPI4_DMA_PRIORITY         1
 #define AT32_SPI_SPI1_IRQ_PRIORITY         10
 #define AT32_SPI_SPI2_IRQ_PRIORITY         10
+#define AT32_SPI_SPI3_IRQ_PRIORITY         10
+#define AT32_SPI_SPI4_IRQ_PRIORITY         10
 #define AT32_SPI_DMA_ERROR_HOOK(spip)      osalSysHalt("DMA failure")
 
 /*
@@ -208,6 +261,9 @@
 #define AT32_UART_USE_USART3               FALSE
 #define AT32_UART_USE_UART4                FALSE
 #define AT32_UART_USE_UART5                FALSE
+#define AT32_UART_USE_USART6               FALSE
+#define AT32_UART_USE_UART7                FALSE
+#define AT32_UART_USE_UART8                FALSE
 #define AT32_UART_USART1_RX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 5)
 #define AT32_UART_USART1_TX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 4)
 #define AT32_UART_USART2_RX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 6)
@@ -219,11 +275,20 @@
 // Only support if use dma mux
 #define AT32_UART_UART5_RX_DMA_STREAM      AT32_DMA_STREAM_ID(1, 1)
 #define AT32_UART_UART5_TX_DMA_STREAM      AT32_DMA_STREAM_ID(1, 2)
+#define AT32_UART_USART6_RX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 1)
+#define AT32_UART_USART6_TX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 2)
+#define AT32_UART_UART7_RX_DMA_STREAM      AT32_DMA_STREAM_ID(1, 1)
+#define AT32_UART_UART7_TX_DMA_STREAM      AT32_DMA_STREAM_ID(1, 2)
+#define AT32_UART_UART8_RX_DMA_STREAM      AT32_DMA_STREAM_ID(1, 1)
+#define AT32_UART_UART8_TX_DMA_STREAM      AT32_DMA_STREAM_ID(1, 2)
 #define AT32_UART_USART1_DMA_PRIORITY      0
 #define AT32_UART_USART2_DMA_PRIORITY      0
 #define AT32_UART_USART3_DMA_PRIORITY      0
 #define AT32_UART_UART4_DMA_PRIORITY       0
 #define AT32_UART_UART5_DMA_PRIORITY       0
+#define AT32_UART_USART6_DMA_PRIORITY      0
+#define AT32_UART_UART7_DMA_PRIORITY       0
+#define AT32_UART_UART8_DMA_PRIORITY       0
 #define AT32_UART_DMA_ERROR_HOOK(uartp)    osalSysHalt("DMA failure")
 
 /*
@@ -237,7 +302,6 @@
 #define AT32_USB_USB1_IRQ_REMAP            FALSE
 #define AT32_USB_USB1_MAPHP_IRQ_PRIORITY   13
 #define AT32_USB_USB1_MAPLP_IRQ_PRIORITY   14
-
 /*
  * WDG driver system settings.
  */

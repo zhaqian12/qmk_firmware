@@ -62,7 +62,7 @@ bool spi_start(pin_t slavePin, bool lsbFirst, uint8_t mode, uint16_t divisor) {
         roundedDivisor <<= 1;
     }
 
-#if defined(AT32F415xx) || defined(AT32F413xx)
+#if defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F40x)
     if (roundedDivisor < 2 || roundedDivisor > 1024) {
         return false;
     }
@@ -204,7 +204,7 @@ bool spi_start(pin_t slavePin, bool lsbFirst, uint8_t mode, uint16_t divisor) {
             spiConfig.SSPCR0 |= SPI_SSPCR0_SPH; // Clock phase: sample on second edge transition
             break;
     }
-#elif defined(AT32F415xx) || defined(AT32F413xx)
+#elif defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F40x)
     spiConfig.cr1 = 0;
 
     if (lsbFirst) {

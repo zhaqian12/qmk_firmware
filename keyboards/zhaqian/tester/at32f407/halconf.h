@@ -16,10 +16,6 @@
 
 #pragma once
 
-#include_next <mcuconf.h>
+#define HAL_USE_PWM    TRUE
 
-#undef AT32_PWM_USE_TIM1
-#define AT32_PWM_USE_TIM1 TRUE
-
-#undef AT32_USB_USB1_IRQ_REMAP
-#define AT32_USB_USB1_IRQ_REMAP TRUE
+#include_next <halconf.h>

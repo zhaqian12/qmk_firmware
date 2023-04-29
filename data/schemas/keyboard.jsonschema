@@ -83,6 +83,8 @@
                 "AIR32F103",
                 "AT32F415",
                 "AT32F413",
+                "AT32F403A",
+                "AT32F407",
                 "atmega16u2",
                 "atmega32u2",
                 "atmega16u4",
