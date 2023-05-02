@@ -198,7 +198,7 @@ DYNAMIC_COMBOS_ENABLE = yes
 ```
 ## UF2 Bootloader
 | Support Devices  |  Description |
-|---------- | ---------- |
+|:--------: | :--------: |
 |STM32F103x8||
 |STM32F103xB||
 |STM32F401xC||
@@ -207,3 +207,6 @@ DYNAMIC_COMBOS_ENABLE = yes
 |AIR32F103xB| No hardware DP pull-up required|
 |AIR32F103xC| No hardware DP pull-up required|
 |STM32G431xB||
+|AT32F403AxG||
+|AT32F413xB||
+|AT32F415xB||

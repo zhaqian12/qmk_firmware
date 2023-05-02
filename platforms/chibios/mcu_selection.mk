@@ -854,6 +854,8 @@ ifneq ($(findstring AT32F415, $(MCU)),)
 
   USE_FPU ?= no
 
+  UF2_FAMILY ?= AT32F415
+  
   # Bootloader address for AT32 DFU
   AT32_BOOTLOADER_ADDRESS ?= 0x1FFFAC00
 endif
@@ -887,6 +889,8 @@ ifneq ($(findstring AT32F413, $(MCU)),)
   BOARD ?= GENERIC_AT32_F413
 
   USE_FPU ?= yes
+
+  UF2_FAMILY ?= AT32F413
 
   # Bootloader address for AT32 DFU
   AT32_BOOTLOADER_ADDRESS ?= 0x1FFFB000
@@ -922,6 +926,8 @@ ifneq ($(findstring AT32F403A, $(MCU)),)
 
   USE_FPU ?= yes
 
+  UF2_FAMILY ?= AT32F40
+
   # Bootloader address for AT32 DFU
   AT32_BOOTLOADER_ADDRESS ?= 0x1FFFB000
 endif
@@ -955,6 +961,8 @@ ifneq ($(findstring AT32F407, $(MCU)),)
   BOARD ?= GENERIC_AT32_F407
 
   USE_FPU ?= yes
+
+  UF2_FAMILY ?= AT32F40
 
   # Bootloader address for AT32 DFU
   AT32_BOOTLOADER_ADDRESS ?= 0x1FFFB000
