@@ -1,0 +1,11 @@
+{
+    "processor": "AIR32F103",
+    "bootloader": "uf2boot",
+    // "board": "GENERIC_STM32_F103XB",
+    "encoder": {
+        "rotary": [
+            {"pin_a": "A9", "pin_b": "A8"}
+        ]
+    }
+}
+
