@@ -117,3 +117,7 @@ via*.json
 !uf2boot_f103_8MHz.bin
 !uf2boot_air32f103xC_8MHz.bin
 !uf2boot_air32f103xB_8MHz.bin
+!cherryuf2_at32f403acgt7_hick.bin
+!cherryuf2_at32f413cbt7_8MHz.bin
+!cherryuf2_at32f413cbt7_hick.bin
+!cherryuf2_at32f415cbt7_8MHz.bin
