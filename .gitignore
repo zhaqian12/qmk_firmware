@@ -121,3 +121,7 @@ via*.json
 !cherryuf2_at32f413cbt7_8MHz.bin
 !cherryuf2_at32f413cbt7_hick.bin
 !cherryuf2_at32f415cbt7_8MHz.bin
+!cherryuf2_stm32f072xb_hsi.bin
+!cherryuf2_stm32f103xb_8MHz.bin
+!cherryuf2_stm32g431xb_hsi.bin
+!cherryuf2_stm32l433xc_hsi.bin

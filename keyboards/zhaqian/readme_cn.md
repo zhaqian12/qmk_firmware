@@ -151,16 +151,20 @@ UNDERGLOW_RGB_MATRIX_ENABLE = yes
 
 ## UF2 Bootloader
 UF2 Bootloader储存了预编译好的MSC下载方式的引导程序,目前支持以下型号的主控.
-| 支持的MCU  |  描述 |
-|:--------: | :--------: |
-|STM32F103x8||
-|STM32F103xB||
-|STM32F401xC||
-|STM32F411xE||
-|GD32VF103xB||
-|AIR32F103xB| No hardware DP pull-up required|
-|AIR32F103xC| No hardware DP pull-up required|
-|STM32G431xB||
-|AT32F403AxG||
-|AT32F413xB||
-|AT32F415xB||
+| 支持的MCU  | 引导程序 |  描述  |
+|:--------: | :--------: | :--------: |
+|STM32F103x8|uf2boot||
+|STM32F103xB|uf2boot||
+|STM32F401xC|tinyuf2||
+|STM32F411xE|tinyuf2||
+|GD32VF103xB|tinyuf2||
+|AIR32F103xB|uf2boot| No hardware DP pull-up required|
+|AIR32F103xC|uf2boot| No hardware DP pull-up required|
+|STM32G431xB|tinyuf2||
+|AT32F403AxG|tinyuf2(cherryuf2)||
+|AT32F413xB|tinyuf2(cherryuf2)||
+|AT32F415xB|tinyuf2(cherryuf2)||
+|STM32F072xB|tinyuf2(cherryuf2)||
+|STM32F103xB|tinyuf2(cherryuf2)||
+|STM32G431xB|tinyuf2(cherryuf2)||
+|STM32L433xC|tinyuf2(cherryuf2)||
