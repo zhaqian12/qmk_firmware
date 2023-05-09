@@ -108,6 +108,7 @@
 #    define CPU_CLOCK AIR32_SYSCLK
 
 #    if defined(AIR32F10x)
+#        define MCU_STM32   // the same registers as stm32
 #        define USE_GPIOV1
 #        define USE_I2CV1
 #        define PAL_MODE_ALTERNATE_OPENDRAIN PAL_MODE_AIR32_ALTERNATE_OPENDRAIN
@@ -126,11 +127,12 @@
 #    endif
 #endif
 
-// AIR32 compatibility
+// AT32 compatibility
 #if defined(MCU_AT32)
 #    define CPU_CLOCK AT32_SYSCLK
 
 #    if defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F40x)
+#        define MCU_STM32   // the same registers as stm32
 #        define USE_GPIOV1
 #        define USE_I2CV1
 #        define PAL_MODE_ALTERNATE_OPENDRAIN PAL_MODE_AT32_ALTERNATE_OPENDRAIN
