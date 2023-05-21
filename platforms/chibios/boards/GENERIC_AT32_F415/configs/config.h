@@ -17,13 +17,13 @@
 
 #define BOARD_OTG_NOVBUSSENS 1
 
-#ifndef AT32_LSECLK
-#    define AT32_LSECLK 32768U
-#endif // AT32_LSECLK
+#ifndef AT32_LEXTCLK
+#    define AT32_LEXTCLK 32768U
+#endif // AT32_LEXTCLK
 
-#ifndef AT32_HSECLK
-#    define AT32_HSECLK 8000000U
-#endif // AT32_HSECLK
+#ifndef AT32_HEXTCLK
+#    define AT32_HEXTCLK 8000000U
+#endif // AT32_HEXTCLK
 
 #define USB_ENDPOINTS_ARE_REORDERABLE
 

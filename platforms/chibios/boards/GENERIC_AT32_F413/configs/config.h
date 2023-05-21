@@ -15,12 +15,12 @@
  */
 #pragma once
 
-#ifndef AT32_LSECLK
-#    define AT32_LSECLK 32768U
-#endif // AT32_LSECLK
+#ifndef AT32_LEXTCLK
+#    define AT32_LEXTCLK 32768U
+#endif // AT32_LEXTCLK
 
-#ifndef AT32_HSECLK
-#    define AT32_HSECLK 8000000U
+#ifndef AT32_HEXTCLK
+#    define AT32_HEXTCLK 8000000U
 #endif // AT32_HSECLK
 
 #ifndef EARLY_INIT_PERFORM_BOOTLOADER_JUMP

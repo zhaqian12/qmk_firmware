@@ -35,13 +35,13 @@
  * HAL driver system settings.
  */
 #define AT32_NO_INIT                       FALSE
-#define AT32_HSI_ENABLED                   TRUE
-#define AT32_LSI_ENABLED                   FALSE
-#define AT32_HSE_ENABLED                   TRUE
-#define AT32_LSE_ENABLED                   FALSE
+#define AT32_HICK_ENABLED                  TRUE
+#define AT32_LICK_ENABLED                  FALSE
+#define AT32_HEXT_ENABLED                  TRUE
+#define AT32_LEXT_ENABLED                  FALSE
 #define AT32_PLL_ENABLED                   TRUE
 #define AT32_SCLKSEL                       AT32_SCLKSEL_PLL
-#define AT32_PLLRCS                        AT32_PLLRCS_HSE
+#define AT32_PLLRCS                        AT32_PLLRCS_HEXT
 #define AT32_PLLHEXTDIV                    AT32_PLLHEXTDIV_DIV1
 #define AT32_PLLMUL_VALUE                  24
 #define AT32_AHBDIV                        AT32_AHBDIV_DIV1

@@ -35,15 +35,19 @@
  * HAL driver system settings.
  */
 #define AT32_NO_INIT                       FALSE
-#define AT32_HSI_ENABLED                   TRUE
-#define AT32_LSI_ENABLED                   TRUE
-#define AT32_HSE_ENABLED                   TRUE
-#define AT32_LSE_ENABLED                   FALSE
+#define AT32_HICK_ENABLED                  TRUE
+#define AT32_LICK_ENABLED                  TRUE
+#define AT32_HEXT_ENABLED                  TRUE
+#define AT32_LEXT_ENABLED                  FALSE
 #define AT32_PLL_ENABLED                   TRUE
 #define AT32_SCLKSEL                       AT32_SCLKSEL_PLL
-#define AT32_PLLRCS                        AT32_PLLRCS_HSE
+#define AT32_PLLRCS                        AT32_PLLRCS_HEXT
 #define AT32_PLLHEXTDIV                    AT32_PLLHEXTDIV_DIV1
 #define AT32_PLLMUL_VALUE                  18
+#define AT32_PLL_FR_VALUE                  4
+#define AT32_PLL_MS_VALUE                  1
+#define AT32_PLL_NS_VALUE                  72
+#define AT32_PLL_CONFIG                    AT32_PLL_CONFIG_SOLID
 #define AT32_AHBDIV                        AT32_AHBDIV_DIV1
 #define AT32_APB1DIV                       AT32_APB1DIV_DIV2
 #define AT32_APB2DIV                       AT32_APB2DIV_DIV2
@@ -52,7 +56,7 @@
 #define AT32_USBCLK_SRC                    AT32_USBCLK_SRC_PLL
 #define AT32_USBDIV                        AT32_USBDIV_DIV3
 #define AT32_CLKOUT_SEL                    AT32_CLKOUT_SEL_NOCLOCK
-#define AT32_RTCSEL                        AT32_RTCSEL_LSI
+#define AT32_RTCSEL                        AT32_RTCSEL_LICK
 #define AT32_PVM_ENABLE                    FALSE
 #define AT32_PVM                           AT32_PVM_LEV0
 
