@@ -44,6 +44,8 @@
 | c28        | 0x00AA    | 0xAA1B     | Hotswap  | ST stm32f103/f103 | RGB                                          |
 | sisyphus65        | 0x00AA    | 0xAA1C     | Hotswap  | ST stm32f103/f103 | RGB                                          |
 | louise        | 0x00AA    | 0xAA1D     | Hotswap  | ST stm32f103/f103 | RGB                                          |
+| axis        | 0x00AA    | 0xAA1E     | Hotswap  | ST stm32f103/f103 | RGB                                          |
+| mmm65        | 0x00AA    | 0xAA1F     | Hotswap  | ST stm32f103/f103 | RGB                                          |
 | Mpad12        | 0x00AA    | 0xAAAA     | Hotswap  | Atmel atmega32u4  | RGB, UGRGB, JOYSTICK, ENCODER, OLED          |
 | split69       | 0x00AA    | 0xAAAB     | Solder   | Atmel atmega32u4  | SPLIT, UGRGB, OLED, ENCODER                  |
 | joystickex    | 0x00AA    | 0xAAAC     | Hotswap  | f103/401/411/vf103/l433/air32/at32f415 | JOYSTICK |
