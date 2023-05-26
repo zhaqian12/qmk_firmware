@@ -325,7 +325,7 @@ void ws2812_init(void) {
                 [WS2812_PWM_CHANNEL - 1] = {.mode = WS2812_PWM_OUTPUT_MODE, .callback = NULL}, // Turn on the channel we care about
             },
         .cr2  = 0,
-#if defined(AIR32F10x) || defined(WS2812_PWM_DRIVER_USE_DMA_CC)
+#if defined(WS2812_PWM_DRIVER_USE_DMA_CC)
         .dier = ((0x100 << WS2812_PWM_CHANNEL) | TIM_DIER_TDE),
 #else
         .dier = TIM_DIER_UDE, // DMA on update event for next period
