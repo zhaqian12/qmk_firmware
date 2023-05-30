@@ -1,0 +1,658 @@
+{
+  "name": "M80_Solder",
+  "vendorId": "0x00AA",
+  "productId": "0xAA18",
+  "matrix": {
+    "rows": 6,
+    "cols": 17
+  },
+  "firmwareVersion": 0,
+  "keycodes": ["qmk_lighting"],
+  "menus": [
+    {
+      "label": "Lighting",
+      "content": [
+        {
+          "label": "Settings",
+          "content": [
+            {
+              "label": "Global",
+              "type": "toggle",
+              "content": ["id_rgb_matrix_toggle[0]", 5, 1, 0]
+            },
+            {
+              "label": "Logo",
+              "type": "toggle",
+              "content": ["id_rgb_matrix_toggle[1]", 5, 1, 1]
+            },
+            {
+              "label": "Underglow",
+              "type": "toggle",
+              "content": ["id_rgb_matrix_toggle[2]", 5, 1, 2]
+            }
+          ]
+        },
+        {
+          "label": "Global",
+          "content": [
+            {
+              "label": "Brightness",
+              "type": "range",
+              "options": [0, 200],
+              "content": ["id_qmk_rgb_matrix_brightness", 3, 1]
+            },
+            {
+              "label": "Effect",
+              "type": "dropdown",
+              "content": ["id_qmk_rgb_matrix_effect", 3, 2],
+              "options": [
+                ["Solid Color", 1],
+                ["Gradient Up/Down", 2],
+                ["Gradient Left/Right", 3],
+                ["Breathing", 4],
+                ["Band Sat.", 5],
+                ["Band Val.", 6],
+                ["Cycle All", 7],
+                ["Cycle Left/Right", 8],
+                ["Cycle Up/Down", 9],
+                ["Rainbow Moving Chevron", 10],
+                ["Cycle Out/In", 11],
+                ["Cycle Pinwheel", 12],
+                ["Cycle Spiral", 13],
+                ["Cycle Breathing", 14],
+                ["Cycle Band Val.", 15],
+                ["Cycle Right/Left", 16],
+                ["Cycle Down/Up", 17],
+                ["Cycle In/Out", 18],
+                ["Snake", 19]
+              ]
+            },
+            {
+              "showIf": "{id_qmk_rgb_matrix_effect} != 0",
+              "label": "Effect Speed",
+              "type": "range",
+              "options": [0, 255],
+              "content": ["id_qmk_rgb_matrix_effect_speed", 3, 3]
+            },
+            {
+              "showIf": "{id_qmk_rgb_matrix_effect} != 0",
+              "label": "Color",
+              "type": "color",
+              "content": ["id_qmk_rgb_matrix_color", 3, 4]
+            }
+          ]
+        },
+        {
+          "label": "Underglow",
+          "content": [
+            {
+              "showIf": "{id_underglow_rgb_matrix_effect} != 1",
+              "label": "Brightness",
+              "type": "range",
+              "options": [0, 200],
+              "content": ["id_underglow_rgb_matrix_brightness", 5, 2]
+            },
+            {
+              "label": "Effect",
+              "type": "dropdown",
+              "content": ["id_underglow_rgb_matrix_effect", 5, 3],
+              "options": [
+                ["Sync", 1],
+                ["Breathing", 2],
+                ["Cycle Breathing", 3],
+                ["Cycle Band Val.", 4], 
+                ["Cycle Pinwheel Val.", 5],
+                ["Cycle All", 6],
+                ["Cycle Left/Right", 7],
+                ["Cycle Up/Down", 8],
+                ["Cycle Out/In", 9],
+                ["Cycle In/Out", 10],
+                ["Rainbow Pinwheel", 11],
+                ["Cycle Spiral", 12]
+              ]
+            },
+            {
+              "showIf": "{id_underglow_rgb_matrix_effect} != 1",
+              "label": "Effect Speed",
+              "type": "range",
+              "options": [0, 255],
+              "content": ["id_underglow_rgb_matrix_effect_speed", 5, 4]
+            },
+            {
+              "showIf": "{id_underglow_rgb_matrix_effect} != 1",
+              "label": "Color",
+              "type": "color",
+              "content": ["id_underglow_rgb_matrix_color", 5, 5]
+            }
+          ]
+        },
+        {
+          "label": "Indicators",
+          "content": [
+            {
+              "label": "Normally On",
+              "type": "toggle",
+              "content": ["id_rgb_indicators_override", 6, 1]
+            },
+            {
+              "showIf": "{id_rgb_indicators_effect1} != 0",
+              "label": "Caps Lock Brightness",
+              "type": "range",
+              "options": [0, 255],
+              "content": ["id_rgb_indicators_brightness[1]", 6, 2, 1]
+            },
+            {
+              "label": "Caps Lock Effect",
+              "type": "dropdown",
+              "content": ["id_rgb_indicators_effect1", 6, 3, 1],
+              "options": [
+                ["All Off", 0],
+                ["Solid Color", 1],
+                ["Breathing", 2],
+                ["Cycle Breathing", 3],
+                ["Cycle All", 4],
+                ["Twinkle", 5],
+                ["Random Color", 6]
+              ]
+            },
+            {
+              "showIf": "{id_rgb_indicators_effect1} != 0",
+              "label": "Caps Lock Led",
+              "type": "dropdown",
+              "content": ["id_rgb_indicators_led[1]", 6, 5, 1],
+              "options": [
+                ["All Led", 0],
+                ["Logo Led", 1],
+                ["Underglow", 2],
+                ["Led 0", 4],
+                ["Led 1", 5],
+                ["Led 2", 6],
+                ["Led 3", 7],
+                ["Led 4", 8],
+                ["Led 5", 9],
+                ["Led 6", 10],
+                ["Led 7", 11],
+                ["Led 8", 12],
+                ["Led 9", 13],
+                ["Led 10", 14],
+                ["Led 11", 15],
+                ["Led 12", 16],
+                ["Led 13", 17],
+                ["Led 14", 18],
+                ["Led 15", 19],
+                ["Led 16", 20],
+                ["Led 17", 21],
+                ["Led 18", 22],
+                ["Led 19", 23],
+                ["Led 20", 24],
+                ["Led 21", 25],
+                ["Led 22", 26],
+                ["Led 23", 27],
+                ["Led 24", 28],
+                ["Led 25", 29],
+                ["Led 26", 30],
+                ["Led 27", 31],
+                ["Led 28", 32],
+                ["Led 29", 33],
+                ["Led 30", 34],
+                ["Led 31", 35]
+              ]
+            },
+            {
+              "showIf": "{id_rgb_indicators_effect1} != 0",
+              "label": "Caps Lock Color",
+              "type": "color",
+              "content": ["id_rgb_indicators_color[1]", 6, 4, 1]
+            },
+            {
+              "showIf": "{id_rgb_indicators_effect0} != 0",
+              "label": "Num Lock Brightness",
+              "type": "range",
+              "options": [0, 255],
+              "content": ["id_rgb_indicators_brightness[0]", 6, 2, 0]
+            },
+            {
+              "label": "Num Lock Effect",
+              "type": "dropdown",
+              "content": ["id_rgb_indicators_effect0", 6, 3, 0],
+              "options": [
+                ["All Off", 0],
+                ["Solid Color", 1],
+                ["Breathing", 2],
+                ["Cycle Breathing", 3],
+                ["Cycle All", 4],
+                ["Twinkle", 5],
+                ["Random Color", 6]
+              ]
+            },
+            {
+              "showIf": "{id_rgb_indicators_effect0} != 0",
+              "label": "Num Lock Led",
+              "type": "dropdown",
+              "content": ["id_rgb_indicators_led[0]", 6, 5, 0],
+              "options": [
+                ["All Led", 0],
+                ["Logo Led", 1],
+                ["Underglow", 2],
+                ["Led 0", 4],
+                ["Led 1", 5],
+                ["Led 2", 6],
+                ["Led 3", 7],
+                ["Led 4", 8],
+                ["Led 5", 9],
+                ["Led 6", 10],
+                ["Led 7", 11],
+                ["Led 8", 12],
+                ["Led 9", 13],
+                ["Led 10", 14],
+                ["Led 11", 15],
+                ["Led 12", 16],
+                ["Led 13", 17],
+                ["Led 14", 18],
+                ["Led 15", 19],
+                ["Led 16", 20],
+                ["Led 17", 21],
+                ["Led 18", 22],
+                ["Led 19", 23],
+                ["Led 20", 24],
+                ["Led 21", 25],
+                ["Led 22", 26],
+                ["Led 23", 27],
+                ["Led 24", 28],
+                ["Led 25", 29],
+                ["Led 26", 30],
+                ["Led 27", 31],
+                ["Led 28", 32],
+                ["Led 29", 33],
+                ["Led 30", 34],
+                ["Led 31", 35]
+              ]
+            },
+            {
+              "showIf": "{id_rgb_indicators_effect0} != 0",
+              "label": "Num Lock Color",
+              "type": "color",
+              "content": ["id_rgb_indicators_color[0]", 6, 4, 0]
+            },
+            {
+              "showIf": "{id_rgb_indicators_effect2} != 0",
+              "label": "Scroll Lock Brightness",
+              "type": "range",
+              "options": [0, 255],
+              "content": ["id_rgb_indicators_brightness[2]", 6, 2, 2]
+            },
+            {
+              "label": "Scroll Lock Effect",
+              "type": "dropdown",
+              "content": ["id_rgb_indicators_effect2", 6, 3, 2],
+              "options": [
+                ["All Off", 0],
+                ["Solid Color", 1],
+                ["Breathing", 2],
+                ["Cycle Breathing", 3],
+                ["Cycle All", 4],
+                ["Twinkle", 5],
+                ["Random Color", 6]
+              ]
+            },
+            {
+              "showIf": "{id_rgb_indicators_effect2} != 0",
+              "label": "Scroll Lock Led",
+              "type": "dropdown",
+              "content": ["id_rgb_indicators_led[2]", 6, 5, 2],
+              "options": [
+                ["All Led", 0],
+                ["Logo Led", 1],
+                ["Underglow", 2],
+                ["Led 0", 4],
+                ["Led 1", 5],
+                ["Led 2", 6],
+                ["Led 3", 7],
+                ["Led 4", 8],
+                ["Led 5", 9],
+                ["Led 6", 10],
+                ["Led 7", 11],
+                ["Led 8", 12],
+                ["Led 9", 13],
+                ["Led 10", 14],
+                ["Led 11", 15],
+                ["Led 12", 16],
+                ["Led 13", 17],
+                ["Led 14", 18],
+                ["Led 15", 19],
+                ["Led 16", 20],
+                ["Led 17", 21],
+                ["Led 18", 22],
+                ["Led 19", 23],
+                ["Led 20", 24],
+                ["Led 21", 25],
+                ["Led 22", 26],
+                ["Led 23", 27],
+                ["Led 24", 28],
+                ["Led 25", 29],
+                ["Led 26", 30],
+                ["Led 27", 31],
+                ["Led 28", 32],
+                ["Led 29", 33],
+                ["Led 30", 34],
+                ["Led 31", 35]
+              ]
+            },
+            {
+              "showIf": "{id_rgb_indicators_effect2} != 0",
+              "label": "Scroll Lock Color",
+              "type": "color",
+              "content": ["id_rgb_indicators_color[2]", 6, 4, 2]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "customKeycodes": [
+      {
+        "name": "Underglow\nRGB\nToggle",
+        "title": "Underglow RGB Toggle",
+        "shortName": "UGRGB\nTog"
+      },
+      {
+          "name": "Logo\nRGB\nToggle",
+          "title": "Logo RGB Toggle",
+          "shortName": "LogoRGB\nTog"
+      },
+      {
+          "name": "Indicator\nRGB\nToggle",
+          "title": "Ind RGB Toggle",
+          "shortName": "IndRGB\nTog"
+      },
+      {
+          "name": "Underglow\nRGB\nMode\nSync",
+          "title": "Underglow RGB Mode Sync With Key RGB Mode",
+          "shortName": "UGRGB\nMODS"
+      },
+      {
+          "name": "Underglow\nRGB\nMode+",
+          "title": "Underglow RGB Mode Step",
+          "shortName": "UGRGB\nMOD+"
+      },
+      {
+          "name": "Underglow\nRGB\nMode-",
+          "title": "Underglow RGB Mode Step Reverse",
+          "shortName": "UGRGB\nMOD-"
+      },
+      {
+          "name": "Underglow\nRGB\nHue+",
+          "title": "Underglow RGB Hue Increase",
+          "shortName": "UGRGB\nHue+"
+      },
+      {
+          "name": "Underglow\nRGB\nHue-",
+          "title": "Underglow RGB Hue Decrease",
+          "shortName": "UGRGB\nHue-"
+      },
+      {
+          "name": "Underglow\nRGB\nSat+",
+          "title": "Underglow RGB Sat Increase",
+          "shortName": "UGRGB\nSat+"
+      },
+      {
+          "name": "Underglow\nRGB\nSat-",
+          "title": "Underglow RGB Sat Decrease",
+          "shortName": "UGRGB\nSat-"
+      },
+      {
+          "name": "Underglow\nRGB\nVal+",
+          "title": "Underglow RGB Val Increase",
+          "shortName": "UGRGB\nVal+"
+      },
+      {
+          "name": "Underglow\nRGB\nVal-",
+          "title": "Underglow RGB Val Decrease",
+          "shortName": "UGRGB\nVal-"
+      },
+      {
+          "name": "Underglow\nRGB\nSPD+",
+          "title": "Underglow RGB Speed Increase",
+          "shortName": "UGRGB\nSPD+"
+      },
+      {
+          "name": "Underglow\nRGB\nSPD-",
+          "title": "Underglow RGB Speed Decrease",
+          "shortName": "UGRGB\nSPD-"
+      }
+  ],
+  "layouts": {
+    "labels": [
+      "ISO Enter",
+      ["Bottom Row","ANSI","7U"],
+      "Split Right Shift",
+      "Split Left Shift"
+    ],
+    "keymap": [
+      [
+        "0,0",
+        {
+          "x": 0.25
+        },
+        "0,1",
+        "0,2",
+        "0,3",
+        "0,4",
+        {
+          "x": 0.25
+        },
+        "0,5",
+        "0,6",
+        "0,7",
+        "0,8",
+        {
+          "x": 0.25
+        },
+        "0,9",
+        "0,10",
+        "0,11",
+        "0,12",
+        {
+          "x": 0.25
+        },
+        "0,13",
+        {
+          "x": 0.25
+        },
+        "0,14",
+        "0,15",
+        "0,16"
+      ],
+      [
+        {
+          "y": 0.25
+        },
+        "1,0",
+        "1,1",
+        "1,2",
+        "1,3",
+        "1,4",
+        "1,5",
+        "1,6",
+        "1,7",
+        "1,8",
+        "1,9",
+        "1,10",
+        "1,11",
+        "1,12",
+        {
+          "w": 2
+        },
+        "1,13",
+        {
+          "x": 0.25
+        },
+        "1,14",
+        "1,15",
+        "1,16"
+      ],
+      [
+        {
+          "w": 1.5
+        },
+        "2,0",
+        "2,1",
+        "2,2",
+        "2,3",
+        "2,4",
+        "2,5",
+        "2,6",
+        "2,7",
+        "2,8",
+        "2,9",
+        "2,10",
+        "2,11",
+        "2,12",
+        {
+          "w": 1.5
+        },
+        "2,13\n\n\n0,0",
+        {
+          "x": 0.25
+        },
+        "2,14",
+        "2,15",
+        "2,16",
+        {
+          "x": 1.5,
+          "w": 1.25,
+          "h": 2,
+          "w2": 1.5,
+          "h2": 1,
+          "x2": -0.25
+        },
+        "3,13\n\n\n0,1"
+      ],
+      [
+        {
+          "w": 1.75
+        },
+        "3,0",
+        "3,1",
+        "3,2",
+        "3,3",
+        "3,4",
+        "3,5",
+        "3,6",
+        "3,7",
+        "3,8",
+        "3,9",
+        "3,10",
+        "3,11",
+        {
+          "w": 2.25
+        },
+        "3,13\n\n\n0,0",
+        {
+          "x": 3.75
+        },
+        "2,13\n\n\n0,1"
+      ],
+      [
+        {
+          "w": 2.25
+        },
+        "4,0\n\n\n3,0",
+        "4,2",
+        "4,3",
+        "4,4",
+        "4,5",
+        "4,6",
+        "4,7",
+        "4,8",
+        "4,9",
+        "4,10",
+        "4,11",
+        {
+          "w": 2.75
+        },
+        "4,12\n\n\n2,0",
+        {
+          "x": 1.25
+        },
+        "4,15",
+        {
+          "x": 1,
+          "w": 1.75
+        },
+        "4,12\n\n\n2,1",
+        "4,13\n\n\n2,1"
+      ],
+      [
+        {
+          "w": 1.25
+        },
+        "5,0\n\n\n1,0",
+        {
+          "w": 1.25
+        },
+        "5,1\n\n\n1,0",
+        {
+          "w": 1.25
+        },
+        "5,2\n\n\n1,0",
+        {
+          "w": 6.25
+        },
+        "5,6\n\n\n1,0",
+        {
+          "w": 1.25
+        },
+        "5,10\n\n\n1,0",
+        {
+          "w": 1.25
+        },
+        "5,11\n\n\n1,0",
+        {
+          "w": 1.25
+        },
+        "5,12\n\n\n1,0",
+        {
+          "w": 1.25
+        },
+        "5,13\n\n\n1,0",
+        {
+          "x": 0.25
+        },
+        "5,14",
+        "5,15",
+        "5,16",
+        {
+          "x": 0.5,
+          "w": 1.25
+        },
+        "4,0\n\n\n3,1",
+        "4,1\n\n\n3,1"
+      ],
+      [
+        {
+          "w": 1.5
+        },
+        "5,0\n\n\n1,1",
+        "5,1\n\n\n1,1",
+        {
+          "w": 1.5
+        },
+        "5,2\n\n\n1,1",
+        {
+          "w": 7
+        },
+        "5,6\n\n\n1,1",
+        {
+          "w": 1.5
+        },
+        "5,11\n\n\n1,1",
+        "5,12\n\n\n1,1",
+        {
+          "w": 1.5
+        },
+        "5,13\n\n\n1,1"
+      ]
+    ]
+  }
+}

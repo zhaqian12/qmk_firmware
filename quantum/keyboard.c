@@ -368,6 +368,27 @@ void quantum_init(void) {
 #ifdef HAPTIC_ENABLE
     haptic_init();
 #endif
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+    rgb_matrix_control_init();
+#endif
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+    underglow_rgb_matrix_init();
+#endif
+#ifdef RGB_INDICATORS_ENABLE
+    rgb_indicators_init();
+#endif
+#ifdef MAGIC_SETTINGS_ENABLE
+    magic_settings_init();
+#endif
+#ifdef AUTO_SWITCH_LAYERS_ENABLE
+    auto_switch_layers_init();
+#endif
+#ifdef DYNAMIC_TAP_DANCE_ENABLE
+    dynamic_tap_dance_init();
+#endif
+#ifdef DYNAMIC_COMBOS_ENABLE
+    dynamic_combos_init();
+#endif
 }
 
 /** \brief keyboard_init
@@ -431,6 +452,9 @@ void keyboard_init(void) {
 #endif
 #ifdef BLUETOOTH_ENABLE
     bluetooth_init();
+#endif
+#ifdef JOYSTICK_TRIGGER_ENABLE
+    joystick_trigger_init();
 #endif
 
 #if defined(DEBUG_MATRIX_SCAN_RATE) && defined(CONSOLE_ENABLE)
@@ -606,6 +630,10 @@ void quantum_task(void) {
 #ifdef SECURE_ENABLE
     secure_task();
 #endif
+
+#ifdef RADIAL_CONTROLLER_ENABLE
+    radial_controller_task();
+#endif
 }
 
 /** \brief Main task that is repeatedly called as fast as possible. */
@@ -694,6 +722,10 @@ void keyboard_task(void) {
 
 #ifdef BLUETOOTH_ENABLE
     bluetooth_task();
+#endif
+
+#ifdef JOYSTICK_TRIGGER_ENABLE
+    joystick_trigger_task();
 #endif
 
     led_task();

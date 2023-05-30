@@ -17,6 +17,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #ifdef OS_DETECTION_ENABLE
 typedef enum {
@@ -30,6 +31,9 @@ typedef enum {
 void         process_wlength(const uint16_t w_length);
 os_variant_t detected_host_os(void);
 void         erase_wlength_data(void);
+bool         os_detection_update(os_variant_t os);
+bool         os_detection_update_kb(os_variant_t os);
+bool         os_detection_update_user(os_variant_t os);
 
 #    if defined(SPLIT_KEYBOARD) && defined(SPLIT_DETECTED_OS_ENABLE)
 void slave_update_detected_host_os(os_variant_t os);

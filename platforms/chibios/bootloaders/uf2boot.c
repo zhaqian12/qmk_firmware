@@ -3,6 +3,8 @@
 
 #include "bootloader.h"
 
+#include <ch.h>
+
 // From mmoskal/uf2-stm32f103's backup.c
 #define MAGIC_BOOT 0x544F4F42UL
 
