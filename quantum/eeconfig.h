@@ -52,19 +52,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* EEPROM parameter address for zhaqian */
 #ifdef EECONFIG_EXTENDED_FOR_ZHAQIAN
-#define EECONFIG_RGB_MATRIX_CONTROL (uint8_t *)34
-#define EECONFIG_UNDERGLOW_RGB_MATRIX (uint8_t *)35
-#define EECONFIG_RGB_INDICATORS (uint8_t *)40
+#define EECONFIG_RGB_MATRIX_CONTROL (uint8_t *)EECONFIG_BASE_SIZE
+#define EECONFIG_UNDERGLOW_RGB_MATRIX (uint8_t *)(EECONFIG_BASE_SIZE + 1)
+#define EECONFIG_RGB_INDICATORS (uint8_t *)(EECONFIG_BASE_SIZE + 6)
 #ifdef DYNAMIC_RGB_INDICATORS_ENABLE
-#define EECONFIG_MAGIC_SETTINGS (uint8_t *)55
-#define EECONFIG_AUTO_SWITCH_LAYERS (uint8_t *)87
+#define EECONFIG_MAGIC_SETTINGS (uint8_t *)(EECONFIG_BASE_SIZE + 11)
+#define EECONFIG_AUTO_SWITCH_LAYERS (uint8_t *)(EECONFIG_BASE_SIZE + 53)
 #else
-#define EECONFIG_MAGIC_SETTINGS (uint8_t *)41
-#define EECONFIG_AUTO_SWITCH_LAYERS (uint8_t *)73
+#define EECONFIG_MAGIC_SETTINGS (uint8_t *)(EECONFIG_BASE_SIZE + 7)
+#define EECONFIG_AUTO_SWITCH_LAYERS (uint8_t *)(EECONFIG_BASE_SIZE + 39)
 #endif
 
-#undef EECONFIG_BASE_SIZE
-#define EECONFIG_BASE_SIZE 94
+#define EECONFIG_ZHAQIAN_SIZE 60
 #endif
 
 // Size of EEPROM dedicated to keyboard- and user-specific data
@@ -81,11 +80,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    define EECONFIG_USER_DATA_VERSION (EECONFIG_USER_DATA_SIZE)
 #endif
 
-#define EECONFIG_KB_DATABLOCK ((uint8_t *)(EECONFIG_BASE_SIZE))
-#define EECONFIG_USER_DATABLOCK ((uint8_t *)((EECONFIG_BASE_SIZE) + (EECONFIG_KB_DATA_SIZE)))
+#define EECONFIG_KB_DATABLOCK ((uint8_t *)(EECONFIG_BASE_SIZE + EECONFIG_ZHAQIAN_SIZE))
+#define EECONFIG_USER_DATABLOCK ((uint8_t *)((EECONFIG_BASE_SIZE + EECONFIG_ZHAQIAN_SIZE) + (EECONFIG_KB_DATA_SIZE)))
 
 // Size of EEPROM being used, other code can refer to this for available EEPROM
-#define EECONFIG_SIZE ((EECONFIG_BASE_SIZE) + (EECONFIG_KB_DATA_SIZE) + (EECONFIG_USER_DATA_SIZE))
+#define EECONFIG_SIZE ((EECONFIG_BASE_SIZE) + (EECONFIG_ZHAQIAN_SIZE) + (EECONFIG_KB_DATA_SIZE) + (EECONFIG_USER_DATA_SIZE))
 
 /* debug bit */
 #define EECONFIG_DEBUG_ENABLE (1 << 0)

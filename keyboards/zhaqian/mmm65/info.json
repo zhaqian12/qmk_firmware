@@ -1,5 +1,5 @@
 {
-    "keyboard_name": "MMM65",
+    "keyboard_name": "M.MM65",
     "manufacturer": "ZhaQian",
     "maintainer": "ZhaQian",
     "url": "https://github.com/zhaqian12/qmk_firmware/tree/zhaqian",
@@ -24,7 +24,9 @@
         "nkro": true,
         "rgblight": false,
         "audio": false,
-        "rgb_matrix": true,
+        "rgb_matrix": true
+    },
+    "build": {
         "lto": true
     },
     "diode_direction": "COL2ROW",
@@ -33,6 +35,10 @@
     },
     "rgb_matrix": {
         "driver": "WS2812"
+    },
+    "ws2812": {
+        "pin": "B4",
+        "driver": "pwm"
     },
     "layouts": {
         "LAYOUT": {

@@ -593,13 +593,12 @@ ifeq ($(strip $(WS2812_DRIVER_REQUIRED)), yes)
 
     SRC += ws2812_$(strip $(WS2812_DRIVER)).c
 
-        ifeq ($(strip $(PLATFORM)), CHIBIOS)
-            ifeq ($(strip $(WS2812_DRIVER)), pwm)
-                OPT_DEFS += -DSTM32_DMA_REQUIRED=TRUE
-                OPT_DEFS += -DGD32_DMA_REQUIRED=TRUE
-                OPT_DEFS += -DAIR32_DMA_REQUIRED=TRUE
-                OPT_DEFS += -DAT32_DMA_REQUIRED=TRUE
-            endif
+    ifeq ($(strip $(PLATFORM)), CHIBIOS)
+        ifeq ($(strip $(WS2812_DRIVER)), pwm)
+            OPT_DEFS += -DSTM32_DMA_REQUIRED=TRUE
+            OPT_DEFS += -DGD32_DMA_REQUIRED=TRUE
+            OPT_DEFS += -DAIR32_DMA_REQUIRED=TRUE
+            OPT_DEFS += -DAT32_DMA_REQUIRED=TRUE
         endif
     endif
 
