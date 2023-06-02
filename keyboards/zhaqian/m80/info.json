@@ -6,7 +6,11 @@
     "usb": {
         "vid": "0x00AA",
         "pid": "0xAA14",
-        "device_version": "0.0.1"
+        "device_version": "0.0.1",
+        "force_nkro": true,
+        "shared_endpoint": {
+            "keyboard": true
+        }
     },
     "processor": "STM32F103",
     "bootloader": "uf2boot",
