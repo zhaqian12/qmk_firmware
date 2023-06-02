@@ -6,8 +6,7 @@
     "usb": {
         "vid": "0x00AA",
         "pid": "0xAA1B",
-        "device_version": "0.0.1",
-        "force_nkro": true
+        "device_version": "0.0.1"
     },
     "processor": "STM32F103",
     "bootloader": "uf2boot",
@@ -23,9 +22,6 @@
         "audio": false,
         "rgb_matrix": true
     },
-    "build": {
-        "lto": true
-    },
     "matrix_pins": {
         "cols": ["A4", "A5", "A6", "A7", "B0", "B1", "B3", "B4", "B5", "B6"],
         "rows": ["A1", "A2", "A3"]
@@ -37,10 +33,6 @@
     },
     "rgb_matrix": {
         "driver": "WS2812"
-    },
-    "ws2812": {
-        "pin": "A10",
-        "driver": "pwm"
     },
     "layouts": {
         "LAYOUT": {
