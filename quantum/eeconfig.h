@@ -56,7 +56,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define EECONFIG_UNDERGLOW_RGB_MATRIX (uint8_t *)(EECONFIG_BASE_SIZE + 1)
 #define EECONFIG_RGB_INDICATORS (uint8_t *)(EECONFIG_BASE_SIZE + 6)
 #ifdef DYNAMIC_RGB_INDICATORS_ENABLE
-#define EECONFIG_MAGIC_SETTINGS (uint8_t *)(EECONFIG_BASE_SIZE + 11)
+#define EECONFIG_MAGIC_SETTINGS (uint8_t *)(EECONFIG_BASE_SIZE + 21)
 #define EECONFIG_AUTO_SWITCH_LAYERS (uint8_t *)(EECONFIG_BASE_SIZE + 53)
 #else
 #define EECONFIG_MAGIC_SETTINGS (uint8_t *)(EECONFIG_BASE_SIZE + 7)

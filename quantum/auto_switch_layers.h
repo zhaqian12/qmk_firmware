@@ -40,6 +40,7 @@
 #ifdef AUTO_SWITCH_LAYERS_ENABLE
 
 typedef struct __attribute__((packed)) {
+    uint8_t config;
     uint8_t windows_layer;
     uint8_t windows_fn_layer;
     uint8_t macos_layer;
@@ -51,6 +52,8 @@ extern system_layers_t system_layers;
 void eeconfig_update_auto_switch_layers(void);
 void auto_switch_layers_init(void);
 void auto_switch_layers_update(void);
+void auto_switch_layers_set_config(uint8_t index, uint8_t value, bool update);
+uint8_t auto_switch_layers_get_config(uint8_t index);
 void auto_switch_layers_set_layer(uint8_t sys, uint8_t layer, bool update);
 uint8_t auto_switch_layers_get_layer(uint8_t sys);
 
@@ -61,6 +64,10 @@ do {                                        \
 } while (0)
 
 #define AUTO_SWITCH_LAYERS_GET(var) system_layers.var
+
+#define CUSTOM_AUTO_SWITCH_LAYERS_ENABLE            (system_layers.config & 0x01)
+#define CUSTOM_AUTO_SWITCH_LAYERS_UPDATE_FN_KEYCODE (system_layers.config & 0x02)
+#define CUSTOM_AUTO_SWITCH_LAYERS_EECONFIG_FLAG     (system_layers.config & 0x80)
 
 bool process_auto_switch_layers(uint16_t keycode, keyrecord_t *record);
 #endif
