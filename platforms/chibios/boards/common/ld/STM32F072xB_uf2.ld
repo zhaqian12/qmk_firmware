@@ -85,4 +85,4 @@ REGION_ALIAS("HEAP_RAM", ram0);
 INCLUDE rules.ld
 
 /* TinyUF2 bootloader reset support */
-_board_dfu_dbl_tap = ORIGIN(ram0) + 16k - 4; /* this is based off the linker file for tinyuf2 */
+_board_dfu_dbl_tap = ORIGIN(ram0) + LENGTH(ram0) - 4; /* this is based off the linker file for tinyuf2 */
