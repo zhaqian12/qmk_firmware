@@ -23,6 +23,7 @@
 #include "print.h"
 #include "debug.h"
 #include "mousekey.h"
+#include "quantum.h"
 
 static inline int8_t times_inv_sqrt2(int8_t x) {
     // 181/256 (0.70703125) is used as an approximation for 1/sqrt(2)
@@ -95,17 +96,17 @@ uint8_t mk_wheel_time_to_max = MOUSEKEY_WHEEL_TIME_TO_MAX;
 static uint8_t move_unit(void) {
     uint16_t unit;
     if (mousekey_accel & (1 << 0)) {
-        unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed) / 4;
+        unit = (CUSTOM_MOUSEKEY_MOVE_DELTA * mk_max_speed) / 4;
     } else if (mousekey_accel & (1 << 1)) {
-        unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed) / 2;
+        unit = (CUSTOM_MOUSEKEY_MOVE_DELTA * mk_max_speed) / 2;
     } else if (mousekey_accel & (1 << 2)) {
-        unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed);
+        unit = (CUSTOM_MOUSEKEY_MOVE_DELTA * mk_max_speed);
     } else if (mousekey_repeat == 0) {
-        unit = MOUSEKEY_MOVE_DELTA;
+        unit = CUSTOM_MOUSEKEY_MOVE_DELTA;
     } else if (mousekey_repeat >= mk_time_to_max) {
-        unit = MOUSEKEY_MOVE_DELTA * mk_max_speed;
+        unit = CUSTOM_MOUSEKEY_MOVE_DELTA * mk_max_speed;
     } else {
-        unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed * mousekey_repeat) / mk_time_to_max;
+        unit = (CUSTOM_MOUSEKEY_MOVE_DELTA * mk_max_speed * mousekey_repeat) / mk_time_to_max;
     }
     return (unit > MOUSEKEY_MOVE_MAX ? MOUSEKEY_MOVE_MAX : (unit == 0 ? 1 : unit));
 }
@@ -127,7 +128,7 @@ static int8_t move_unit(uint8_t axis) {
 
     if (mousekey_frame < 2) { // first frame(s): initial keypress moves one pixel
         mousekey_frame = 1;
-        unit           = dir * MOUSEKEY_MOVE_DELTA;
+        unit           = dir * CUSTOM_MOUSEKEY_MOVE_DELTA;
     } else { // acceleration
         // linear acceleration (is here for reference, but doesn't feel as good during use)
         // unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed * inertia) / mk_time_to_max;
@@ -249,15 +250,15 @@ static uint8_t move_unit(void) {
     if (mousekey_accel & (1 << 0)) {
         unit = 1;
     } else if (mousekey_accel & (1 << 1)) {
-        unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed) / 2;
+        unit = (CUSTOM_MOUSEKEY_MOVE_DELTA * mk_max_speed) / 2;
     } else if (mousekey_accel & (1 << 2)) {
         unit = MOUSEKEY_MOVE_MAX;
     } else if (mousekey_repeat == 0) {
-        unit = MOUSEKEY_MOVE_DELTA;
+        unit = CUSTOM_MOUSEKEY_MOVE_DELTA;
     } else if (mousekey_repeat >= mk_time_to_max) {
-        unit = MOUSEKEY_MOVE_DELTA * mk_max_speed;
+        unit = CUSTOM_MOUSEKEY_MOVE_DELTA * mk_max_speed;
     } else {
-        unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed * mousekey_repeat) / mk_time_to_max;
+        unit = (CUSTOM_MOUSEKEY_MOVE_DELTA * mk_max_speed * mousekey_repeat) / mk_time_to_max;
     }
     return (unit > MOUSEKEY_MOVE_MAX ? MOUSEKEY_MOVE_MAX : (unit == 0 ? 1 : unit));
 }
