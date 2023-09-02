@@ -20,6 +20,7 @@ No further inputs are accepted until DEBOUNCE milliseconds have occurred.
 */
 
 #include "debounce.h"
+#include "magic_settings.h"
 #include "timer.h"
 #include <stdlib.h>
 
@@ -127,7 +128,7 @@ static void transfer_matrix_values(matrix_row_t raw[], matrix_row_t cooked[], ui
         // determine new value basd on debounce pointer + raw value
         if (existing_row != raw_row) {
             if (*debounce_pointer == DEBOUNCE_ELAPSED) {
-                *debounce_pointer = DEBOUNCE;
+                *debounce_pointer = CUSTOM_DEBOUNCE;
                 cooked[row]       = raw_row;
                 cooked_changed |= cooked[row] ^ raw[row];
                 counters_need_update = true;

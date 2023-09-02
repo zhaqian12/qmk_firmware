@@ -23,6 +23,7 @@ When no state changes have occured for DEBOUNCE milliseconds, we push the state.
 */
 
 #include "debounce.h"
+#include "magic_settings.h"
 #include "timer.h"
 #include <stdlib.h>
 
@@ -153,7 +154,7 @@ static void transfer_matrix_values(matrix_row_t raw[], matrix_row_t cooked[], ui
             if (delta & col_mask) {
                 if (debounce_pointer->time == DEBOUNCE_ELAPSED) {
                     debounce_pointer->pressed = (raw[row] & col_mask);
-                    debounce_pointer->time    = DEBOUNCE;
+                    debounce_pointer->time    = CUSTOM_DEBOUNCE;
                     counters_need_update      = true;
 
                     if (debounce_pointer->pressed) {

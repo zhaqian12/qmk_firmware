@@ -29,6 +29,30 @@
 
 #include <lib/lib8tion/lib8tion.h>
 
+#ifdef OPENRGB_ENABLE
+#    include "openrgb.h"
+#endif
+
+#ifdef SIGNALRGB_ENABLE
+#    include "signalrgb.h"
+#endif
+
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+#    include "rgb_matrix_control.h"
+#endif
+
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+#    include "underglow_rgb_matrix.h"
+#endif
+
+#ifdef RGB_INDICATORS_ENABLE
+#ifdef DYNAMIC_RGB_INDICATORS_ENABLE
+#   include "dynamic_rgb_indicators.h"
+#else
+#   include "rgb_indicators.h"
+#endif
+#endif
+
 #ifndef RGB_MATRIX_CENTER
 const led_point_t k_rgb_matrix_center = {112, 32};
 #else
@@ -53,6 +77,9 @@ __attribute__((weak)) RGB rgb_matrix_hsv_to_rgb(HSV hsv) {
 #endif
 #ifdef RGB_MATRIX_CUSTOM_USER
 #    include "rgb_matrix_user.inc"
+#endif
+#ifdef SIGNALRGB_ENABLE
+#    include "signalrgb_anim.h"
 #endif
 
 #undef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
@@ -287,10 +314,22 @@ void rgb_matrix_test(void) {
 }
 
 static bool rgb_matrix_none(effect_params_t *params) {
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+    static uint8_t changed = 0;
+    uint8_t override = indicator_rgb_is_override();
+    changed ^= override;
+    if (changed == 1 && override == 0) {
+        rgb_matrix_set_color_all(0, 0, 0);
+        rgb_matrix_update_pwm_buffers();
+    }
+    if (!params->init && override == 0) {
+        return false;
+    }
+#else
     if (!params->init) {
         return false;
     }
-
+#endif
     rgb_matrix_set_color_all(0, 0, 0);
     return false;
 }
@@ -378,6 +417,15 @@ static void rgb_task_render(uint8_t effect) {
 #    endif
 #    undef RGB_MATRIX_EFFECT
 #endif
+
+#ifdef SIGNALRGB_ENABLE
+#define RGB_MATRIX_EFFECT(name, ...)              \
+        case RGB_MATRIX_##name:                   \
+            rendering = name(&rgb_effect_params); \
+            break;
+#    include "signalrgb_anim.h"
+#    undef RGB_MATRIX_EFFECT
+#endif
             // -----End rgb effect switch case macros-------
             // ---------------------------------------------
 
@@ -394,7 +442,11 @@ static void rgb_task_render(uint8_t effect) {
     // next task
     if (!rendering) {
         rgb_task_state = FLUSHING;
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+        if (!rgb_effect_params.init && effect == RGB_MATRIX_NONE && indicator_rgb_is_override() == 0) {
+#else
         if (!rgb_effect_params.init && effect == RGB_MATRIX_NONE) {
+#endif
             // We only need to flush once if we are RGB_MATRIX_NONE
             rgb_task_state = SYNCING;
         }
@@ -433,12 +485,31 @@ void rgb_matrix_task(void) {
         case RENDERING:
             rgb_task_render(effect);
             if (effect) {
-                // Only run the basic indicators in the last render iteration (default there are 5 iterations)
-                if (rgb_effect_params.iter == RGB_MATRIX_LED_PROCESS_MAX_ITERATIONS) {
-                    rgb_matrix_indicators();
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+                underglow_rgb_matrix_task();
+#endif
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+                if (indicator_rgb_is_override() == 1) 
+                {
+                    rgb_matrix_control_task();
+                    RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
                 }
-                rgb_matrix_indicators_advanced(&rgb_effect_params);
+                else
+                {
+                    RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
+                    rgb_matrix_control_task();
+                }
+#else
+                RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
+#endif
+            } 
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+            else {
+                if (indicator_rgb_is_override() == 1) {
+                    RGB_MATRIX_INDICATORS_TASK(rgb_effect_params);
+                }
             }
+#endif
             break;
         case FLUSHING:
             rgb_task_flush(effect);
@@ -493,6 +564,10 @@ void rgb_matrix_init(void) {
         last_hit_buffer.tick[i] = UINT16_MAX;
     }
 #endif // RGB_MATRIX_KEYREACTIVE_ENABLED
+
+#if defined(ENABLE_RGB_MATRIX_CYCLE_ALTER) || defined (ENABLE_RGB_MATRIX_RAINBOW_ALTER)
+    ALTER_init();
+#endif
 
     if (!eeconfig_is_enabled()) {
         dprintf("rgb_matrix_init_drivers eeconfig is not enabled.\n");

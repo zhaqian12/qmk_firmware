@@ -17,6 +17,7 @@
 
 #include "encoder.h"
 #include "keyboard.h"
+#include "magic_settings.h"
 #include "action.h"
 #include "keycodes.h"
 #include "wait.h"
@@ -30,7 +31,7 @@
 
 #ifndef ENCODER_MAP_KEY_DELAY
 #    include "action.h"
-#    define ENCODER_MAP_KEY_DELAY TAP_CODE_DELAY
+#    define ENCODER_MAP_KEY_DELAY CUSTOM_TAP_CODE_DELAY
 #endif
 
 #if !defined(ENCODER_RESOLUTIONS) && !defined(ENCODER_RESOLUTION)
@@ -175,14 +176,14 @@ void encoder_init(void) {
 static void encoder_exec_mapping(uint8_t index, bool clockwise) {
     // The delays below cater for Windows and its wonderful requirements.
     action_exec(clockwise ? MAKE_ENCODER_CW_EVENT(index, true) : MAKE_ENCODER_CCW_EVENT(index, true));
-#    if ENCODER_MAP_KEY_DELAY > 0
-    wait_ms(ENCODER_MAP_KEY_DELAY);
-#    endif // ENCODER_MAP_KEY_DELAY > 0
+    if (ENCODER_MAP_KEY_DELAY > 0) {
+        wait_ms(ENCODER_MAP_KEY_DELAY);
+    }
 
     action_exec(clockwise ? MAKE_ENCODER_CW_EVENT(index, false) : MAKE_ENCODER_CCW_EVENT(index, false));
-#    if ENCODER_MAP_KEY_DELAY > 0
-    wait_ms(ENCODER_MAP_KEY_DELAY);
-#    endif // ENCODER_MAP_KEY_DELAY > 0
+    if (ENCODER_MAP_KEY_DELAY > 0) {
+        wait_ms(ENCODER_MAP_KEY_DELAY);
+    }
 }
 #endif // ENCODER_MAP_ENABLE
 

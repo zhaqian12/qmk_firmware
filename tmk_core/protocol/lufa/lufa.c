@@ -69,7 +69,7 @@ extern keymap_config_t keymap_config;
 #    include "qmk_midi.h"
 #endif
 
-#ifdef RAW_ENABLE
+#if defined(RAW_ENABLE) || defined(HIDRGB_PROTOCOL_ENABLE)
 #    include "raw_hid.h"
 #endif
 
@@ -180,6 +180,45 @@ static void raw_hid_task(void) {
 
         if (data_read) {
             raw_hid_receive(data, sizeof(data));
+        }
+    }
+}
+#endif
+
+#ifdef HIDRGB_PROTOCOL_ENABLE
+
+void hidrgb_hid_send(uint8_t *data, uint8_t length) {
+    if (length != HIDRGB_EPSIZE) return;
+    send_report(HIDRGB_IN_EPNUM, data, HIDRGB_EPSIZE);
+}
+
+__attribute__((weak)) void hidrgb_hid_receive(uint8_t *data, uint8_t length) {
+}
+
+static void hidrgb_hid_task(void) {
+    // Create a temporary buffer to hold the read in data from the host
+    uint8_t data[HIDRGB_EPSIZE];
+    bool    data_read = false;
+
+    // Device must be connected and configured for the task to run
+    if (USB_DeviceState != DEVICE_STATE_Configured) return;
+
+    Endpoint_SelectEndpoint(HIDRGB_OUT_EPNUM);
+
+    // Check to see if a packet has been sent from the host
+    if (Endpoint_IsOUTReceived()) {
+        // Check to see if the packet contains data
+        if (Endpoint_IsReadWriteAllowed()) {
+            /* Read data */
+            Endpoint_Read_Stream_LE(data, sizeof(data), NULL);
+            data_read = true;
+        }
+
+        // Finalize the stream transfer to receive the last packet
+        Endpoint_ClearOUT();
+
+        if (data_read) {
+            hidrgb_hid_receive(data, sizeof(data));
         }
     }
 }
@@ -381,6 +420,11 @@ void EVENT_USB_Device_ConfigurationChanged(void) {
     /* Setup raw HID endpoints */
     ConfigSuccess &= Endpoint_ConfigureEndpoint((RAW_IN_EPNUM | ENDPOINT_DIR_IN), EP_TYPE_INTERRUPT, RAW_EPSIZE, 1);
     ConfigSuccess &= Endpoint_ConfigureEndpoint((RAW_OUT_EPNUM | ENDPOINT_DIR_OUT), EP_TYPE_INTERRUPT, RAW_EPSIZE, 1);
+#endif
+
+#ifdef HIDRGB_PROTOCOL_ENABLE
+    ConfigSuccess &= Endpoint_ConfigureEndpoint((HIDRGB_IN_EPNUM | ENDPOINT_DIR_IN), EP_TYPE_INTERRUPT, HIDRGB_EPSIZE, 1);
+    ConfigSuccess &= Endpoint_ConfigureEndpoint((HIDRGB_OUT_EPNUM | ENDPOINT_DIR_OUT), EP_TYPE_INTERRUPT, HIDRGB_EPSIZE, 1);
 #endif
 
 #ifdef CONSOLE_ENABLE
@@ -597,6 +641,12 @@ static void send_mouse(report_mouse_t *report) {
 static void send_extra(report_extra_t *report) {
 #ifdef EXTRAKEY_ENABLE
     send_report(SHARED_IN_EPNUM, report, sizeof(report_extra_t));
+#endif
+}
+
+void send_radial(report_radial_t *report) {
+#ifdef RADIAL_CONTROLLER_ENABLE
+    send_report(SHARED_IN_EPNUM, report, sizeof(report_radial_t));
 #endif
 }
 
@@ -893,6 +943,10 @@ void protocol_post_task(void) {
 
 #ifdef RAW_ENABLE
     raw_hid_task();
+#endif
+
+#ifdef HIDRGB_PROTOCOL_ENABLE
+    hidrgb_hid_task();
 #endif
 
 #if !defined(INTERRUPT_CONTROL_ENDPOINT)

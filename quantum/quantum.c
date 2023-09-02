@@ -147,7 +147,7 @@ __attribute__((weak)) void tap_code16_delay(uint16_t code, uint16_t delay) {
  * \param code The modded keycode to tap. If `code` is `KC_CAPS_LOCK`, the delay will be `TAP_HOLD_CAPS_DELAY`, otherwise `TAP_CODE_DELAY`, if defined.
  */
 __attribute__((weak)) void tap_code16(uint16_t code) {
-    tap_code16_delay(code, code == KC_CAPS_LOCK ? TAP_HOLD_CAPS_DELAY : TAP_CODE_DELAY);
+    tap_code16_delay(code, code == KC_CAPS_LOCK ? CUSTOM_TAP_HOLD_CAPS_DELAY : CUSTOM_TAP_CODE_DELAY);
 }
 
 __attribute__((weak)) bool pre_process_record_kb(uint16_t keycode, keyrecord_t *record) {
@@ -391,6 +391,24 @@ bool process_record_quantum(keyrecord_t *record) {
 #ifdef TRI_LAYER_ENABLE
             process_tri_layer(keycode, record) &&
 #endif
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+            process_rgb_matrix_control(keycode, record) &&
+#endif
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+            process_underglow_rgb_matrix(keycode, record) &&
+#endif
+#ifdef RGB_INDICATORS_ENABLE
+            process_rgb_indicators(keycode, record) &&
+#endif
+#ifdef RADIAL_CONTROLLER_ENABLE
+            process_radial_controller(keycode, record) &&
+#endif
+#ifdef VIA_CUSTOM_KEYCODE_ENABLE
+            process_via_custom_keycode(keycode, record) &&
+#endif
+#ifdef AUTO_SWITCH_LAYERS_ENABLE
+            process_auto_switch_layers(keycode, record) &&
+#endif
             true)) {
         return false;
     }
@@ -461,16 +479,16 @@ bool process_record_quantum(keyrecord_t *record) {
 #    endif
                 clear_mods();
 
-                SEND_STRING_DELAY("qmk", TAP_CODE_DELAY);
+                SEND_STRING_DELAY("qmk", CUSTOM_TAP_CODE_DELAY);
                 if (temp_mod & MOD_MASK_SHIFT) { // if shift is held, flash rather than compile
-                    SEND_STRING_DELAY(" flash ", TAP_CODE_DELAY);
+                    SEND_STRING_DELAY(" flash ", CUSTOM_TAP_CODE_DELAY);
                 } else {
-                    SEND_STRING_DELAY(" compile ", TAP_CODE_DELAY);
+                    SEND_STRING_DELAY(" compile ", CUSTOM_TAP_CODE_DELAY);
                 }
 #    if defined(CONVERTER_ENABLED)
-                SEND_STRING_DELAY("-kb " QMK_KEYBOARD " -km " QMK_KEYMAP " -e CONVERT_TO=" CONVERTER_TARGET SS_TAP(X_ENTER), TAP_CODE_DELAY);
+                SEND_STRING_DELAY("-kb " QMK_KEYBOARD " -km " QMK_KEYMAP " -e CONVERT_TO=" CONVERTER_TARGET SS_TAP(X_ENTER), CUSTOM_TAP_CODE_DELAY);
 #    else
-                SEND_STRING_DELAY("-kb " QMK_KEYBOARD " -km " QMK_KEYMAP SS_TAP(X_ENTER), TAP_CODE_DELAY);
+                SEND_STRING_DELAY("-kb " QMK_KEYBOARD " -km " QMK_KEYMAP SS_TAP(X_ENTER), CUSTOM_TAP_CODE_DELAY);
 #    endif
                 if (temp_mod & MOD_MASK_SHIFT && temp_mod & MOD_MASK_CTRL) {
                     reset_keyboard();
