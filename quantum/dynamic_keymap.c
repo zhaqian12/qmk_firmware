@@ -22,10 +22,20 @@
 #include "send_string.h"
 #include "keycodes.h"
 
+#ifdef DYNAMIC_TAP_DANCE_ENABLE
+#   include "dynamic_tap_dance.h"
+#endif
+
+#ifdef DYNAMIC_COMBOS_ENABLE
+#   include "dynamic_combos.h"
+#endif
+
+
 #ifdef VIA_ENABLE
 #    include "via.h"
 #    define DYNAMIC_TAP_DANCE_EEPROM_ADDR (VIA_EEPROM_CONFIG_END)
 #else
+#    include "eeconfig.h"
 #    define DYNAMIC_TAP_DANCE_EEPROM_ADDR (EECONFIG_SIZE)
 #endif
 

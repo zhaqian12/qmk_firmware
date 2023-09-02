@@ -20,6 +20,7 @@ When no state changes have occured for DEBOUNCE milliseconds, we push the state.
 */
 
 #include "debounce.h"
+#include "magic_settings.h"
 #include "timer.h"
 #include <stdlib.h>
 

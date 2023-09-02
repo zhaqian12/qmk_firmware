@@ -138,6 +138,36 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifdef WPM_ENABLE
 #    include "wpm.h"
 #endif
+#ifdef JOYSTICK_TRIGGER_ENABLE
+#    include "joystick_trigger.h"
+#endif
+
+#ifdef RGB_MATRIX_CONTROL_ENABLE
+#    include "rgb_matrix_control.h"
+#endif
+
+#ifdef UNDERGLOW_RGB_MATRIX_ENABLE
+#    include "underglow_rgb_matrix.h"
+#endif
+
+#ifdef RGB_INDICATORS_ENABLE
+#ifdef DYNAMIC_RGB_INDICATORS_ENABLE
+#   include "dynamic_rgb_indicators.h"
+#else
+#   include "rgb_indicators.h"
+#endif
+#endif
+
+#   include "magic_settings.h"
+#   include "auto_switch_layers.h"
+
+#ifdef DYNAMIC_TAP_DANCE_ENABLE
+#   include "dynamic_tap_dance.h"
+#endif
+
+#ifdef DYNAMIC_COMBOS_ENABLE
+#   include "dynamic_combos.h"
+#endif
 
 static uint32_t last_input_modification_time = 0;
 uint32_t        last_input_activity_time(void) {

@@ -20,6 +20,7 @@ No further inputs are accepted until DEBOUNCE milliseconds have occurred.
 */
 
 #include "debounce.h"
+#include "magic_settings.h"
 #include "timer.h"
 #include <stdlib.h>
 

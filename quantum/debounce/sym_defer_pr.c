@@ -18,6 +18,7 @@ DEBOUNCE milliseconds have elapsed since the last change.
 */
 
 #include "debounce.h"
+#include "magic_settings.h"
 #include "timer.h"
 #include <stdlib.h>
 

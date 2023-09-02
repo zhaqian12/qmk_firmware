@@ -17,6 +17,7 @@
 
 #include "encoder.h"
 #include "keyboard.h"
+#include "magic_settings.h"
 #include "action.h"
 #include "keycodes.h"
 #include "wait.h"

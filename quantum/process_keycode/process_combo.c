@@ -26,6 +26,7 @@
 #include "action_tapping.h"
 #include "action_util.h"
 #include "keymap_introspection.h"
+#include "magic_settings.h"
 
 __attribute__((weak)) void process_combo_event(uint16_t combo_index, bool pressed) {}
 

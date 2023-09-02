@@ -18,6 +18,7 @@ Basic global debounce algorithm. Used in 99% of keyboards at time of implementat
 When no state changes have occured for DEBOUNCE milliseconds, we push the state.
 */
 #include "debounce.h"
+#include "magic_settings.h"
 #include "timer.h"
 #include <string.h>
 #ifndef DEBOUNCE
