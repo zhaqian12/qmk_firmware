@@ -21,6 +21,7 @@
 #include "progmem.h"
 #include "send_string.h"
 #include "keycodes.h"
+#include "magic_settings.h"
 
 #ifdef DYNAMIC_TAP_DANCE_ENABLE
 #   include "dynamic_tap_dance.h"
