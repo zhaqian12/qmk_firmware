@@ -21,9 +21,9 @@
 #include "wait.h"
 
 #define BOOTLOADER_MAGIC 0x5AA5
-#if defined(AT32F415xx)
+#if defined(AT32F415xx) || defined(AT32F402_5xx) || defined(AT32F435_7xx)
 #define MAGIC_ADDR (__IO uint32_t *)(ERTC_BASE + 0x50)
-#elif defined(AT32F413xx) || defined(AT32F40x)
+#elif defined(AT32F413xx) || defined(AT32F403_7xx)
 #define MAGIC_ADDR (__IO uint32_t *)(BPR_BASE + 0x04)
 #endif
 

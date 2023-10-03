@@ -23,7 +23,7 @@
 #    error "You need to set HAL_USE_ADC to TRUE in your halconf.h to use the ADC."
 #endif
 
-#if !RP_ADC_USE_ADC1 && !STM32_ADC_USE_ADC1 && !STM32_ADC_USE_ADC2 && !STM32_ADC_USE_ADC3 && !STM32_ADC_USE_ADC4 && !WB32_ADC_USE_ADC1 && !AIR32_ADC_USE_ADC1 && !AT32_ADC_USE_ADC1
+#if !RP_ADC_USE_ADC1 && !STM32_ADC_USE_ADC1 && !STM32_ADC_USE_ADC2 && !STM32_ADC_USE_ADC3 && !STM32_ADC_USE_ADC4 && !WB32_ADC_USE_ADC1 && !AIR32_ADC_USE_ADC1 && !AT32_ADC_USE_ADC1 && !AT32_ADC_USE_ADC2 && !AT32_ADC_USE_ADC3
 #    error "You need to set one of the 'xxx_ADC_USE_ADCx' settings to TRUE in your mcuconf.h to use the ADC."
 #endif
 
@@ -38,7 +38,7 @@
 // Otherwise assume V3
 #if defined(STM32F0XX) || defined(STM32L0XX)
 #    define USE_ADCV1
-#elif defined(STM32F1XX) || defined(STM32F2XX) || defined(STM32F4XX) || defined(GD32VF103) || defined(WB32F3G71xx) || defined(WB32FQ95xx) || defined(AIR32F10x) || defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F40x)
+#elif defined(STM32F1XX) || defined(STM32F2XX) || defined(STM32F4XX) || defined(GD32VF103) || defined(WB32F3G71xx) || defined(WB32FQ95xx) || defined(AIR32F10x) || defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F403_7xx) || defined(AT32F402_5xx) || defined(AT32F435_7xx)
 #    define USE_ADCV2
 #endif
 
@@ -75,8 +75,12 @@
 
 /* User configurable ADC options */
 #ifndef ADC_COUNT
-#    if defined(RP2040) || defined(STM32F0XX) || defined(STM32F1XX) || defined(STM32F4XX) || defined(GD32VF103) || defined(WB32F3G71xx) || defined(WB32FQ95xx) || defined(AIR32F10x) || defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F40x)
+#    if defined(RP2040) || defined(STM32F0XX) || defined(STM32F1XX) || defined(STM32F4XX) || defined(GD32VF103) || defined(WB32F3G71xx) || defined(WB32FQ95xx) || defined(AIR32F10x) || defined(AT32F415xx)|| defined(AT32F402_5xx)
 #        define ADC_COUNT 1
+#    elif defined(AT32F413xx) 
+#        define ADC_COUNT 2
+#    elif defined(AT32F403_7xx) 
+#        define ADC_COUNT 3
 #    elif defined(STM32F3XX)
 #        define ADC_COUNT 4
 #    else
@@ -122,7 +126,7 @@ static ADCConversionGroup adcConversionGroup = {
     .cfgr1 = ADC_CFGR1_CONT | ADC_RESOLUTION,
     .smpr  = ADC_SAMPLING_RATE,
 #elif defined(USE_ADCV2)
-#    if !defined(STM32F1XX) && !defined(GD32VF103) && !defined(WB32F3G71xx) && !defined(WB32FQ95xx) && !defined(AIR32F10x) && !defined(AT32F415xx) && !defined(AT32F413xx) && !defined(AT32F40x)
+#    if !defined(STM32F1XX) && !defined(GD32VF103) && !defined(WB32F3G71xx) && !defined(WB32FQ95xx) && !defined(AIR32F10x) && !defined(AT32F415xx) && !defined(AT32F413xx) && !defined(AT32F403_7xx)
     .cr2   = ADC_CR2_SWSTART, // F103 seem very unhappy with, F401 seems very unhappy without...
 #    endif
     .smpr2 = ADC_SMPR2_SMP_AN0(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN1(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN2(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN3(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN4(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN5(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN6(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN7(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN8(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN9(ADC_SAMPLING_RATE),
@@ -195,7 +199,7 @@ __attribute__((weak)) adc_mux pinToMux(pin_t pin) {
         case E15: return TO_MUX( ADC_CHANNEL_IN2,  3 );
         case F2:  return TO_MUX( ADC_CHANNEL_IN10, 0 ); // Can also be ADC2
         case F4:  return TO_MUX( ADC_CHANNEL_IN5,  0 );
-#elif defined(STM32F4XX)
+#elif defined(STM32F4XX) || defined(AT32F402_5xx)
         case A0:  return TO_MUX( ADC_CHANNEL_IN0,  0 );
         case A1:  return TO_MUX( ADC_CHANNEL_IN1,  0 );
         case A2:  return TO_MUX( ADC_CHANNEL_IN2,  0 );
@@ -212,7 +216,7 @@ __attribute__((weak)) adc_mux pinToMux(pin_t pin) {
         case C3:  return TO_MUX( ADC_CHANNEL_IN13, 0 );
         case C4:  return TO_MUX( ADC_CHANNEL_IN14, 0 );
         case C5:  return TO_MUX( ADC_CHANNEL_IN15, 0 );
-#    if STM32_ADC_USE_ADC3
+#    if STM32_ADC_USE_ADC3 || AT32_ADC_USE_ADC3
         case F3:  return TO_MUX( ADC_CHANNEL_IN9,  2 );
         case F4:  return TO_MUX( ADC_CHANNEL_IN14, 2 );
         case F5:  return TO_MUX( ADC_CHANNEL_IN15, 2 );
@@ -222,7 +226,7 @@ __attribute__((weak)) adc_mux pinToMux(pin_t pin) {
         case F9:  return TO_MUX( ADC_CHANNEL_IN7,  2 );
         case F10: return TO_MUX( ADC_CHANNEL_IN8,  2 );
 #    endif
-#elif defined(STM32F1XX) || defined(GD32VF103) || defined(WB32F3G71xx) || defined(WB32FQ95xx) || defined(AIR32F10x) || defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F40x)
+#elif defined(STM32F1XX) || defined(GD32VF103) || defined(WB32F3G71xx) || defined(WB32FQ95xx) || defined(AIR32F10x) || defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F403_7xx)
         case A0:  return TO_MUX( ADC_CHANNEL_IN0,  0 );
         case A1:  return TO_MUX( ADC_CHANNEL_IN1,  0 );
         case A2:  return TO_MUX( ADC_CHANNEL_IN2,  0 );
@@ -260,11 +264,11 @@ static inline ADCDriver* intToADCDriver(uint8_t adcInt) {
         case 0:
             return &ADCD1;
 #endif
-#if STM32_ADC_USE_ADC2
+#if STM32_ADC_USE_ADC2 || AT32_ADC_USE_ADC2
         case 1:
             return &ADCD2;
 #endif
-#if STM32_ADC_USE_ADC3
+#if STM32_ADC_USE_ADC3 || AT32_ADC_USE_ADC3
         case 2:
             return &ADCD3;
 #endif

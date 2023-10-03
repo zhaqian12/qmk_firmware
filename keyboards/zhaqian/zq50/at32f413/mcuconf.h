@@ -18,8 +18,8 @@
 
 #include_next <mcuconf.h>
 
-#undef AT32_PWM_USE_TIM1
-#define AT32_PWM_USE_TIM1 TRUE
+#undef AT32_PWM_USE_TMR1
+#define AT32_PWM_USE_TMR1 TRUE
 
 // #undef AT32_USB_USB1_IRQ_REMAP
 // #define AT32_USB_USB1_IRQ_REMAP TRUE

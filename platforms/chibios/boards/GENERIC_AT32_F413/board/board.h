@@ -26,25 +26,25 @@
  * Port A setup.
  * Everything input with pull-up except:
  */
-#define VAL_GPIOACRL            0x88888888      /*  PA7...PA0 */
-#define VAL_GPIOACRH            0x88888888      /* PA15...PA8 */
-#define VAL_GPIOAODR            0xFFFFFFFF
+#define VAL_GPIOACFGLR            0x88888888      /*  PA7...PA0 */
+#define VAL_GPIOACFGHR            0x88888888      /* PA15...PA8 */
+#define VAL_GPIOAODT              0xFFFFFFFF
 
 /*
  * Port B setup.
  * Everything input with pull-up except:
  */
-#define VAL_GPIOBCRL            0x88888888      /*  PB7...PB0 */
-#define VAL_GPIOBCRH            0x88888888      /* PB15...PB8 */
-#define VAL_GPIOBODR            0xFFFFFFFF
+#define VAL_GPIOBCFGLR            0x88888888      /*  PB7...PB0 */
+#define VAL_GPIOBCFGHR            0x88888888      /* PB15...PB8 */
+#define VAL_GPIOBODT              0xFFFFFFFF
 
 /*
  * Port C setup.
  * Everything input with pull-up except:
  */
-#define VAL_GPIOCCRL            0x88888888      /*  PC7...PC0 */
-#define VAL_GPIOCCRH            0x88888888      /* PC15...PC8 */
-#define VAL_GPIOCODR            0xFFFFFFFF
+#define VAL_GPIOCCFGLR            0x88888888      /*  PC7...PC0 */
+#define VAL_GPIOCCFGHR            0x88888888      /* PC15...PC8 */
+#define VAL_GPIOCODT              0xFFFFFFFF
 
 /*
  * Port D setup.
@@ -52,17 +52,17 @@
  * PD0  - Normal input (XTAL).
  * PD1  - Normal input (XTAL).
  */
-#define VAL_GPIODCRL            0x88888844      /*  PD7...PD0 */
-#define VAL_GPIODCRH            0x88888888      /* PD15...PD8 */
-#define VAL_GPIODODR            0xFFFFFFFF
+#define VAL_GPIODCFGLR            0x88888844      /*  PD7...PD0 */
+#define VAL_GPIODCFGHR            0x88888888      /* PD15...PD8 */
+#define VAL_GPIODODT              0xFFFFFFFF
 
 /*
  * Port F setup.
  * Everything input with pull-up except:
  */
-#define VAL_GPIOFCRL            0x88888888      /*  PF7...PF0 */
-#define VAL_GPIOFCRH            0x88888888      /* PF15...PF8 */
-#define VAL_GPIOFODR            0xFFFFFFFF
+#define VAL_GPIOFCFGLR            0x88888888      /*  PF7...PF0 */
+#define VAL_GPIOFCFGHR            0x88888888      /* PF15...PF8 */
+#define VAL_GPIOFODT              0xFFFFFFFF
 
 /*
  * Board identifier.
@@ -74,7 +74,18 @@
 #define AT32F413CBT7
 
 #if !defined(AT32F413xx)
-  #define AT32F413xx
+#define AT32F413xx
+#endif
+
+/*
+ * Board oscillators-related settings.
+ */
+#if !defined(AT32_LEXTCLK)
+#define AT32_LEXTCLK              32768U
+#endif
+
+#if !defined(AT32_HEXTCLK)
+#define AT32_HEXTCLK              8000000U
 #endif
 
 /*===========================================================================*/
