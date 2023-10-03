@@ -141,6 +141,7 @@
 #define AT32_I2C_USE_I2C2                     FALSE
 #define AT32_I2C_USE_I2C3                     FALSE
 #define AT32_I2C_BUSY_TMREOUT                 50
+#define AT32_I2C_USE_DMA                      TRUE
 #define AT32_I2C_I2C1_RX_DMA_STREAM           AT32_DMA_STREAM_ID_ANY
 #define AT32_I2C_I2C1_TX_DMA_STREAM           AT32_DMA_STREAM_ID_ANY
 #define AT32_I2C_I2C2_RX_DMA_STREAM           AT32_DMA_STREAM_ID_ANY
@@ -264,7 +265,7 @@
 /*
  * USB driver system settings.
  */
-#define AT32_USB_USE_OTG1                     FALSE
+#define AT32_USB_USE_OTG1                     TRUE
 #define AT32_USB_USE_OTG2                     FALSE
 #define AT32_USE_USB_OTG2_HS                  FALSE
 #define AT32_USB_OTG1_IRQ_PRIORITY            14
