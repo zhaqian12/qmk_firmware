@@ -18,13 +18,13 @@
 
 #include_next <mcuconf.h>
 
-#undef AT32_PWM_USE_TIM1
-#define AT32_PWM_USE_TIM1 TRUE
+#undef AT32_PWM_USE_TMR1
+#define AT32_PWM_USE_TMR1 TRUE
 
-#undef AT32_PLLMUL_VALUE
+#undef AT32_PLLMULT_VALUE
 #undef AT32_ADCDIV
 #undef AT32_USBCLK_SRC
 
-#define AT32_PLLMUL_VALUE                  30
+#define AT32_PLLMULT_VALUE                 30
 #define AT32_ADCDIV                        AT32_ADCDIV_DIV6
-#define AT32_USBCLK_SRC                    AT32_USBCLK_SRC_HSI48
+#define AT32_USBCLK_SRC                    AT32_USBCLK_SRC_HICK48

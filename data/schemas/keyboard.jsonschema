@@ -87,6 +87,8 @@
                 "AT32F413",
                 "AT32F403A",
                 "AT32F407",
+                "AT32F402",
+                "AT32F405",
                 "atmega16u2",
                 "atmega32u2",
                 "atmega16u4",
