@@ -1,4 +1,4 @@
-  /*
+/*
     Copyright (C) Zhaqian
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -80,7 +80,7 @@ static const gpio_config_t gpio_default_config = {
 #endif
 #if AT32_HAS_GPIOD
   {VAL_GPIOD_CFGR, VAL_GPIOD_OMODE, VAL_GPIOD_ODRVR, VAL_GPIOD_PULL,
-   VAL_GPIOD_ODT,  VAL_GPIOD_MUXL,  VAL_GPIOD_MUXH,  VAL_GPIOF_HDRV},
+   VAL_GPIOD_ODT,  VAL_GPIOD_MUXL,  VAL_GPIOD_MUXH,  VAL_GPIOD_HDRV},
 #endif
 #if AT32_HAS_GPIOF
   {VAL_GPIOF_CFGR, VAL_GPIOF_OMODE, VAL_GPIOF_ODRVR, VAL_GPIOF_PULL,

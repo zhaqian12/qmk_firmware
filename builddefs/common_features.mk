@@ -233,7 +233,7 @@ else
         COMMON_VPATH += $(PLATFORM_PATH)/$(PLATFORM_KEY)/$(DRIVER_DIR)/flash
         COMMON_VPATH += $(DRIVER_PATH)/flash
         SRC += eeprom_driver.c eeprom_legacy_emulated_flash.c legacy_flash_ops.c
-      else ifneq ($(filter $(MCU_SERIES),STM32F1xx STM32F3xx STM32F4xx STM32L4xx STM32G4xx WB32F3G71xx WB32FQ95xx GD32VF103 AIR32F10x AT32F415xx AT32F413xx AT32F403_7xx AT32F435_7xx AT32F402_5xx),)
+      else ifneq ($(filter $(MCU_SERIES),STM32F1xx STM32F3xx STM32F4xx STM32L4xx STM32G4xx WB32F3G71xx WB32FQ95xx GD32VF103 AIR32F10x AT32F415xx AT32F413xx AT32F403_7xx AT32F435_7xx AT32F402_5xx AT32F423xx),)
         # Wear-leveling EEPROM implementation, backed by MCU flash
         OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_WEAR_LEVELING
         SRC += eeprom_driver.c eeprom_wear_leveling.c
@@ -1066,4 +1066,8 @@ ifeq ($(strip $(DYNAMIC_COMBOS_ENABLE)), yes)
     endif
     SRC += $(QUANTUM_DIR)/dynamic_combos.c
 	OPT_DEFS += -DDYNAMIC_COMBOS_ENABLE
+endif
+
+ifeq ($(strip $(QMK_USB_SUPPORT_HS)), yes)
+	OPT_DEFS += -DQMK_USB_SUPPORT_HS
 endif

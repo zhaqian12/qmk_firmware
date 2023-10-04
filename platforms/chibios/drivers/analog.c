@@ -38,7 +38,7 @@
 // Otherwise assume V3
 #if defined(STM32F0XX) || defined(STM32L0XX)
 #    define USE_ADCV1
-#elif defined(STM32F1XX) || defined(STM32F2XX) || defined(STM32F4XX) || defined(GD32VF103) || defined(WB32F3G71xx) || defined(WB32FQ95xx) || defined(AIR32F10x) || defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F403_7xx) || defined(AT32F402_5xx) || defined(AT32F435_7xx)
+#elif defined(STM32F1XX) || defined(STM32F2XX) || defined(STM32F4XX) || defined(GD32VF103) || defined(WB32F3G71xx) || defined(WB32FQ95xx) || defined(AIR32F10x) || defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F403_7xx) || defined(AT32F402_5xx) || defined(AT32F435_7xx) || defined(AT32F423xx)
 #    define USE_ADCV2
 #endif
 
@@ -75,11 +75,11 @@
 
 /* User configurable ADC options */
 #ifndef ADC_COUNT
-#    if defined(RP2040) || defined(STM32F0XX) || defined(STM32F1XX) || defined(STM32F4XX) || defined(GD32VF103) || defined(WB32F3G71xx) || defined(WB32FQ95xx) || defined(AIR32F10x) || defined(AT32F415xx)|| defined(AT32F402_5xx)
+#    if defined(RP2040) || defined(STM32F0XX) || defined(STM32F1XX) || defined(STM32F4XX) || defined(GD32VF103) || defined(WB32F3G71xx) || defined(WB32FQ95xx) || defined(AIR32F10x) || defined(AT32F415xx) || defined(AT32F402_5xx) || defined(AT32F423xx)
 #        define ADC_COUNT 1
 #    elif defined(AT32F413xx) 
 #        define ADC_COUNT 2
-#    elif defined(AT32F403_7xx) 
+#    elif defined(AT32F403_7xx) || defined(AT32F435_7xx)
 #        define ADC_COUNT 3
 #    elif defined(STM32F3XX)
 #        define ADC_COUNT 4
@@ -131,6 +131,9 @@ static ADCConversionGroup adcConversionGroup = {
 #    endif
     .smpr2 = ADC_SMPR2_SMP_AN0(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN1(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN2(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN3(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN4(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN5(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN6(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN7(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN8(ADC_SAMPLING_RATE) | ADC_SMPR2_SMP_AN9(ADC_SAMPLING_RATE),
     .smpr1 = ADC_SMPR1_SMP_AN10(ADC_SAMPLING_RATE) | ADC_SMPR1_SMP_AN11(ADC_SAMPLING_RATE) | ADC_SMPR1_SMP_AN12(ADC_SAMPLING_RATE) | ADC_SMPR1_SMP_AN13(ADC_SAMPLING_RATE) | ADC_SMPR1_SMP_AN14(ADC_SAMPLING_RATE) | ADC_SMPR1_SMP_AN15(ADC_SAMPLING_RATE),
+#    if defined(AT32F423xx)
+    .smpr3 = ADC_SMPR3_SMP_AN20(ADC_SAMPLING_RATE) | ADC_SMPR3_SMP_AN21(ADC_SAMPLING_RATE) | ADC_SMPR3_SMP_AN22(ADC_SAMPLING_RATE) | ADC_SMPR3_SMP_AN23(ADC_SAMPLING_RATE) | ADC_SMPR3_SMP_AN24(ADC_SAMPLING_RATE) | ADC_SMPR3_SMP_AN25(ADC_SAMPLING_RATE) | ADC_SMPR3_SMP_AN26(ADC_SAMPLING_RATE) | ADC_SMPR3_SMP_AN27(ADC_SAMPLING_RATE);
+#    endif
 #elif defined(RP2040)
 // RP2040 does not have any extra config here
 #else
@@ -245,6 +248,32 @@ __attribute__((weak)) adc_mux pinToMux(pin_t pin) {
         case C5:  return TO_MUX( ADC_CHANNEL_IN15, 0 );
         // STM32F103x[C-G] in 144-pin packages also have analog inputs on F6...F10, but they are on ADC3, and the
         // ChibiOS ADC driver for STM32F1xx currently supports only ADC1, therefore these pins are not usable.
+#elif defined(AT32F423xx)
+        case A0:  return TO_MUX( ADC_CHANNEL_IN0,  0 );
+        case A1:  return TO_MUX( ADC_CHANNEL_IN1,  0 );
+        case A2:  return TO_MUX( ADC_CHANNEL_IN2,  0 );
+        case A3:  return TO_MUX( ADC_CHANNEL_IN3,  0 );
+        case A4:  return TO_MUX( ADC_CHANNEL_IN4,  0 );
+        case A5:  return TO_MUX( ADC_CHANNEL_IN5,  0 );
+        case A6:  return TO_MUX( ADC_CHANNEL_IN6,  0 );
+        case A7:  return TO_MUX( ADC_CHANNEL_IN7,  0 );
+        case B0:  return TO_MUX( ADC_CHANNEL_IN8,  0 );
+        case B1:  return TO_MUX( ADC_CHANNEL_IN9,  0 );
+        case C0:  return TO_MUX( ADC_CHANNEL_IN10, 0 );
+        case C1:  return TO_MUX( ADC_CHANNEL_IN11, 0 );
+        case C2:  return TO_MUX( ADC_CHANNEL_IN12, 0 );
+        case C3:  return TO_MUX( ADC_CHANNEL_IN13, 0 );
+        case C4:  return TO_MUX( ADC_CHANNEL_IN14, 0 );
+        case C5:  return TO_MUX( ADC_CHANNEL_IN15, 0 );
+
+        case B2:  return TO_MUX( ADC_CHANNEL_IN20, 0 );
+        case B10: return TO_MUX( ADC_CHANNEL_IN21, 0 );
+        case B11: return TO_MUX( ADC_CHANNEL_IN22, 0 );
+        case B12: return TO_MUX( ADC_CHANNEL_IN23, 0 );
+        case B13: return TO_MUX( ADC_CHANNEL_IN24, 0 );
+        case B14: return TO_MUX( ADC_CHANNEL_IN25, 0 );
+        case B15: return TO_MUX( ADC_CHANNEL_IN26, 0 );
+        case E7:  return TO_MUX( ADC_CHANNEL_IN27, 0 );
 #elif defined(RP2040)
         case 26U: return TO_MUX(0, 0);
         case 27U: return TO_MUX(1, 0);
