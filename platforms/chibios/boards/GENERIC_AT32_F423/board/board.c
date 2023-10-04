@@ -57,6 +57,9 @@ typedef struct {
 #if AT32_HAS_GPIOD || defined(__DOXYGEN__)
   gpio_setup_t          PDData;
 #endif
+#if AT32_HAS_GPIOE || defined(__DOXYGEN__)
+  gpio_setup_t          PEData;
+#endif
 #if AT32_HAS_GPIOF || defined(__DOXYGEN__)
   gpio_setup_t          PFData;
 #endif
@@ -81,6 +84,10 @@ static const gpio_config_t gpio_default_config = {
 #if AT32_HAS_GPIOD
   {VAL_GPIOD_CFGR, VAL_GPIOD_OMODE, VAL_GPIOD_ODRVR, VAL_GPIOD_PULL,
    VAL_GPIOD_ODT,  VAL_GPIOD_MUXL,  VAL_GPIOD_MUXH,  VAL_GPIOD_HDRV},
+#endif
+#if AT32_HAS_GPIOE
+  {VAL_GPIOE_CFGR, VAL_GPIOE_OMODE, VAL_GPIOE_ODRVR, VAL_GPIOE_PULL,
+   VAL_GPIOE_ODT,  VAL_GPIOE_MUXL,  VAL_GPIOE_MUXH,  VAL_GPIOE_HDRV},
 #endif
 #if AT32_HAS_GPIOF
   {VAL_GPIOF_CFGR, VAL_GPIOF_OMODE, VAL_GPIOF_ODRVR, VAL_GPIOF_PULL,
@@ -123,6 +130,9 @@ static void at32_gpio_init(void) {
 #endif
 #if AT32_HAS_GPIOD
   gpio_init(GPIOD, &gpio_default_config.PDData);
+#endif
+#if AT32_HAS_GPIOE
+  gpio_init(GPIOE, &gpio_default_config.PEData);
 #endif
 #if AT32_HAS_GPIOF
   gpio_init(GPIOF, &gpio_default_config.PFData);

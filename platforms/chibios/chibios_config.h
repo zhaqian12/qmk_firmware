@@ -126,7 +126,7 @@
 #    define CPU_CLOCK AIR32_SYSCLK
 
 #    if defined(AIR32F10x)
-#        define MCU_STM32   // the same registers as stm32
+#        define MCU_STM32 // the same registers as stm32
 #        define USE_GPIOV1
 #        define USE_I2CV1
 #        define PAL_MODE_ALTERNATE_OPENDRAIN PAL_MODE_AIR32_ALTERNATE_OPENDRAIN
@@ -175,9 +175,11 @@
 #    if HAL_USE_ADC
 #        define smpr1 spt1
 #        define smpr2 spt2
+
 #        define sqr1 osq1
 #        define sqr2 osq2
 #        define sqr3 osq3
+
 #        define ADC_SMPR2_SMP_AN0 ADC_SPT2_CSPT0
 #        define ADC_SMPR2_SMP_AN1 ADC_SPT2_CSPT1
 #        define ADC_SMPR2_SMP_AN2 ADC_SPT2_CSPT2
@@ -195,6 +197,30 @@
 #        define ADC_SMPR1_SMP_AN14 ADC_SPT1_CSPT14
 #        define ADC_SMPR1_SMP_AN15 ADC_SPT1_CSPT15
 #        define ADC_SQR3_SQ1_N ADC_OSQ3_OSN1_N
+#        if defined(AT32F435_7xx) || defined(AT32F423xx)
+#            define ADC_SMPR_SMP_1P5 ADC_SAMPLE_2P5
+#            define ADC_SMPR_SMP_7P5 ADC_SAMPLE_6P5
+#            define ADC_SMPR_SMP_13P5 ADC_SAMPLE_12P5
+#            define ADC_SMPR_SMP_28P5 ADC_SAMPLE_24P5
+#            define ADC_SMPR_SMP_41P5 ADC_SAMPLE_47P5
+#            define ADC_SMPR_SMP_55P5 ADC_SAMPLE_92P5
+#            define ADC_SMPR_SMP_71P5 ADC_SAMPLE_247P5
+#            define ADC_SMPR_SMP_239P5 ADC_SAMPLE_640P5
+#        endif
+#        if defined(AT32F423xx)
+#            define smpr3 spt3
+#            define sqr4 osq4
+#            define sqr5 osq5
+#            define sqr6 osq6
+#            define ADC_SMPR3_SMP_AN20 ADC_SPT1_CSPT20
+#            define ADC_SMPR3_SMP_AN21 ADC_SPT1_CSPT21
+#            define ADC_SMPR3_SMP_AN22 ADC_SPT1_CSPT22
+#            define ADC_SMPR3_SMP_AN23 ADC_SPT1_CSPT23
+#            define ADC_SMPR3_SMP_AN24 ADC_SPT1_CSPT24
+#            define ADC_SMPR3_SMP_AN25 ADC_SPT1_CSPT25
+#            define ADC_SMPR3_SMP_AN26 ADC_SPT1_CSPT26
+#            define ADC_SMPR3_SMP_AN27 ADC_SPT1_CSPT27
+#        endif
 #    endif
 
 #    if HAL_USE_SERIAL
@@ -228,7 +254,7 @@
 
 #    endif
 
-#    if defined(AT32F402_5xx) || defined(AT32F435_7xx)
+#    if defined(AT32F402_5xx) || defined(AT32F435_7xx) || defined(AT32F423xx)
 #        define PAL_OUTPUT_TYPE_OPENDRAIN PAL_AT32_OMODE_OPENDRAIN
 #        define PAL_OUTPUT_TYPE_PUSHPULL PAL_AT32_OMODE_PUSHPULL
 #        define PAL_OUTPUT_SPEED_HIGHEST PAL_AT32_ODRV_STRONGER
