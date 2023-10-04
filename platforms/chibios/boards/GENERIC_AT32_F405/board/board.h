@@ -174,22 +174,22 @@
                                      PIN_MODE_ALTERNATE(GPIOA_SWDIO) |      \
                                      PIN_MODE_ALTERNATE(GPIOA_SWCLK) |      \
                                      PIN_MODE_INPUT(GPIOA_PIN15))
-#define VAL_GPIOA_OMODE             (PIN_OTYPE_PUSHPULL(GPIOA_PIN0) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOA_PIN1) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOA_PIN2) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOA_PIN3) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOA_PIN4) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOA_PIN5) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOA_PIN6) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOA_PIN7) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOA_PIN8) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOA_PIN9) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOA_PIN10) |      \
-                                     PIN_OTYPE_PUSHPULL(GPIOA_PIN11) |      \
-                                     PIN_OTYPE_PUSHPULL(GPIOA_PIN12) |      \
-                                     PIN_OTYPE_PUSHPULL(GPIOA_SWDIO) |      \
-                                     PIN_OTYPE_PUSHPULL(GPIOA_SWCLK) |      \
-                                     PIN_OTYPE_PUSHPULL(GPIOA_PIN15))
+#define VAL_GPIOA_OMODE             (PIN_OMODE_PUSHPULL(GPIOA_PIN0) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOA_PIN1) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOA_PIN2) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOA_PIN3) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOA_PIN4) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOA_PIN5) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOA_PIN6) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOA_PIN7) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOA_PIN8) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOA_PIN9) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOA_PIN10) |      \
+                                     PIN_OMODE_PUSHPULL(GPIOA_PIN11) |      \
+                                     PIN_OMODE_PUSHPULL(GPIOA_PIN12) |      \
+                                     PIN_OMODE_PUSHPULL(GPIOA_SWDIO) |      \
+                                     PIN_OMODE_PUSHPULL(GPIOA_SWCLK) |      \
+                                     PIN_OMODE_PUSHPULL(GPIOA_PIN15))
 #define VAL_GPIOA_ODRVR             (PIN_ODRVR_STRONGER(GPIOA_PIN0) |       \
                                      PIN_ODRVR_STRONGER(GPIOA_PIN1) |       \
                                      PIN_ODRVR_STRONGER(GPIOA_PIN2) |       \
@@ -307,22 +307,22 @@
                                      PIN_MODE_INPUT(GPIOB_PIN13) |          \
                                      PIN_MODE_INPUT(GPIOB_PIN14) |          \
                                      PIN_MODE_INPUT(GPIOB_PIN15))
-#define VAL_GPIOB_OMODE             (PIN_OTYPE_PUSHPULL(GPIOB_PIN0) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN1) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN2) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN3) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN4) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN5) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN6) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN7) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN8) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN9) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN10) |      \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN11) |      \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN12) |      \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN13) |      \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN14) |      \
-                                     PIN_OTYPE_PUSHPULL(GPIOB_PIN15))
+#define VAL_GPIOB_OMODE             (PIN_OMODE_PUSHPULL(GPIOB_PIN0) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOB_PIN1) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOB_PIN2) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOB_PIN3) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOB_PIN4) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOB_PIN5) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOB_PIN6) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOB_PIN7) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOB_PIN8) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOB_PIN9) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOB_PIN10) |      \
+                                     PIN_OMODE_PUSHPULL(GPIOB_PIN11) |      \
+                                     PIN_OMODE_PUSHPULL(GPIOB_PIN12) |      \
+                                     PIN_OMODE_PUSHPULL(GPIOB_PIN13) |      \
+                                     PIN_OMODE_PUSHPULL(GPIOB_PIN14) |      \
+                                     PIN_OMODE_PUSHPULL(GPIOB_PIN15))
 #define VAL_GPIOB_ODRVR             (PIN_ODRVR_STRONGER(GPIOB_PIN0) |       \
                                      PIN_ODRVR_STRONGER(GPIOB_PIN1) |       \
                                      PIN_ODRVR_STRONGER(GPIOB_PIN2) |       \
@@ -440,22 +440,22 @@
                                      PIN_MODE_INPUT(GPIOC_PIN13) |          \
                                      PIN_MODE_INPUT(GPIOC_PIN14) |          \
                                      PIN_MODE_INPUT(GPIOC_PIN15))
-#define VAL_GPIOC_OMODE             (PIN_OTYPE_PUSHPULL(GPIOC_PIN0) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOC_PIN1) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOC_PIN2) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOC_PIN3) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOC_PIN4) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOC_PIN5) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOC_PIN6) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOC_PIN7) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOC_PIN8) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOC_PIN9) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOC_PIN10) |      \
-                                     PIN_OTYPE_PUSHPULL(GPIOC_PIN11) |      \
-                                     PIN_OTYPE_PUSHPULL(GPIOC_PIN12) |      \
-                                     PIN_OTYPE_PUSHPULL(GPIOC_PIN13) |      \
-                                     PIN_OTYPE_PUSHPULL(GPIOC_PIN14) |      \
-                                     PIN_OTYPE_PUSHPULL(GPIOC_PIN15))
+#define VAL_GPIOC_OMODE             (PIN_OMODE_PUSHPULL(GPIOC_PIN0) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOC_PIN1) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOC_PIN2) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOC_PIN3) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOC_PIN4) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOC_PIN5) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOC_PIN6) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOC_PIN7) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOC_PIN8) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOC_PIN9) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOC_PIN10) |      \
+                                     PIN_OMODE_PUSHPULL(GPIOC_PIN11) |      \
+                                     PIN_OMODE_PUSHPULL(GPIOC_PIN12) |      \
+                                     PIN_OMODE_PUSHPULL(GPIOC_PIN13) |      \
+                                     PIN_OMODE_PUSHPULL(GPIOC_PIN14) |      \
+                                     PIN_OMODE_PUSHPULL(GPIOC_PIN15))
 #define VAL_GPIOC_ODRVR             (PIN_ODRVR_STRONGER(GPIOC_PIN0) |       \
                                      PIN_ODRVR_STRONGER(GPIOC_PIN1) |       \
                                      PIN_ODRVR_STRONGER(GPIOC_PIN2) |       \
@@ -543,7 +543,7 @@
  * PD2  - PIN2                      (input pullup).
  */
 #define VAL_GPIOD_CFGR              (PIN_MODE_INPUT(GPIOD_PIN2))
-#define VAL_GPIOD_OMODE             (PIN_OTYPE_PUSHPULL(GPIOD_PIN2))
+#define VAL_GPIOD_OMODE             (PIN_OMODE_PUSHPULL(GPIOD_PIN2))
 #define VAL_GPIOD_ODRVR             (PIN_ODRVR_STRONGER(GPIOD_PIN2))
 #define VAL_GPIOD_PULL              (PIN_PULL_PULLUP(GPIOD_PIN2))
 #define VAL_GPIOD_ODT               (PIN_ODT_HIGH(GPIOD_PIN2))
@@ -569,13 +569,13 @@
                                      PIN_MODE_INPUT(GPIOF_PIN6) |           \
                                      PIN_MODE_INPUT(GPIOF_PIN7) |           \
                                      PIN_MODE_INPUT(GPIOF_PIN11))
-#define VAL_GPIOF_OMODE             (PIN_OTYPE_PUSHPULL(GPIOF_PIN0) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOF_PIN1) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOF_PIN4) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOF_PIN5) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOF_PIN6) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOF_PIN7) |       \
-                                     PIN_OTYPE_PUSHPULL(GPIOF_PIN11))
+#define VAL_GPIOF_OMODE             (PIN_OMODE_PUSHPULL(GPIOF_PIN0) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOF_PIN1) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOF_PIN4) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOF_PIN5) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOF_PIN6) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOF_PIN7) |       \
+                                     PIN_OMODE_PUSHPULL(GPIOF_PIN11))
 #define VAL_GPIOF_ODRVR             (PIN_ODRVR_STRONGER(GPIOF_PIN0) |       \
                                      PIN_ODRVR_STRONGER(GPIOF_PIN1) |       \
                                      PIN_ODRVR_STRONGER(GPIOF_PIN4) |       \

@@ -1,0 +1,17 @@
+{
+    "processor": "AT32F405",
+    "bootloader": "tinyuf2",
+    "matrix_pins": {
+        "cols": ["B13", "B12", "B10", "B0", "A7", "A6", "A5", "A4", "A3", "A2", "A1", "A0", "B1", "B7"],
+        "rows": ["B3", "B4", "B9", "B8"]
+    },
+    "encoder": {
+        "rotary": [
+            {"pin_a": "B5", "pin_b": "B6"}
+        ]
+    },
+    "ws2812": {
+        "pin": "A10",
+        "driver": "pwm"
+    }
+}
