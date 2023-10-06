@@ -202,7 +202,7 @@ __attribute__((weak)) adc_mux pinToMux(pin_t pin) {
         case E15: return TO_MUX( ADC_CHANNEL_IN2,  3 );
         case F2:  return TO_MUX( ADC_CHANNEL_IN10, 0 ); // Can also be ADC2
         case F4:  return TO_MUX( ADC_CHANNEL_IN5,  0 );
-#elif defined(STM32F4XX) || defined(AT32F402_5xx)
+#elif defined(STM32F4XX) || defined(AT32F402_5xx) || defined(AT32F435_7xx)
         case A0:  return TO_MUX( ADC_CHANNEL_IN0,  0 );
         case A1:  return TO_MUX( ADC_CHANNEL_IN1,  0 );
         case A2:  return TO_MUX( ADC_CHANNEL_IN2,  0 );
