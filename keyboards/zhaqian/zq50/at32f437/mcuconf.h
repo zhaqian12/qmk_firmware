@@ -26,3 +26,14 @@
 
 #undef AT32_USB_USE_OTG2
 #define AT32_USB_USE_OTG2                     TRUE
+
+#define AT32_EDMA_REQUIRED TRUE
+
+#undef AT32_USBCLK_SRC
+#define AT32_USBCLK_SRC AT32_USBCLK_SRC_HICK    
+
+#undef AT32_HEXT_ENABLED                  
+#define AT32_HEXT_ENABLED                     FALSE
+
+#undef AT32_PLLRCS 
+#define AT32_PLLRCS AT32_PLLRCS_HICK
