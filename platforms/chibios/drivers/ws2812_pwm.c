@@ -28,8 +28,8 @@
 #if (STM32_DMA_SUPPORTS_DMAMUX == TRUE) && !defined(WS2812_DMAMUX_ID)
 #    error "please consult your MCU's datasheet and specify in your config.h: #define WS2812_DMAMUX_ID STM32_DMAMUX1_TIM?_UP"
 #endif
-#if (AT32_DMA_SUPPORTS_DMAMUX == TRUE) 
-#    if defined(AT32_USE_DMA_V1) 
+#if (AT32_DMA_SUPPORTS_DMAMUX == TRUE)
+#    if defined(AT32_USE_DMA_V1)
 #        if (AT32_DMA_USE_DMAMUX == TRUE) && !defined(WS2812_DMAMUX_CHANNEL) && !defined(WS2812_DMAMUX_ID)
 #            error "please consult your MCU's datasheet and specify in your config.h: #define WS2812_DMAMUX_CHANNEL 1 #define WS2812_DMAMUX_ID AT32_DMAMUX_TMR?_OVERFLOW"
 #        endif
@@ -38,6 +38,9 @@
 #            error "please consult your MCU's datasheet and specify in your config.h: #define WS2812_DMAMUX_ID AT32_DMAMUX_TMR?_OVERFLOW"
 #        endif
 #    endif
+#endif
+#ifndef WS2812_DMA_USE_EDMAV1
+#    define WS2812_DMA_USE_EDMAV1 FALSE
 #endif
 
 /* Summarize https://www.st.com/resource/en/application_note/an4013-stm32-crossseries-timer-overview-stmicroelectronics.pdf to
@@ -282,14 +285,24 @@
 
 // STM32F2XX, STM32F4XX and STM32F7XX do NOT zero pad DMA transfers of unequal data width. Buffer width must match TIMx CCR.
 // For all other STM32 DMA transfer will automatically zero pad. We only need to set the right peripheral width.
-#if defined(STM32F2XX) || defined(STM32F4XX) || defined(STM32F7XX)
+#if defined(STM32F2XX) || defined(STM32F4XX) || defined(STM32F7XX) || (WS2812_DMA_USE_EDMAV1 == TRUE)
 #    if defined(WS2812_PWM_TIMER_32BIT)
-#        define WS2812_DMA_MEMORY_WIDTH STM32_DMA_CR_MSIZE_WORD
-#        define WS2812_DMA_PERIPHERAL_WIDTH STM32_DMA_CR_PSIZE_WORD
+#        if defined(MCU_AT32)
+#            define WS2812_DMA_MEMORY_WIDTH AT32_EDMA_CTRL_MWIDTH_WORD
+#            define WS2812_DMA_PERIPHERAL_WIDTH AT32_EDMA_CTRL_PWIDTH_WORD
+#        else
+#            define WS2812_DMA_MEMORY_WIDTH STM32_DMA_CR_MSIZE_WORD
+#            define WS2812_DMA_PERIPHERAL_WIDTH STM32_DMA_CR_PSIZE_WORD
+#        endif
 typedef uint32_t ws2812_buffer_t;
 #    else
-#        define WS2812_DMA_MEMORY_WIDTH STM32_DMA_CR_MSIZE_HWORD
-#        define WS2812_DMA_PERIPHERAL_WIDTH STM32_DMA_CR_PSIZE_HWORD
+#        if defined(MCU_AT32)
+#            define WS2812_DMA_MEMORY_WIDTH AT32_EDMA_CTRL_MWIDTH_HWORD
+#            define WS2812_DMA_PERIPHERAL_WIDTH AT32_EDMA_CTRL_PWIDTH_HWORD
+#        else
+#            define WS2812_DMA_MEMORY_WIDTH STM32_DMA_CR_MSIZE_HWORD
+#            define WS2812_DMA_PERIPHERAL_WIDTH STM32_DMA_CR_PSIZE_HWORD
+#        endif
 typedef uint16_t ws2812_buffer_t;
 #    endif
 #else
@@ -332,7 +345,7 @@ void ws2812_init(void) {
                 [0 ... 3]                = {.mode = PWM_OUTPUT_DISABLED, .callback = NULL},    // Channels default to disabled
                 [WS2812_PWM_CHANNEL - 1] = {.mode = WS2812_PWM_OUTPUT_MODE, .callback = NULL}, // Turn on the channel we care about
             },
-        .cr2  = 0,
+        .cr2 = 0,
 #if defined(WS2812_PWM_DRIVER_USE_DMA_CC)
         .dier = ((0x100 << WS2812_PWM_CHANNEL) | TIM_DIER_TDE),
 #else
@@ -348,31 +361,44 @@ void ws2812_init(void) {
     dmaStreamSetSource(WS2812_DMA_STREAM, ws2812_frame_buffer);
     dmaStreamSetDestination(WS2812_DMA_STREAM, &(WS2812_PWM_DRIVER.tim->CCR[WS2812_PWM_CHANNEL - 1])); // Ziel ist der An-Zeit im Cap-Comp-Register
     dmaStreamSetMode(WS2812_DMA_STREAM, WB32_DMA_CHCFG_HWHIF(WS2812_DMA_CHANNEL) | WB32_DMA_CHCFG_DIR_M2P | WB32_DMA_CHCFG_PSIZE_WORD | WB32_DMA_CHCFG_MSIZE_WORD | WB32_DMA_CHCFG_MINC | WB32_DMA_CHCFG_CIRC | WB32_DMA_CHCFG_TCIE | WB32_DMA_CHCFG_PL(3));
+    dmaStreamSetTransactionSize(WS2812_DMA_STREAM, WS2812_BIT_N);
+#elif (WS2812_DMA_USE_EDMAV1 == TRUE) && defined(MCU_AT32)
+    edmaStreamAlloc(WS2812_DMA_STREAM - AT32_EDMA_STREAM(0), 10, NULL, NULL);
+    edmaStreamSetPeripheral(WS2812_DMA_STREAM, &(WS2812_PWM_DRIVER.tim->CCR[WS2812_PWM_CHANNEL - 1])); // Ziel ist der An-Zeit im Cap-Comp-Register
+    edmaStreamSetMemory0(WS2812_DMA_STREAM, ws2812_frame_buffer);
+    edmaStreamSetMode(WS2812_DMA_STREAM, AT32_EDMA_CTRL_CHSEL(WS2812_DMA_CHANNEL) | AT32_EDMA_CTRL_DTD_M2P | WS2812_DMA_PERIPHERAL_WIDTH | WS2812_DMA_MEMORY_WIDTH | AT32_EDMA_CTRL_MINCM | AT32_EDMA_CTRL_LM | AT32_EDMA_CTRL_CHPL(3));
+    edmaStreamSetTransactionSize(WS2812_DMA_STREAM, WS2812_BIT_N);
 #else
     dmaStreamAlloc(WS2812_DMA_STREAM - STM32_DMA_STREAM(0), 10, NULL, NULL);
     dmaStreamSetPeripheral(WS2812_DMA_STREAM, &(WS2812_PWM_DRIVER.tim->CCR[WS2812_PWM_CHANNEL - 1])); // Ziel ist der An-Zeit im Cap-Comp-Register
     dmaStreamSetMemory0(WS2812_DMA_STREAM, ws2812_frame_buffer);
     dmaStreamSetMode(WS2812_DMA_STREAM, STM32_DMA_CR_CHSEL(WS2812_DMA_CHANNEL) | STM32_DMA_CR_DIR_M2P | WS2812_DMA_PERIPHERAL_WIDTH | WS2812_DMA_MEMORY_WIDTH | STM32_DMA_CR_MINC | STM32_DMA_CR_CIRC | STM32_DMA_CR_PL(3));
-#endif
     dmaStreamSetTransactionSize(WS2812_DMA_STREAM, WS2812_BIT_N);
+#endif
+
     // M2P: Memory 2 Periph; PL: Priority Level
 
 #if (STM32_DMA_SUPPORTS_DMAMUX == TRUE)
     // If the MCU has a DMAMUX we need to assign the correct resource
     dmaSetRequestSource(WS2812_DMA_STREAM, WS2812_DMAMUX_ID);
 #endif
-#if (AT32_DMA_SUPPORTS_DMAMUX == TRUE) 
+#if (AT32_DMA_SUPPORTS_DMAMUX == TRUE)
 #    if defined(AT32_USE_DMA_V1)
 #        if (AT32_DMA_USE_DMAMUX == TRUE)
     dmaSetRequestSource(WS2812_DMA_STREAM, WS2812_DMAMUX_CHANNEL, WS2812_DMAMUX_ID);
 #        endif
+#    elif (WS2812_DMA_USE_EDMAV1 == TRUE)
+    edmaSetRequestSource(WS2812_DMA_STREAM, WS2812_DMAMUX_ID);
 #    else
     dmaSetRequestSource(WS2812_DMA_STREAM, WS2812_DMAMUX_ID);
 #    endif
 #endif
     // Start DMA
+#if (WS2812_DMA_USE_EDMAV1 == TRUE) && defined(MCU_AT32)
+    edmaStreamEnable(WS2812_DMA_STREAM);
+#else
     dmaStreamEnable(WS2812_DMA_STREAM);
-
+#endif
     // Configure PWM
     // NOTE: It's required that preload be enabled on the timer channel CCR register. This is currently enabled in the
     // ChibiOS driver code, so we don't have to do anything special to the timer. If we did, we'd have to start the timer,
